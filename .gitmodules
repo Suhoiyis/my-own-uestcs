@@ -1,0 +1,3 @@
+[submodule "assembler_py"]
+	path = assembler_py
+	url = https://github.com/Suhoiyis/assembler_py.git

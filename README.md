@@ -2,4 +2,4 @@
 
 这里主要存背景资料，
 
-main文件夹实际上就是[assembler_py](https://github.com/Suhoiyis/assembler_py)仓库
+[assembler_py](https://github.com/Suhoiyis/assembler_py)仓库,这个是汇编器的代码
