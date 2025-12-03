@@ -1,0 +1,13 @@
+fpga/*
+!fpga/create_project.tcl
+!fpga/constraints/
+
+obj/
+
+*.mif
+*.bin
+obj/
+*.o
+
+sdk/toolchains/*
+!sdk/toolchains/init.sh

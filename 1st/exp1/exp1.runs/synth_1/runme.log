@@ -1,0 +1,379 @@
+
+*** Running vivado
+    with args -log looongson_remote_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source looongson_remote_top.tcl
+
+
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Fri Jul 18 14:02:00 2025
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source looongson_remote_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:13 . Memory (MB): peak = 507.812 ; gain = 200.742
+Command: read_checkpoint -auto_incremental -incremental D:/UESTC/2.2sum/loongson/exp1/exp1.srcs/utils_1/imports/synth_1/looongson_remote_top.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from D:/UESTC/2.2sum/loongson/exp1/exp1.srcs/utils_1/imports/synth_1/looongson_remote_top.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top looongson_remote_top -part xc7a200tfbg676-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a200t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a200t'
+INFO: [Device 21-403] Loading part xc7a200tfbg676-1
+INFO: [Device 21-9227] Part: xc7a200tfbg676-1 does not have CEAM library.
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 3956
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1416.586 ; gain = 449.613
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'looongson_remote_top' [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'remote2local' [C:/Users/32188/OneDrive/桌面/exp1/remote2local.v:1]
+INFO: [Synth 8-6157] synthesizing module 'SEG7_LUT' [C:/Users/32188/OneDrive/桌面/exp1/remote2local.v:25]
+INFO: [Synth 8-6155] done synthesizing module 'SEG7_LUT' (0#1) [C:/Users/32188/OneDrive/桌面/exp1/remote2local.v:25]
+INFO: [Synth 8-6155] done synthesizing module 'remote2local' (0#1) [C:/Users/32188/OneDrive/桌面/exp1/remote2local.v:1]
+INFO: [Synth 8-6157] synthesizing module 'scroller' [C:/Users/32188/OneDrive/桌面/exp1/scroller.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'scroller' (0#1) [C:/Users/32188/OneDrive/桌面/exp1/scroller.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'looongson_remote_top' (0#1) [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:3]
+WARNING: [Synth 8-3848] Net uart_rdn in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:17]
+WARNING: [Synth 8-3848] Net uart_wrn in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:18]
+WARNING: [Synth 8-3848] Net base_ram_addr in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:25]
+WARNING: [Synth 8-3848] Net base_ram_be_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:26]
+WARNING: [Synth 8-3848] Net base_ram_ce_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:27]
+WARNING: [Synth 8-3848] Net base_ram_oe_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:28]
+WARNING: [Synth 8-3848] Net base_ram_we_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:29]
+WARNING: [Synth 8-3848] Net ext_ram_addr in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:33]
+WARNING: [Synth 8-3848] Net ext_ram_be_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:34]
+WARNING: [Synth 8-3848] Net ext_ram_ce_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:35]
+WARNING: [Synth 8-3848] Net ext_ram_oe_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:36]
+WARNING: [Synth 8-3848] Net ext_ram_we_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:37]
+WARNING: [Synth 8-3848] Net txd in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:40]
+WARNING: [Synth 8-3848] Net flash_a in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:44]
+WARNING: [Synth 8-3848] Net flash_rp_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:46]
+WARNING: [Synth 8-3848] Net flash_vpen in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:47]
+WARNING: [Synth 8-3848] Net flash_ce_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:48]
+WARNING: [Synth 8-3848] Net flash_oe_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:49]
+WARNING: [Synth 8-3848] Net flash_we_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:50]
+WARNING: [Synth 8-3848] Net flash_byte_n in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:51]
+WARNING: [Synth 8-3848] Net video_red in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:54]
+WARNING: [Synth 8-3848] Net video_green in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:55]
+WARNING: [Synth 8-3848] Net video_blue in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:56]
+WARNING: [Synth 8-3848] Net video_hsync in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:57]
+WARNING: [Synth 8-3848] Net video_vsync in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:58]
+WARNING: [Synth 8-3848] Net video_clk in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:59]
+WARNING: [Synth 8-3848] Net video_de in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:60]
+WARNING: [Synth 8-3848] Net local_num_data in module/entity looongson_remote_top does not have driver. [C:/Users/32188/OneDrive/桌面/exp1/loongson_remote_top.v:66]
+WARNING: [Synth 8-7129] Port remote_switch[31] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[30] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[29] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[28] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[27] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[26] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[25] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[24] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[23] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[22] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[21] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[20] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[19] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[18] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[17] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[16] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[15] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[14] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[13] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[12] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[11] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[10] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[9] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[8] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port uart_rdn in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port uart_wrn in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[19] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[18] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[17] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[16] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[15] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[14] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[13] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[12] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[11] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[10] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[9] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[8] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[7] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[6] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[5] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[4] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[3] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[2] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[1] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[0] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_be_n[3] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_be_n[2] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_be_n[1] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_be_n[0] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_ce_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_oe_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_we_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[19] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[18] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[17] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[16] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[15] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[14] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[13] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[12] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[11] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[10] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[9] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[8] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[7] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[6] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[5] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[4] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[3] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[2] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[1] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[0] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_be_n[3] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_be_n[2] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_be_n[1] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_be_n[0] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_ce_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_oe_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_we_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port txd in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[22] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[21] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[20] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[19] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[18] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[17] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[16] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[15] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[14] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[13] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[12] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[11] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[10] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[9] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[8] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[7] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[6] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[5] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[4] in module looongson_remote_top is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:09 . Memory (MB): peak = 1525.191 ; gain = 558.219
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:09 . Memory (MB): peak = 1525.191 ; gain = 558.219
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:09 . Memory (MB): peak = 1525.191 ; gain = 558.219
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1525.191 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/32188/OneDrive/桌面/exp1/scroller.xdc]
+WARNING: [Vivado 12-507] No nets matched 'clk_11M0592_IBUF'. [C:/Users/32188/OneDrive/桌面/exp1/scroller.xdc:4]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/32188/OneDrive/桌面/exp1/scroller.xdc:4]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-507] No nets matched 'clock_btn_IBUF'. [C:/Users/32188/OneDrive/桌面/exp1/scroller.xdc:18]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/32188/OneDrive/桌面/exp1/scroller.xdc:18]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-507] No nets matched 'reset_btn_IBUF'. [C:/Users/32188/OneDrive/桌面/exp1/scroller.xdc:19]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/32188/OneDrive/桌面/exp1/scroller.xdc:19]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+Finished Parsing XDC File [C:/Users/32188/OneDrive/桌面/exp1/scroller.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/32188/OneDrive/桌面/exp1/scroller.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/looongson_remote_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/looongson_remote_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1607.523 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1607.523 ; gain = 0.000
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a200tfbg676-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
++---Muxes : 
+	   2 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 740 (col length:100)
+BRAMs: 730 (col length: RAMB18 100 RAMB36 50)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3917] design looongson_remote_top has port dpy0[0] driven by constant 0
+WARNING: [Synth 8-3917] design looongson_remote_top has port dpy1[0] driven by constant 0
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:08 ; elapsed = 00:00:24 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:33 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:33 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:11 ; elapsed = 00:00:33 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:13 ; elapsed = 00:00:39 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:13 ; elapsed = 00:00:39 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:13 ; elapsed = 00:00:39 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:13 ; elapsed = 00:00:39 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:39 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:13 ; elapsed = 00:00:39 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     7|
+|3     |LUT1   |    17|
+|4     |LUT3   |     2|
+|5     |LUT4   |     3|
+|6     |LUT5   |     1|
+|7     |LUT6   |     3|
+|8     |FDRE   |    29|
+|9     |FDSE   |    14|
+|10    |IBUF   |     2|
+|11    |OBUF   |    32|
+|12    |OBUFT  |    98|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:13 ; elapsed = 00:00:39 . Memory (MB): peak = 1607.523 ; gain = 640.551
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 223 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:09 ; elapsed = 00:00:35 . Memory (MB): peak = 1607.523 ; gain = 558.219
+Synthesis Optimization Complete : Time (s): cpu = 00:00:14 ; elapsed = 00:00:39 . Memory (MB): peak = 1607.523 ; gain = 640.551
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1607.523 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 7 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1607.523 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 9a62e56b
+INFO: [Common 17-83] Releasing license: Synthesis
+31 Infos, 134 Warnings, 3 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:48 . Memory (MB): peak = 1607.523 ; gain = 1095.758
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1607.523 ; gain = 0.000
+[libprotobuf ERROR C:\protobuf-3.21.12\protobuf\src\google\protobuf\wire_format_lite.cc:618] String field 'HDMetricDBGroup.MetricMapEntry.value' contains invalid UTF-8 data when serializing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes. 
+[libprotobuf ERROR C:\protobuf-3.21.12\protobuf\src\google\protobuf\wire_format_lite.cc:618] String field 'HDMetricDBGroup.MetricMapEntry.value' contains invalid UTF-8 data when serializing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes. 
+[libprotobuf ERROR C:\protobuf-3.21.12\protobuf\src\google\protobuf\wire_format_lite.cc:618] String field 'HDMetricDBGroup.MetricMapEntry.value' contains invalid UTF-8 data when serializing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes. 
+INFO: [Common 17-1381] The checkpoint 'D:/UESTC/2.2sum/loongson/exp1/exp1.runs/synth_1/looongson_remote_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file looongson_remote_top_utilization_synth.rpt -pb looongson_remote_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Jul 18 14:03:06 2025...

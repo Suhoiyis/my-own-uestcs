@@ -1,0 +1,222 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
+| Date         : Sat Jul 19 16:15:36 2025
+| Host         : Genshin-Impact running 64-bit major release  (build 9200)
+| Command      : report_drc -file looongson_remote_top_drc_opted.rpt -pb looongson_remote_top_drc_opted.pb -rpx looongson_remote_top_drc_opted.rpx
+| Design       : looongson_remote_top
+| Device       : xc7a200tfbg676-1
+| Speed File   : -1
+| Design State : Synthesized
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 29
++---------+------------------+--------------------------+------------+
+| Rule    | Severity         | Description              | Violations |
++---------+------------------+--------------------------+------------+
+| LUTLP-1 | Critical Warning | Combinatorial Loop Alert | 29         |
++---------+------------------+--------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+LUTLP-1#1 Critical Warning
+Combinatorial Loop Alert  
+1 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/led_data[1]_i_5_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/led_data[1]_i_5.
+Related violations: <none>
+
+LUTLP-1#2 Critical Warning
+Combinatorial Loop Alert  
+2 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_102_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_102
+soc_lite/cpu/u_regfile/data_ram_i_179.
+Related violations: <none>
+
+LUTLP-1#3 Critical Warning
+Combinatorial Loop Alert  
+2 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_176_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_176
+soc_lite/cpu/u_regfile/data_ram_i_222.
+Related violations: <none>
+
+LUTLP-1#4 Critical Warning
+Combinatorial Loop Alert  
+2 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_20_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_2, soc_lite/cpu/u_regfile/data_ram_i_20.
+Related violations: <none>
+
+LUTLP-1#5 Critical Warning
+Combinatorial Loop Alert  
+2 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_22_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_22, soc_lite/cpu/u_regfile/data_ram_i_3.
+Related violations: <none>
+
+LUTLP-1#6 Critical Warning
+Combinatorial Loop Alert  
+2 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_27_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_27, soc_lite/cpu/u_regfile/data_ram_i_4.
+Related violations: <none>
+
+LUTLP-1#7 Critical Warning
+Combinatorial Loop Alert  
+2 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_38_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_38, soc_lite/cpu/u_regfile/data_ram_i_9.
+Related violations: <none>
+
+LUTLP-1#8 Critical Warning
+Combinatorial Loop Alert  
+2 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_44_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_10, soc_lite/cpu/u_regfile/data_ram_i_43.
+Related violations: <none>
+
+LUTLP-1#9 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_103_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_103,
+soc_lite/cpu/u_regfile/data_ram_i_181
+soc_lite/cpu/u_regfile/data_ram_i_232.
+Related violations: <none>
+
+LUTLP-1#10 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_104_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_104,
+soc_lite/cpu/u_regfile/data_ram_i_186
+soc_lite/cpu/u_regfile/data_ram_i_239.
+Related violations: <none>
+
+LUTLP-1#11 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_107_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_107,
+soc_lite/cpu/u_regfile/data_ram_i_14, soc_lite/cpu/u_regfile/data_ram_i_50.
+Related violations: <none>
+
+LUTLP-1#12 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_147_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_147,
+soc_lite/cpu/u_regfile/data_ram_i_34, soc_lite/cpu/u_regfile/data_ram_i_84.
+Related violations: <none>
+
+LUTLP-1#13 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_154_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_154,
+soc_lite/cpu/u_regfile/data_ram_i_37, soc_lite/cpu/u_regfile/data_ram_i_91.
+Related violations: <none>
+
+LUTLP-1#14 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_168_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_168,
+soc_lite/cpu/u_regfile/data_ram_i_208
+soc_lite/cpu/u_regfile/data_ram_i_243.
+Related violations: <none>
+
+LUTLP-1#15 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_169_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_169,
+soc_lite/cpu/u_regfile/data_ram_i_209
+soc_lite/cpu/u_regfile/data_ram_i_245.
+Related violations: <none>
+
+LUTLP-1#16 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_170_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_170,
+soc_lite/cpu/u_regfile/data_ram_i_210
+soc_lite/cpu/u_regfile/data_ram_i_247.
+Related violations: <none>
+
+LUTLP-1#17 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_171_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_171,
+soc_lite/cpu/u_regfile/data_ram_i_213
+soc_lite/cpu/u_regfile/data_ram_i_254.
+Related violations: <none>
+
+LUTLP-1#18 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_172_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_172,
+soc_lite/cpu/u_regfile/data_ram_i_215
+soc_lite/cpu/u_regfile/data_ram_i_260.
+Related violations: <none>
+
+LUTLP-1#19 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_174_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_174,
+soc_lite/cpu/u_regfile/data_ram_i_218
+soc_lite/cpu/u_regfile/data_ram_i_268.
+Related violations: <none>
+
+LUTLP-1#20 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_175_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_175,
+soc_lite/cpu/u_regfile/data_ram_i_221
+soc_lite/cpu/u_regfile/data_ram_i_273.
+Related violations: <none>
+
+LUTLP-1#21 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_33_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_33, soc_lite/cpu/u_regfile/data_ram_i_5
+soc_lite/cpu/u_regfile/data_ram_i_82.
+Related violations: <none>
+
+LUTLP-1#22 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_36_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_36, soc_lite/cpu/u_regfile/data_ram_i_7
+soc_lite/cpu/u_regfile/data_ram_i_88.
+Related violations: <none>
+
+LUTLP-1#23 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/led_data[1]_i_14_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/led_data[1]_i_14,
+soc_lite/cpu/u_regfile/led_data[1]_i_30
+soc_lite/cpu/u_regfile/led_data[1]_i_7.
+Related violations: <none>
+
+LUTLP-1#24 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/led_data[1]_i_16_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/led_data[1]_i_16,
+soc_lite/cpu/u_regfile/led_data[1]_i_32
+soc_lite/cpu/u_regfile/led_data[1]_i_8.
+Related violations: <none>
+
+LUTLP-1#25 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/write_timer_begin_i_10_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/write_timer_begin_i_10,
+soc_lite/cpu/u_regfile/write_timer_begin_i_18
+soc_lite/cpu/u_regfile/write_timer_begin_i_4.
+Related violations: <none>
+
+LUTLP-1#26 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/write_timer_begin_i_12_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/write_timer_begin_i_12,
+soc_lite/cpu/u_regfile/write_timer_begin_i_21
+soc_lite/cpu/u_regfile/write_timer_begin_i_6.
+Related violations: <none>
+
+LUTLP-1#27 Critical Warning
+Combinatorial Loop Alert  
+3 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/write_timer_begin_i_16_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/write_timer_begin_i_16,
+soc_lite/cpu/u_regfile/write_timer_begin_i_3
+soc_lite/cpu/u_regfile/write_timer_begin_i_9.
+Related violations: <none>
+
+LUTLP-1#28 Critical Warning
+Combinatorial Loop Alert  
+4 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_173_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_173,
+soc_lite/cpu/u_regfile/data_ram_i_217,
+soc_lite/cpu/u_regfile/data_ram_i_266
+soc_lite/cpu/u_regfile/data_ram_i_316.
+Related violations: <none>
+
+LUTLP-1#29 Critical Warning
+Combinatorial Loop Alert  
+4 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is soc_lite/cpu/u_regfile/data_ram_i_177_n_0. Please evaluate your design. The cells in the loop are: soc_lite/cpu/u_regfile/data_ram_i_177,
+soc_lite/cpu/u_regfile/data_ram_i_224,
+soc_lite/cpu/u_regfile/data_ram_i_275
+soc_lite/cpu/u_regfile/data_ram_i_321.
+Related violations: <none>
+
+

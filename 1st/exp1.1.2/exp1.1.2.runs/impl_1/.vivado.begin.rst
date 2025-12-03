@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="IKUN" Host="GENSHIN-IMPACT" Pid="26432" HostCore="20" HostMemory="034071240704">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="IKUN" Host="GENSHIN-IMPACT" Pid="20112" HostCore="20" HostMemory="034071240704">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="IKUN" Host="GENSHIN-IMPACT" Pid="18004" HostCore="20" HostMemory="034071240704">
+    </Process>
+</ProcessHandle>

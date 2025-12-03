@@ -1,0 +1,433 @@
+
+*** Running vivado
+    with args -log looongson_remote_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source looongson_remote_top.tcl
+
+
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Sat Jul 19 11:53:15 2025
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source looongson_remote_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:03 ; elapsed = 00:00:13 . Memory (MB): peak = 507.590 ; gain = 199.875
+Command: synth_design -top looongson_remote_top -part xc7a200tfbg676-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a200t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a200t'
+INFO: [Device 21-403] Loading part xc7a200tfbg676-1
+INFO: [Device 21-9227] Part: xc7a200tfbg676-1 does not have CEAM library.
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 29420
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:08 . Memory (MB): peak = 1424.664 ; gain = 447.785
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-10714] extra semicolon is not allowed here in this dialect; use SystemVerilog mode instead [D:/UESTC/2.2sum/loongson/exp5/miniCPU/minicpu_top.v:131]
+INFO: [Synth 8-6157] synthesizing module 'looongson_remote_top' [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'remote2local' [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/remote2local.v:1]
+INFO: [Synth 8-6157] synthesizing module 'SEG7_LUT' [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/remote2local.v:25]
+INFO: [Synth 8-6155] done synthesizing module 'SEG7_LUT' (0#1) [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/remote2local.v:25]
+INFO: [Synth 8-6155] done synthesizing module 'remote2local' (0#1) [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/remote2local.v:1]
+INFO: [Synth 8-6157] synthesizing module 'soc_mini_top' [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/soc_mini_top.v:64]
+INFO: [Synth 8-6157] synthesizing module 'clk_pll' [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/project/loongson.runs/synth_1/.Xil/Vivado-11460-Genshin-Impact/realtime/clk_pll_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'clk_pll' (0#1) [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/project/loongson.runs/synth_1/.Xil/Vivado-11460-Genshin-Impact/realtime/clk_pll_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'minicpu_top' [D:/UESTC/2.2sum/loongson/exp5/miniCPU/minicpu_top.v:1]
+INFO: [Synth 8-6157] synthesizing module 'decoder_6_64' [D:/UESTC/2.2sum/loongson/exp5/miniCPU/tools.v:40]
+INFO: [Synth 8-6155] done synthesizing module 'decoder_6_64' (0#1) [D:/UESTC/2.2sum/loongson/exp5/miniCPU/tools.v:40]
+INFO: [Synth 8-6157] synthesizing module 'decoder_4_16' [D:/UESTC/2.2sum/loongson/exp5/miniCPU/tools.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'decoder_4_16' (0#1) [D:/UESTC/2.2sum/loongson/exp5/miniCPU/tools.v:14]
+INFO: [Synth 8-6157] synthesizing module 'decoder_2_4' [D:/UESTC/2.2sum/loongson/exp5/miniCPU/tools.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'decoder_2_4' (0#1) [D:/UESTC/2.2sum/loongson/exp5/miniCPU/tools.v:1]
+INFO: [Synth 8-6157] synthesizing module 'decoder_5_32' [D:/UESTC/2.2sum/loongson/exp5/miniCPU/tools.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'decoder_5_32' (0#1) [D:/UESTC/2.2sum/loongson/exp5/miniCPU/tools.v:27]
+INFO: [Synth 8-6157] synthesizing module 'regfile' [D:/UESTC/2.2sum/loongson/exp5/miniCPU/regfile.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'regfile' (0#1) [D:/UESTC/2.2sum/loongson/exp5/miniCPU/regfile.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'minicpu_top' (0#1) [D:/UESTC/2.2sum/loongson/exp5/miniCPU/minicpu_top.v:1]
+INFO: [Synth 8-6157] synthesizing module 'inst_ram' [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/project/loongson.runs/synth_1/.Xil/Vivado-11460-Genshin-Impact/realtime/inst_ram_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'inst_ram' (0#1) [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/project/loongson.runs/synth_1/.Xil/Vivado-11460-Genshin-Impact/realtime/inst_ram_stub.v:6]
+WARNING: [Synth 8-689] width (16) of port connection 'a' does not match port width (5) of module 'inst_ram' [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/soc_mini_top.v:146]
+INFO: [Synth 8-6157] synthesizing module 'confreg' [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/CONFREG/confreg.v:43]
+INFO: [Synth 8-6155] done synthesizing module 'confreg' (0#1) [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/CONFREG/confreg.v:43]
+INFO: [Synth 8-6155] done synthesizing module 'soc_mini_top' (0#1) [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/soc_mini_top.v:64]
+INFO: [Synth 8-6155] done synthesizing module 'looongson_remote_top' (0#1) [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:3]
+WARNING: [Synth 8-3848] Net uart_rdn in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:17]
+WARNING: [Synth 8-3848] Net uart_wrn in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:18]
+WARNING: [Synth 8-3848] Net base_ram_addr in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:25]
+WARNING: [Synth 8-3848] Net base_ram_be_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:26]
+WARNING: [Synth 8-3848] Net base_ram_ce_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:27]
+WARNING: [Synth 8-3848] Net base_ram_oe_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:28]
+WARNING: [Synth 8-3848] Net base_ram_we_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:29]
+WARNING: [Synth 8-3848] Net ext_ram_addr in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:33]
+WARNING: [Synth 8-3848] Net ext_ram_be_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:34]
+WARNING: [Synth 8-3848] Net ext_ram_ce_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:35]
+WARNING: [Synth 8-3848] Net ext_ram_oe_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:36]
+WARNING: [Synth 8-3848] Net ext_ram_we_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:37]
+WARNING: [Synth 8-3848] Net txd in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:40]
+WARNING: [Synth 8-3848] Net flash_a in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:44]
+WARNING: [Synth 8-3848] Net flash_rp_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:46]
+WARNING: [Synth 8-3848] Net flash_vpen in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:47]
+WARNING: [Synth 8-3848] Net flash_ce_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:48]
+WARNING: [Synth 8-3848] Net flash_oe_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:49]
+WARNING: [Synth 8-3848] Net flash_we_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:50]
+WARNING: [Synth 8-3848] Net flash_byte_n in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:51]
+WARNING: [Synth 8-3848] Net video_red in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:54]
+WARNING: [Synth 8-3848] Net video_green in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:55]
+WARNING: [Synth 8-3848] Net video_blue in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:56]
+WARNING: [Synth 8-3848] Net video_hsync in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:57]
+WARNING: [Synth 8-3848] Net video_vsync in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:58]
+WARNING: [Synth 8-3848] Net video_clk in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:59]
+WARNING: [Synth 8-3848] Net video_de in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:60]
+WARNING: [Synth 8-3848] Net local_num_data in module/entity looongson_remote_top does not have driver. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/loongson_remote_top.v:66]
+WARNING: [Synth 8-7129] Port remote_switch[31] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[30] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[29] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[28] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[27] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[26] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[25] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[24] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[23] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[22] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[21] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[20] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[19] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[18] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[17] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[16] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[15] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[14] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[13] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[12] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[11] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[10] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[9] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port remote_switch[8] in module remote2local is either unconnected or has no load
+WARNING: [Synth 8-7129] Port uart_rdn in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port uart_wrn in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[19] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[18] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[17] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[16] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[15] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[14] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[13] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[12] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[11] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[10] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[9] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[8] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[7] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[6] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[5] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[4] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[3] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[2] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[1] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_addr[0] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_be_n[3] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_be_n[2] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_be_n[1] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_be_n[0] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_ce_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_oe_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port base_ram_we_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[19] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[18] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[17] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[16] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[15] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[14] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[13] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[12] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[11] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[10] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[9] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[8] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[7] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[6] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[5] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[4] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[3] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[2] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[1] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_addr[0] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_be_n[3] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_be_n[2] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_be_n[1] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_be_n[0] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_ce_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_oe_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ext_ram_we_n in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port txd in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[22] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[21] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[20] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[19] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[18] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[17] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[16] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[15] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[14] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[13] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[12] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[11] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[10] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[9] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[8] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[7] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[6] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[5] in module looongson_remote_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port flash_a[4] in module looongson_remote_top is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:10 . Memory (MB): peak = 1537.527 ; gain = 560.648
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:02 ; elapsed = 00:00:10 . Memory (MB): peak = 1537.527 ; gain = 560.648
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:10 . Memory (MB): peak = 1537.527 ; gain = 560.648
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.032 . Memory (MB): peak = 1537.527 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [d:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/xilinx_ip/clk_pll/clk_pll/clk_pll_in_context.xdc] for cell 'soc_lites/pll.clk_pll'
+Finished Parsing XDC File [d:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/xilinx_ip/clk_pll/clk_pll/clk_pll_in_context.xdc] for cell 'soc_lites/pll.clk_pll'
+Parsing XDC File [d:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/xilinx_ip/inst_ram/inst_ram/inst_ram_in_context.xdc] for cell 'soc_lites/inst_ram'
+Finished Parsing XDC File [d:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/xilinx_ip/inst_ram/inst_ram/inst_ram_in_context.xdc] for cell 'soc_lites/inst_ram'
+Parsing XDC File [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/constraints/soc_mini_top.xdc]
+WARNING: [Vivado 12-507] No nets matched 'clk_11M0592_IBUF'. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/constraints/soc_mini_top.xdc:4]
+WARNING: [Constraints 18-619] A clock with name 'clk_50M' already exists, overwriting the previous clock with the same name. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/constraints/soc_mini_top.xdc:6]
+WARNING: [Vivado 12-507] No nets matched 'clock_btn_IBUF'. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/constraints/soc_mini_top.xdc:18]
+WARNING: [Vivado 12-507] No nets matched 'reset_btn_IBUF'. [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/constraints/soc_mini_top.xdc:19]
+Finished Parsing XDC File [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/constraints/soc_mini_top.xdc]
+WARNING: [Project 1-498] One or more constraints failed evaluation while reading constraint file [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/constraints/soc_mini_top.xdc] and the design contains unresolved black boxes. These constraints will be read post-synthesis (as long as their source constraint file is marked as used_in_implementation) and should be applied correctly then. You should review the constraints listed in the file [.Xil/looongson_remote_top_propImpl.xdc] and check the run log file to verify that these constraints were correctly applied.
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/constraints/soc_mini_top.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/looongson_remote_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/looongson_remote_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1585.793 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1585.793 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:22 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a200tfbg676-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:22 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property IO_BUFFER_TYPE = NONE for clk_50M. (constraint file  d:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/xilinx_ip/clk_pll/clk_pll/clk_pll_in_context.xdc, line 4).
+Applied set_property CLOCK_BUFFER_TYPE = NONE for clk_50M. (constraint file  d:/UESTC/2.2sum/loongson/exp5/soc_verify/rtl/xilinx_ip/clk_pll/clk_pll/clk_pll_in_context.xdc, line 5).
+Applied set_property KEEP_HIERARCHY = SOFT for soc_lites/\pll.clk_pll . (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for soc_lites/inst_ram. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:22 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:23 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
+	                1 Bit    Registers := 3     
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 5     
+	   2 Input    5 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 740 (col length:100)
+BRAMs: 730 (col length: RAMB18 100 RAMB36 50)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3917] design looongson_remote_top has port dpy0[0] driven by constant 0
+WARNING: [Synth 8-3917] design looongson_remote_top has port dpy1[0] driven by constant 0
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:08 ; elapsed = 00:00:26 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Preliminary Mapping Report (see note below)
++---------------------+--------------------------------+-----------+----------------------+--------------+
+|Module Name          | RTL Object                     | Inference | Size (Depth x Width) | Primitives   | 
++---------------------+--------------------------------+-----------+----------------------+--------------+
+|looongson_remote_top | soc_lites/cpu/u_regfile/rf_reg | Implied   | 32 x 32              | RAM32M x 12  | 
++---------------------+--------------------------------+-----------+----------------------+--------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-565] redefining clock 'clk_50M'
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:36 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:37 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Final Mapping Report
++---------------------+--------------------------------+-----------+----------------------+--------------+
+|Module Name          | RTL Object                     | Inference | Size (Depth x Width) | Primitives   | 
++---------------------+--------------------------------+-----------+----------------------+--------------+
+|looongson_remote_top | soc_lites/cpu/u_regfile/rf_reg | Implied   | 32 x 32              | RAM32M x 12  | 
++---------------------+--------------------------------+-----------+----------------------+--------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:11 ; elapsed = 00:00:37 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:14 ; elapsed = 00:00:44 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:14 ; elapsed = 00:00:44 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:14 ; elapsed = 00:00:44 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:14 ; elapsed = 00:00:44 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:44 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:14 ; elapsed = 00:00:44 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |clk_pll       |         1|
+|2     |inst_ram      |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |clk_pll  |     1|
+|2     |inst_ram |     1|
+|3     |CARRY4   |    13|
+|4     |LUT2     |    25|
+|5     |LUT3     |     5|
+|6     |LUT4     |     5|
+|7     |LUT5     |    12|
+|8     |LUT6     |   123|
+|9     |RAM32M   |    10|
+|10    |RAM32X1D |     4|
+|11    |FDRE     |    19|
+|12    |FDSE     |     5|
+|13    |IBUF     |     9|
+|14    |OBUF     |    32|
+|15    |OBUFT    |    98|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:14 ; elapsed = 00:00:44 . Memory (MB): peak = 1585.793 ; gain = 608.914
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 216 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:11 ; elapsed = 00:00:40 . Memory (MB): peak = 1585.793 ; gain = 560.648
+Synthesis Optimization Complete : Time (s): cpu = 00:00:14 ; elapsed = 00:00:44 . Memory (MB): peak = 1585.793 ; gain = 608.914
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1585.793 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 27 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1585.793 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 14 instances were transformed.
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 10 instances
+  RAM32X1D => RAM32X1D (RAMD32(x2)): 4 instances
+
+Synth Design complete | Checksum: 93d1ad0b
+INFO: [Common 17-83] Releasing license: Synthesis
+43 Infos, 139 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:16 ; elapsed = 00:00:54 . Memory (MB): peak = 1585.793 ; gain = 1063.449
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1585.793 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'D:/UESTC/2.2sum/loongson/exp5/soc_verify/run_vivado/project/loongson.runs/synth_1/looongson_remote_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file looongson_remote_top_utilization_synth.rpt -pb looongson_remote_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Jul 19 11:54:28 2025...

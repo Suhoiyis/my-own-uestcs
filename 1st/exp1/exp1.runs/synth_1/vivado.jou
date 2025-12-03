@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Fri Jul 18 14:02:00 2025
+# Process ID: 18856
+# Current directory: D:/UESTC/2.2sum/loongson/exp1/exp1.runs/synth_1
+# Command line: vivado.exe -log looongson_remote_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source looongson_remote_top.tcl
+# Log file: D:/UESTC/2.2sum/loongson/exp1/exp1.runs/synth_1/looongson_remote_top.vds
+# Journal file: D:/UESTC/2.2sum/loongson/exp1/exp1.runs/synth_1\vivado.jou
+# Running On        :Genshin-Impact
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :22631
+# Processor Detail  :13th Gen Intel(R) Core(TM) i9-13900H
+# CPU Frequency     :2995 MHz
+# CPU Physical cores:14
+# CPU Logical cores :20
+# Host memory       :34071 MB
+# Swap memory       :2415 MB
+# Total Virtual     :36487 MB
+# Available Virtual :22690 MB
+#-----------------------------------------------------------
+source looongson_remote_top.tcl -notrace

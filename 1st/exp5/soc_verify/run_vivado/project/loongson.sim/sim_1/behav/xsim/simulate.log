@@ -1,0 +1,3 @@
+Time resolution is 1 ps
+WARNING: This core is supplied with a behavioral model. To model cycle-accurate behavior you must run timing simulation.
+Warning : input CLKIN1 period and attribute CLKIN1_PERIOD on PLLE2_ADV instance tb_top.soc_mini.pll.clk_pll.inst.plle2_adv_inst are not same.

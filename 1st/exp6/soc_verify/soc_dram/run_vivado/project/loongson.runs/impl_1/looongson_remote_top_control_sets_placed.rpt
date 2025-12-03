@@ -1,0 +1,87 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
+| Date         : Sat Jul 19 16:19:35 2025
+| Host         : Genshin-Impact running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file looongson_remote_top_control_sets_placed.rpt
+| Design       : looongson_remote_top
+| Device       : xc7a200t
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |     9 |
+|    Minimum number of control sets                        |     9 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    15 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |     9 |
+| >= 0 to < 4        |     0 |
+| >= 4 to < 6        |     4 |
+| >= 6 to < 8        |     1 |
+| >= 8 to < 10       |     1 |
+| >= 10 to < 12      |     0 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |     3 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              13 |            8 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |              36 |           20 |
+| Yes          | No                    | No                     |               0 |            0 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++--------------------------------------+-----------------------------------------------------------------------------------------------------+-----------------------------------+------------------+----------------+--------------+
+|             Clock Signal             |                                            Enable Signal                                            |          Set/Reset Signal         | Slice Load Count | Bel Load Count | Bels / Slice |
++--------------------------------------+-----------------------------------------------------------------------------------------------------+-----------------------------------+------------------+----------------+--------------+
+|  soc_lite/pll.clk_pll/inst/cpu_clk   | soc_lite/data_ram/U0/synth_options.dist_mem_inst/gen_sp_ram.spram_inst/ram_reg_0_255_0_0_i_1_n_0    |                                   |                1 |              4 |         4.00 |
+|  soc_lite/pll.clk_pll/inst/cpu_clk   | soc_lite/data_ram/U0/synth_options.dist_mem_inst/gen_sp_ram.spram_inst/ram_reg_256_511_0_0_i_1_n_0  |                                   |                1 |              4 |         4.00 |
+|  soc_lite/pll.clk_pll/inst/cpu_clk   | soc_lite/data_ram/U0/synth_options.dist_mem_inst/gen_sp_ram.spram_inst/ram_reg_768_1023_0_0_i_1_n_0 |                                   |                1 |              4 |         4.00 |
+|  soc_lite/pll.clk_pll/inst/cpu_clk   | soc_lite/data_ram/U0/synth_options.dist_mem_inst/gen_sp_ram.spram_inst/ram_reg_512_767_0_0_i_1_n_0  |                                   |                1 |              4 |         4.00 |
+|  soc_lite/pll.clk_pll/inst/timer_clk |                                                                                                     |                                   |                3 |              6 |         2.00 |
+|  soc_lite/pll.clk_pll/inst/cpu_clk   | soc_lite/cpu/u_regfile/rf_we                                                                        |                                   |                1 |              8 |         8.00 |
+|  soc_lite/pll.clk_pll/inst/cpu_clk   |                                                                                                     | soc_lite/u_confreg/cpu_resetn_reg |               14 |             18 |         1.29 |
+|  soc_lite/pll.clk_pll/inst/cpu_clk   |                                                                                                     | soc_lite/cpu/reset                |                6 |             18 |         3.00 |
+|  soc_lite/pll.clk_pll/inst/cpu_clk   |                                                                                                     |                                   |             4101 |          16391 |         4.00 |
++--------------------------------------+-----------------------------------------------------------------------------------------------------+-----------------------------------+------------------+----------------+--------------+
+
+

@@ -1,0 +1,75 @@
+.
+├── config.h
+├── ip
+│   ├── APB_UART
+│   │   ├── apb_mux2.v
+│   │   ├── axi2apb.v
+│   │   ├── axi_uart_controller.v
+│   │   └── URT
+│   │       ├── raminfr.v
+│   │       ├── uart_defines.h
+│   │       ├── uart_receiver.v
+│   │       ├── uart_regs.v
+│   │       ├── uart_rfifo.v
+│   │       ├── uart_sync_flops.v
+│   │       ├── uart_tfifo.v
+│   │       ├── uart_top.v
+│   │       └── uart_transmitter.v
+│   ├── Bus_interconnects
+│   │   ├── axi2sram_dp.v
+│   │   ├── axi2sram_sp_ext.v
+│   │   ├── axi2sram_sp.v
+│   │   ├── Axi_CDC.v
+│   │   └── AxiCrossbar_1x4.v
+│   ├── confreg
+│   │   ├── confreg.v
+│   │   ├── digitaltube_controller.v
+│   │   └── key_debounce.v
+│   ├── open-la500
+│   │   ├── addr_trans.v
+│   │   ├── alu.v
+│   │   ├── axi_bridge.v
+│   │   ├── btb.v
+│   │   ├── csr.h
+│   │   ├── csr.v
+│   │   ├── dcache.v
+│   │   ├── div.v
+│   │   ├── doc
+│   │   │   ├── picture
+│   │   │   │   └── 框图.svg
+│   │   │   ├── 分支预测.md
+│   │   │   ├── 前言.md
+│   │   │   └── 设计概述.md
+│   │   ├── exe_stage.v
+│   │   ├── icache.v
+│   │   ├── id_stage.v
+│   │   ├── if_stage.v
+│   │   ├── IP
+│   │   │   ├── data_bank_sram.xcix
+│   │   │   └── tagv_sram.xcix
+│   │   ├── LICENSE
+│   │   ├── mem_stage.v
+│   │   ├── mul.v
+│   │   ├── mycpu.h
+│   │   ├── mycpu_top.v
+│   │   ├── perf_counter.v
+│   │   ├── README.md
+│   │   ├── regfile.v
+│   │   ├── tlb_entry.v
+│   │   ├── tools.v
+│   │   └── wb_stage.v
+│   ├── PLL_2019_2
+│   │   └── clk_pll.xci
+│   ├── ram_wrap
+│   │   ├── axi_wrap_ram_dp.v
+│   │   ├── axi_wrap_ram_sp_ext.v
+│   │   ├── axi_wrap_ram_sp.v
+│   │   ├── cache_sram.v
+│   │   ├── fpga_sram_dp.v
+│   │   └── fpga_sram_sp.v
+│   └── rst_sync
+│       └── rst_sync.v
+├── soc_top.v
+└── structure.txt
+
+12 directories, 60 files

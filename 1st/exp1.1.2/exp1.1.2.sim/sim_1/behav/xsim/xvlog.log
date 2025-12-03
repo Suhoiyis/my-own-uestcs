@@ -1,0 +1,18 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sources_1/new/Addder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Addder
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sources_1/new/adder_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module adder_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sources_1/new/full_adder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module full_adder
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sources_1/new/half_a.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module half_a
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sim_1/new/test_bench.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module test_bench
+ERROR: [VRFC 10-2989] 'dipsw' is not declared [D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sim_1/new/test_bench.v:42]
+ERROR: [VRFC 10-2989] 'dipsw' is not declared [D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sim_1/new/test_bench.v:50]
+ERROR: [VRFC 10-2989] 'dipsw' is not declared [D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sim_1/new/test_bench.v:59]
+ERROR: [VRFC 10-2989] 'dipsw' is not declared [D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sim_1/new/test_bench.v:68]
+ERROR: [VRFC 10-2989] 'dipsw' is not declared [D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sim_1/new/test_bench.v:74]
+ERROR: [VRFC 10-2989] 'dipsw' is not declared [D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sim_1/new/test_bench.v:89]
+ERROR: [VRFC 10-2989] 'dipsw' is not declared [D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sim_1/new/test_bench.v:90]
+ERROR: [VRFC 10-8530] module 'test_bench' is ignored due to previous errors [D:/UESTC/2.2sum/loongson/exp1.1.2/exp1.1.2.srcs/sim_1/new/test_bench.v:23]

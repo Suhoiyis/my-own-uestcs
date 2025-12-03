@@ -1,0 +1,22 @@
+
+phasesym.o：     文件格式 elf64-loongarch
+
+
+Disassembly of section .text:
+
+0000000000000000 <main>:
+   0:	02ffc063 	addi.d	$r3,$r3,-16(0xff0)
+   4:	29c02061 	st.d	$r1,$r3,8(0x8)
+   8:	1c00000c 	pcaddu12i	$r12,0
+   c:	28c0018c 	ld.d	$r12,$r12,0
+  10:	28800185 	ld.w	$r5,$r12,0
+  14:	1c00000c 	pcaddu12i	$r12,0
+  18:	28c0018c 	ld.d	$r12,$r12,0
+  1c:	28800186 	ld.w	$r6,$r12,0
+  20:	001018a7 	add.w	$r7,$r5,$r6
+  24:	1c000004 	pcaddu12i	$r4,0
+  28:	02c00084 	addi.d	$r4,$r4,0
+  2c:	54000000 	bl	0 # 2c <main+0x2c>
+  30:	28c02061 	ld.d	$r1,$r3,8(0x8)
+  34:	02c04063 	addi.d	$r3,$r3,16(0x10)
+  38:	4c000020 	jirl	$r0,$r1,0

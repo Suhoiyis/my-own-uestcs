@@ -1,0 +1,5 @@
+1.
+先通过objdump与readelf得到ex1.txt  ex1elf.txt两个文件
+查询各个关键地址
+
+
