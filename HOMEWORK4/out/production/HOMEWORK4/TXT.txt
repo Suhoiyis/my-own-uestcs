@@ -1,0 +1,79 @@
+CREATE OR REPLACE FUNCTION grade_audit_func()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF OLD.Score IS DISTINCT FROM NEW.Score THEN
+        INSERT INTO GradeLOG (
+            OperatorUser, SID, CID, 
+            OldScore, NewScore
+        ) VALUES (
+            CURRENT_USER,
+            OLD.SID, OLD.CID,
+            OLD.Score, NEW.Score
+        );
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+CREATE TRIGGER grade_after_update
+AFTER UPDATE ON GRADE
+FOR EACH ROW
+EXECUTE PROCEDURE grade_audit_func();
+
+
+CREATE TRIGGER grade_after_delete
+AFTER DELETE ON GRADE
+FOR EACH ROW
+EXECUTE PROCEDURE grade_audit_func();
+
+
+
+
+
+CREATE OR REPLACE FUNCTION count_failing_students()
+RETURNS VOID AS $$
+DECLARE
+    course_record RECORD;
+    fail_count INTEGER;
+BEGIN
+
+    FOR course_record IN 
+        SELECT c.id AS course_id, c.name AS course_name 
+        FROM courses c
+    LOOP
+
+        SELECT COUNT(*) INTO fail_count
+        FROM scores s
+        WHERE s.course_id = course_record.course_id
+          AND s.score < 60;
+
+        RAISE NOTICE '课程ID: %, 课程名称: %, 不及格人数: %', 
+                     course_record.course_id, 
+                     course_record.course_name, 
+                     fail_count;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+
+-- 教师表
+CREATE TABLE teachers (
+    TID CHAR(6) PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+-- 课程表（新增 teacher_id 外键）
+ALTER TABLE course ADD COLUMN teacher_id CHAR(6) REFERENCES teachers(TID);
+
+-- 成绩表（保留原有结构）
+CREATE TABLE scores (
+    student_id CHAR(10),
+    course_id CHAR(6) REFERENCES courses(id),
+    score DECIMAL(5,2)
+);
+

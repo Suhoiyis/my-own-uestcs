@@ -1,0 +1,105 @@
+INSERT INTO Owner (person_id, name, gender, occupation, addr, tel)
+VALUES 
+('123456789012345678', '张三', '男', '老师', '四川成都', '13600000000');
+
+INSERT INTO Estate (estate_id, estate_name, estate_build_name, estate_addr, estate_city , estate_type, property_area , usable_area, completed_date)
+VALUES 
+('ES202500001', '14栋', '电子科技大学沙河校区', '成华区建设北路2段4号', '成都', '住宅', 12.00, 10.00, '2010-1-1');
+
+INSERT INTO Registration (person_id, estate_id, price, purchased_date, deliver_date)
+VALUES 
+('123456789012345678', 'ES202500001', 3000, '2023-08-02', '2025-02-28');
+
+
+
+
+INSERT INTO registration (person_id, estate_id, price, purchased_date, deliver_date) VALUES
+-- 住宅交易（覆盖不同城市、时间）
+('110101199001011234', 'ES2024BJ001', 8500000, '2024-01-10', '2024-06-30'),  -- 北京住宅
+('310115198502023456', 'ES2024SH001', 12000000, '2024-07-05', '2024-12-31'), -- 上海住宅
+('500103199512124567', 'ES2024CQ001', 6800000, '2024-03-20', '2024-09-30'),  -- 重庆住宅
+('510104198803034568', 'ES2024CD001', 9500000, '2024-09-10', '2025-03-01'),  -- 成都住宅
+
+-- 多房产持有者记录（林峰：3套住宅）
+('330102197706054321', 'ES2024BJ002', 8600000, '2024-02-15', '2024-07-15'),  -- 北京
+('330102197706054321', 'ES2024SH001', 12500000, '2024-08-01', '2025-01-01'), -- 上海
+('330102197706054321', 'ES2024CQ001', 7000000, '2024-04-10', '2024-10-01'),  -- 重庆
+
+-- 商铺交易（赵敏：2套商铺）
+('440305199909096666', 'ES2024CQ002', 5000000, '2024-06-01', '2024-11-30'),  -- 重庆商铺
+('440305199909096666', 'ES2024BJ002', 15000000, '2025-01-05', '2025-06-30'), -- 北京商铺（2025年购买）
+
+-- 其他类型房产
+('310115198502023456', 'ES2024SH002', 45000000, '2024-09-01', '2025-05-01'), -- 上海别墅
+('510104198803034568', 'ES2024CD002', 200000, '2024-03-01', '2024-03-01');    -- 成都车位
+
+
+
+
+SELECT * FROM Estate 
+WHERE completed_date > '2024-12-01' 
+  AND property_area > 90 
+  AND estate_type = '住宅';
+
+
+SELECT o.* 
+FROM Owner o
+JOIN Registration r ON o.person_id = r.person_id
+JOIN Estate e ON r.estate_id = e.estate_id
+WHERE e.estate_type = '住宅' AND e.estate_city = '重庆'
+GROUP BY o.person_id, o.name, o.gender, o.occupation, o.addr, o.tel
+HAVING COUNT(*) >= 2;
+
+
+
+SELECT o.* 
+FROM Owner o
+JOIN Registration r ON o.person_id = r.person_id
+JOIN Estate e ON r.estate_id = e.estate_id
+WHERE e.estate_type = '住宅'
+GROUP BY o.person_id, name, o.gender, o.occupation, o.addr, o.tel
+HAVING COUNT(*) >= 2;
+
+
+
+SELECT 
+    estate_city,
+    estate_type,
+    SUM(property_area) AS TotalArea
+FROM Estate e
+JOIN Registration r ON e.estate_id = r.estate_id
+WHERE e.estate_city = '重庆' 
+  AND YEAR(r.purchased_date) = 2024
+GROUP BY estate_city, estate_type;
+
+
+
+
+CREATE VIEW vw_OwnerProperty AS
+SELECT 
+    r.register_id,
+    e.estate_name,
+    e.estate_type,
+    e.property_area,
+    r.price,
+    r.purchased_date,
+    e.estate_build_name,
+    e.estate_city
+FROM Registration r
+JOIN Estate e ON r.estate_id = e.estate_id
+ORDER BY r.purchased_date DESC;
+
+
+
+CREATE VIEW vw_CitySales2024 AS
+SELECT 
+    e.estate_city,
+    e.estate_type,
+    COUNT(*) AS SaleCount,
+    SUM(r.Price) AS TotalAmount
+FROM Estate e
+JOIN Registration r ON e.estate_id = r.estate_id
+WHERE YEAR(r.purchased_date) = 2024
+  AND e.estate_city IN ('北京', '上海', '重庆', '成都')
+GROUP BY e.estate_city, e.estate_type;
+
