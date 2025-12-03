@@ -1,0 +1,12 @@
+﻿  ikun.vs.xiaoheizi.cpp
+D:\VScode C\gege\Project2\Project2\ikun.vs.xiaoheizi.cpp(238,22): warning C4018: “>”: 有符号/无符号不匹配
+D:\VScode C\gege\Project2\Project2\ikun.vs.xiaoheizi.cpp(279,14): warning C4244: “-=”: 从“float”转换到“int”，可能丢失数据
+D:\VScode C\gege\Project2\Project2\ikun.vs.xiaoheizi.cpp(284,14): warning C4244: “-=”: 从“float”转换到“int”，可能丢失数据
+D:\VScode C\gege\Project2\Project2\ikun.vs.xiaoheizi.cpp(289,14): warning C4244: “+=”: 从“float”转换到“int”，可能丢失数据
+D:\VScode C\gege\Project2\Project2\ikun.vs.xiaoheizi.cpp(294,14): warning C4244: “+=”: 从“float”转换到“int”，可能丢失数据
+  正在生成代码
+  2 of 23 functions ( 8.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+  Project2.vcxproj -> D:\VScode C\gege\Project2\x64\Release\cxk.exe

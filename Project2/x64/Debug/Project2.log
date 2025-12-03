@@ -1,0 +1,8 @@
+﻿  ikun.vs.xiaoheizi.cpp
+D:\UESTC\1.1\飞机大战最终版\Project2\ikun.vs.xiaoheizi.cpp(455,22): warning C4018: “>”: 有符号/无符号不匹配
+D:\UESTC\1.1\飞机大战最终版\Project2\ikun.vs.xiaoheizi.cpp(496,14): warning C4244: “-=”: 从“float”转换到“int”，可能丢失数据
+D:\UESTC\1.1\飞机大战最终版\Project2\ikun.vs.xiaoheizi.cpp(501,14): warning C4244: “-=”: 从“float”转换到“int”，可能丢失数据
+D:\UESTC\1.1\飞机大战最终版\Project2\ikun.vs.xiaoheizi.cpp(506,14): warning C4244: “+=”: 从“float”转换到“int”，可能丢失数据
+D:\UESTC\1.1\飞机大战最终版\Project2\ikun.vs.xiaoheizi.cpp(511,14): warning C4244: “+=”: 从“float”转换到“int”，可能丢失数据
+D:\UESTC\1.1\飞机大战最终版\Project2\ikun.vs.xiaoheizi.cpp(796,16): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Project2.vcxproj -> D:\UESTC\1.1\飞机大战最终版\x64\Debug\cxk.exe

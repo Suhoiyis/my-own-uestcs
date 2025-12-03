@@ -1,0 +1,8 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Project2.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  ikun.vs.xiaoheizi.cpp
+C:\Users\KEKE\Desktop\Z7Z8\Files from QQ\Project2 (1)\Project2\Project2\ikun.vs.xiaoheizi.cpp(408,22): warning C4018: “>”: 有符号/无符号不匹配
+C:\Users\KEKE\Desktop\Z7Z8\Files from QQ\Project2 (1)\Project2\Project2\ikun.vs.xiaoheizi.cpp(449,14): warning C4244: “-=”: 从“float”转换到“int”，可能丢失数据
+C:\Users\KEKE\Desktop\Z7Z8\Files from QQ\Project2 (1)\Project2\Project2\ikun.vs.xiaoheizi.cpp(454,14): warning C4244: “-=”: 从“float”转换到“int”，可能丢失数据
+C:\Users\KEKE\Desktop\Z7Z8\Files from QQ\Project2 (1)\Project2\Project2\ikun.vs.xiaoheizi.cpp(459,14): warning C4244: “+=”: 从“float”转换到“int”，可能丢失数据
+C:\Users\KEKE\Desktop\Z7Z8\Files from QQ\Project2 (1)\Project2\Project2\ikun.vs.xiaoheizi.cpp(464,14): warning C4244: “+=”: 从“float”转换到“int”，可能丢失数据
+  Project2.vcxproj -> C:\Users\KEKE\Desktop\Z7Z8\Files from QQ\Project2 (1)\Project2\x64\Debug\cxk.exe
