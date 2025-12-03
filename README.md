@@ -1,3 +1,7 @@
-这几天选实习老师，做简历，想起来整理之前的一些东西
+# 3.1：认知计算前沿及应用
 
-不同的就写不同分支吧
+平时作业是做了个聚类算法啥的
+
+期末使用我的7900gre在ubuntu 24装了rocm和pytorch跑了个textcnn
+
+[-TextCNN-IMDb-](https://github.com/Suhoiyis/-TextCNN-IMDb-) 仓库（可能设私密了）

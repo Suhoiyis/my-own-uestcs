@@ -1,0 +1,3 @@
+[submodule "ends"]
+	path = ends
+	url = git@github.com:Suhoiyis/-TextCNN-IMDb-.git
