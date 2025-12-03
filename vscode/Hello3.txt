@@ -1,0 +1,3 @@
+Hello!
+This is another text file using BufferedWriter,
+所以我能用newLine()开一个新行

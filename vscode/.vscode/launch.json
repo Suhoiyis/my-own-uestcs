@@ -1,0 +1,1072 @@
+{
+	// 使用 IntelliSense 了解相关属性。 
+	// 悬停以查看现有属性的描述。
+	// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "java",
+			"name": "CourseManager",
+			"request": "launch",
+			"mainClass": "fourChapter.CourseManager",
+			"console": "integratedTerminal",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "GeneralArrayStack",
+			"request": "launch",
+			"mainClass": "nineChapter.GeneralArrayStack",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Current File",
+			"request": "launch",
+			"mainClass": "${file}"
+		},
+		{
+			"type": "java",
+			"name": "TestScanner",
+			"request": "launch",
+			"mainClass": "eightChapter.TestScanner",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "AbstractAreas",
+			"request": "launch",
+			"mainClass": "fiveChapter.AbstractAreas",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "AnonymousDemo",
+			"request": "launch",
+			"mainClass": "fiveChapter.AnonymousDemo",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "AnonymousDemo2",
+			"request": "launch",
+			"mainClass": "fiveChapter.AnonymousDemo2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ClassTest",
+			"request": "launch",
+			"mainClass": "fiveChapter.ClassTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ClassTest2",
+			"request": "launch",
+			"mainClass": "fiveChapter.ClassTest2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ClassTest3",
+			"request": "launch",
+			"mainClass": "fiveChapter.ClassTest3",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Data",
+			"request": "launch",
+			"mainClass": "fiveChapter.Data",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FIFOQueue",
+			"request": "launch",
+			"mainClass": "fiveChapter.FIFOQueue",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FactoryTest",
+			"request": "launch",
+			"mainClass": "fiveChapter.FactoryTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FactoryTest2",
+			"request": "launch",
+			"mainClass": "fiveChapter.FactoryTest2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "HideTest",
+			"request": "launch",
+			"mainClass": "fiveChapter.HideTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "HideTest2",
+			"request": "launch",
+			"mainClass": "fiveChapter.HideTest2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "HideTest3",
+			"request": "launch",
+			"mainClass": "fiveChapter.HideTest3",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "HideTest4",
+			"request": "launch",
+			"mainClass": "fiveChapter.HideTest4",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "IFExtend",
+			"request": "launch",
+			"mainClass": "fiveChapter.IFExtend",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "InheritTest",
+			"request": "launch",
+			"mainClass": "fiveChapter.InheritTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "InheritTest2",
+			"request": "launch",
+			"mainClass": "fiveChapter.InheritTest2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "PolyTest",
+			"request": "launch",
+			"mainClass": "fiveChapter.PolyTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "PolymorphismTest",
+			"request": "launch",
+			"mainClass": "fiveChapter.PolymorphismTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "SimpleInheritance",
+			"request": "launch",
+			"mainClass": "fiveChapter.SimpleInheritance",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Test",
+			"request": "launch",
+			"mainClass": "fiveChapter.Test",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Test2",
+			"request": "launch",
+			"mainClass": "fiveChapter.Test2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestConvert",
+			"request": "launch",
+			"mainClass": "fiveChapter.TestConvert",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestMethodHidden",
+			"request": "launch",
+			"mainClass": "fiveChapter.TestMethodHidden",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "CarEngineTest",
+			"request": "launch",
+			"mainClass": "fourChapter.CarEngineTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstructorTest",
+			"request": "launch",
+			"mainClass": "fourChapter.ConstructorTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstructorTest2",
+			"request": "launch",
+			"mainClass": "fourChapter.ConstructorTest2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstructorTest3",
+			"request": "launch",
+			"mainClass": "fourChapter.ConstructorTest3",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstructorTest4",
+			"request": "launch",
+			"mainClass": "fourChapter.ConstructorTest4",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstructorTest5",
+			"request": "launch",
+			"mainClass": "fourChapter.ConstructorTest5",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstructorTest6",
+			"request": "launch",
+			"mainClass": "fourChapter.ConstructorTest6",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstructorTest7",
+			"request": "launch",
+			"mainClass": "fourChapter.ConstructorTest7",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstructorTest8",
+			"request": "launch",
+			"mainClass": "fourChapter.ConstructorTest8",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstructorTest9",
+			"request": "launch",
+			"mainClass": "fourChapter.ConstructorTest9",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Father_A",
+			"request": "launch",
+			"mainClass": "fourChapter.Father_A",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FinalData",
+			"request": "launch",
+			"mainClass": "fourChapter.FinalData",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FinalData2",
+			"request": "launch",
+			"mainClass": "fourChapter.FinalData2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Outer",
+			"request": "launch",
+			"mainClass": "fourChapter.Outer",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Outer2",
+			"request": "launch",
+			"mainClass": "fourChapter.Outer2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Outer3",
+			"request": "launch",
+			"mainClass": "fourChapter.Outer3",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Outer4",
+			"request": "launch",
+			"mainClass": "fourChapter.Outer4",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Outer5",
+			"request": "launch",
+			"mainClass": "fourChapter.Outer5",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "PointTest",
+			"request": "launch",
+			"mainClass": "fourChapter.PointTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "StaticMethod",
+			"request": "launch",
+			"mainClass": "fourChapter.StaticMethod",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "StaticTest",
+			"request": "launch",
+			"mainClass": "fourChapter.StaticTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "StaticTest2",
+			"request": "launch",
+			"mainClass": "fourChapter.StaticTest2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Test(1)",
+			"request": "launch",
+			"mainClass": "fourChapter.Test",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ForeachTest",
+			"request": "launch",
+			"mainClass": "nineChapter.ForeachTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Car",
+			"request": "launch",
+			"mainClass": "oneChapter.Car",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Hello",
+			"request": "launch",
+			"mainClass": "oneChapter.Hello",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "VariableTest",
+			"request": "launch",
+			"mainClass": "oneChapter.VariableTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Account",
+			"request": "launch",
+			"mainClass": "senvenChapter.Account",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "AnonymousTest",
+			"request": "launch",
+			"mainClass": "senvenChapter.AnonymousTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Creep",
+			"request": "launch",
+			"mainClass": "senvenChapter.Creep",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "DemoThread",
+			"request": "launch",
+			"mainClass": "senvenChapter.DemoThread",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FactorialThreadTest",
+			"request": "launch",
+			"mainClass": "senvenChapter.FactorialThreadTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "LambdaTest",
+			"request": "launch",
+			"mainClass": "senvenChapter.LambdaTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "RunTest",
+			"request": "launch",
+			"mainClass": "senvenChapter.RunTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "SellTicketsTest",
+			"request": "launch",
+			"mainClass": "senvenChapter.SellTicketsTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestCallable",
+			"request": "launch",
+			"mainClass": "senvenChapter.TestCallable",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestDeadLock",
+			"request": "launch",
+			"mainClass": "senvenChapter.TestDeadLock",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestJoin",
+			"request": "launch",
+			"mainClass": "senvenChapter.TestJoin",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestProduct",
+			"request": "launch",
+			"mainClass": "senvenChapter.TestProduct",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestTicket1",
+			"request": "launch",
+			"mainClass": "senvenChapter.TestTicket1",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ThreadRunnable",
+			"request": "launch",
+			"mainClass": "senvenChapter.ThreadRunnable",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ThreadTest1",
+			"request": "launch",
+			"mainClass": "senvenChapter.ThreadTest1",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ThreadTest2",
+			"request": "launch",
+			"mainClass": "senvenChapter.ThreadTest2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ThreadUnsafe",
+			"request": "launch",
+			"mainClass": "senvenChapter.ThreadUnsafe",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Demo",
+			"request": "launch",
+			"mainClass": "sixChapter.Demo",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ExceptionDemo",
+			"request": "launch",
+			"mainClass": "sixChapter.ExceptionDemo",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ExceptionTryCatchTest",
+			"request": "launch",
+			"mainClass": "sixChapter.ExceptionTryCatchTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "MethNestTry",
+			"request": "launch",
+			"mainClass": "sixChapter.MethNestTry",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestCustomException01",
+			"request": "launch",
+			"mainClass": "sixChapter.TestCustomException01",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestCustomException02",
+			"request": "launch",
+			"mainClass": "sixChapter.TestCustomException02",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestCustomException03",
+			"request": "launch",
+			"mainClass": "sixChapter.TestCustomException03",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestCustomException04",
+			"request": "launch",
+			"mainClass": "sixChapter.TestCustomException04",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestCustomException05",
+			"request": "launch",
+			"mainClass": "sixChapter.TestCustomException05",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestThrows01",
+			"request": "launch",
+			"mainClass": "sixChapter.TestThrows01",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestThrows02",
+			"request": "launch",
+			"mainClass": "sixChapter.TestThrows02",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TryTest",
+			"request": "launch",
+			"mainClass": "sixChapter.TryTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TryTest1",
+			"request": "launch",
+			"mainClass": "sixChapter.TryTest1",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TryTest2",
+			"request": "launch",
+			"mainClass": "sixChapter.TryTest2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Child",
+			"request": "launch",
+			"mainClass": "subject_instantiation.Child",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstructorTest(1)",
+			"request": "launch",
+			"mainClass": "subject_instantiation.ConstructorTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "InitialTest",
+			"request": "launch",
+			"mainClass": "subject_instantiation.InitialTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "MyCat",
+			"request": "launch",
+			"mainClass": "subject_instantiation.MyCat",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "MyCat2",
+			"request": "launch",
+			"mainClass": "subject_instantiation.MyCat2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "MyCat3",
+			"request": "launch",
+			"mainClass": "subject_instantiation.MyCat3",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "MyCat4",
+			"request": "launch",
+			"mainClass": "subject_instantiation.MyCat4",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "MyCat5",
+			"request": "launch",
+			"mainClass": "subject_instantiation.MyCat5",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "MyCat6",
+			"request": "launch",
+			"mainClass": "subject_instantiation.MyCat6",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Test(2)",
+			"request": "launch",
+			"mainClass": "subject_instantiation.Test",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "BasicPrint",
+			"request": "launch",
+			"mainClass": "tenChapter.BasicPrint",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "BufferTest",
+			"request": "launch",
+			"mainClass": "tenChapter.BufferTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "BufferedReaderTester",
+			"request": "launch",
+			"mainClass": "tenChapter.BufferedReaderTester",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "BufferedWriterTester",
+			"request": "launch",
+			"mainClass": "tenChapter.BufferedWriterTester",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "DataInputStreamTester",
+			"request": "launch",
+			"mainClass": "tenChapter.DataInputStreamTester",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Echo",
+			"request": "launch",
+			"mainClass": "tenChapter.Echo",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FileOutputstreamTester",
+			"request": "launch",
+			"mainClass": "tenChapter.FileOutputstreamTester",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FileStreamTest",
+			"request": "launch",
+			"mainClass": "tenChapter.FileStreamTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FileTest",
+			"request": "launch",
+			"mainClass": "tenChapter.FileTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FileTest1",
+			"request": "launch",
+			"mainClass": "tenChapter.FileTest1",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FileWriterTester",
+			"request": "launch",
+			"mainClass": "tenChapter.FileWriterTester",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "FileWriterTester2",
+			"request": "launch",
+			"mainClass": "tenChapter.FileWriterTester2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "LineNumberTest",
+			"request": "launch",
+			"mainClass": "tenChapter.LineNumberTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "PrintFormat",
+			"request": "launch",
+			"mainClass": "tenChapter.PrintFormat",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "RandomAccessFileTester",
+			"request": "launch",
+			"mainClass": "tenChapter.RandomAccessFileTester",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ScannerTest",
+			"request": "launch",
+			"mainClass": "tenChapter.ScannerTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "SerializableTester",
+			"request": "launch",
+			"mainClass": "tenChapter.SerializableTester",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestDecorator",
+			"request": "launch",
+			"mainClass": "tenChapter.TestDecorator",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestPrintStream",
+			"request": "launch",
+			"mainClass": "tenChapter.TestPrintStream",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestSequence",
+			"request": "launch",
+			"mainClass": "tenChapter.TestSequence",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "AddressTest",
+			"request": "launch",
+			"mainClass": "twelveChapter.AddressTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ClientChat",
+			"request": "launch",
+			"mainClass": "twelveChapter.ClientChat",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ServerChat",
+			"request": "launch",
+			"mainClass": "twelveChapter.ServerChat",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestClient",
+			"request": "launch",
+			"mainClass": "twelveChapter.TestClient",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestClient2",
+			"request": "launch",
+			"mainClass": "twelveChapter.TestClient2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestReceive",
+			"request": "launch",
+			"mainClass": "twelveChapter.TestReceive",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestSend",
+			"request": "launch",
+			"mainClass": "twelveChapter.TestSend",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestServer",
+			"request": "launch",
+			"mainClass": "twelveChapter.TestServer",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestServerThread",
+			"request": "launch",
+			"mainClass": "twelveChapter.TestServerThread",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestUDP",
+			"request": "launch",
+			"mainClass": "twelveChapter.TestUDP",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestUploadClient",
+			"request": "launch",
+			"mainClass": "twelveChapter.TestUploadClient",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TestUploadServer",
+			"request": "launch",
+			"mainClass": "twelveChapter.TestUploadServer",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ArrayTest",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.ArrayTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "BreakTest",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.BreakTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ClassName",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.ClassName",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstantPool",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.ConstantPool",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstantPool2",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.ConstantPool2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstantPool3",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.ConstantPool3",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstantPool4",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.ConstantPool4",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ConstantPool5",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.ConstantPool5",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "Ex1_1",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.Ex1_1",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ExchangeTest",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.ExchangeTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ForeachTest(1)",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.ForeachTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "J_StringConstructors",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.J_StringConstructors",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "PrimeNumber",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.PrimeNumber",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "RefTest_1",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.RefTest_1",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "RefTest_2",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.RefTest_2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "StringTest",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.StringTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "StringTest2",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.StringTest2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "StringTest3",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.StringTest3",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "SwitchTest",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.SwitchTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "SwitchTest2",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.SwitchTest2",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "SwitchTest3",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.SwitchTest3",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "TwoDArray",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.TwoDArray",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "ValueTest",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.ValueTest",
+			"projectName": "FJClassRoom_5e3708ac"
+		},
+		{
+			"type": "java",
+			"name": "显示Hello的类",
+			"request": "launch",
+			"mainClass": "twoThreeChapter.显示Hello的类",
+			"projectName": "FJClassRoom_5e3708ac"
+		}
+	]
+}

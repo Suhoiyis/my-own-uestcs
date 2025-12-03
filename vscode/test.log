@@ -1,0 +1,8 @@
+Exception msg:4
+Exception string:java.lang.ArrayIndexOutOfBoundsException: 4
+java.lang.ArrayIndexOutOfBoundsException: 4
+at sixChapter.TryTest1.<init>(TryTest1.java:7)
+at sixChapter.TryTest1.main(TryTest1.java:23)
+-------------
+finally
+No exception?
