@@ -1,0 +1,121 @@
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>  // Include this to use strlen
+
+using namespace std;
+
+// 随机生成一个密钥（一个介于1到6之间的整数）
+short SHIFT_KeyGen() {
+    return rand() % 6 + 1;  // 生成一个 1 到 6 之间的随机数
+}
+
+// 加密函数
+int SHIFT_Encrypt(short key, char* plaintext, int plength, char* ciphertext, int* clength) {
+    // 根据木棍的截面为正六边形，我们将明文按列写入矩阵
+    // 在加密时，我们将矩阵按行顺序进行读取
+
+    int rows = 6;  // 固定为 6 行
+    int cols = (plength + rows - 1) / rows;  // 列数根据明文长度确定
+
+    vector<vector<char>> matrix(rows, vector<char>(cols, ' '));
+
+    // 将明文填充到矩阵中（按列填充）
+    int idx = 0;
+    for (int col = 0; col < cols; ++col) {
+        for (int row = 0; row < rows && idx < plength; ++row) {
+            matrix[row][col] = plaintext[idx++];
+        }
+    }
+
+    // 打印加密时的矩阵（按矩阵形式输出）
+    cout << "Matrix representation of encrypted data:" << endl;
+    for (int row = 0; row < rows; ++row) {
+        for (int col = 0; col < cols; ++col) {
+            cout << matrix[row][col] << " ";
+        }
+        cout << endl;
+    }
+
+    // 按行将矩阵内容写入密文
+    idx = 0;
+    for (int row = 0; row < rows; ++row) {
+        for (int col = 0; col < cols; ++col) {
+            if (matrix[row][col] != ' ') {  // 跳过填充的空格
+                ciphertext[idx++] = matrix[row][col];
+            }
+        }
+    }
+
+    *clength = idx;  // 设置密文长度
+    return 0;  // 返回加密成功
+}
+
+// 解密函数
+int SHIFT_Decrypt(short key, char* ciphertext, int clength, char* plaintext, int* plength) {
+    // 解密时，我们需要逆向操作：将密文按行写入矩阵，再按列读取
+    int rows = 6;
+    int cols = (clength + rows - 1) / rows;
+
+    vector<vector<char>> matrix(rows, vector<char>(cols, ' '));
+
+    // 将密文填充到矩阵中（按行填充）
+    int idx = 0;
+    for (int row = 0; row < rows; ++row) {
+        for (int col = 0; col < cols && idx < clength; ++col) {
+            matrix[row][col] = ciphertext[idx++];
+        }
+    }
+
+    // 按列将矩阵内容写入明文
+    idx = 0;
+    for (int col = 0; col < cols; ++col) {
+        for (int row = 0; row < rows; ++row) {
+            if (matrix[row][col] != ' ') {  // 跳过填充的空格
+                plaintext[idx++] = matrix[row][col];
+            }
+        }
+    }
+
+    *plength = idx;  // 设置明文长度
+    return 0;  // 返回解密成功
+}
+
+int main() {
+    // 初始化随机数种子
+    srand(time(0));
+
+    // 用户输入明文
+    string input;
+    cout << "Enter the plaintext: ";
+    getline(cin, input);  // 获取整行输入
+
+    const char* plaintext = input.c_str();
+    int plength = strlen(plaintext);  // 使用 strlen 来获取明文的长度
+
+    // 生成随机密钥
+    short key = SHIFT_KeyGen();
+    cout << "Generated Key: " << key << endl;
+
+    // 加密过程
+    char ciphertext[100];
+    int clength = 0;
+    SHIFT_Encrypt(key, (char*)plaintext, plength, ciphertext, &clength);
+
+    cout << "Encrypted Text (Flattened): ";
+    for (int i = 0; i < clength; ++i) {
+        cout << ciphertext[i];
+    }
+    cout << endl;
+
+    // 解密过程
+    char decryptedText[100];
+    int decryptedLength = 0;
+    SHIFT_Decrypt(key, ciphertext, clength, decryptedText, &decryptedLength);
+
+    decryptedText[decryptedLength] = '\0';  // 确保字符串以 null 结尾
+    cout << "Decrypted Text: " << decryptedText << endl;
+
+    return 0;
+}

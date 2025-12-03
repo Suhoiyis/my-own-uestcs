@@ -1,0 +1,150 @@
+#include <graphics.h>
+#include<stdio.h>
+#include<string.h>
+#include<time.h>
+#include<stdlib.h>
+
+//凯撒密码函数声明 
+int REP_KeyGen();
+int REP_Encrypt(short key, char*plaintext, int plength, char* ciphertext, int* clength);
+int REP_Decrypt(short key, char*ciphertext, int clength, char* plaintext, int* plength);
+
+//斯巴达手杖密码声明
+int SHIFT_KeyGen();
+int SHIFT_Encrypt(short key, char* plaintext, int plength, char* ciphertext, int* clength);
+int SHIFT_Decrypt(short key, char* ciphertext, int clength, char* plaintext, int* plength);
+
+int main(){
+	
+//凯撒加密
+//  initgraph(640, 480); 
+//	char Plaintext[100],Ciphertext[100],Plaintext1[100];
+
+//	inputbox_getline("加密解密-凯撒密码", "请输入您像加密的字符串（回车确认）", Plaintext, 100);
+//	int Plength=strlen(Plaintext);
+//	xyprintf(0,20,"您输入的字符串的长度为：%d",Plength);
+//	int Clength;
+//	int Plength1;
+//	int key=REP_KeyGen();
+
+//	xyprintf(0,40,"本次加密的加密参数（随机生成）为：%d",key);                                   /*加密过程,并回复用户以便检验是否加密成功 */
+//  REP_Encrypt(key,Plaintext,Plength,Ciphertext,&Clength);
+//  xyprintf(0,60,"您输入的字符串经加密后：");
+//  outtextxy(175,60,Ciphertext);
+//  xyprintf(0,80,"您输入的字符串经加密后长度为：%d",Clength);
+
+//  REP_Decrypt(key,Ciphertext,Clength,Plaintext1,&Plength1);                                   /*解密过程,并回复用户以便检验是否解密成功 */
+//  xyprintf(0,100,"您输入的字符串经加密再解密后：");
+//  outtextxy(230,100,Plaintext1);
+//  xyprintf(0,120,"您输入的字符串经加密再解密后长度为：%d",Plength1);      
+//	getch();
+//	closegraph();
+//	return 0;
+
+//斯巴达手杖
+//  initgraph(640,480);
+//	char Plaintext[100],Ciphertext[100],Plaintext1[100];
+//	inputbox_getline("加密解密-斯巴达手杖","请输入您想加密的字符串（回车确认）",Plaintext,100);
+//	int Plength=strlen(Plaintext);
+//	xyprintf(0,20,"您输入的字符串的长度为：%d",Plength);
+//	int Clength;
+//	int Plength1; 
+//	int key=SHIFT_KeyGen();
+
+//	xyprintf(0,40,"本次加密的加密参数（随机生成）为：%d",key);                                  /*加密过程,并回复用户以便检验是否加密成功 */
+//	SHIFT_Encrypt(key,Plaintext,Plength,Ciphertext,&Clength);
+//  xyprintf(0,60,"您输入的字符串经加密后：");
+//  outtextxy(175,60,Ciphertext);
+//  xyprintf(0,80,"您输入的字符串经加密后长度为：%d",Clength);
+
+//  SHIFT_Decrypt(key,Ciphertext,Clength,Plaintext1,&Plength1);                                  /*解密过程,并回复用户以便检验是否解密成功 */
+//  xyprintf(0,100,"您输入的字符串经加密再解密后：");
+//  outtextxy(230,100,Plaintext1);
+//  xyprintf(0,120,"您输入的字符串经加密再解密后长度为：%d",Plength1);      
+//	getch();
+//	closegraph(); 
+}
+
+//斯巴达手杖生成key的函数 
+int SHIFT_KeyGen(){
+	srand((int)time(0));
+	return rand()%4+3;	
+}
+
+//斯巴达手杖解密 
+int SHIFT_Encrypt(short key, char* plaintext, int plength, char* ciphertext, int* clength){
+	int m=plength/key;
+	int n=plength%key;
+	int i,j=0,z=0; 
+	while(j<n){               
+	for(i=0;i<m+1;i++,z++){
+		ciphertext[z]=plaintext[j+i*key];                                   //对刚好可以框入正方形的数据进行加密 
+	}
+	j++;
+    }
+    while(j<key){
+	for(i=0;i<m;i++,z++){
+		ciphertext[z]=plaintext[j+i*key];                                  //对多余部分进行加密 
+	}
+	j++;
+    }
+    *clength=strlen(ciphertext);
+}
+
+int SHIFT_Decrypt(short key, char* ciphertext, int clength, char* plaintext, int* plength){
+	int m=clength/key;
+	int n=clength%key;
+	int i,j=0,z=0;
+	while(j<n){
+	for(i=0;i<m+1;i++,z++){
+		plaintext[j+i*key]=ciphertext[z];                                   //对刚好可以框入正方形的数据进行加密 
+	}
+	j++;
+    }
+    while(j<key){
+	for(i=0;i<m;i++,z++){
+		plaintext[j+i*key]=ciphertext[z];                                  //对多余部分进行加密
+	}
+	j++;
+    }
+    *plength=strlen(plaintext);
+}
+
+//凯撒密码生成key的函数 
+int REP_KeyGen(){
+	srand((int)time(0));
+	return rand()%26;
+}
+
+//凯撒加密 
+int REP_Encrypt(short key, char*plaintext, int plength, char* ciphertext, int* clength){
+	for(int i=0;i<plength;i++){
+		if(plaintext[i]<='z'&&plaintext[i]>='a')                                //判断大小写,对大小写的数据都进行加密 
+		   ciphertext[i]=(plaintext[i]-'a'+key)%26+'a';
+		else if(plaintext[i]<='Z'&&plaintext[i]>='A')
+		   ciphertext[i]=(plaintext[i]-'A'+key)%26+'A';
+	}
+	*clength=strlen(ciphertext);
+}
+
+//凯撒解密 
+int REP_Decrypt(short key, char*ciphertext, int clength, char* plaintext, int* plength){
+	int m;
+	for(int i=0;i<clength;i++){
+		if(ciphertext[i]<='z'&&ciphertext[i]>='a')                              //判断大小写,对大小写的数据都进行解密 
+		  {
+		  	m=(ciphertext[i]-'a'-key);
+		  	if(m<0) m+=26;    
+		  	plaintext[i]=m%26+'a';		   
+		  }
+		else if(ciphertext[i]<='Z'&&ciphertext[i]>='A')          
+		   {
+		   	m=(ciphertext[i]-'A'-key);
+		  	if(m<0) m+=26;
+		  	plaintext[i]=m%26+'A';		   
+		  }
+	}
+	*plength=strlen(plaintext);
+}
+
+

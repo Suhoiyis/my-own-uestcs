@@ -1,0 +1,3 @@
+D:/cpp/Sparta/cmake-build-debug/CMakeFiles/Sparta.dir
+D:/cpp/Sparta/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/cpp/Sparta/cmake-build-debug/CMakeFiles/rebuild_cache.dir
