@@ -1,3 +1,5 @@
-这几天选实习老师，做简历，想起来整理之前的一些东西
+# 2.2：综设
 
-不同的就写不同分支吧
+这里主要存背景资料，
+
+main文件夹实际上就是[assembler_py](https://github.com/Suhoiyis/assembler_py)仓库

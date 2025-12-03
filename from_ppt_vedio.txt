@@ -1,0 +1,72 @@
+
+
+.data
+array:.word 64,34,-25,12,22,11,90 #
+array_size:.byte 7 #
+.align 4
+
+.text
+
+_start:
+	#把data section从 flash 搬运到 ram 中
+	la a0, _data_lma
+	la a1, _data_start
+	la a2, _data_end
+	bgeu a1, a2, begin
+	
+move_loop:
+	lw t0, 0(a0)	#从 flash 中取出一个 word 的数据
+	sw t0, 0(a1)	#将取出的数据存入 ram 中对应位置
+	addi a0，a0, 4
+	addi a1, a1, 4
+	bltu a1, a2, move_loop
+
+begin:#开始
+	la s0, array
+	lb s1, array_size
+	
+	# 外层循环计数器(i)
+	li t0, 0     # t0 = i = 0
+	
+outer_loop:
+	# 检查是否完成所有外层循环 (i < ARRAY_LEN - 1)
+	addi t1, s1, -1			# t1 = ARRAY_LEN - 1
+	bge t0, t1, end_sort	# if i >= ARRAY_LEN-1，结束
+	
+	#内层循环计数器(j)
+	li t2, 0  		# t2 = j = 0
+	
+inner_loop:
+	# 计算剩余内层循环次数(ARRAY_LEN - 1 - i)
+	sub t3, t1, t0			# t3 = ARRAY_LEN - 1 - i
+	bge t2, t3, end_inner	# if j >= ARRAY_LEN-1-i，结束内层循环
+	
+	# 计算当前元素的地址上 (array_start + j*4)
+	slli t4, t2, 2	# t4 = j *4 (字节偏移)
+	add t4, s0, t4	# t4 = &array[j]
+	
+	#加载 array[j］和 array[j+1]
+	lw t5, 0(t4)	# t5 = array[j]
+	lw t6, 4(t4)	# t6 = array[j+1]
+	
+	#比较array[j]和array[j+1]
+	ble t5, t6, no_swap		# if array[j］<= array[j+1]，不交换
+	
+	#交换 array[j］和 array[j+1]
+	sw t6, 0(t4)	# array[j] = t6
+	sw t5, 4(t4)	# array[j+1] = t5
+	
+no_swap:
+	#内层循环计数器增加
+	addi t2, t2, 1	# j++
+	j inner_loop
+	
+end inner:
+	#外层循环计数器增加
+	addi t0, t0, 1	# i++
+	j outer_loop
+	
+end_sort:
+	#排序完成，进入无限循环
+	j end_sort
+_data_lma:
