@@ -1,0 +1,4 @@
+[submodule "2.assembler_py"]
+	path = 2.assembler_py
+	url = git@github.com:Suhoiyis/2.assembler_py.git
+	branch = dev
