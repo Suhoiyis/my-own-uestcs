@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网络流量监控系统</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .top-section {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .chart-box {
+            flex: 1;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-box {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #444;
+            margin-top: 0;
+            font-size: 1.2em;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+
+        .last-update {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin-top: 15px;
+        }
+
+        .chart-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>网络流量监控系统 <span id="last-update" class="last-update"></span></h1>
+
+        <div class="top-section">
+            <div class="chart-box">
+                <h2>发送流量趋势</h2>
+                <div class="chart-container">
+                    <canvas id="sendChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-box">
+                <h2>接收流量趋势</h2>
+                <div class="chart-container">
+                    <canvas id="receiveChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-box">
+            <h2>详细流量数据</h2>
+            <div id="data-container">
+                <table id="traffic-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">本地IP</th>
+                            <th rowspan="2">目的IP</th>
+                            <th rowspan="2">总流量(B)</th>
+                            <th rowspan="2">峰值流量(B)</th>
+                            <th colspan="10">流量详情</th>
+                        </tr>
+                        <tr>
+                            <th>数据方向</th>
+                            <th>累计流量(B)</th>
+                            <th>峰值流量(B)</th>
+                            <th>平均流量(2s)</th>
+                            <th>数据包数(2s)</th>
+                            <th>平均流量(10s)</th>
+                            <th>数据包数(10s)</th>
+                            <th>平均流量(40s)</th>
+                            <th>数据包数(40s)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 颜色配置
+        const colorPalette = [
+            'rgb(54, 162, 235)',   // blue
+            'rgb(255, 99, 132)',   // red
+            'rgb(75, 192, 192)',   // green
+            'rgb(255, 159, 64)',   // orange
+            'rgb(153, 102, 255)',  // purple
+            'rgb(255, 205, 86)',   // yellow
+            'rgb(201, 203, 207)'   // gray
+        ];
+
+        // 初始化数据
+        const DATA_COUNT = 21; // 40秒数据，每2秒一个点
+        const labels = [];
+        for (let i = 0; i <= 40; i += 2) {
+            labels.push(i + 's');
+        }
+
+        // 存储IP地址与数据集索引的映射（两个图表分开存储）
+        const sendIpDatasetMap = {};
+        const receiveIpDatasetMap = {};
+        let nextColorIndex = 0;
+
+        // 图表通用配置
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 12
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return context.dataset.label + ': ' + context.parsed.y + ' B/s';
+                        }
+                    }
+                }
+            },
+            interaction: {
+                intersect: false,
+            },
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: '秒前'
+                    },
+                    reverse: true
+                },
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: '速率 (B/s)'
+                    },
+                    suggestedMin: 0
+                }
+            }
+        };
+
+        // 发送图表配置
+        const sendChartConfig = {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: []
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: '发送流量趋势'
+                    }
+                }
+            }
+        };
+
+        // 接收图表配置
+        const receiveChartConfig = {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: []
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    title: {
+                        display: true,
+                        text: '接收流量趋势'
+                    }
+                }
+            }
+        };
+
+        // 图表实例
+        let sendChart;
+        let receiveChart;
+
+        // 页面加载完成后初始化
+        window.onload = function () {
+            // 初始化发送图表
+            const sendCtx = document.getElementById('sendChart').getContext('2d');
+            sendChart = new Chart(sendCtx, sendChartConfig);
+
+            // 初始化接收图表
+            const receiveCtx = document.getElementById('receiveChart').getContext('2d');
+            receiveChart = new Chart(receiveCtx, receiveChartConfig);
+
+            // 初始加载数据
+            fetchData();
+
+            // 每2秒自动刷新一次
+            setInterval(fetchData, 2000);
+        };
+
+        // 获取并显示数据
+        function fetchData() {
+            // 添加时间戳防止缓存
+            const timestamp = new Date().getTime();
+            fetch(`traffic_data.csv?t=${timestamp}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("网络响应不正常");
+                    return response.text();
+                })
+                .then(data => {
+                    // 更新最后更新时间
+                    // document.getElementById('last-update').textContent =
+                    // `最后更新: ${new Date().toLocaleTimeString()}`;
+
+                    // 过滤掉非数据行
+                    const rows = data.split('\n')
+                        .filter(row => row.trim() !== '' && !row.includes('==='));
+
+                    // 处理数据用于表格和图表
+                    const trafficData = rows.map(row => {
+                        const [sip, dip, total_bytes, peak_bandwidth,
+                            in_bytes, out_bytes, in_peak_bandwidth, out_peak_bandwidth,
+                            w2s_in_avg, w2s_out_avg, w2s_in_packets, w2s_out_packets,
+                            w10s_in_avg, w10s_out_avg, w10s_in_packets, w10s_out_packets,
+                            w40s_in_avg, w40s_out_avg, w40s_in_packets, w40s_out_packets] = row.split(',').map(item => item.trim());
+                        return {
+                            sip, dip, total_bytes, peak_bandwidth,
+                            in_bytes, out_bytes, in_peak_bandwidth, out_peak_bandwidth,
+                            w2s_in_avg, w2s_out_avg, w2s_in_packets, w2s_out_packets,
+                            w10s_in_avg, w10s_out_avg, w10s_in_packets, w10s_out_packets,
+                            w40s_in_avg, w40s_out_avg, w40s_in_packets, w40s_out_packets
+                        };
+                    });
+
+                    // 更新表格数据
+                    updateTableData(trafficData);
+
+                    // 准备发送图表数据
+                    const sendRateData = trafficData.map(item => ({
+                        ip: item.dip,
+                        rate: parseFloat(item.w2s_out_avg) // 使用2秒平均出流量
+                    }));
+
+                    // 准备接收图表数据
+                    const receiveRateData = trafficData.map(item => ({
+                        ip: item.dip,
+                        rate: parseFloat(item.w2s_in_avg) // 使用2秒平均入流量
+                    }));
+
+                    // 更新图表数据
+                    updateChartData(sendChart, sendIpDatasetMap, sendRateData, '发送');
+                    updateChartData(receiveChart, receiveIpDatasetMap, receiveRateData, '接收');
+                })
+                .catch(error => {
+                    console.error('获取数据失败:', error);
+                    document.getElementById('data-container').innerHTML =
+                        `<p class="error-message">无法加载数据: ${error.message}</p>`;
+                });
+        }
+
+        // 更新表格数据
+        function updateTableData(trafficData) {
+            const tableBody = document.getElementById('table-body');
+            tableBody.innerHTML = '';
+
+            trafficData.forEach(item => {
+                // 创建发送行
+                const sendRow = document.createElement('tr');
+                sendRow.innerHTML = `
+                    <td rowspan="2">${item.sip}</td>
+                    <td rowspan="2">${item.dip}</td>
+                    <td rowspan="2">${item.total_bytes}</td>
+                    <td rowspan="2">${item.peak_bandwidth}</td>
+                    <td>发送</td>
+                    <td>${item.out_bytes}</td>
+                    <td>${item.out_peak_bandwidth}</td>
+                    <td>${item.w2s_out_avg}</td>
+                    <td>${item.w2s_out_packets}</td>
+                    <td>${item.w10s_out_avg}</td>
+                    <td>${item.w10s_out_packets}</td>
+                    <td>${item.w40s_out_avg}</td>
+                    <td>${item.w40s_out_packets}</td>
+                `;
+                tableBody.appendChild(sendRow);
+
+                // 创建接收行
+                const receiveRow = document.createElement('tr');
+                receiveRow.innerHTML = `
+                    <td>接收</td>
+                    <td>${item.in_bytes}</td>
+                    <td>${item.in_peak_bandwidth}</td>
+                    <td>${item.w2s_in_avg}</td>
+                    <td>${item.w2s_in_packets}</td>
+                    <td>${item.w10s_in_avg}</td>
+                    <td>${item.w10s_in_packets}</td>
+                    <td>${item.w40s_in_avg}</td>
+                    <td>${item.w40s_in_packets}</td>
+                `;
+                tableBody.appendChild(receiveRow);
+            });
+        }
+
+        // 更新图表数据（通用函数）
+        function updateChartData(chart, ipMap, ipRateData, direction) {
+            // 1. 检查是否有新IP需要添加
+            ipRateData.forEach(item => {
+                if (!ipMap.hasOwnProperty(item.ip)) {
+                    // 新IP，创建新数据集
+                    const color = colorPalette[nextColorIndex % colorPalette.length];
+                    nextColorIndex++;
+
+                    // 新数据集初始数据应与现有数据集同步
+                    const initialDataForNewIP = Array(DATA_COUNT).fill(NaN);
+
+                    // 如果有现有数据集，复制它们的数据结构（除了第一个点）
+                    if (chart.data.datasets.length > 0) {
+                        const existingDataset = chart.data.datasets[0];
+                        for (let i = 1; i < existingDataset.data.length; i++) {
+                            initialDataForNewIP[i] = existingDataset.data[i];
+                        }
+                    }
+
+                    const newDataset = {
+                        label: `${item.ip} (${direction})`,
+                        data: initialDataForNewIP,
+                        borderColor: color,
+                        backgroundColor: color,
+                        fill: false,
+                        cubicInterpolationMode: 'monotone',
+                        tension: 0.4
+                    };
+
+                    // 添加到图表
+                    chart.data.datasets.push(newDataset);
+
+                    // 记录映射关系
+                    ipMap[item.ip] = chart.data.datasets.length - 1;
+                }
+            });
+
+            // 2. 更新所有数据集的数据（包括新添加的）
+            chart.data.datasets.forEach(dataset => {
+                // 移动所有数据点
+                for (let i = dataset.data.length - 1; i > 0; i--) {
+                    dataset.data[i] = dataset.data[i - 1];
+                }
+
+                // 提取IP地址（去掉方向后缀）
+                const ip = dataset.label.split(' (')[0];
+
+                // 查找当前数据集对应的IP的最新数据
+                const ipData = ipRateData.find(item => item.ip === ip);
+
+                // 更新第一个数据点（0s位置）
+                dataset.data[0] = ipData ? ipData.rate : NaN;
+            });
+
+            // 3. 更新图表
+            chart.update();
+        }
+    </script>
+</body>
+
+</html>
