@@ -1,8 +1,10 @@
 # 3.1：综设
 
-代码仓库在[2.assembler\_py](https://github.com/Suhoiyis/2.assembler_py)
+代码仓库在[2.assembler_py](https://github.com/Suhoiyis/2.assembler_py)
 
-用到[riscv-none-gcc](https://github.com/ilg-archived/riscv-none-gcc),因为我用的是[GNU MCU Eclipse RISC-V Embedded GCC v8.2.0-2.2 20190521](https://github.com/ilg-archived/riscv-none-gcc/releases/tag/v8.2.0-2.2-20190521)这个Release,好像不能git submodule
+~~其实现在不止综设，Gemini让我再开发一个cpp写的模拟器，就放在[2.assembler_py](https://github.com/Suhoiyis/2.assembler_py)的cpp分支下面了~~
+
+用到[riscv-none-gcc](https://github.com/ilg-archived/riscv-none-gcc),因为我用的是[GNU MCU Eclipse RISC-V Embedded GCC v8.2.0-2.2 20190521](https://github.com/ilg-archived/riscv-none-gcc/releases/tag/v8.2.0-2.2-20190521)这个Release,好像不能git submodule,就只能复制下来了
 
 # Assets：
 
