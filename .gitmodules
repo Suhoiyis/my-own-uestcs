@@ -1,0 +1,3 @@
+[submodule "LaTex"]
+	path = LaTex
+	url = git@github.com:Suhoiyis/thesisuestc.git

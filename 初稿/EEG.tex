@@ -1,0 +1,233 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  chinese,
+  12pt,
+  a4paper,
+]{book}
+\usepackage{xcolor}
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={EEG数据增强技术：演进脉络、工程挑战与未来展望},
+  pdfauthor={(电子科技大学 中国四川省成都市 610000)},
+  pdflang={zh-CN},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{EEG数据增强技术：演进脉络、工程挑战与未来展望}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{汤仲宇，刘卓函，代子祥，施政宇}
+\author{(电子科技大学 中国四川省成都市 610000)}
+\date{}
+
+\begin{document}
+\frontmatter
+\maketitle
+
+\mainmatter
+\textbf{【摘要】} 脑电图（EEG）信号因其高时间分辨率在脑机接口与神经科学中广泛应用，但其小样本、高维、低信噪比、非平稳及显著个体差异等特性，严重制约了深度学习模型的泛化能力。为应对上述挑战，数据增强技术成为提升模型鲁棒性与泛化性能的关键手段。本文系统梳理了EEG数据增强技术的演进脉络：从基于信号处理的确定性增强方法，发展为基于生成对抗网络与扩散模型的概率生成增强，进一步演进至以对比学习和自监督预训练为代表的隐式增强范式。本文的主要贡献在于对现有技术进行系统性分类与对比分析，揭示其在不同应用场景下的有效性，深入探讨工程实践中面临的表征耦合、评估陷阱与部署瓶颈等关键挑战，并展望了轻量化生成、多模态引导与标准化评估等未来研究方向。 关 键 词 \textbf{脑电图; 数据增强; 生成对抗网络; 模型泛化}
+
+\textbf{A Survey of EEG Data Augmentation: Evolution, Engineering Challenges, and Future Directions}
+
+Author1 Lastname, Author2 Lastname, Author3 Lastname, and Author4 Lastname (Department, University, City Zipcode)
+
+\textbf{Abstract} Electroencephalography (EEG) signals are widely used in brain-computer interfaces (BCI) and neuroscience due to their high temporal resolution. However, their characteristics---such as small sample sizes, high dimensionality, low signal-to-noise ratio, non-stationarity, and significant inter-subject variability---severely limit the generalization capability of deep learning models. To address these challenges, data augmentation has emerged as a crucial technique for enhancing model robustness and generalization. This paper systematically reviews the evolutionary trajectory of EEG data augmentation techniques, from deterministic methods based on signal processing, through probabilistic generative augmentation using Generative Adversarial Networks (GANs) and diffusion models, to the latest implicit augmentation paradigms represented by contrastive learning and self-supervised pre-training. The primary contribution of this work lies in providing a systematic taxonomy and comparative analysis of existing techniques, revealing their effectiveness across various application scenarios, and delving into key engineering challenges such as representation coupling, evaluation pitfalls, and deployment bottlenecks. Finally, we outline promising future research directions, including lightweight generation, multimodal guidance, and standardized evaluation frameworks. \textbf{Key words} electroencephalography; data augmentation; generative adversarial networks; model generalization
+
+\section{1 引言}\label{ux5f15ux8a00}
+
+\subsection{1.1 EEG数据分析的独特挑战}\label{eegux6570ux636eux5206ux6790ux7684ux72ecux7279ux6311ux6218}
+
+脑电图（EEG）作为一种非侵入式、高时间分辨率的脑活动监测手段，在脑机接口、神经疾病诊断和认知科学研究中扮演着不可或缺的角色。然而，基于EEG的深度学习模型在实际部署中，面临着源于数据本身的一系列独特挑战。
+
+首先，EEG信号固有的低信噪比和非平稳性是其首要难点。大脑的电生理活动极易被眼电、肌电等伪迹所污染，且其统计特性会随时间推移而发生变化 {[}1{]}。这种``脆弱''的特性对模型的鲁棒性提出了极高要求。
+
+其次，个体间与会话间的显著差异构成了泛化的主要障碍。不同受试者之间的大脑解剖结构与功能连接模式存在差异，甚至同一受试者在不同实验会话中的心理状态和环境因素都会导致EEG数据分布漂移，这使得在一个被试或会话上训练的优秀模型，在另一个上可能表现急剧下降 {[}2, 3{]}。
+
+更为根本性的挑战在于标注数据的极端稀缺性与高昂的获取成本。与ImageNet等拥有海量标注数据的计算机视觉任务不同，EEG数据的采集需要专业的设备与严格的环境控制，且需要专家进行精细的标注 {[}4, 5{]}。例如，在运动想象、情绪识别等任务中，每次试验仅能产生一个有效的标签，导致数据集规模通常仅有数十到数百个样本 {[}6{]}。这种``小样本困境''使得复杂的深度神经网络极易陷入严重的过拟合，难以学习到具有泛化能力的本质特征。
+
+\subsection{1.2 数据增强的必要性与目标}\label{ux6570ux636eux589eux5f3aux7684ux5fc5ux8981ux6027ux4e0eux76eeux6807}
+
+面对上述挑战，数据增强技术从``数据中心化人工智能''的视角 {[}7{]}，提供了一条行之有效的路径。其核心目标并非如去噪、滤波等技术那样修复单个样本的质量，而是通过系统性地扩充与变换训练数据集，来模拟数据的潜在分布，从而构建一个更具多样性、包容性和鲁棒性的训练环境。
+
+具体而言，在EEG数据分析中引入数据增强旨在实现以下四个关键目标： 1. \textbf{缓解过拟合}：通过增加训练数据的多样性，迫使模型学习更普适的特征，而非记忆有限的训练样本。 2. \textbf{提升泛化能力}：特别是在跨被试和跨会话场景下，增强技术可以隐式地模拟个体差异，从而提升模型的域泛化性能 {[}2, 3{]}。 3. \textbf{平衡类别分布}：对于癫痫检测 {[}5{]} 等类别极度不平衡的任务，增强技术可以针对性地生成少数类样本，避免模型预测偏向多数类。 4. \textbf{增强模型鲁棒性}：通过对原始数据施加可控的扰动（如噪声），使模型对输入数据中的微小变化不敏感，从而提升其在实际应用中的稳定性。
+
+值得注意的是，自动化数据增强策略 {[}8{]} 的出现，进一步将数据增强从一个依赖于专家经验的``技巧''，提升为一个可优化、可学习的模型组件，体现了其与机器学习流程深度融合的工程化趋势。
+
+\subsection{1.3 本文组织结构}\label{ux672cux6587ux7ec4ux7ec7ux7ed3ux6784}
+
+本文旨在从软件工程与机器学习的交叉视角，系统梳理EEG数据增强技术的演进脉络、前沿动态与工程实践。全文结构如下：第2章将作为核心，按技术范式演进顺序，深入剖析从基于信号处理的确定性增强，到基于生成模型的概率增强，再到基于自监督学习的隐式增强等一系列关键技术。第3章将聚焦于工程实践中面临的关键挑战，包括数据表征形式、评估指标与常见陷阱。第4章将通过典型应用场景下的效果分析，佐证不同增强技术的有效性。最后，第5章将对全文进行总结，并展望未来的研究方向。
+
+\section{2 EEG数据增强的技术分类与演进}\label{eegux6570ux636eux589eux5f3aux7684ux6280ux672fux5206ux7c7bux4e0eux6f14ux8fdb}
+
+脑电（EEG）信号作为一种非平稳、低信噪比且具有显著个体差异的生物电信号，其``数据孤岛''与``标签稀缺''问题长期制约着深度学习模型在脑机接口（BCI）与临床诊断中的性能上限。He等{[}1{]}在最新的综述中指出，数据增强已成为解决过拟合、提升模型泛化能力的核心技术。近年来，随着情感计算、癫痫检测等领域的发展，EEG数据增强的技术范式经历了深刻的演进：从早期的``基于物理规则的信号变换''，发展到``基于样本插值的正则化''，再到``基于概率分布的生成建模''，直至当前最前沿的``基于自监督学习的隐式增强''。这种演进不仅是算法复杂度的提升，更是对EEG信号本质从时空物理特性向深层语义流形理解的转变。
+
+\subsection{2.1 基于信号处理的确定性增强}\label{ux57faux4e8eux4fe1ux53f7ux5904ux7406ux7684ux786eux5b9aux6027ux589eux5f3a}
+
+基于信号处理的确定性增强是EEG分析领域最早应用，也是目前工业界最为稳健的预处理与增强手段。该类方法不涉及对数据分布的统计学习，而是利用脑电信号在时域、频域或时频域的物理特性，通过预设的几何变换或信号处理算子生成新样本。
+
+在时域层面，滑动窗口（Sliding Window）及其变体是解决长程信号切分与扩充的首选策略。针对稳态视觉诱发电位（SSVEP）信号对数据长度的敏感性，Chen等{[}6{]}提出了一种基于改进任务相关成分分析（TRCA）的数据长度适配方法，结合锁相时移的数据增强策略，有效解决了被试内和跨被试的神经响应差异问题。
+
+在频域与变换域层面，增强操作旨在模拟信号的频谱扰动或重构，以提高模型对频带偏移的鲁棒性。Du等{[}7{]}提出了一种基于时频域联合数据增强的多尺度特征融合算法。更为精细的频域操作如Zheng等{[}8{]}提出的基于小波包分解（WPD）的合成增强策略，该方法利用WPD将信号分解为低方差的``稳定''分量和高方差的``变异''分量，并通过子带交换（Sub-band Swapping）生成保留了事件相关去同步/同步（ERD/ERS）特征的合成样本。
+
+此外，统计特性与多维重构也被引入增强流程。Gao等{[}9{]}提出了一种基于高斯混合模型（GMM）的增强方法，通过分解同类样本并交换其概率系数加权的特征矩阵列向量，生成的信号在t-SNE可视化中显示出更紧凑的时空分布特性。
+
+\subsection{2.2 基于样本插值与自动化搜索的正则化增强}\label{ux57faux4e8eux6837ux672cux63d2ux503cux4e0eux81eaux52a8ux5316ux641cux7d22ux7684ux6b63ux5219ux5316ux589eux5f3a}
+
+为了突破单样本变换的局限性，技术范式向``样本间插值''演进。该范式引入了``混合（Mixup）''的概念，假设在特征空间或输入空间中，样本间的线性插值点仍然具有语义意义，从而通过软化标签（Label Smoothing）实现正则化。
+
+Mixup及其变体在处理类别不平衡和提升鲁棒性方面表现优异。He等{[}12{]}在癫痫发作检测的系统性研究中，深入评估了Mixup、SuperMix和Co-MixUp三种策略，发现Co-MixUp能最大化混合样本与源样本的显著性依赖，极大地缓解了长程EEG监测中的严重类别不平衡问题。
+
+随着增强策略的增多，自动化数据增强（AutoAugment）成为新的趋势。Cubuk等{[}17{]}在图像领域的开创性工作启发了EEG研究者。Rommel等{[}18{]}提出了CADDA（类可微自动数据增强），针对EEG信号特性设计了可微的增强操作搜索空间，实现了针对特定任务的最优策略自动搜索。
+
+\subsection{2.3 基于生成模型的概率增强}\label{ux57faux4e8eux751fux6210ux6a21ux578bux7684ux6982ux7387ux589eux5f3a}
+
+随着生成对抗网络（GAN）和扩散模型（Diffusion Models）的爆发，EEG数据增强进入了``概率建模''时代。该范式的核心目标是学习真实EEG数据的联合概率分布 P(X,Y)，并从中采样生成``未见过''但逼真的新样本。
+
+GAN系列是这一阶段的主流框架。为解决传统GAN训练不稳定的问题，Du等{[}21{]}提出了基于DCGAN-GP的方法。Song等{[}22{]}进一步提出了EEGGAN-Net，结合条件GAN（CGAN）与SE注意力机制，实现了对特定类别EEG信号的定向生成。为了提升生成特征的可解释性与解耦能力，信息最大化GAN（InfoGAN）受到关注。Li等{[}24, 25{]}的研究提出了基于深度卷积的InfoGAN（DCIMGAN），通过在生成过程中最大化生成数据与潜在变量的互信息，成功实现了对MI-EEG信号特征的自动控制。
+
+扩散模型（Diffusion Models）作为最新的生成范式，凭借其优越的分布覆盖性和训练稳定性正逐渐取代GAN。Zhang等{[}29{]}构建了基于扩散概率模型（DDPM）的深度生成框架。Moghadam等{[}30{]}提出的卷积注意力扩散模型（CADM），专门针对抑郁症检测中的数据稀缺，生成的时频特征显著增强了Transformer的鲁棒性。
+
+\subsection{2.4 基于自监督学习的隐式增强}\label{ux57faux4e8eux81eaux76d1ux7763ux5b66ux4e60ux7684ux9690ux5f0fux589eux5f3a}
+
+数据增强的最新演进方向不再局限于``显式地生成样本''，而是将增强操作内化为模型学习特征不变性的核心机制------即自监督学习（Self-Supervised Learning, SSL）和对比学习（Contrastive Learning）。
+
+对比学习通过构造``正样本对''（增强视图）来拉近其特征距离。Zhang等{[}34{]}在MSTDAN模型中构建了无负样本的对比学习框架，利用随机裁剪和滤波作为增强策略，仅需50\%的标注数据即可达到全量数据的性能。
+
+在图结构与复杂任务中，增强策略变得更加结构化。Li等{[}37{]}提出的GMSS模型引入了``拼图任务''（Jigsaw Puzzle），包括空间拼图和频率拼图作为自监督任务，迫使模型学习EEG的内在拓扑结构和关键频段。
+
+\section{3 关键技术挑战与工程实践}\label{ux5173ux952eux6280ux672fux6311ux6218ux4e0eux5de5ux7a0bux5b9eux8df5}
+
+EEG 数据增强技术虽然在理论上缓解了小样本困境，但要将其转化为可靠的工程能力，仍需跨越从实验室到规模化部署的鸿沟。当前，制约该技术落地的核心阻力不再仅仅是算法性能，而是表征形式的物理约束、评估体系的维度缺失以及复杂的资源权衡。
+
+\subsection{3.1 表征演进与增强策略的物理耦合}\label{ux8868ux5f81ux6f14ux8fdbux4e0eux589eux5f3aux7b56ux7565ux7684ux7269ux7406ux8026ux5408}
+
+脑电信号的表征形式直接划定了数据增强的''安全边界''。随着建模范式从简单的 2D 时序矩阵向保留拓扑的 3D 张量乃至图结构演进，增强算法的设计复杂度呈指数级上升。
+
+早期的 2D 表征（通道×时间）虽然计算高效，但往往忽视电极间的空间拓扑。在这种表征下，简单的时移或裁剪若不被加以限制，极易破坏通道间的相位同步性，致使模型学习到非生理性的噪声特征。为了规避这一风险，当前的工程实践更倾向于采用联合增强策略。例如，在处理时频域数据时，必须确保时域的切片拼接与频域的节律交换同步进行，以维持信号在物理空间上的邻域一致性。
+
+对于更复杂的 3D 及图结构表征，增强操作面临的约束就更为严格。研究表明，生成式模型（如 3D-GAN）只有在维持运动想象任务的 μ 波抑制特征等空间一致性时，才能有效提升分类准确率。而在最新的图对比学习框架中，增强策略（如随机滤波或加噪）必须在严格保持图拓扑结构的前提下进行。
+
+\subsection{3.2 评估陷阱：跳出单一准确率的误区}\label{ux8bc4ux4f30ux9677ux9631ux8df3ux51faux5355ux4e00ux51c6ux786eux7387ux7684ux8befux533a}
+
+在缺乏标准化评估体系的现状下，过度依赖''分类准确率''已成为评估生成质量的主要陷阱。工程经验表明，分类准确率不仅无法区分模型是学习了鲁棒特征还是记忆了增强样本的分布，甚至可能掩盖过拟合风险。
+
+因此，构建一个能反映信号本质的多维度评估体系，就是突破这一瓶颈的关键。首要的评估维度是生理特征的``保真度''，也就是生理频谱保真度。高质量的增强样本必须在频谱特性上复现真实脑电的模式。例如，生成样本必须保持与真实 EEG 一致的 ERD/ERS（事件相关去同步/同步）模式。
+
+在确保单样本生理保真的基础上，还需关注整体数据集的``分布一致性''。针对这一维度，直接套用图像领域的 FID 指标会导致评估偏差。更合理的做法是采用针对 EEG 特性改进的指标（如基于 EEGNet 特征的 EEG-FID），或使用切片 Wasserstein 距离（SWD）来捕捉时频特性的分布差异。
+
+\subsection{3.3 工程实践：防范泄露与资源权衡}\label{ux5de5ux7a0bux5b9eux8df5ux9632ux8303ux6cc4ux9732ux4e0eux8d44ux6e90ux6743ux8861}
+
+在实际部署中，除了算法层面的挑战，还需警惕数据泄露、边际效应递减与计算资源消耗三大工程陷阱。
+
+首先，是建立严格的数据隔离机制，防范隐蔽的``虚假高分''数据泄露是模型评估失效的头号原因，最常见的陷阱是在数据划分前进行全局增强。因此，工程最佳实践必须遵循``先划分、后增强''的原则，确保每个原始样本及其增强子片段严格限制在单一数据集中。
+
+在确保数据独立性后，需理性看待增强规模的边际效应。EEG 信号的类内多样性有限，这意味着增强规模并非越大越好。多项研究证实，生成样本比例存在一个最佳''甜点''（通常为原始数据的 2-3 倍或 70\% 左右）。一旦超过此阈值，过度增强会导致模式崩溃（Mode Collapse），引发样本同质化，反而降低模型的泛化性能。
+
+最后，面对生成式模型高昂推理成本与 BCI 边缘端资源受限的矛盾，必须采取``非对称''的计算权衡策略。解决之道在于采取非对称的轻量化策略和分阶段部署。在算法选择上，优先采用计算成本仅为原始信号生成 40\% 的特征空间增强（如 MixReg）；或在架构层面采用``离线重生成、在线轻增强''的两阶段部署方案。
+
+\section{4 典型应用场景与效果分析}\label{ux5178ux578bux5e94ux7528ux573aux666fux4e0eux6548ux679cux5206ux6790}
+
+本部分旨在从软件工程与机器学习的视角出发，系统性地回顾和分析不同数据增强技术在EEG主要应用领域中的实际案例。目前的主要应用领域是:运动想象、临床诊断、情感识别。
+
+\subsection{4.1 运动想象（MI）与BCI解码}\label{ux8fd0ux52a8ux60f3ux8c61miux4e0ebciux89e3ux7801}
+
+运动想象（MI）作为主动式脑机接口（BCI）系统的核心控制信号，其数据采集耗时、信号微弱且易受噪声干扰，导致训练样本数量往往不足以支撑复杂深度学习模型的收敛和泛化。
+
+针对MI-EEG数据量不足，以及生成数据特征难以自动控制和多样性不足的问题，肖楠等提出了一种基于信息最大化生成对抗网络（InfoGAN）的MI-EEG数据增强方法（DCIMGAN）{[}1{]}。该方法通过深度卷积网络结构和InfoGAN机制，使生成器能够学习并控制输出样本中隐含的类别相关特征，确保生成的MI-EEG样本不仅数量增加，而且具有较高的类别保真度和可控的特征属性。
+
+除了复杂的生成模型，基于样本插值的正则化增强方法因其简单高效而广泛应用于MI任务中。霍首君等在基于深度卷积网络的MI-EEG模式识别研究中{[}2{]}，采用STFT和CWT将原始信号转化为时频特征图，并以三维张量形式作为CNN输入。训练过程中引入Mixup数据增强策略，通过线性插值平滑决策边界，增强模型泛化能力。
+
+在特定的BCI应用场景中，如肢体运动解码，增强方法需要具备区域特异性。鲁博洋针对下肢运动想象所涉及的中央区和顶区电极{[}3{]}，采用了基于通道的下肢脑电数据增强方法，仅操作特定导联或导联组以保留局部皮层特征，从而在实践中提高RCNN等模型在空间敏感任务中的解码精度和可靠性。
+
+\subsection{4.2 神经与精神疾病检测}\label{ux795eux7ecfux4e0eux7cbeux795eux75beux75c5ux68c0ux6d4b}
+
+临床EEG在神经与精神疾病（如癫痫、抑郁症）诊断中很重要，因为数据获取受伦理和隐私限制，病理事件稀疏且类别不平衡。
+
+癫痫检测是典型案例，癫痫发作样本稀少，分类模型容易偏向正常状态。胡文蓉通过数据增强解决类别不平衡问题{[}6{]}。过采样或生成病理样本，使1DCNN-BiLSTM模型学习关键特征，从而在实际诊断中显著提升罕见发作自动识别准确率。
+
+为解决抑郁症EEG数据稀缺及生成样本生理真实性问题，汪子凯提出CADM模型{[}5{]}，结合DDPM和CBAM，生成高保真时频特征，与原始信号高度相似。在MODMA数据集上，增强数据提升了Vision Transformer、MLP和SVM分类准确率，证明扩散模型在实际临床小样本问题中的可操作性和有效性。
+
+\subsection{4.3 情感与复杂认知任务}\label{ux60c5ux611fux4e0eux590dux6742ux8ba4ux77e5ux4efbux52a1}
+
+情感识别和罕见认知任务（联觉,即跨感官）采集难度大，受试者差异显著，模型跨个体泛化和数据稀疏是主要瓶颈。
+
+在基于深度学习的脑电信号情感识别研究中，王照雄指出EEG低信噪比和个体差异大{[}7{]},传统算法和泛化能力弱的深度模型在新样本上性能下降，数据增强提高模型可用性。彭磊阐述情绪识别中的数据增强趋势{[}8{]}，归纳了增强生成的人工情绪特征，如差分熵（DE）增强变体，是框架性指导,为实践中设计模型提供参考。
+
+对于嗅觉、味觉与联觉样本稀缺、训练困难的复杂认知任务，夏秀鑫将数据增强作为核心技术{[}9{]}，有效提升罕见认知任务的实际识别性能。
+
+\section{5 结 论}\label{ux7ed3-ux8bba}
+
+\subsection{5.1 技术演进总结}\label{ux6280ux672fux6f14ux8fdbux603bux7ed3}
+
+本文系统性地回顾了EEG数据增强技术从传统方法到前沿范式的演进历程。这一历程清晰地展现了一条从显式模拟到隐式学习，从数据层面的扩充到学习范式变革的技术发展路径。
+
+早期，基于信号处理的确定性增强方法（如小波包合成 {[}1{]}）凭借其低计算开销和高可解释性，为领域奠定了基石。随后，基于样本插值的正则化增强思想（如Mixup及其变体 {[}2{]}）通过在线插值简单而有效地引入了正则化，缓解了过拟合。
+
+基于生成模型的概率增强成为了近年来的主流方向，其中GAN系列（如InfoGAN {[}3{]}, WTGAN {[}4{]}）展现了强大的数据生成能力，尽管其训练不稳定性与模式崩塌问题一度成为瓶颈；而新兴的扩散模型 {[}5, 6{]} 则以其训练稳定性和高质量生成效果，显示出巨大的潜力。
+
+最具革命性的范式转变来自于基于自监督学习的隐式增强，它不再将增强视为独立的预处理步骤，而是将其作为预训练任务的核心机制（如对比学习 {[}7, 8{]}），通过构建代理任务让模型从未标注数据中自我学习，从根本上减少了对大量标注数据的依赖。
+
+\subsection{5.2 当前局限与挑战}\label{ux5f53ux524dux5c40ux9650ux4e0eux6311ux6218}
+
+尽管数据增强技术取得了显著进展，但该领域仍面临若干严峻挑战，制约着其在科研与工业界的更广泛应用： * \textbf{缺乏统一的评估协议}：当前研究大多以最终分类准确率作为增强效果的单一评判标准，缺乏针对生成样本质量本身（如多样性、保真度）的标准化的、可比的评估指标，类似于图像领域的FID指标在EEG中尚属空白。 * \textbf{生成样本的生理真实性存疑}：大多数数据驱动的生成模型（如GAN、扩散模型）可能无法保证生成的EEG片段在神经科学上具有明确的生理意义 {[}9{]}。其是否真实反映了特定的脑认知活动模式，而非仅仅是统计上的拟合，仍需神经科学层面的验证。 * \textbf{在实时BCI系统中部署困难}：许多先进的生成模型（如扩散模型 {[}5{]}）和复杂的数据增强流程计算开销巨大，难以满足实时脑机接口系统对低延迟的苛刻要求。增强技术的轻量化是走向实际应用的关键一步。
+
+\subsection{5.3 未来研究方向}\label{ux672aux6765ux7814ux7a76ux65b9ux5411}
+
+基于当前现状与挑战，我们认为EEG数据增强技术未来有以下几个充满前景的研究方向： 1. \textbf{轻量化与高效的生成模型}：探索知识蒸馏、模型剪枝、高效的网络架构（如线性Transformer）等技术，对大型生成模型进行压缩与加速，使其能够部署在资源受限的边缘设备上 {[}5, 4{]}。 2. \textbf{多模态引导的增强策略}：结合fNIRS、fMRI等多模态脑成像数据，或利用已知的神经科学先验知识（如脑功能连接图谱）来引导EEG数据的生成过程，有望提升生成样本的生理合理性与任务相关性 {[}6, 10{]}。 3. \textbf{统一、全面的评估框架建设}：推动建立包含信号保真度（时域、频域）、生理合理性（如ERD/ERS模式 {[}9{]}）和下游任务效用在内的多维度评估基准，促进不同研究之间的公平比较与技术发展。 4. \textbf{开源工具库与标准化流程}：大力支持如TorchEEG等开源工具库的建设，将主流的数据增强算法进行模块化、标准化的实现与集成，降低研究门槛，促进实验的可复现性，推动整个领域的健康发展。
+
+\section{参 考 文 献}\label{ux53c2-ux8003-ux6587-ux732e}
+
+\backmatter
+\end{document}
