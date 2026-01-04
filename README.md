@@ -29,5 +29,5 @@
 
 
 ```
-git clone -b 3.1：PoC --depth 1 git@github.com:Suhoiyis/my-own-uestcs.git
+git clone -b main --depth 1 git@github.com:Suhoiyis/my-own-uestcs.git
 ```
