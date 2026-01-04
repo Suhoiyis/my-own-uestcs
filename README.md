@@ -25,3 +25,9 @@
 - 2.2：计算机网络
     - 实验二的交叉编译、openwrt虚拟机
 - 2.2：操作系统
+
+
+
+```
+git clone -b 3.1：PoC --depth 1 git@github.com:Suhoiyis/my-own-uestcs.git
+```
