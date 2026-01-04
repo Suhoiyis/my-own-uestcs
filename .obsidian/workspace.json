@@ -1,0 +1,280 @@
+{
+  "main": {
+    "id": "3b5da1ea055f6cea",
+    "type": "split",
+    "children": [
+      {
+        "id": "419b001234850efd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6d1bdf748f968156",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Markdown/8/8.5 脉冲编码调制.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "8.5 脉冲编码调制"
+            }
+          },
+          {
+            "id": "d7391a297f3b6860",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Markdown/tips.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "tips"
+            }
+          },
+          {
+            "id": "c937ff59545b11fc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Markdown/4/4.3 信道的数学模型.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "4.3 信道的数学模型"
+            }
+          },
+          {
+            "id": "0670410c5f1740dd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Markdown/5/5.2 角度调制（非线性调制）原理.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "5.2 角度调制（非线性调制）原理"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f5821d2c23489263",
+    "type": "split",
+    "children": [
+      {
+        "id": "fc7fe6869adda230",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "319ee5d9dfcc285e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "af638cbbd4b61876",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          },
+          {
+            "id": "a30c74cf7aca59f7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "f_c",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "acbcfb1f247c7dc4",
+    "type": "split",
+    "children": [
+      {
+        "id": "d49f6b1ac34440bc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3961b44135a0a3ce",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Markdown/2/2.1 确知信号.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "2.1 确知信号 的反向链接列表"
+            }
+          },
+          {
+            "id": "fd6754296129b30a",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Markdown/2/2.1 确知信号.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "2.1 确知信号 的出链列表"
+            }
+          },
+          {
+            "id": "db4dc53a8e2dbbd2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "86daddd1d1e881e4",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Markdown/2/2.1 确知信号.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "2.1 确知信号 的大纲"
+            }
+          },
+          {
+            "id": "600d17eba89d0c41",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:创建新数据库": false,
+      "random-note:开始漫游笔记": false,
+      "markdown-importer:打开 Markdown 格式转换器": false
+    }
+  },
+  "active": "319ee5d9dfcc285e",
+  "lastOpenFiles": [
+    "README.md",
+    "Pasted image 20260104220940.png",
+    "Pasted image 20260104220926.png",
+    "Pasted image 20260104220904.png",
+    "Pasted image 20260104220855.png",
+    "Pasted image 20260104220843.png",
+    "Markdown/8/8.4  抽样信号的量化.md",
+    "Markdown/8/8.5 脉冲编码调制.md",
+    "Pasted image 20260104220607.png",
+    "Pasted image 20260104220559.png",
+    "Pasted image 20260104220437.png",
+    "Pasted image 20260104220424.png",
+    "Pasted image 20260104220356.png",
+    "Markdown/8/8.3 模拟脉冲调制.md",
+    "Markdown/8/8.2 模拟信号的抽样.md",
+    "Markdown/8/8.1 引言.md",
+    "所有章节课件/第1章 绪论.pdf",
+    "Markdown/tips.md",
+    "2026-01-04.md",
+    "未命名.canvas",
+    "Markdown/7/7.3  二进制数字调制系统的性能比较.md",
+    "Markdown/7/7.4 多进制数字调制原理.md",
+    "Markdown/1/1.4 & 1.5.md",
+    "Markdown/3/第三章  随机过程.md",
+    "Markdown/7/7.1  二进制数字调制原理.md",
+    "Markdown/1/1.2 通信系统的组成.md",
+    "Markdown/5/5.3 各种模拟调制系统的比较.md",
+    "Markdown/6/6.6  眼图.md",
+    "Markdown/1/1.3 通信系统分类与通信方式.md",
+    "Markdown/4/4.3 信道的数学模型.md",
+    "Markdown/5/5.2 角度调制（非线性调制）原理.md",
+    "Markdown/4/4.6 信道容量.md",
+    "Markdown/6/6.2  基带传输的常用码型.md",
+    "Markdown/4/4.1 & 4.2 有-无线信道.md",
+    "Markdown/8",
+    "Markdown/7/7.2  二进制数字调制系统的抗噪声性能.md",
+    "Markdown/7",
+    "Markdown/7.md",
+    "Markdown/6/6.5  基带传输系统的抗噪声性能.md",
+    "Markdown/6/6.4  无码间串扰的基带传输特性.md",
+    "Markdown/6",
+    "Markdown/5",
+    "Markdown/4",
+    "Markdown/3",
+    "Markdown/2",
+    "Markdown/1",
+    "通信原理(第7版) [Principles of Communications (The Seventh Edition)] (樊昌信, 曹丽娜) (Z-Library).pdf"
+  ]
+}
