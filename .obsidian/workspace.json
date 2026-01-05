@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Markdown/2/2.2 带通信号.md",
+                "file": "Markdown/5/5.3 各种模拟调制系统的比较.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2.2 带通信号"
+              "title": "5.3 各种模拟调制系统的比较"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Markdown/2/2.2 带通信号.md",
+                "file": "Markdown/5/5.3 各种模拟调制系统的比较.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "2.2 带通信号 的大纲"
+              "title": "5.3 各种模拟调制系统的比较 的大纲"
             }
           },
           {
@@ -224,11 +224,19 @@
   },
   "active": "ff1454735775e673",
   "lastOpenFiles": [
-    "Markdown/2/2.1 确知信号.md",
-    "Markdown/1/1.4 & 1.5.md",
+    "Markdown/5/5.4 频分复用.md",
+    "Markdown/5/5.3 各种模拟调制系统的比较.md",
     "Markdown/5/5.2 角度调制（非线性调制）原理.md",
     "Markdown/5/5.1 幅度调制（线性调制）的原理.md",
+    "Markdown/4/4.6 信道容量.md",
+    "Markdown/4/4.5 信道中的噪声.md",
+    "Markdown/4/4.4 信道特性对信号传输的影响.md",
+    "Markdown/4/4.3 信道的数学模型.md",
+    "Markdown/4/4.1 & 4.2 有-无线信道.md",
     "Markdown/3/第三章  随机过程.md",
+    "Markdown/2/2.2 带通信号.md",
+    "Markdown/2/2.1 确知信号.md",
+    "Markdown/1/1.4 & 1.5.md",
     "未命名.base",
     "Markdown/6/6.2  基带传输的常用码型.md",
     "Markdown/6/6.1  数字基带信号及其频谱特性.md",
@@ -237,7 +245,6 @@
     "Markdown/1/1.1 通信的基本概念.md",
     "Markdown/tips.md",
     "未命名.canvas",
-    "Markdown/2/2.2 带通信号.md",
     "Markdown/8/8.5 脉冲编码调制.md",
     "README.md",
     "Pasted image 20260104220940.png",
@@ -256,13 +263,6 @@
     "Markdown/8/8.1 引言.md",
     "所有章节课件/第1章 绪论.pdf",
     "2026-01-04.md",
-    "Markdown/7/7.3  二进制数字调制系统的性能比较.md",
-    "Markdown/7/7.4 多进制数字调制原理.md",
-    "Markdown/7/7.1  二进制数字调制原理.md",
-    "Markdown/5/5.3 各种模拟调制系统的比较.md",
-    "Markdown/6/6.6  眼图.md",
-    "Markdown/1/1.3 通信系统分类与通信方式.md",
-    "Markdown/4/4.3 信道的数学模型.md",
     "Markdown/8",
     "Markdown/7",
     "Markdown/6",
