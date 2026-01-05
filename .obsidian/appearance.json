@@ -1,5 +1,9 @@
 {
   "interfaceFontFamily": "Inter",
   "textFontFamily": "Inter",
-  "monospaceFontFamily": "Inter"
+  "monospaceFontFamily": "",
+  "nativeMenus": false,
+  "cssTheme": "Things",
+  "theme": "moonstone",
+  "showRibbon": true
 }
