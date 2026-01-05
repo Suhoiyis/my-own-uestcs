@@ -1,0 +1,428 @@
+{
+  "main": {
+    "id": "eb6f6a27e9361bd7",
+    "type": "split",
+    "children": [
+      {
+        "id": "f41f71503eaf0a79",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "333d0c77d87cc219",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3.1 模型机的总体设计.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "3.1 模型机的总体设计"
+            }
+          },
+          {
+            "id": "5097f8b960557e2d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3.3 运算方法.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "3.3 运算方法"
+            }
+          },
+          {
+            "id": "1748f1d9794c71ed",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3.4 模型机的组合逻辑控制器.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "3.4 模型机的组合逻辑控制器"
+            }
+          },
+          {
+            "id": "5faef79e97cecce2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3.5 模型机的微程序控制器.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "3.5 模型机的微程序控制器"
+            }
+          },
+          {
+            "id": "112b4c4fd266afc6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3 复习提纲.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "3 复习提纲"
+            }
+          },
+          {
+            "id": "568905c132aea160",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "4.1 概述.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "4.1 概述"
+            }
+          },
+          {
+            "id": "ec423307d1459514",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "4.2 半导体存储器.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "4.2 半导体存储器"
+            }
+          },
+          {
+            "id": "5473556face6677e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "4.3 主存储器组织.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "4.3 主存储器组织"
+            }
+          },
+          {
+            "id": "35ca23a904f2fe1a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "4 复习提纲.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "4 复习提纲"
+            }
+          },
+          {
+            "id": "ec26367a6c133fcc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "5.1 概述.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "5.1 概述"
+            }
+          },
+          {
+            "id": "636c0019626e91f7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "5.2 5.3.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "5.2 5.3"
+            }
+          },
+          {
+            "id": "af2ca917ca2cbf7b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "5.4 中断方式及接口.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "5.4 中断方式及接口"
+            }
+          },
+          {
+            "id": "dce6a27efe87db86",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "5.5 DMA方式及接口.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "5.5 DMA方式及接口"
+            }
+          },
+          {
+            "id": "f1e88787ddfd61b4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "5 复习提纲.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "5 复习提纲"
+            }
+          },
+          {
+            "id": "6822056d5424eebf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "6.1 键盘及接口.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "6.1 键盘及接口"
+            }
+          },
+          {
+            "id": "b5075eea991eca5f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3.1 模型机的总体设计.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "3.1 模型机的总体设计"
+            }
+          }
+        ],
+        "currentTab": 15
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "691794b5ae59b7f3",
+    "type": "split",
+    "children": [
+      {
+        "id": "84608df9816164d6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ecae1c71cfadd5a6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "1880232b357f0be5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "55ddb4298501b608",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1f9a929db2bf2e4b",
+    "type": "split",
+    "children": [
+      {
+        "id": "97bfd26cf9596836",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9a25f7ecfcda7283",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "6.2 显示设备及接口.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "6.2 显示设备及接口 的反向链接列表"
+            }
+          },
+          {
+            "id": "082a6d75bf668a71",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "6.2 显示设备及接口.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "6.2 显示设备及接口 的出链列表"
+            }
+          },
+          {
+            "id": "4b0406ed7729f73a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "cc43ef8ab62a1798",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "e9e4562ee6a6d4ce",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "6.2 显示设备及接口.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "6.2 显示设备及接口 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:创建新数据库": false
+    }
+  },
+  "active": "b5075eea991eca5f",
+  "lastOpenFiles": [
+    "欢迎.md",
+    "3.1 模型机的总体设计.md",
+    "6.2 显示设备及接口.md",
+    "Pasted image 20251229202939.png",
+    "Pasted image 20251229202928.png",
+    "Pasted image 20251229202621.png",
+    "Pasted image 20251229202419.png",
+    "6.1 键盘及接口.md",
+    "Pasted image 20251229202224.png",
+    "Pasted image 20251229202210.png",
+    "5 复习提纲.md",
+    "5.5 DMA方式及接口.md",
+    "Pasted image 20251229201508.png",
+    "Pasted image 20251229201433.png",
+    "5.4 中断方式及接口.md",
+    "Pasted image 20251229200005.png",
+    "5.2 5.3.md",
+    "5.1 概述.md",
+    "Pasted image 20251229195115.png",
+    "4 复习提纲.md",
+    "3 复习提纲.md",
+    "4.1 概述.md",
+    "4.2 半导体存储器.md",
+    "4.3 主存储器组织.md",
+    "3.5 模型机的微程序控制器.md",
+    "3.4 模型机的组合逻辑控制器.md",
+    "3.3 运算方法.md",
+    "3.2 算术逻辑运算部件.md"
+  ]
+}
