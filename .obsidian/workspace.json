@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Markdown/5/5.3 各种模拟调制系统的比较.md",
+                "file": "Markdown/7/7.1  二进制数字调制原理.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "5.3 各种模拟调制系统的比较"
+              "title": "7.1  二进制数字调制原理"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Markdown/5/5.3 各种模拟调制系统的比较.md",
+                "file": "Markdown/7/7.1  二进制数字调制原理.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "5.3 各种模拟调制系统的比较 的大纲"
+              "title": "7.1  二进制数字调制原理 的大纲"
             }
           },
           {
@@ -224,10 +224,22 @@
   },
   "active": "ff1454735775e673",
   "lastOpenFiles": [
-    "Markdown/5/5.4 频分复用.md",
-    "Markdown/5/5.3 各种模拟调制系统的比较.md",
-    "Markdown/5/5.2 角度调制（非线性调制）原理.md",
+    "Markdown/7/7.3  二进制数字调制系统的性能比较.md",
+    "Markdown/7/7.4 多进制数字调制原理.md",
+    "Markdown/7/7.2  二进制数字调制系统的抗噪声性能.md",
+    "Markdown/7/7.1  二进制数字调制原理.md",
+    "Markdown/6/6.5  基带传输系统的抗噪声性能.md",
+    "Markdown/tips.md",
+    "通信原理(第7版) [Principles of Communications (The Seventh Edition)] (樊昌信, 曹丽娜) (Z-Library).pdf",
+    "Markdown/6/6.6  眼图.md",
+    "Markdown/6/6.4  无码间串扰的基带传输特性.md",
+    "Markdown/6/6.3  数字基带信号传输与码间串扰.md",
+    "Markdown/6/6.2  基带传输的常用码型.md",
+    "Markdown/6/6.1  数字基带信号及其频谱特性.md",
     "Markdown/5/5.1 幅度调制（线性调制）的原理.md",
+    "Markdown/5/5.2 角度调制（非线性调制）原理.md",
+    "Markdown/5/5.3 各种模拟调制系统的比较.md",
+    "Markdown/5/5.4 频分复用.md",
     "Markdown/4/4.6 信道容量.md",
     "Markdown/4/4.5 信道中的噪声.md",
     "Markdown/4/4.4 信道特性对信号传输的影响.md",
@@ -238,38 +250,26 @@
     "Markdown/2/2.1 确知信号.md",
     "Markdown/1/1.4 & 1.5.md",
     "未命名.base",
-    "Markdown/6/6.2  基带传输的常用码型.md",
-    "Markdown/6/6.1  数字基带信号及其频谱特性.md",
     "Markdown/1/第一章小结.md",
     "Markdown/1/1.2 通信系统的组成.md",
-    "Markdown/1/1.1 通信的基本概念.md",
-    "Markdown/tips.md",
     "未命名.canvas",
-    "Markdown/8/8.5 脉冲编码调制.md",
-    "README.md",
     "Pasted image 20260104220940.png",
     "Pasted image 20260104220926.png",
     "Pasted image 20260104220904.png",
     "Pasted image 20260104220855.png",
     "Pasted image 20260104220843.png",
-    "Markdown/8/8.4  抽样信号的量化.md",
     "Pasted image 20260104220607.png",
     "Pasted image 20260104220559.png",
     "Pasted image 20260104220437.png",
     "Pasted image 20260104220424.png",
     "Pasted image 20260104220356.png",
-    "Markdown/8/8.3 模拟脉冲调制.md",
-    "Markdown/8/8.2 模拟信号的抽样.md",
-    "Markdown/8/8.1 引言.md",
     "所有章节课件/第1章 绪论.pdf",
-    "2026-01-04.md",
     "Markdown/8",
     "Markdown/7",
     "Markdown/6",
     "Markdown/5",
     "Markdown/4",
     "Markdown/3",
-    "Markdown/2",
-    "Markdown/1"
+    "Markdown/2"
   ]
 }
