@@ -1,0 +1,475 @@
+2022 年 第 41 卷 第 4 期 传感器与微系统(Transducer and Microsystem Technologies)
+DOI:10. 13873 / J. 1000—9787(2022)04—0125—04
+基于深度学习的运动想象脑电信号识别方法*
+宋春宁,盛 勇,宁正高
+(广西大学 电气工程学院,广西 南宁 530004)
+摘 要:在脑电(EEG)信号分析方法中,时频分析方法综合考虑了信号的时间与频率两者的分辨率,同时
+改善了单纯时间域或频率域分析方法的短板。本实验使用 S 变换代替短时傅里叶变换将左右手运动想象
+脑电信号转换为二维时频图像形式,然后构建卷积神经网络—极限学习机(CNN-ELM)模型进行分类。在
+面对小样本训练数据时模型能力受到限制,提出一种数据增强方法,通过 ACGAN 对时频图像进行生成,
+有效丰富了训练样本数量。实验结果表明:CNN-ELM 模型识别效果好,泛化能力强,进行数据增强后识别
+正确率得到了进一步的提升。
+关键词:运动想象;脑电信号;S 变换;卷积神经网络;极限学习机;数据增强
+中图分类号:TP391 文献标识码:A 文章编号:1000—9787(2022)04—0125—04
+Deep learning-based method for recognition of motion
+imagery EEG signal*
+SONG Chunning,SHENG Yong,NING Zhenggao
+(
+School of Electrical Engineering,Guangxi University,Nanning 530004,China)
+Abstract:Among EEG signal analysis methods,the time-frequency analysis method comprehensively considers
+the resolution of both the time and frequency of the signal,and improves the shortcomings of the simple time
+domain or frequency-domain analysis method. In this experiment,S transform is used instead of STFT to transform
+left and right hand motor imagery EEG signals into two-dimensional time-frequency images,and then a CNN-ELM
+model is constructed for classification. When faced with the training data of small samples,the ability of the model
+is limited,so a data augmentation method is proposed. The generation of time-frequency images by conditional
+image synthesis with auxiliary classifier GANs(ACGAN)effectively enriched the number of training samples. The
+experimental results show that the CNN-ELM model has good recognition effect and strong generalization ability,
+and the recognition accuracy is further improved after data augmentation.
+Keywords:motion imagery;electroencephalogram(EEG)signal;S transform;CNN;extreme learning machine
+(
+ELM);data augmentation
+0引言
+脑—机接口(brain-computer interface,BCI)技术是一门
+多学科融合的新型人机结合技术。目前较为普遍的是利用
+大脑特定活动产生的脑电(electroencephalogram,EEG)信号
+控制外部电子设备,其基本过程是首先使用电极采集到脑
+电信号,再经过放大、去噪、滤波等一系列预处理后,最后利
+用特征提取与分类算法将信号解码成控制设备的指令。有
+效提出脑电特征并准确分类是 BCI 的关键。研究发现,当
+人进行单侧肢体运动想象时大脑主感觉运动皮层的特定频
+段的能量会出现变化,这类现象被称为事件相关去同步(e
+vent-related desynchronization,ERD)及事件相关同步(event
+related synchronization,ERS)[1]。基于时频分析方法的左右
+手运动想象脑电信号分类效果要由于单纯的时域或频域分
+析方法。在基于左右手运动想象脑电信号识别方法中,文
+献[2]使用短时傅里叶变换(short-time Fourier transform,
+STFT)时频图像结合卷积神经网络(convolutional neural net
+work,CNN)与 SAE(stacked autoencoder)模型,其识别效果
+优于普通 CNN;文献[3]使用小波变换时频图像结合 CNN
+进行分类,使用 C3 及 C4 电极进行实验,验证了添加 CZ 电
+极会降低分类器的识别效果。文献[4]使用 STFT 时频图
+像结合 CNN 与支持向量机(support vector machine,SVM),
+效 果 优 于 传 统 的 滤 波 器 组 共 空 间 模 式 (filter bank common
+收稿日期:2020—08—05
+*基金项目:国家自然科学基金资助项目(51767005);广西自然科学基金资助项目(2016GXNSFAA380328)
+125
+
+
+传 感 器 与 微 系 统 第 41 卷
+spatial patern,FBCSP),但其分类耗时较高。传统的时间—频
+率方法主要包括:STFT、小波变换(wavelet transform,WT)、S
+变换(S transform)等。
+由于 STFT 窗函数宽度固定不变,窗太窄虽然会有高的
+时间分辨率但会导致频率分辨率差;窗太宽则会导致时间
+分辨率过低,不利于脑电信号的时频特征提取。WT 的分析
+结果并不是真正的时间—频率谱,从而导致信号特征的精确
+度有一定的问题。S 变换是 STFT 与 WT 的继承与发展,加
+入了 WT 法的多分辨率分析思想,有效克服了 STFT 时窗固
+定的缺点,能较好地适应非平稳信号。S 变换能同时在时
+域和频域内提供信号良好的局部时频特征,因此,它适合用
+于具有特定节律特征的运动想象脑电信号的分析,而且还
+不需要考虑小波基函数选择问题。
+CNN 是一种非常有效的图像识别方法,在语音识别、计
+算机视觉、图像处理等方面取得了不错的成绩,在脑电信号
+分类领域也有研究[5~7]。通常 CNN 的最后一层可以看成
+是一个线性分类器,但却不是一个最优的分类器。Huang G
+B 等人[8]在 2004 年提出了一种单隐层网络学习算法,称为
+极限学习机(extreme learning machine,ELM),与传统的单隐
+含层网络相比,ELM 在保证学习精度的前提下比传统的学
+习算法速度更快,泛化性能好等优点。针对 CNN 泛化能力
+稍差、较易陷入局部极值点的不足之处,本文采用 CNN 和
+ELM 相结合的方法,使用 ELM 取代 CNN 的最后一层。
+在脑电信号采集过程中,受试者受疲劳和精力分散的
+影响,很难长时间保持良好的实验状态,很难获得足够和优
+质的被试标记数据。在分类问题中,分类模型面对小样本
+训练集能力往往受到限制。文献[9]使用高斯噪声作为信
+息源输入进一个基于快速傅里叶变换(FFT)的系统来产生
+脑电 信 号,但 此 方 法 忽 视 了 脑 电 信 号 的 时 域 特 性。文
+献[10]将不同时间段的脑电信号进行拼接构造新的数据,
+虽然保持了时域特征然而忽视了脑电信号的频域特性。
+针对以上问题本文提出一种基于 ACGAN (auxiliary
+classifier generative adversarial networks)的数据增强方法,即
+使用 ACGAN 模型进行时频特征图像的扩增来提高小样本
+数据下分类模型的分类性能。
+1 S 变换基本原理
+S 变换是地球物理学家 Stockwell R G 在 1996 年提出
+的,是连续 WT 和 STFT 的发展,适用于非平稳信号的分
+析[11]信。号 X(t)的 S 变换定义如下
+S(τ,f)= ∫∞
+-∞
+X(t)ω(τ -t,f)e -j2πftdt (1)
+ω(τ -t,f)= | f |
+槡2π
+exp(-f 2 (τ -t)2
+2 ) (2)
+式中 ω(τ -t,f)为高斯窗口,f 为频率,τ 为控制高斯窗口
+关于时间轴 t 的位置参数。
+其逆变换公式如下
+X(t)= ∫∞
+-∞ [∫∞
+-∞
+S(τ,f)dτ]ej2πftdf (3)
+由式(1)和式(2)可知,S 变换是在继承 STFT 原理的基
+础上采用了宽度可变的高斯窗函数。高斯窗函数 ω(t,f)是
+时间和频率的函数,窗宽与频率呈反比,这使得窗函数在低
+频区域具有良好的频率分辨率,在高频区域具有良好的时
+间分辨率。
+2 CNN-ELM 网络结构
+2. 1 ELM
+ELM 网络结构如图 1 所示。
+隐含层
+输入层 (ai,bi)
+oj
+βL
+βi
+β1
+Xi
+X
+L
+i
+1
+N
+1
+图 1 ELM 模型
+对于给定样本(xi,yi)∈Rn × Rm (i =1,2,...,N),有激
+励函数为 g(ai,bi,x)和隐节点数目 L 个,ELM 网络模型可
+以表示为
+Oj = ∑
+L
+j =1
+βig(ai·xi +bi),j =1,2,...,N (4)
+式中 ai 为输入权值;bi 为隐含层的偏差;βi 为连接隐含层
+与输出层的输出权值;Oj∈Rn 为网络输出值。当激励函数 g
+能够以零误差逼近任意 N 个样本时,可以将式(4)表示为
+矩阵形式
+Hβ =T (5)
+H=
+g(a1 ·x1 +b1 ) ... g(aL·x1 +bL)
+
+g(a1 ·xN +b1 ) ... g(aL·xN +bL
+  
+ 
+)N ×L
+(
+6)
+式(6)等价于求解 Hβ =T 的最小二乘解,即寻找最优
+的输出权值 β 为
+β =H + T (7)
+式中 H+ =HT(HHT)-1为隐含层输出矩阵 H 的广义逆矩阵。
+2. 2 CNN-ELM 结构与参数
+本文将 CNN 与 ELM 相结合,将 ELM 取代 CNN 的最后
+一层,其结构如图 2 所示。
+ELM
+识 别 率
+全连接层
+特征图 8@1×11
+特征图 8@23×11
+特征图 8@46×22
+输入时频图 48×46
+卷积 池化 卷积
+图 2 CNN-ELM 模型结构
+本文 CNN 两个卷积层分别使用不同形状的卷积核,以
+126
+
+
+第 4 期 宋春宁,等:基于深度学习的运动想象脑电信号识别方法
+便更好地提取图像特征。网络模型第 1 层为输入层,输入
+图像大小为 48 ×46;第 2 层为卷积层,该层有 8 个卷积核,
+其卷积核的大小为[3 ×3],设置步长为大小为[1 ×2],使
+用二维卷积核是为了更好地提取图像的时频特性;第 3 层
+为最大池化层,大小为[2 ×2];第 4 层为卷积层,该层有 8
+个卷积核,卷积核的大小为[23 ×1];最后为 ELM。网络的
+训练过程如下:先采用梯度下降法调整 CNN 的参数,当训
+练误差小于一定值时停止训练,之后将 CNN 全连接层提取
+的特征作为 ELM 的输入用于 ELM 的训练。当 ELM 训练完
+成后,将它取代训练完成的 CNN 的最后一层,整个分类网
+络也就形成了。
+3 实验 ACGAN 模型结构与参数
+ACGAN 是在 GAN 的 基 础 上 由 Odena A 等 人[12]在
+2016 年提出的一种新的辅助标签 GAN。ACGAN 损失函数
+包含两部分第一部分 Ls 是面向数据真实与否的最大似然
+估计如式(8),第二部分 Lc 则是面向数据分类准确性的最
+大似然估计如式(9)。在 ACGAN 的训练中,优化的方向是
+希望判别器使得 Ls +Lc 尽可能大,而生成器使得 Ls -Lc 尽
+可能大。式(8)、式(9)如下
+Ls =E[log P(S =real | Xreal)]+E[logP(S =fake | Xfake)]
+(
+8)
+Lc =E[log P(C =c | Xreal)]+E[logP(C =c | Xfake)](9)
+表
+1 实验使用的 ACGAN 其具体的结构如表 1 所示。
+ACGAN 的输入、输出图像大小均为 48 ×46。模型训练批量
+大小为 30,生成器第一层为全连接层输出尺寸为(30,24,
+23,128);第二层为上采样层输出尺寸为(30,48,46,128);
+第三层为卷积层输出尺寸为(30,48,46,128);第四层为卷
+积层输出尺寸大小为(30,48,46,64);第五层为卷积层输出
+尺寸大小为(30,48,46,1)。判别器第一层为卷积层输出尺
+寸大小为(60,24,23,32);第二层为卷积层输出尺寸大小为
+(
+60,12,12,64);第三层为卷积层输出尺寸大小为(60,6,6,
+128);第四层为两个全连接层,神经元个数分别为 1(判断
+真假)和 2(2 分类)。
+表 1 本文 ACGAN 的生成器与判别器结构
+层数 生成器结构 判别器结构 1 全连接层 卷积层:32 个卷积核,[3,3] 2 上采样层 卷积层:64 个卷积核,[3,3] 3 卷积层:128 卷积核,[3,3] 卷积层:128 个卷积核,[3,3] 4 卷积层:64 卷积核,[3,3] 全连接层 5 卷积层:1 卷积核,[3,3]
+4 实验过程与结果分析
+4. 1 实验数据来源
+实验采用的左右手运动想象脑电数据来自 BCI Compe
+tition II,BCI Competition III 和 BCI Competition IV。前一数
+据集共包含一名女性受试者,该实验的任务是按照箭头提
+示进行左右手运动想象来控制一个反馈条移动,每 9 s 采集
+一次,所有的试次(Trials)均在同一天完成,总共 280 个试
+次,其中想象左右手运动各 140 个试次。实验采集了 C3,
+C4,CZ 三个电极的脑电信号,信号的频率为 128 Hz。三个
+数据集的实验过程的详细描述,如文献[13]所述。实验选
+取
+C3,C4 电极的 8 ~13 Hz 及 18 ~24 Hz 频段图像进行组
+合,其大小为尺寸 48 ×46,组合图像如图 3 所示。
+8
+13
+18
+C4
+24
+8
+13
+18
+24
+C3
+图 3 组合特征图像
+4. 2 CNN-ELM 实验结果
+为检验本文方法的性能,选用 BCI Competition II 竞赛
+数据采用五折交叉验证法和训练集测试集比例 1:1 分别 进行实验。实验结果如表 2 所示,该表选用对应文献中的 最优结果。STFT +CNN-SAE 是文献[2]中采用的方法,先 用
+STFT 方法进行时频特征提取,然后使用 CNN-SAE 模型 进行特征分类。WT + CNN 是文献[3]中采用的方法,先 用
+WT 方法进行时频特征提取,然后使用 CNN 模型进行 特征分类。文献[14]使用 WT 结合小波神经网络(wavelet neural network,WNN),由于存在过拟合问题,进行数据增 强后识别率为 91. 1 % 。由表 2 可以看出本文模型的识别 率要优于文献[2]和文献[3]及文献[14]所提出的方法的 识别率。
+表 2 BCI Competition II 数据识别率
+文献 方法 最高分类正确率/ % [
+2] STFT +CNN-SAE(1:1) 90. 00
+[
+3] WT +CNN(5-fold cross-validation) 92. 75
+[
+14] WT +WNN(1:1) 91. 10
+本文方法 训测比例(1:1),(5-fold cross-validation) 92. 10,94. 64
+在
+BCI Competition III 数据集上,分别选取被试者 O3,
+S4,X11 分别选取 320,540,540 个样本采用五折交叉验证法 进行实验。表 3 列举了不同文献在上的识别率,可见本文 的识别率要优于其他方法。
+表 3 BCI Competition III 数据识别率 %
+方法 O3 S4 X11 Avg
+文献[15] 86. 80 75. 90 75. 40 79. 36
+文献[16] 89. 30 72. 96 75. 18 78. 96
+文献[17] 82. 39 83. 89 78. 15 81. 47
+本文方法 92. 20 79. 60 78. 70 83. 50
+127
+
+
+传 感 器 与 微 系 统 第 41 卷
+4. 3 数据增强实验
+实验选用 BCI Competition IV 数据集中 5 名受试者进行
+实验。数据增强实验分为训练过程与测试过程。训练过程
+将由 ACGAN 的生成器产生出新的样本数据,新数据用于扩
+增原始数据后用于分类器的训练。测试过程使用训练好的
+分类器对测试集进行预测,从而得出分类器在测试集上的
+识别准确率。选取每名受试者 200 个样本作为训练集用于
+训练 ACGAN,其余 520 个样本作为分类器的测试集。
+为了验证数据增强的效果,实验扩增了原始的 200 个 数据,分别加入了新的 200,400,600,800 个新生成的样本, 其实验结果如表 4 和图 4 所示。表 4 列出了 5 名受试者在 不同扩增数据下的平均识别正确率,可知原始数据未扩增 时分类器的平均识别正确率为 76. 3 % ,当扩增 400 个样本 时平均识别正确率78. 2% 达到最大。从图4 可以直观看出 最初加入 200 个新样本受试者 B04,B05,B08 以及 B09 在测 试集上的识别正确率得到了提升,而在之后随着生成样本 的加入各位受试者的识别正确率走势也有所不同。当加入 的生成样本远大于原始样本时分类器更多的去拟合生成样 本的分布,而一定程度上忽视了原始样本的分布,观察平均 识别正确率可知,当添加的新样本数量大于 600 时识别正 确率会逐渐降低。
+表4 数据增强实验结果
+B04 B05 B07 B08 B09 Avg
+Raw 84. 6 72. 1 69. 0 80. 8 74. 8 76. 3
++200 85. 6 75. 0 68. 8 81. 5 76. 3 77. 4
++400 87. 0 74. 2 70. 4 83. 3 76. 0 78. 2
++600 86. 3 73. 4 70. 6 83. 7 76. 0 78. 0
++800 86. 3 71. 2 68. 3 83. 3 74. 6 76. 7
+RAW +200 +400 +600 +800
+65
+70
+75
+80
+85
+90
+训练集样本个数
+识别正确率 /%
+B04 B05 B07 B08 B09 Avg
+图4 数据增强实验结果
+5 结束语
+基于运动想象的 BCI 是众多 BCI 范式中的重要组成部
+分,提高脑电信号的识别精度是 BCI 技术从实验室研究走
+向实际应用的关键之一。本文研究了利用 ELM 方法实现
+左右手运动想象脑电信号的自动分类。采用的 CNN-ELM
+模型具有模型简单,准确率高的特点,采用的数据增强方法
+丰富了小样本数据集样本的数量提高了识别率。实验表明
+CNN 结合 ELM 提高了识别率,具有较好的泛化性能,在一
+定程度上满足了更高要求 BCI 系统的需求。
+参考文献: [
+1] NEUPER C,PFURTSCHELLER G. 15 Event-related desynchroni
+zation (ERD ) and synchronization (ERS ) of rolandic EEG
+rhythms during motor behavior[J]. International Journal of Psy
+chophysiology,1998,30(1 -2):7 -8.
+[
+2] TABAR Y R,HALICI U. A novel deep learning approach for clas
+sification of EEG motor imagery signals [J]. Journal of Neural
+Engineering,2017,14(1):016003. 1 -016003. 11.
+[
+3] XU B G,ZHANG L L,SONG A G,et al. Wavelet transform time
+frequency image and convolutional network based motor imagery
+EEG classification[J]. IEEE Access,2018,7:6084 -6093.
+[
+4] 胡章芳,张力,黄丽嘉,等. 基于时频域的卷积神经网络运动 想象脑电信号识别方法 [J]. 计算机应用,2019,39 (8):
+2480 -2483.
+[
+5] CHAUDHARY S,TARAN S,BAJAJ V,et al. Convolutional
+neural network based approach towards motor imagery tasks EEG
+signals classification[J]. IEEE Sensors Journal,2019,19 (12):
+4494 -4500.
+[
+6] HE K,ZHANG X,REN S,et al. Spatial pyramid pooling in deep
+convolutional networks for visual recognition [J]. IEEE Transac
+tions on Pattern Analysis & Machine Intelligence,2014,37 (9):
+1904 -1916.
+[
+7] 王卫星,孙守迁,李超,等. 基于卷积神经网络的脑电信号上 肢运动意图识别[J]. 浙江大学学报(工学版),2017,51(7):
+1381 -1389.
+[
+8] HUANG G B,ZHU Q Y,SIEW C K. Extreme learning machine:A
+new learning scheme of feedforward neural networks [C]∥2004
+Proceedings of 2004 IEEE International Joint Conference on
+Neural Networks,IEEE,2004:985 -990.
+[
+9] PARIS A,ATIA G K,VOSOUGHI A,et al. A new statistical
+model of electroencephalogram noise spectra for real-time brain
+computer interfaces[J]. IEEE Transactions on Biomedical Engi
+neering,2017,64(8):1688 -1700.
+[
+10]FABIEN L. Generating artificial EEG signals to reduce BCI cali
+bration time [C ]∥ 5th International Brain-Computer Interface
+Workshop,Graz,Austria,2011:176 -179.
+[
+11]STOCKWELL R G,MANSINHA L,LOWE R P. Localization of
+the complex spectrum:The S transform[J]. IEEE Transactions on
+Signal Processing,2002,44(4):998 -1001.
+[
+12]ODENA A,OLAH C,SHLENS J. Conditional image synthesis with
+auxiliary classifier GANs[C]∥2017 34th Int’l Conf on Machine
+Learning(ICML),2017:4043 -4055.
+[
+13]杨默涵. 基于运动想象的脑电信号分类算法与脑—机接口技
+术研究[D]. 长春:吉林大学,2017.
+[
+14] ZHANG Z W,DUAN F,SOLE-ASALS C J,et al. A novel deep
+learning approach with data augmentation to classify motor imagery
+signals[J]. IEEE Access,2019,7:15945 -15954.
+(下转第 133 页)
+128
+
+
+第 4 期 王一田,等:基于 YOLO v3 的地面垃圾检测与清洁度评定方法
+或吸除。
+表4 垃圾数量及其加权总值
+垃圾种类 垃圾数量 加权总值 小
+33
+无机垃圾(废塑料、烟头) 中 0 0 大
+00
+小
+36
+有机垃圾(纸巾) 中 0 0 大
+00
+未收集的清扫垃圾(灰尘堆) 1 6 黏性残留物(黏性污渍) 3 6
+合计 10 21
+4结论
+通过自建数据集来训练地面垃圾检测模型,实验检测
+结果表明:模型在测试集上的 mAP 达到了 88. 3 % ,平均帧
+率达到了 28 帧/ s,基本能够满足地面垃圾检测的要求。在
+实际场地测试中实现了对地面垃圾的分类与量化,评定出
+了清洁度等级,以便于清洁机器人高效地完成定点清洁、再
+次清洁以及分类清洁等作业。本文为避免机器人盲目清洁
+作业而浪费时间和资源提供了一种解决方案。未来研究可
+以增加实际的垃圾类别与场景,提高垃圾检测模型对各种
+垃圾特征和属性的检测适应性,使清洁机器人达到更高效、
+更高质量的自主和协作作业能力。
+参考文献:
+[
+1] PRABAKARAN V,ELARA M R,PATHMAKUMAR T,et al.
+Floor cleaning robot with reconfigurable mechanism [J]. Auto
+mation in Construction,2018,91:155 -165.
+[
+2] 张一博,马磊. 基于视觉传感器的移动机器人定位算法[J].
+传感器与微系统,2019,38(6):137 -143.
+[
+3] 巨志勇,张文馨,翟春宇. 基于改进 Canny 算子的垃圾图像边
+缘检测[J]. 电子科技,2020(8):1 -6.
+[
+4] GUO S,HAN L,HAO X. GW28-e0419 Image detection scale
+invariant feature transform algorithm based on feature matching
+improves image matching accuracy[J]. Journal of the American
+College of Cardiology,2017,70(16):C10.
+[
+5] LI W,LIU K,YAN L,et al. FRD-CNN:Object detection based on
+small-scale convolutional neural networks and feature reuse[J].
+Scientific Reports,2019,9(1):98 -136.
+[
+6] HUANG G,LIU Z,MAATEN L,et al. Densely connected convo
+lutional networks[C]∥Proceedings of the IEEE Computer Socie
+ty Conference on Computer Vision and Pattern Recognition
+(
+CVPR),2017:4700 -4708.
+[
+7] PHAM C,JEON J W. Robust object proposals re-ranking for
+object detection in autonomous driving using convolutional neural
+networks[J ]. Signal Processing:Image Communication,2017,
+53:110 -122.
+[
+8] REN S,HE K,GIRSHICK R,et al. Faster R-CNN:Towards real
+time object detection with region proposal networks [J]. IEEE
+Transactions on Pattern Analysis and Machine Intelligence,
+2017,39(6):1137 -1149.
+[
+9] GIRSHICK R. Fast R-CNN[C]∥2015 IEEE International Con
+ference on Computer Vision (ICCV),Santiago,2015:1440 -1448.
+[
+10] REDMON J,DIVVALA S,GIRSHICK R,et al. You only look
+once:Unified,real-time object detection[C]∥2016 IEEE Con
+ference on Computer Vision and Pattern Recognition (CVPR),
+Las Vegas,NV,2016:779 -788.
+[
+11] REDMON J,FARHADI A. YOLO9000:Better,faster,stronger[C]∥
+2017 IEEE Conference on Computer Vision and Pattern Recogni
+tion (CVPR),Honolulu,HI,USA,2017:6517 -6525.
+[
+12] REDMON J,FARHADI A. YOLOv3:An incremental improve
+ment[D]. Washington:University of Washington,2018.
+[
+13]何东健,刘建敏,熊虹婷,等. 基于改进 YOLO v3 模型的挤奶
+奶牛个体识别方法[J]. 农业机械学报,2020,51(4):250 -260.
+[
+14]ZHANG X,YANG W,TANG X,et al. A fast learning method for
+accurate and robust lane detection using two-stage feature extrac
+tion with YOLO v3[J]. Sensors,2018,18(12):4308.
+[
+15 ] LI J,GU J,HUANGZ,et al. Application research of improved
+YOLO V3 algorithm in PCB electronic component detection[J].
+Applied Sciences,2019,9(18):3750.
+[
+16]潘卫国,刘博,陈英昊,等. 基于 YOLO v3 的交通标志牌检测
+识别[J]. 传感器与微系统,2019,38(11):147 -150.
+[
+17]SEVILLA A,RODRÍGUEZ M L,GARCÍA-MARAVER Á,et al.
+An index to quantify street cleanliness:The case of Granada[J].
+Waste Management,2013,33(5):1037 -1046.
+作者简介:
+王一田(1994 -),男,硕士研究生,研究方向为机器人技术,深
+度学唐习开。强(1992 -),男,通讯作者,博士研究生,研究方向为机器
+学习,机器人技术。
+留沧海(1966 -),男,博士,教授,主要研究领域为机电一体
+化,机器人技术。
+(上接第 128 页) [
+15]LOTTE F,LÉCUYER A,LAMARCHE F,et al. Studying the use
+of fuzzy inference systems for motor imagery classification [J].
+IEEE Trans Neural Syst Rehabil Eng,2017,15(2):322 -332.
+[
+16]ZHONG M J,LOTTE F,GIROLAMI M,et al. Classifying EEG for
+brain computer interfaces using Gaussian processes [J]. Pattern
+Recognition Letters,2008,29(3):354 -359.
+[
+17]HOSSEIN B,WARD R K,BIRCH G E,et al. Comparing different
+classifiers in sensory motor brain computer interfaces[J]. PLOS
+ONE,2015,10(6):e0129435.
+作者简介:
+宋春宁(1969 -),男,副教授,研究领域为模式识别,嵌入式系统。 盛 勇(1995 -),男,硕士,研究方向为脑电信号分析,深度学习。 宁正高(1992 -),男,硕士,研究方向为智能控制,信号处理。
+133

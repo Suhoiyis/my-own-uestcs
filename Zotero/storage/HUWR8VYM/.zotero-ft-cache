@@ -1,0 +1,548 @@
+EEG-MFNet:适用 于 脑 电 信 号 分 析 的 轻 量 级 多 分 支 融 合 网 络
+叶晓雅 1,2,3,王秀青1,2,3*, 马海 滨1,2,3,张诺 飞1,2,3
+(1.河北师范大学计算机与网络空间安全学院, 河北 石 家庄 050024;2.河北省网络与信息安全重点实验室(河 北师范大学), 河北 石 家庄 050024; 3.河北省供应链大数据分析与数据安全工程研究中心(河 北师范大学), 河北 石 家庄 050024)
+摘要 :为解 决脑 电数 据分辨率低、数据量不足 以及 被试者个 体 差异 所 导致 的解 码 效 率低 下 问题 ,提 出适 于脑 电信 号分 析 的轻
+量级多分 支融合网络 (multi-branchfusionnetworkforelectroencephalogram signal,EEG-MFNet)模 型. 通过多尺度时空卷积模 块提 取 脑 电数 据 的多层 次 时空特 征 ,应用多尺 度 时 间卷 积提 取 更 高级 的时-空-频域 特征 ,对输入 分 类 器 的特 征 数 据 应 用滑 动
+窗口,增强数据的有 效特征. EEG-MFNet模 型的平均分 类准确率、标准差相 比对 比模 型分 别提 升3.19%、22.86%以上,模型推 理时间减 少 16.87%以上. 实验 结果表明所提 方法提 高运 动想象脑电信 号分类准确率,并增强模 型的稳 定性,提升了模 型的训 练效 率,为基 于运动想 象的脑 电信 号分析提供更有效的解码方案.
+关键 词 :多尺 度 卷积 ;滑 动 窗 口;运 动想 象;脑机 接 口;脑 电信 号
+中图分 类号:TP391 文献 标 志码:A
+文章编号 :1671-9352(2025)07-0001-12 DOI:10.6040/j.issn.1671-9352.4.2024.126
+EEG-MFNet: alightweightmulti-branch fusion networkfor
+electroencephalogram signalanalysis
+YEXiaoya1,2,3,WANG Xiuqing1,2,3*, MA Haibin1,2,3,ZHANG Nuofei1,2,3
+(1.CollegeofComputerandCyberSecurityHebeiNormalUniversity, Shijiazhuang050024,Hebei,China;2.HebeiProvincial
+KeyLaboratoryofNetwork& InformationSecurity(HebeiNormalUniversity), Shijiazhuang050024,Hebei,China;3.HebeiPro
+vincialEngineeringResearchCenterforSupplyChinaBigDataAnalytics& DataSecurity(HebeiNormalUniversity), Shijiazhuang
+050024, H ebei, China)
+Abstract:Inordertosolvetheproblemsofdecodingefficiency caused by low resolution, insufficientdatavolumeand individual
+differencesofsubjects,multi-branchfusionnetworkforelectroencephalogram signal(EEG-MFNet)m odelsuitableforEEG signal
+analysisisproposed.Multi-levelspatiotemporalfeaturesofEEG dataareextractedthrough multi-scalespatiotemporalconvolutional
+modules, andfurtherappliedby multi-scaletemporalconvolution to extractmoreadvanced time-space-frequency domain features.
+Applyingaslidingwindow to thefeaturedataoftheinputclassifiersignificantly enhancesthe effectivefeaturesofthedata.The
+averageclassificationaccuracy and standard deviation oftheEEG-MFNetmodelareimproved by morethan 3.19%and 22.86%
+compared withthecomparison model,respectively.Modelinferencetimeisreducedbymorethan 16.87%.Theexperimentalresults
+show thattheproposed method improvesthe stability ofthe modeland significantly improvesthe training efficiency.Thiswork
+providesamoreefficientdecodingschemeforEEG signalanalysisbasedonmotorimagery.
+Keywords: multi-scaleconvolution; slidewindow;motorimagery;brain-computerinterface; electroencephalogram signal
+收稿 日期 :2024-07-07; 基金项目:国家自然科学基金资助项目(61673160);河 北省自然科学基金资助项目(F2018205102);河 北省高等学校科学技术研究重点项 目 (ZD2021063) 第一作者:叶晓雅(2000- ),女,硕士,研究方向为脑电信号识别、深度学习等.E-mail:13230051283@163.com *通信作者:王秀青(1970- ),女,教授,硕士生导师,博士,研究方向为脑电信号识别、脉冲神经网络、先进机器人技术等. E-mail:xqwang2013@ 163.com
+山东大学学报(理学版)2025年 7月 第 60卷 第 7期 JournalofShandongUniversity{NaturalScience), Vol.60,No.7,2025 http://lxbwk.njoumal.sdu.edu.cn
+DOI: 10.6040/j.issn.1671-9352.4.2024.12
+*叶晓雅口3,王秀青2 ’ 3*马海滨 ’ 23 , ,张诺3飞U ’ , “ “
+文献 标 志 :A
+引用格式:叶晓雅, 王秀青, 马海滨, 等.EEG-MFNet:适 用于脑电信号分析的轻量级多分支融合网络 [J] .山 东大学学报(理 学版),2025,60
+(7):1-12.
+0 引言
+随着人工智能的快速发展 人 ,机交互(human-computerinteraction,HCI)技术得到了广泛的关注 1 [ ] 。 脑
+网络 出版 时间 2 :025-02-2811 3 :80 :9
+万方数据
+
+
+2 山 东 大 学 学 报 (理 学 版) 第 60卷
+机接口(brain-computerinteraction,BCI)作为HCI技术的重要方面之一 1 [ ] 将 ,人脑信号与计算机或外部设备 进行交互, 实现了人脑与机器之间的直接通信 , 在神经康复、 辅助医学 2 ["3]、 军事 4 [] 以及娱乐 5 [] 等方面具有广
+阔的应用前 景 。
+准确识别人类运动意图— — 脑电识 别是 B CI研 究领域 的关 键 问题 之一 。脑 电信 号作为一 种复 杂 的时
+序信号, 具 有低信噪比(容 易受心电、 肌 电、 眼球运动、 眨眼等多种生物因素 以及环境伪影 的干扰 )的 特性 。
+此外 , 由于记录脑电信号的电极之间的耦合性, 使 得记录所得的脑 电信号存在通道相关性。在 进行同一身体
+部位 的运动想象 时 , 不 同被 试 者可 能 会 产生 不 同的脑 电信 号。上 述 这 些特 性 使 得 脑 电信 号 的识 别极 具 挑
+战性 。
+常用范式之一的运动想象脑电信号在没有身体运动 的情况下 , 通 过 意识 或想象模拟特定 的运动 。在 这
+个过程中, 大 脑皮层 中的 波的节律发生变化产生事件相关去同步 (event-relateddesynchronization, ERD)和事件相关同步(event-relatedsynchronization,ERS)现象 6 [ ] 。 传 统的运动想象任务分析方法多通过 小波变换 7 [和 ]短时傅里叶变换提取时频特征 借 ,助共空间模式(commonspatialpattern,CSP)8 [提 ]取空间特
+征等 然 ,后根据提取的特征通过诸如支持向量机(supportvectormachine,SVM)和 Fisher判别分析等进行分
+类。然 而 , 这 些传统分析方法的特征选择和分类是独立 的 , 而 特征选择影 响着分 类 的结果 。对 此 , 研 究者们
+开始尝试基于深度学习的端到端模型 2 [ ] 如 ,:Lawhern等 9 [提 ]出的基于脑电信号的紧凑的卷积神经网络(a
+compactconvolutionalneuralnetworkforelectroencephalogram-basedBCIs,EEGNet)模型 利 ,用可分离卷积以 及深度卷积技术对脑电信号进行分类;Zhang等 2 [] 在EEGNet结构基础上设计了多尺度模块, 解决了由于脑电 信号主体性带来的单尺度限制识别精度提升的问题 。此 外, 当训练数据有限时, 也会限制分类准确率 的提高。
+综上 , 虽 然现有的端到端模型取得了不错 的识别精度 , 但 很多基于深度学 习的脑 电信号识别模型结构复
+杂、 计算时间长 , 难 以满 足实际应用 中对模型运行速度的要求 , 因此 , 须 建立一种具 有高分类准确率且轻量级
+的识别模型。 本 文提出一种适用于脑电信号分类的轻量级多分支融合网络(multi-branchfusionnetworkfor
+electroencephalogram signal,EEG-MFNet)模型解码脑电信号。 该 模型主要包含多尺度时空卷积(multi-scale
+temporal-spatioconvolution,MSTS)、 多尺度时间卷积(multi-scaletemporalconvolution,MST)以及滑动窗口
+(slidingwindow,SW)o与 现有多尺度模型不同 本 ,文所提模型直接对原始数据进行特征提取 不 ,依赖于滤 波等预处理操作 , 是 一个鲁棒的、 易于实现的、 端 到端 的轻量级 网络 。
+1 相关工作
+脑电信号的解码方法主要包括传统的机器学习和深度学习技术 。传 统方法主要对空间特 征和时频特征
+进行提取, 如 Z :hang等 (10)提 出基 于 CSP的 多核极限学习机 (multi-kernelextremelearningmachine, MKELM), 该方法借助CSP提取空间特征进行运动想象脑电信号的分类;Ang等 1 [1] 在CSP的基础上提出滤
+波器组共空间模式(filterbankcommononspatialpattern,FBCSP)方法 该 ,方法将带通滤波后的脑电信号分
+为多个频带 , 然后从每个频带 中提 取 C SP特 征 , 再 借助特征选择算法 自动 选择对应频带 的特征。
+然而 , 上 述这些方法需要大量的先验知识 。与 传统方法不 同, 深 度学习方 法具备直接从数据 中自动 提取
+特征的能力, 能避免繁琐的预处理和手动特征提取的步骤。深 度学习已成功应用于视频识别 、 图像分类等领
+域。 深 度学习方法主要包含卷积神经网络 (convolutionalneuralnetworks,CNNs)、 循环神经网络(recurrent neuralnetworks,RNNs)、 深度置信网络(deepbeliefnetwork,DBN)方法以及它们的组合_ 。 CNNs是脑电 信号分类任务 中使用最广泛 的。 基 于标 准 CNNs的 浅层 、 深 层架 构 以及 其 他变体 也被 陆续提 出。 L awhem
+等 9 [] 提 出的 EEGNet模 型, 借 助卷积提取数据的时空特征, 并 通过 深度可分 离卷 积降低 了模 型的参 数。
+Ingolfsson等_ 提出一种时间卷积网络(temporalconvolutionalnetwork,EEG-TCNet)模型 该 ,模型首次将时 间卷积网络应用于脑电信号识别, 在实现高准确率的同时节约了大量内存资源。A ltaheri等 1 [4] 提 出动态注
+意时间卷积网络(dynamicattentiontemporalconvolutionalnetwork,D-ATCNet)模 型解码运动想象脑电信 号 该 ,模型采用动态卷积(dynamicconvolution,Dy-conv)和多级注意机制技术, 能够在使用相对较少参数
+的同时提高模型对运动想象(motorimagery,MI)分类的准确性。 同 时 考 ,虑到脑电数据的个体差异可能导 致最佳卷积尺度不同的问题 A ,ltuwaijri等 1 [ 5提 ]出多分支结构(multibranchEEGNet,MBEEGNet)模型 利 ,用
+万方数据
+
+
+第 7期 叶晓雅 , 等 :EEG-MFNet:适 用于脑 电信号分析 的轻 量级多分 支融合 网络 3
+多尺度卷积核从原始脑电数据中提取不同范围的特征, 进一步提升了脑电信号的识别精度。王 蒙昊等 1 [6] 提
+出的多尺度混合卷积的脑电信号网络 m (ulti-scalehybridneuralnetworkforEEGsignal,EEG-MSTNet) 模型,
+连用 2个 多尺度一维卷积增强对数据的时间特征提取能力, 在 一定程度上平衡 了个 体差异问题 , 然 而对于空
+间特征的提取不够精细。Tang等 1 [7] 提出多尺度混合网络模型, 借助并行的多尺度一维和二维卷积提取数
+据的时空特征 , 在 二分类问题上达到了较 好的结果 。
+另一方面 , CNNs需 要大量的训练数据来实现 高分 类准确率 , 然 而脑 电数 据获取相对 困难 , 因 而 数据 集
+大多规模较小。针 对这一问题 , 目前 采用 2种 数据增强方法 :一种是进行数据转换 , 从 原始 的训练 数据 中生
+成更多的训练数据 1 [8〜;另 一种方法是在原始训练数据中添加噪声, 生成新的训练数据 2 [1_22。]
+上述方法虽然在脑电识别方面表现出了良好的效果, 但仍然面临2个 问题 : (1)大部分模型的多尺度结
+构基于EEGNet模 型或简单的一维卷积实现, 往往难以同时兼顾运行效率和性能; (2) 许 多方法在使用时没
+有考虑到脑 电数据集大小的问题 。因 此 , 本 文基于滑动窗 口和 多尺度混合卷积设计 了一 种适 用于脑 电信 号
+分类的轻量级多分支融合 网络模型。该 模型在原来 EEGNet的 基 础上将 可分 离卷 积替换 为一维卷 积 , 使 用
+多尺度提取不同层次的数据特征, 借 助滑动窗 口操 作对待分类数据进行特征增强。
+2 数据 集及预处理
+2.1 数 据 集
+采用运动想象脑电信号识别领域常用的2008年 第四届脑机接口竞赛 2a数 据集( brain-computerinterac
+, 该数据集包含9名被试者关于左手( 第 1类 )、右手( 第 2类 )、
+tioncompetitionIVdataset2a,BCIIV2a) 2 [ 3]
+双脚( 第 3类 ) 和舌头( 第 4类 )的 4类 运动想象实验。每
+名被试者在 2d完 成 了 2次 实验 , 每 天进 行 6组 实验 , 每
+组包括 48个 实验 , 共 288次 实验 。实 验 中采用 22个 脑 电
+电极记 录 EEG 信 息 , 3个 眼电电极记 录有关 眼球 运 动 的
+信息 采 ,样频率为 250Hz带 ,通滤波的范围为 0.5-100Hz。
+实验过程如图 1所 示。
+采集 时 , 被 试 者注视 电脑 屏幕 上 出现 的相 应 动作 提
+示 跟 ,着提示进行想象。 实 验开始时( Z=Os) ,一个固定
+十字 出现 在电脑黑色屏幕上 , 并 且还伴 有简短 的提 示音 。
+图1 单次数据采集流程 Fig.l Processofdataacquisition
+f在 2〜 3.25s时 , 以箭 头 的形 式 指 向上 、 下 、 左 或
+右, 分 别对应 四类 中舌头 、 脚 、 左手和右手。f在 3~6s时 为被试者执行想象任务 的时间, 当 r=6s时 屏 ,上 的
+十字消失 , 被试者休息时间为 1.5s然 ,后继续实验。
+2.2 数 据 预 处 理
+实验中单个样本的张量形状为( 1,22,1125) 。 将 第 1d采 集的数据作为训练集 第 ,2d的采集数据作为
+测试 集 , 训练集和测试 集的样本数均为 2592为 便 于模型对样本标签进行有效分类 , 对 训练集和测试 集的标
+签进行 one-hot编 码 , 并 在使用前对训练集和测试集进行标准化处理 。
+3 研究方法
+受Lawhem 等 9 [] 提 出的EEGNet结 构的启发 , 本文提出EEG-MFNet模 型, 总体结构如图2所 示。该 模
+型主要包含MSTS.MST以及SW模块。预 处理后的脑电数据xz.eRCxr( C 为输人脑电数据的通道数 T ,为输 人脑 电数据的采样点数 ), 首先通过多尺度时空卷积模块在不 同尺度下 自适 应地提取脑 电数据的时空特征 ;
+然后利用多尺度时间卷积模块提取更精细的时-空-频域特征;最 后在分类前将 时间序列分 割成多个窗 口,
+经过层归一化后进行特征拼接 , 能 有效地对待分类数据进行特征增强并提高分类准确性 。表 1是 该 网络 结
+构各模块的参数 。表 1中 的大部分参数根据实验效果设定 的最优参数 , 其 中多尺度时空卷 积模块 的卷 积核
+大小还结合了对 脑 电数据的频域分析。
+万方数据
+
+
+4 山 东 大 学 学 报 ( 理 学 版) 第 60卷
+Softm ax
+©M )<
+分类 ;
+图2 EEG-MFNet模 型结 构图 Fig.2 StructureofthemodelEEG-MFNet
+表 1 EEG-MFNet模 型参 数
+Table 1 Param eters of 1EEG -M FNetm odel
+注:表 中省略 了滑动窗 口的参数设 置 。
+模块 层结构名 参数设 置 滤波 器个数 步长 填充
+二维卷 积 卷积核大小: (16, 1), (32, 1),(64 1 ,) 16 1 sam e 深度卷 积 卷积核大小为(1,22) 32 1
+多尺度 时空卷 积 平均池 化 池化大小为( 8,1) 1
+Dropout 丢弃率 :0.25
+一维卷 积的分 支 1 卷积核大小 :2、 4 8、 8 4 sam e
+一维卷 积的分 支 2 卷积核大小为 16 32 1 sam e
+多尺度 时间卷 积 平均池 化 池化 大小为 4
+Dropout 丢弃率为 0.30
+3.1 多尺 度 时 空卷 积 模 块
+在深度学习领域中, 提升模型性能最直接的方法就是增加模型的深度或宽度 2 [4]。此 外, 在时间卷积层
+中使用 same填 充有助于保持时间维度不变 , 确保卷积操作不会丢失重要 的时 间信 息 , 同时也 简化 了后 续层
+的计算过程。然 而 , 随 着网络深度的增加 , 计 算量会逐渐增加 , 而 特征图会 越来 越小 , 导 致信息丢失 的问题 。
+同时 , 脑 电数据 由于被试者的个体差异 , 不 同被试者的最佳卷积核大小是不一样 的。因 此 , 为 了提 取更多层
+次的特征 , 本 文构建一个 由二 维卷积组成的多尺度时空卷 积模块 , 用 于从 脑 电数据 中提 取初级 的时空特 征 。
+该操作消除了对固定长度的内核的需要, 并允许网络学习代表不同频率子带的滤波器 2 [5]。如 图2所 示, 在
+多尺度时空卷积模块中 使 ,用了 3种不同大小的卷积核( 么 1 ,) ( /=12 ,,3) 提取时间特征, 同时 借 ,助深度卷 积提取脑电信号的空间特征 其 ,中人 =16,k2=32,k3=64。 提 取相关频谱信息为8~32Hz覆 ,盖/z( 8~13 Hz) 波和扒 13〜 30Hz) 波 这 ,与运动想象的生理学特性密切相关。
+3.2 多尺 度 时 间卷 积 模 块
+CNNs借 助 于卷 积 操 作提 取 特 征 , 涉 及 到 的参 数 有卷 积 核尺 寸 、 移 动 步 长 、 填 充 方 式 以及 滤 波 器 的数
+万方数据
+
+
+第 7期 叶晓雅 , 等 :EEG-MFNet:适 用于脑 电信号分析 的轻 量级多分 支融合 网络 5
+量 2 [6] 。不 同的移动步长可以改变卷积提取到的数据之间的相关性。同 时, 不同的卷积核也可以捕获到不同
+范围的特征 , 大 的卷积核可以捕 获整体特征 , 而 小 的卷积核则捕 获更精细的特 征。其 次 , 根 据卷积核移动方
+向的不同, 可以分为一维卷积和二维卷积。在 处理一维序列数据(如时间序列、 文本数据等)时 , 一维卷积相 较于二维卷积更容易训练, 可以在实现高性能的同时降低计算复杂度 2 [7。]
+脑电数据在经过 MSTS模 块处理之后 , 得 到时间序列相关 的特征图, 因此 , 在 MST模 块中使用一维卷积
+进一步提取更精细的时-空-频域特征 , 并 应用多尺度提取不 同层 次 的特 征信 息 , 进 行 特征拼 接后输 人后续
+模块 , 如 图 2所 示 。M ST模 块的单分支采用一维卷积 , 而 EEGNet模 型采用可分离卷积 , EEG-MFNet模 型较
+使用可分离卷积具有更好 的识别精度和模型稳定性 。
+3.3 滑动 窗 口
+为了进一步提升模型的性能 ,EEG-MFNet模 型借 助滑动窗 口对 提取 的特 征进行处 理 , 而 不是 直接将 其
+输人到后续 的层 中, 这 一操作有助于对 MSTS和 MST模 块处理后的特征信息进行增强 , 进 而提高模 型 的分
+类准确率 。这 种将滑动窗 口与卷积集成 的操作与通过滑动窗 口处 理原始数据不 同, 在 增强数 据特征 的同时 也通过并行化过程减少训练和推理的时间, 最初被用于基于滑动窗口的目标检测中。Schirrmeister等 TM 对
+此做了详细的描述, 使用长度为Tw的滑动窗口, 将经过混合卷积后的时间序列Tc划分为n个长度相同的子 序列分别输人到后续分类模块。滑 动窗 口长度为
+Tw=Tc-n+l, Tc>n^lo (1)
+4 实验
+(2)
+(3)
+(4)
+Pe
+4.1 评 价 指 标
+选取准确率、(即 Kappa值 )以及标准差作为指标评估实验结果。更 高的准确率和k表 明模型具有更 好的分类性能 , 而 较低的标准差意味着更小的离散度 , 表 示模 型具有更好 的稳定性 。准 确率为
+^acc
+式中么 为预期分类精度, 即
+cc C
+X (Y aijY ak)i
+Z=1 J=l k=l CC 9
+(S IX )2
+1=1 J=1 cc
+式中: X tz,表示真实类别为第i类的样本数 X ,aki表示被预测类为第i类的样本数。
+;= 1 炎= i
+标准差 5 的定义为
+Cc 9
+iiau
+1=1 j=l
+QC
+式中c : 为类别数a , i7为类别预测正确的样本数a , iy为真实类别为 预测类别为j的样本数即 ,Jf%为
+总样本数 。
+k是 衡量模型一致性和有效性的指标 , 定 义为
+.U e
+K=
+卜 户e
+E(xd-无)2
+。(3)
+J
+式中&为第 个被试者的分类准确率2V ,为被试者^冬。
+4.2 实验 设 置
+使用 TensorFlow 的 Keras框架在 CPU 为 11thGenIntel(R)Core(TM)i7-11700F, 2.5GHz,GPU 为
+万方数据
+
+
+6 山 东 大 学 学 报 (理 学 版) 第 60卷
+NVIDIA GeForceRTX 3060Ti以 及 内存 为 16GB的 实验环境下进行模型的训练和评估 , 在 整个过程 中均遵
+循了如下配置:采用Adam 优化器算法和最小化交叉熵损失函数对模型参数进行优化;每个 epoch中批处理 (batchsize)的大小为32;学习率为0.0009O在 训练过程中采取容忍度为 300的早停训练方式, 即当模型连 续训练超过 300次 后 , 准 确率没有继续提升 , 则停止训练 。此 外 , 为 了保 证 结果 的准确性 , 在 实验 中, 对 每名
+被试者均进行 了 20次 实验 并 ,取均值作为最后结果 。
+4.3 对 比实 验
+将 EEG-MFNet模 型与一些传统的机器学习方 法和典 型的深 度学 习模 型在 BCIIV 2a数 据集上 的分 类
+结果进行了比较 , 具 体结果见表 2- 4所 示。
+表 2 在 BCIIV 2a数 据集上 EEG-MFNet模 型与传统机器学 习方 法的分 类准确率 Table2 ClassificationaccuracyofEEG-MFNetmodelandtraditionalmachinelearningmethodsontheBCIIV 2adataset
+表 3 在 BCIIV 2a数 据集上 EEG-MFNet模 型与其 它深度学 习方 法 的分 类准确率
+Table3 ClassificationaccuracyofEEG-MFNetmodelandotherdeeplearningmethodsontheBCIIV 2adataset 单位 :%
+单位 :% 被试者 FBCSP[11] MTF-CSP[29] EEG-M FNet
+A l 76.00 92.2 91.60
+A 2 56.50 59.9 78.19
+A 3 81.25 97.1 95.80
+A 4 61.00 64.7 89.65
+A 5 55.00 74.8 78.44
+A 6 45.25 65.7 78.92
+A 7 82.75 81.4 93.06
+A 8 81.75 92.5 89.58
+A 9 70.75 80.0 86.18
+平均 值 67.75 78.7 86.82
+标准 差 16.96 12.7 6.58
+注:粗 体 为测试 指标最好结果 。
+注:粗 体 为测试 指标最好结果 。
+被试者 EEGNetL9] EEG-TCNet[13] D-ATCNet[14] MBEEGNet[15] E EG 
+MSTNet[16]
+M BEEG
+cbam [30] m bhnn[31] EE G 
+M FN et
+A l 86.9 83.0 87.5 89.59 86.81 91.09 90.58 91.60
+A 2 62.6 58.8 70.0 68.06 68.40 65.87 75.99 78.19
+A 3 91.7 92.6 94.9 94.58 95.83 94.52 93.73 95.80
+A 4 64.7 67.7 80.5 79.88 79.86 77.88 83.14 89.65
+A 5 71.6 73.0 79.5 76.92 82.29 81.87 73.09 78.44
+A 6 60.3 60.1 74.4 66.10 71.53 64.48 68.15 78.92
+A 7 88.9 86.0 93.2 91.57 92.71 93.38 95.82 93.06
+A 8 85.0 81.8 87.6 87.71 87.50 89.84 89.06 89.58
+A 9 80.0 81.4 89.6 83.69 86.81 86.69 86.24 86.18
+平均值 76.9 76.1 84.1 82.01 83.53 82.85 83.91 86.82
+标 准差 12.2 11.8 8.53 10.13 9.10 10.70 9.09 6.58
+表 4 在 BCIIV 2a数 据集上 EEG-MFNet模 型与其 它深 度学 习模 型的 k Table4 kofEEG-MFNetmodelandotherdeeplearningmethodsontheBCIIV 2adataset 被试者 EEGNet[9] EEG-TCNet[13] D-ATCNet[14] MBEEGNet[15] m beegcbam [30] m bhnn[31] EEG -M FNet
+A l 0.83 0.77 0.83 0.86 0.88 0.88 0.89
+A 2 0.50 0.45 0.60 0.57 0.55 0.69 0.71
+A 3 0.89 0.90 0.93 0.93 0.93 0.95 0.94
+A 4 0.53 0.57 0.74 0.73 0.71 0.71 0.86
+A 5 0.62 0.64 0.73 0.69 0.76 0.64 0.71
+A 6 0.47 0.47 0.66 0.55 0.53 0.60 0.72
+万方数据
+
+
+第 7期 叶晓雅 , 等 :EEG-MFNet:适 用 于脑 电信号分析 的轻 量级多分 支融合 网络 7
+注:粗 体 为测试 指标最好结果 。
+表4(续 ) 被试者 EEGNet[9] EEG-TCNet[13] D-ATCNet[14] MBEEGNet[15] m beegcbam [30] MBHNN[31] EEG -M FNet
+A 7 0.85 0.81 0.91 0.89 0.91 0.94 0.91
+A 8 0.80 0.76 0.83 0.84 0.87 0.80 0.86
+A 9 0.73 0.75 0.86 0.78 0.82 0.85 0.82
+平均值 0.69 0.68 0.79 0.76 0.77 0.78 0.82
+标 准差 0.16 0.16 0.11 0.13 0.15 0.12 0.09
+对比实验中使用的传统机器学习方法为FBCSP方法 1 [ 1和 ]多时频 CSP(multi-timeandfrequency bandcommonspacepattern,MTF-CSP)脑电特征分类方法 2 [ 9] 。FBCSP方法 1 [ 1将 ]带通滤波后的脑电信 号分 为多个 频带 , 然 后 从 每 个 频 带 中提 取 C SP特 征 , 借 助 特 征 选 择 算 法 自动 选 择 对 应 频 带 的 特 征 。
+MTF-CSP方 法 2 [9] 是 一种基于多时间窗和多频带 的 C SP算 法 , 采 用 SVM对 从 多时间窗 中提 取 的多频
+带特征进行 了分 类 。
+使用的典 型深 度学 习模 型有 E :EGNet9 [ ]E 、EG-TCNet1 [ 3]D 、-ATCNet1 [ 4] 、 MBEEGNet1 [ 5]E 、EG-MST
+Net1 [ 6]结 、合卷积注意机制的多分支 EEGNet3 [ ° ] (multi-branchEEGNetwithconvolutionalblockattention
+module,MBEEGCBAM)以及多分支混合神经网络 3 [ 1\multi-branchhybridneuralnetwork,MBHNN)模型。 EEGNet模型(9)是一种轻量且高效的脑电信号处理模型。E EG-TCNet模 型 1 [3] 是基于 TCNet的模型, 该模型
+内存 占用小, 计算推理复杂度低。D-ATCNet模 型 1 [4] 采用动态卷积和多级注意力机制, 使 用相对少的参数
+却提高了 MI分 类的准确率。MBEEGNet模 型 1 [ 5是 ]多分支卷积神经网络模型, 通 过结合不同大小的卷积
+核, 从原始脑电数据中提取不同尺度的时空特征。E EG-MSTNet模 型 1 [6] 连用两个多尺度一维卷积增强对数
+据的时间特征提取能力, 在一定程度上平衡了个体差异问题。M BEEGCBAM模 型 3 [Q] 是 一种多分支卷积神
+经网络模型, 利用注意力机制和融合技术对EEG-MI信号进行分类。M BHNN模 型TM 是一种端到端的新型
+多分支混合神经 网络 , 将 输人 信 号分 为与运 动想 象 信 号相关 的 4 个 频段 。同 时 还 引人 双 向门控 循 环单 元
+(gaterecurrentunit,BiGRU)来识别 EEG特征。
+表 2 中 列 出了所 提方 法与传 统 机器学 习方 法对 9 名 被 试 者分 类准 确率 的对 比。实 验 结果 表 明, 所 提
+EEG-MFNet模 型的准确率为 86.82% ,相 比于 FBCSP方 法 1 [1] 提 高 27.23% ,相 比于 MTF-CSP方 法 2 [9] 提 高
+11.1% 。与 对 比方法相 比, 本 文所提方法在被试者 A 2、 A4、 A5、 A6、 A7以 及 9上 获得最高分类准确率 。
+表 3中 列出了所提方法与其他深度学习的基线方法对 9名 被 试者分类实验 的准 确率 。实 验结果表 明,
+EEG-MFNet模 型在 BCIIV 2a数 据集的分类准确率 86.82%的, 比其他模型高出了 3.19%以上。 对 于单个被试
+者的分类准确率 E ,EG-MFNet模 型在被试者 A l、 A2 A 、4和 A 6上 达到了最高值。与 实验结果次优的模型相 比,
+被试者 A2的 分类准确率提高了 2.89%;被 试者 A4的 准确率 提高 7.83%; 被 试者 A6的 准确率 提高 6.1%。 此
+外, 所提方法的准确率 的标准差为 6.58% , 在对 比方法中的准确率的标准差最小 , 模 型的稳定性较好。
+表 4中 列出了所提模型与深度学习的基线方法在 BCIIV 2a数 据集上关于 k的 比较结果 。 所 有模 型中
+EEG-MFNet模 型的々最 大, 为 0.82。其 中, 在被试者A 1、 A2、 A4和 A 6的 女在所有模型中均为最大。此 外夕
+的标准差要所有模型中为最小 , 表 明了所 提模型是有效且稳定的。
+4.4 实验 结 果 的 统 计 分 析
+为了比较所提 EEG-MFNet模 型与基线模 型对 运动想 象 脑 电信 号 的分 析结果 , 本 文对 实验 结果 进行 统
+计分析。使 用Shapiro检 验模型的识别准确率是否服从正态分布。由 于 Shapiro检 验结果表明所得实验数
+据均服从正态分布, 因此采用检验水平a=0.05的配对 t检验进行分析。m1和 m2分 别是 EEG-MFNet模型
+和基线模型的识别准确率(见表2、 3), 则配对f检验的原假设仏 和备择假设什 分 别为
+•mi>m2o (6)
+EEG-MFNet模型与 FBCSP1 [ 1]M 、TF-CSP2 [ 9]E 、EGNet(9)E 、EG-TCNet1 [ 3]D 、-ATCNet1 [ 4]M 、BEEGNet1 [ 5、 ]
+EEG-MSTNet1 [ 6] .MBEEGCBAM2 [ 9以 ]及 MBHNN(10)模型进行统计分析得到的p值 分别为 1.854xl0_5、
+0.0096.0.0009,0.0003.0.0297,0.0036,0.0249.0.0408和0.0215,均小于 0.05不 ,能拒绝 Hx, 即所提模型的 识别 准 确率 优 于基 线模 型 。
+万方数据
+
+
+8 山 东 大 学 学 报 ( 理 学 版) 第 60卷
+4.5 消融 实 验
+4.5.1 分 支 消融 实验
+EEG-MFNet模 型的 M STS和 MST模 块均包含多个分支。为 了验证单分支和多分支结构对模型分类结
+果的影响, 在 BCIIV 2a数 据集上进行了消融实验 对 ,应的结果如图 3 4 、所 示。 具 体参数设置见表 5O
+图3 多尺度时空卷 积模块 的消融实验 Fig.3 Ablationexperimentsofmulti-scalespatio-temporalconvolutionmodules
+图4 多尺度时 间卷 积模块 的消融实验 Fig.4 Ablationexperimentsformulti-scaletimeconvolutionmodules
+表 5 分支消融实验参数 Table5 Parametersofthebranchablationexperiments
+模块名称 分支 卷积核大小 滤波 器个数 步长 填充
+分支 1 (16,1) 16 1 sam e
+多尺度 时空卷 积 分支 2 (32,1) 16 1 sam e
+分支 3 (64,1) 16 1 sam e
+分支 1 2、4 、8 8 4 sam e
+多尺度 时 间卷 积 分支 2 16 32 1 sam e
+图3为 MSTS模 块的分支消融实验 的结果 。从 中可 以看 出, 所 提模型的平均分类准确率 优于单分支结
+构 分 ,支 1 2 、以及 3的分类准确率分别为 84.81% ,85.13%以及 85.07%o除 了被试者 A7和 A9,其余被试者
+在 EEG-MFNet模 型 中的结 果 均 优 于使 用 单 分 支 结 构 的模 型 。对 于 比较 难 分 的被 试 者 A 2、 A4以 及 A 6,
+EEG-MFNet模 型的分类准确率有了大 幅的提升 , 证 实了该 网络 所提 多尺度结 构能够 充分提取时空信 息 , 并
+显著提高脑 电信 号的解码精度。
+图4 为 MST模 块 的消融实验结果 。分 支 1以 及 分 支 2 部 分 的实 验 结果 分 别为 81.91% 和 85.52% , 即
+EEG-MFNet模 型相对 于只使 用分 支 1结 构来说有了很 大的提升 , 而 对于分支 2来 说 , 提 升相对 较小 , 但 由于
+分支 1的 加人 , 使 模型的标准差从 7.72% 降为 6.58% , 模 型的稳定性更好。
+%/涯 嬰讲
+<%/麗
+万方数据
+
+
+第 7期 叶晓雅 , 等 :EEG-MFNet:适 用于脑 电信号分析 的轻 量级多分 支融合 网络 9
+Lefthand Righthand Foot Tongue Predicted label
+LefthandRighthand Foot Tongue Predicted label
+Lefthand Righthand Foot Tongue Predicted label
+(a)EEGNet模型
+Fig-6
+(b)EEG-TCNet模型 (c)EEG-MFNet模型
+图6 不同模 型的被 试者 A 4的 混 淆矩 阵 Confusion matrix ofdifferentmodelswith SubjectA4
+•0 .8
+■ 0 .6
+■ 0.4
+■0.2
+■0
+0.029 0.036 0.03 1
+0.0 42 0.048 0.03 1
+00 0
+0.0 42 0.058 0.06
+0.14 0.043 0.0 5
+0.23 0.087 0.0 5
+0.08 0.056 0.15
+0.0 46 0.2 1 0.12
+0.17 0.09 0.053
+0.16 0.14 0.16
+0.0 17 0.2 0.12
+0 0.11 0.17
+84.0 1 1 1 1 1 1 1 1 1 1 2 3 4 5 6 7 8 9 10
+滑动窗口数 量
+图5 不同滑 动窗 口数 量的实验结果 Fig.5 Experimentalresultsfordifferentnumbersofslidingwindows
+4.7 可视 化
+图6为 不 同模 型训练 的被试者 A 4的 混淆矩阵 , 横 纵坐标分别为预测标 签和真 实标签 , 图例颜色 的深浅
+表示分类正确率 的高低 。蓝 色区域代表准确率较低 , 逐 渐过渡到黄色区域准确率最高。
+4.5.2 模 块 消 融 买验
+为了验证模型各个模块对分类性能的影响, 本 文基 于 BCIIV 2a数 据集进行模块 消融实验 。 表 6为 从
+EEG-MFNet模 型中删除一个或多个模块后对分类性能 的影 响。E EG-MFNet模 型 的分 类准 确率 为86.82% ,
+而模型分别去 除 MSTS、 MST S 、W 以 及 SW+MST+MSTS模 块后 , 准 确率 为 84.81% .85.52% .84.22%以及
+83.55%。 结 果表明, MSTS模 块使得模 型提 取 特 征 的能力提 高 了 2.37%; MST模 块 提 高 了 1.5%; SW 提 升
+3.09% ;本 文所提出的模 型相 比较于修改前提高 3.91% 。从 上述 结果可 以看 出模 型 中的每 一个模 块都 对 提
+高性 能起 到 了积 极 的作 用 。
+表 6 EEG-MFNet模 型各个模块参数
+Table 6 Param eter of the individualm odules of the EEG -M FN etm odel
+模块 准确度/% k
+M STS 84.81 0.80
+M ST 85.52 0.81
+SW 84.22 0.79
+SW +M ST+M SST 83.55 0.78
+4.6 参数 敏 感性 实验
+本文研究 了滑动窗 口的数量对模型分类准确率 的影响 , 实 验结果如图 5所 示。一般来说 , 随 着滑动窗 口
+数量的增多 , 对 数据的增强效果会逐渐 提升 , 模 型从 不 同位 置 学习到 的信 息则越 多 , 模 型 的效 果就 会更好 。
+然而 通 ,过图5的实验结果可以看到EEG-MFNet模 型对 BCIIV 2a数 据集的分类准确率在经过( 4,86.82)
+之后便有所下降。这 是因为过多的滑动窗 口会 造成信息冗余 , 使 得模型难 以准确学习数据集的信息。因 此 ,
+在实验时使用的滑动窗 口的数量为 4。
+•foUEqyaqTJ5umpq82JOOHansuoH
+pqccl 31UF
+.8
+.7
+6 5
+.4
+.3
+.21^
+0
+.
+0
+.
+o
+.
+o
+.
+o
+.
+o
+.
+o
+.
+0
+.
+0
+PUBJ=ytDJ
+cqpue
+looj
+anouoH n
+1qlQB32
+PUBXyIJUEqmsjoDqTijoojansuoH
+n
+3
+IUH
+7 6 5 4 3
+21
+o
+.
+o
+.
+o
+.
+o
+.
+o
+.
+o.
+o
+.
+万方数据
+
+
+10 山 东 大 学 学 报 ( 理 学 版) 第 60卷
+从图 6 可 以看 出, EEG-MFNet模型相 比较于 EEGNet和 EEG-TCNet模 型对 4种 MI任 务 的分 类准确率
+均得到提升 , 分 别达到了 92%、 91% 、 86%和 94%。 此 外 , 为 了证 明所 提模型学 习到 的特 征具 有高可分 性 , 以
+被试者 A4为 例将 不 同模 型学 习到 的特 征进 行 ( -分布随 机邻域嵌 人 ( ^-distributed stochasticneighbor
+embedding,f-SNE) 可视化 结 ,果如图7所 示。 EEG-MFNet模 型在捕捉脑电时空特征方面的能力优于EEGNet和 EEG-TCNet模 型 。
+图7 被试者 A 4的 不 同算法 的特征可视化图 Fig.7 FeaturevisualizationofthedifferentalgorithmsforSubjectA4
+4.8 推理 效 率 评 估 实 验
+本文从模型的推理速度研究轻量化程度 , 在 相同的实验 条件下 , 对 比了模 型的训练 时间, 具 体结果见
+表 7。轻 量级模型 EEGNet参 数量小 , 具 有最快的推理速度 , 但 其脑电识别精度相对较低 , 为 76.9% 。相 比之
+下, EEG-MFNet模 型的分类准确率为 86.82% ,提 高 12.89% 。与 D -ATCNet和 EEG-MSTNet模 型相 比,EEG
+MFNet模 型在提升分类准确率 的同时也具有更短 的推理时间。相 比 MBEEGNet模 型 , 本 文所提模型的准确
+率提高了 5.87%,而推理时间仅增加了 104s不 ,到 2mino未 来工作可以将 EEGNet模 型中的可分离卷积与
+本模型相结合 , 提 出更 为轻量化且具有较高分类准确率 的新模型。
+表 7 EEG-MFNet模 型与基 线模型的训练 时 间对 比 Table7 ComparisonsofthetrainingtimefortheEEG-MFNetmodelandthebaselinemodel 模型 时间/s 准确率/%
+EEGNet[9] 876 76.90
+D-ATCNet[14] 2 988 84.10
+MBEEGNet[15] 2 388 82.01
+EEG-MSTNet[16] 3 108 83.53
+EEG -M FN et 2 484 86.82
+5 讨论
+实验结果表明, EEG-MFNet模 型能 有效 提 取 脑 电数 据 的时 空特 征 , 与 EEGNet111]、 MBEEGNet1 [6]、
+D-ATCNet1 [ 5]E 、EG-TCNet1 [ 4]E 、EG-MSTNet1 [ 7和 ]FBCSP1 [ 2模 ]型相比具有更好的分类性能。 EEG-MFNet模
+型中的 M STS模 块借助多尺度卷积精准地提取与运动想象 生理学特性密切相关 的脑 电数据时空特 征 , 这 一
+操作很大程度上增强模型的特征提取能力。消 融实验结果证 明 EEG-MFNet模 型 中的多分支结构有助于分
+类准确率 的提升。M ST模 块借助一维卷积进一步提取 时频特征 , 在 消融实验 中, 提 升模 型 的分 类准确率 和
+稳定性。由 于脑电数据获取相对困难 , 导致数据集大多规模较小, 通 常借助添加噪声 、 滑动窗 口等增强数据。
+本研究的不同之处在于借助卷积集成的滑动窗口对 处理后的时间特征图进行滑动切片操作 , 实 现特征增强
+的效果 , 与传 统数据相比, 减 少模型的运行推理 时间。从 表 5 中 的实 验结果 可以看 出, 本 文模 型分 类准确率
+较高。此 外 , 模 型轻量化实验部分也表明所 提模型具有较高的推理速度。
+虽然 EEG-MFNet模 型取得了很 好的解码效 果 , 但 仍存 在一 些局 限性 。多 尺度特 征融 合 在提 升准确率
+的同时增加了模 型的参数量 , 在 未来 的研究中, 将 改进多尺度特征提取 网络 和特征融合结构 , 将 所 提模型与
+可分离卷积相结合 , 力 图在减少 网络参数的情况下提高模型的分类准确率 , 所 提模型在特征提取时仅使用卷
+积结构 , 提 取全局依赖方面具有局限性 , 进 一步考虑使用 Transformer结 构改进 时间依 赖性 问题 。本 研 究仅
+万方数据
+
+
+[1]JIAO Runhai,LIChengyang,XUN Gangyi, etal.A context-awaremulti-eventidentificationmethodfornonintrusiveload
+monitoring[J].IEEETransactionsonConsumerElectronics,2023,69(2):194-204.
+[2]ZHANG Yu,LIPenghai,CHENG Longlong,etal.Attention-basedmultiscalespatial-temporalconvolutionalnetworkformo
+torimageryEEG decoding[J].IEEETransactionsonConsumerElectronics,2024,70(1):2423-2434.
+[3]AHMED I,JEON G,PICCIALLIF.From artificialintelligencetoexplainableartificialintelligenceinindustry4.0:asurveyon
+what,how,andwhere[J].IEEE TransactionsonIndustrialInformatics,2022,18(8):5031-5042.
+[4]WILLIAMSSC,HORSFALL H L,FUNNELL JP,etal.Neurosurgicalteam acceptabilityofbrain-computerinterfaces:a
+two-stageinternationalcross-sectionalsurvey[J].WorldNeurosurgery,2022, 164:884-898.
+[5]LIHongli,LIU Haoyu,CHEN Hongyu,etal.Multi-scalefeatureextractionandclassificationofmotorimageryelectroenceph
+alographybasedontimeseriesdataenhancement[J].JournalofBiomedicalEngineering,2023,40(3):418-425.
+[6]CHUNDURIV,AOUNDNIY,KHAN S,etal.Multi-scalespatiotemporalattentionnetworkforneuronbasedmotorimagery
+EEG classification[J].JournalofNeuroscienceMethods,2024,406:110-128.
+[7]GAO Dongrui,YANG Wen,LIPengrui,etal.A multiscalefeaturefusionnetworkbasedonattentionmechanism formotor
+imageryEEG decoding[J].AppliedSoftComputing,2024,151:111-129.
+[8]LIHongli,CHEN Hongyu,JIA Ziyu,etal.A parallelmulti-scaletime-frequencyblockconvolutionalneuralnetworkbasedon
+channelattentionmoduleformotorimageryclassification[J].BiomedicalSignalProcessingandControl,2023,79:104066.
+[9]LAWHERN V J,SOLON A J,WAYTOWICH N R,etal.EEGNet:acompactconvolutionalneuralnetworkforEEG-based
+brain-computerinterfaces[J].Journalofneuralengineering,2018, 15(5):056013.
+[10]ZHANG Yu, WANG Yu, ZHOU Guoxu, etal.Multi-kernelextremelearning machineforEEG classification in brain
+computerinterfaces[J].ExpertSystemswithApplications,2018,96:302-310. [11]ANGKK,CHINZY,ZHANG H,etal.Filterbankcommonspatialpattern(FBCSP)inbrain-computerinterface[C]//
+2008IEEE InternationalJointConferenceonNeuralNetworks,HongKong:IEEE,2390-2397.
+[12] 吕璐,程虎,朱鸿泰,等.基于深度学习的目标检测研究与应用综述[J]. 电子与封装,2022,22(1):72-80.
+LV Lu,CHENG Hu,ZHU Hongtai,etal.Review ofresearchandapplicationoftargetdetectionbasedondeeplearning[J].
+ElectronsandPackaging,2022,22(1):72-80.
+[13]INGOLFSSON TM,HERSCHEM,WANG X,etal.EEG-TCNet:anaccuratetemporalconvolutionalnetworkforembed
+dedmotor-imagerybrain-machineinterfaces[C]//2020IEEE InternationalConferenceonSystems,Man,andCybernetics
+(SMC). Toronto:IEEE, 2020:2958-2965.
+[14]ALTAHERIH,MUHAMMAD G,ALSULAIMAN M.DynamicconvolutionwithmultilevelattentionforEEG-basedmotor
+imagerydecoding[J].IEEE InternetofThingsJournal,2023, 10(21):18579-18588.
+[15]ALTUWAIJRIG,MUHAMMAD G.A multibranchofconvolutionalneuralnetworkmodelsforelectroencephalogram-based
+motorimageryclassification[J].Biosensors,2022,12(1):22.
+第 7期 叶晓雅 , 等 :EEG-MFNet:适 用于脑 电信号分析 的轻 量级多分 支融合 网络 11
+针对单被试进行了实验 , 将 在现有实验的基础上考虑借助迁移学习或域 自适 应技术研究跨被试条件下的脑
+电信号解码 , 并 通过脉冲神经 网络进一步提升模型的稳定性 。
+6 结论
+本文提 出的基于滑动窗 口和多尺度卷 积 的轻 量级 多尺度 融合 网络 EEG-MFNet模 型具 有 4 个 优点 : 首
+先 , 多 尺度时空卷积模块借助符合运动想象脑电信 号特性的不 同尺度的卷积核 , 解 决 了脑 电数据 因被试者差
+异导致的最佳卷积尺度不 同的问题 , 使 得模型可以自适 应地提取数据集 的时空信息 ;其 次 , 多 尺度 时 间卷 积
+模块中使用多尺度一维卷积处理时间序列 , 在提取更丰富特征的同时降低计算复杂度 , 并且提升模型的鲁棒
+性 ;然 后 , 借 助集成卷积的滑动窗 口进 行特征增强 , 进 一步加快模型的速度并提高了分 类准确率 。最 后 , 所 提
+模型相 比其 他方 法更 轻量化 , 在 计算 资源有 限 的情 况下 , 更 易于 实现 。实 验 结果 表 明,EEG-MFNet模 型在
+BCIIV 2a数 据集上与几种先进方法相 比达到了最 高 的分 类准确率 , 为 86.82%,标 准差最小 , 为 6.58%。 此
+外, 借 助消融实验 , 验 证各模块的有效性 。
+参考文献 :
+万方数据
+
+
+[16] 王蒙昊,方慧娟,龚亨翔,等.应用多尺度混合卷积网络的脑电信号特征提取与识别[J]. 华侨大学学报(自然科学版),
+2023,44(5):628-635.
+WANG Menghao,FANG Huijuan,GONG Hengxiang,etal.FeatureextractionandidentificationofEEG signalsusingmulti
+scalehybridconvolutionalnetworks[J].JournalofHuaqiaoUniversity(NaturalScienceEdition), 2023,44(5):628-635.
+[17]TANG Xianlun,YANG Caiquan,SUN Xia,etal.MotorimageryEEG decodingbasedonmulti-scalehybridnetworksand
+featureenhancement[J].IEEETransactionsonNeuralSystemsandRehabilitationEngineering,2023,31:1208-1218.
+[18]GUENNEC A L,MALINOWSKIS,TAVENARD R.Dataaugmentationfortimeseriesclassificationusingconvolutional
+neuralnetworks[C]//EuropeanConferenceonPrinciplesofDataMiningandKnowledgeDiscovery.RivadelGarda,Italy:
+IE EE, 2016.
+[19]KIM SK,KIRCHNER EA,STEFESA,etal.Intrinsicinteractivereinforcementlearning-usingerror-relatedpotentialsfor
+realworldhuman-robotinteraction[J].ScientificReports,2017,7(1):1-16.
+[20]LOTTE F.Signalprocessingapproachestominimizeorsuppresscalibrationtimeinoscillatoryactivity-basedbrain-computer
+interfaces[J].ProceedingsoftheIEEE,2015, 103(6):871-890.
+[21]WANG Fang,ZHONG Shenhua,PENG Jianfen,etal.DataaugmentationforEEG-basedemotionrecognitionwithdeepcon
+volutionalneuralnetworks[C]//MultiMediaModeling:24thInternationalConference,MMM 2018.Tokyo:Springer,2018.
+[22]LIYoujun,HUANG Jiajin,ZHOU Haiyan,etal.Humanemotionrecognitionwithelectroencephalographicmultidimensional
+featuresbyhybriddeepneuralnetworks[J].AppliedSciences,2017,7(10):1060.
+[23]BRUNNER C,LEEB R,MULLER-PUTZ G etal.BCIcompetition2008-GrazdatasetA[DB/OL].(2008-07-03)[2014
+01-17].https://ieee-dataport.org/documents/bci-competition-2008.
+[24]ZHANG C,KIM Y K,ESKANDARIAN A.EEG-inception:anaccurateandrobustend-to-endneuralnetworkforEEG-based
+motorimageryclassification[J].JournalofNeuralEngineering,2021, 18(4):046014.
+[25]SALAMIA,ANDREU-PEREZJ,GILLMEISTER H.EEG-ITNet:anexplainableinceptiontemporalconvolutionalnetwork
+formotorimageryclassification[J].IEEEAccess,2022,10:36672-36685.
+[26] 刘近贞,叶方方,熊慧.基于卷积神经网络的多类运动想象脑电信号识别[J]. 浙江大学学报(工 学版),2021,55(11):
+2054-2066.
+LIU Jinzhen,YE Fangfang, XIONG Hui.Multi-classmotorimageryEEG signalrecognitionbased on convolutionalneural
+networks[J].JournalofZhejiangUniversity(EngineeringEdition), 2021,55(11):2054-2066.
+[27]KIRANYAZ S, AVCIO, ABDELJABER O, etal.1D convolutionalneuralnetworksand applications: asurvey[J].
+MechanicalSystemsandSignalProcessing,2021, 151:107398.
+[28]SCHIRRMEISTER R T,SPRINGENBERG JT,FIEDERER LD J,etal.Deeplearningwithconvolutionalneuralnetworks
+forEEGdecodingandvisualization[C]//2017IEEESignalProcessinginMedicineandBiologySymposium (SPMB).Los
+Angeles: IEEE, 2017:1-7.
+[29]YANG Jun,MA Zhengmin,SHEN Tao.Multi-timeandmulti-bandCSPmotorimageryEEG featureclassificationalgorithm
+[J].AppliedSciences,2021, 11(21):10294.
+[30]ALTUWAIJRIG A,MUHAMMAD G.Electroencephalogram-basedmotorimagerysignalsclassificationusingamulti-branch
+convolutionalneuralnetworkmodelwithattentionblocks[J].Bioengineering(Basel), 2022,9(7):323.
+[31]MA Weifeng,XUEHaojie,SUN Xiaoyong,etal.A novelmulti-branchhybridneuralnetworkformotorimageryEEG signal
+classification[J].BiomedicalSignalProcessingandControl,2022,77:103718.
+12 山 东 大 学 学 报 ( 理 学 版) 第 60卷
+[
+( 编辑: 陈丽萍)
+万方数据

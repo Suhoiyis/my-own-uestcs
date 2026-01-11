@@ -1,0 +1,338 @@
+现代电子技术
+Modern Electronic Technique
+Sep. 2025 Vol. 48 No. 18
+2025 年 9 月 15 日 第 48 卷第 18 期
+0引言
+脑机接口(Brain⁃Computer Interface, BCI)系统可以 将脑电信号解码成计算机设备可识别的指令,进而实现 大脑活动与外部设备的交互[1⁃2]。BCI 的应用领域广泛, 包括临床诊断、康复治疗和脑功能研究等。BCI 的应用
+首先需要获取脑电(Electroencephalography, EEG)信号, 常 见 的 EEG 信 号 实 验 范 式 包 括 运 动 想 象(Motor
+Imagery, MI)、稳 态 视 觉 诱 发 电 位(Steady State Visual
+Evoked Potential, SSVEP)和 P300[3]。 MI 是 通 过 想 象 而
+不进行实际动作向大脑发送指令,通过解析 MI 信号可
+以实现对大脑认知活动的精确识别。BCI 中信号处理
+部分是重要组成之一,主要包括预处理、特征提取、特征
+分类三个方面。传统 MI⁃EEG 分类算法主要是提取信
+号 的 时 频 域 特 征 、空 域 特 征 以 及 非 线 性 特 征 ,然 后 使 用
+单域特征或多域融合特征输入到分类器当中进行分
+类
+[4]。 时 频 域 特 征 提 取 算 法 主 要 包 括 小 波 包 变 换[5]、功
+率 谱 密 度[6]和 傅 里 叶 变 换[7]等 。 共 空 间 模 式[8]作 为 一 种
+常 用 的 空 域 特 征 方 法 ,通 过 矩 阵 的 对 角 化 ,找 到 一 组 最
+优空间滤波器并进行投影,使得两类信号的方差值差异
+最大化,从而得到具有较高区分度的特征向量。虽然传
+统机器学习方法在二分类领域取得了不错的成效,但这
+DOI:10.16652/j.issn.1004⁃373x.2025.18.024
+引用格式:谷学静,周记帆,郭志斌 . 融合注意力的双分支时空卷积脑电识别网络[J]. 现代电子技术,2025,48(18):159⁃164.
+融合注意力的双分支时空卷积脑电识别网络
+谷学静 1,2,周记帆 1,2,郭志斌 1,2
+(1. 华北理工大学 电气工程学院,河北 唐山 063000;2. 唐山市数字媒体工程研究中心,河北 唐山 063000)
+摘 要:针对运动想象脑电信号特征表达能力弱、分类识别准确率低等问题,提出一种融合注意力机制的双分支时空 卷积运动想象识别网络。为解决数据量少的问题,提出一种改进的滑动窗口技术进行数据增强;然后将数据输入到特征提 取网络中,采用双分支结构同时提取时间和空间特征。时间分支上,采用多尺度时序卷积提取不同尺度下的时间特征;空间 分支上,使用深度可分离卷积提取深层次的空间特征。最后,采用注意力机制为融合特征动态分配权重。与其他方法的对 比结果表明,所提出的网络模型具有较好的分类性能和泛化能力。 关键词:脑电信号;运动想象;多尺度时序卷积;双分支结构;数据增强;注意力机制
+中图分类号:TN911.7⁃34 文献标识码:A 文章编号:1004⁃373X(2025)18⁃0159⁃06
+Dual⁃branch spatio⁃temporal convolution EEG recognition network integrating attention
+GU Xuejing1, 2, ZHOU Jifan1, 2, GUO Zhibin1, 2
+(1. College of Electrical Engineering, North China University of Science and Technology, Tangshan 063000, China;
+2. Tangshan Digital Media Engineering Technology Research Center, Tangshan 063000, China)
+Abstract:In allusion to the problems of weak feature expression of motor image (MI) electroencephalography (EEG) signals
+and low accuracy of classification and recognition, a dual⁃branch spatio⁃temporal convolutional motor imagery recognition network
+integrating attention mechanism is proposed. In order to address the problem of few data, an improved sliding window technology
+is proposed for the data augmentation. The data is fed into the feature extraction network, and the dual⁃branch structure is used
+to simultaneously extract the feature in both temporal and spatial aspects. On the temporal branch, multi ⁃ scale temporal
+convolution is used to extract temporal features at different scales. On the spatial branch, deep spatial features are used to extract
+depth ⁃ separable convolution. The attention mechanism is used to dynamically assign weights to the fused features. The
+comparison results with other methods show that the proposed network model has better classification performance and
+generalization ability.
+Keywords: EEG signal; motor imagery; multi ⁃ scale temporal convolution; dual ⁃ branch structure; data augmentation;
+attention mechanism
+收稿日期:2024⁃08⁃14 修回日期:2024⁃10⁃18
+基金项目:唐山市沉浸式虚拟环境基础仿真团队项目(18130221A)
+159
+159
+
+
+现代电子技术 2025 年第 48 卷
+些方法往往依赖于特征工程,会造成特征的遗漏或出现 冗 余 特 征 ,特 别 在 面 临 高 维 数 据 时 容 易 受 到 维 度 的 影 响,难以进一步挖掘 EEG 信号中的深层次特征。 随着深度学习技术的快速发展,尤其是卷积神经网
+络(Convolution Neural Network, CNN)在 图 像 和 语 音 识 别领域的成功应用,研究者开始将 CNN 应用到脑电信 号识别领域[9]。CNN 采用端到端的模式,可以从 MI 数据 中 自 动 提 取 特 征 ,无 需 人 工 干 预 ,有 效 提 高 了 模 型 的 泛 化能力和准确率,不仅减少了机器学习中复杂的预处理 步 骤 ,而 且 处 理 高 维 数 据 时 具 有 优 势 ,一 定 程 度 上 提 高 了 模 型 的 效 率 。 文 献 [10] 提 出 了 一 个 参 数 量 较 小 的 EEGNet 模 型 ,在 多 个 BCI 范 式 中 表 现 出 了 良 好 的 泛 化 能力。文献[11]提出了 DTP⁃Net,首次在神经网络中应 用 时 间 金 字 塔 ,能 够 有 效 提 取 多 尺 度 特 征 并 降 低 噪 声 。 文献[12]提出了一种基于图形卷积神经网络的深度学习 框架,以增强不同类型 MI 任务期间原始信号的解码能
+力。文献[13]提出了 EEG⁃inception 模型,通过将处理图 像的模型应用到 EEG 时间序列中 ,提取脑电信号的时 间 特 征 ,并 在 网 络 中 添 加 残 差 块 以 防 止 学 习 退 化 。 但 是,此方法受限于卷积核大小,CNN 只能从局部感受野 接 收 信 息 ,忽 略 了 长 程 时 间 依 赖 关 系 。 文 献 [14] 提 出 了 基于时间注意力的 ATCNet 模型,通过添加注意力机制 的时间卷积网络进行轻量化设计,提高了 MI 的分类性 能。虽然以上方法在解码性能上有所提高,但未能将注 意力机制与 EEG 信号的时空特征结合起来。 考虑到 MI⁃EEG 信号中的多模态信息,本文提出了 一种融合注意力机制的双分支时空卷积脑电特征识别 网络。该网络采用双分支结构,分别通过多尺度时序卷 积层、深度可分离卷积层同时捕捉 MI 信号中的时空信
+息,并结合注意力机制(Attention Mechanism)来增强关 键特征的学习,从而提高分类的准确性,最后在 BCI 竞 赛 IV2a 数据集和 HGD 数据集上进行验证。
+1 数据集与预处理
+1.1 数据集介绍
+本文采用的第一个数据集是来自 2008 年 BCI 竞赛 的 IV2a 数据集。实验共有 9 名被试,每个被试在不同天
+做了 2 个 session,每个 session 有 6 个 runs,每个 runs有 48 个 trials,一共 288 次测试。在每一次测试中受试者面对屏 幕 ,测 试 开 始 时 会 伴 随 着 提 示 音 ,屏 幕 上 会 出 现 一 个 固 定的十字。2 s 后,屏幕上会出现一个指向左、右、上、下 的箭头,分别对应左手运动、右手运动、双脚运动和舌头 运动,提示受试者进行运动想象。数据采集 MI 的时间 为 4 s,每个受试者根据箭头提示完成想象任务直到十
+字消失,之后进行短暂的休息。本文实验中数据全部使 用 4 种标签数据,2a 数据集实验范式图如图 1 所示。
+图 1 2a 数据集实验范式
+本文的第二个数据集是 HGD 数据集,该数据集一 共 有 14 名 被 试 ,数 据 共 有 4 种 标 签 ,分 别 为 左 手 、右
+手 、双 脚 和 休 息 。 每 个 session 有 13 个 runs,每 个 runs 有 80 个 trials,一 共 1 040 次 实 验 ,具 体 实 验 细 节 参 考
+文 献 [15] 。
+1.2 数据预处理
+受试者在进行感觉运动相关活动时,会出现事件相 关去同步现象和事件相关同步现象,在实验过程中通常 利用这两个现象下特定频段的信号对 MI 信号进行识 别 。 2a 数 据 集 一 共 有 25 个 通 道 ,其 中 22 个 为 EEG 通 道,3 个为 EOG 通道,信号采样频率为 250 Hz。HGD 数 据集一共有 128 个通道,采样频率为 500 Hz。EEG 信号 中常常包含来自头部运动和眼动的伪影,本文使用独立 成分分析去除伪影部分。为了提高 EEG 信号的信噪
+比,使用 4 阶 Butterworth 滤波器对 8~30 Hz 的信号进行 带通滤波处理和 50 Hz 的陷波滤波处理。两个数据集 在每次实验中均使用 4.5 s 时间窗口。
+2 方法实现
+BCI 系统需要建立一个实时性好、准确率高、泛化 能力强的模型,从而满足在实际应用过程中的需求。虽 然传统机器学习模型在二分类方面取得了很高的分类 结 果 ,但 这 些 模 型 依 赖 人 工 提 取 特 征 ,以 及 在 处 理 大 规 模数据时存在效率不高的问题。针对上述问题,本文提 出的模型可以从时域和空域充分提取特征信息,以实现 对不同类别的准确识别。本文所提模型主要由三部分 组 成 ,网 络 总 体 框 架 如 图 2 所 示 。 首 先 是 数 据 增 强
+(Data Augmentation, DA)部 分 ,为 模 型 创 建 多 样 化 数 据,防止模型过拟合;然后是双分支时空网络模块,同时 对时间和空间两方面进行特征提取,随后将特征进行融 合 并 输 入 到 注 意 力 层 ,以 对 不 同 特 征 分 配 权 重 ;最 后 经 过平均池化层和 Dropout 层,将结果输入到全连接层进 行分类。
+2.1 数据增强
+EEG 数 据 采 集 难 度 大 且 耗 时 长 ,导 致 EEG 训 练 数 据集有限。在深度学习中,数据增强是一种在不实质性 增 加 数 据 的 情 况 下 ,让 有 限 的 数 据 产 生 更 多 的 数 据 价
+160
+
+
+第 18 期
+值,以此来提高模型的泛化能力和鲁棒性的技术。通过 增加数据集的大小,可以减少模型对训练数据的过度拟 合 ,防 止 网 络 学 习 一 些 不 相 关 的 特 征 ,从 而 在 测 试 集 上 获得更好的性能。本文采用滑动窗口(Sliding Window, SW)技术来实现数据增强。首先确定时间窗口大小,太
+小会无法捕捉所有相关信息,太大可能会包含不相关信 息 ,故 本 文 将 设 计 好 的 窗 口 在 序 列 数 据 上 进 行 滑 动 ,步 长设置为 10,每次以固定步长移动,通过随机组合不同 的滑动窗口的数据来合成新的样本,以此增加数据集的 大小。滑动窗口技术原理图如图 3 所示。
+图 2 本文模型网络框架
+图 3 滑动窗口技术原理
+2.2 多尺度时序卷积
+MI⁃EEG 作 为 一 种 时 间 序 列 ,具 有 非 周 期 性 、非 线
+性、时变复杂等特点,在时间方面具有丰富的信息,但单
+一 尺 度 的 卷 积 核 感 受 野 太 小 ,无 法 充 分 提 取 MI 特 征 。
+本文设计了多尺度时序卷积模块(Multi⁃scale Temporal
+Convolution Module, MTCM),通过并行设计 3 个不同的
+二 维 卷 积 核 ,在 不 同 尺 度 上 对 数 据 进 行 处 理 ,从 而 增 加
+模 型 对 输 入 的 感 受 野 ,以 捕 捉 数 据 中 的 局 部 和 全 局 特
+征。激活函数选择 ReLU。
+MTCM 中 的 3 个 卷 积 核 大 小 分 别 为 1×15、1×25 和
+1×51,使 模 型 能 够 更 好 地 理 解 和 捕 捉 时 间 序 列 数 据 中
+的长期时间依赖关系和时域上的信息。最后得到不同
+尺 度 下 的 特 征 图 ,将 不 同 尺 度 的 特 征 图 进 行 拼 接 ,形 成
+一个多尺度特征张量。本文所提模型中 MTCM 架构如
+图 4 所示。
+图 4 多尺度时序卷积模块架构
+2.3 深度可分离卷积
+在空间分支方面,本文采用深度可分离卷积作为该
+卷 积 层 的 主 要 组 件 ,进 行 空 间 方 面 特 征 提 取 ,以 更 好 地
+捕捉通道之间和空间位置之间的特征关系。在 MI 分类
+过程中,一次 MI 任务与多个通道有关,因此在特征提取
+时,需要进行逐通道卷积来捕捉重要信息。深度可分离
+卷积是一种将标准卷积分解为深度卷积和逐点卷积两
+个步骤的卷积操作,这样的分解使得网络能够在保持特
+征图尺寸不变的情况下有效地减少参数数量,从而提高
+模型的效率和泛化能力。深度卷积对于每个输入通道,
+使用一个独立的卷积核进行卷积操作,对输入的 MI 数
+据进行空间特征提取;逐点卷积将深度卷积的输出作为
+输 入 ,将 组 合 所 有 深 度 卷 积 的 输 出 ,从 而 捕 捉 不 同 通 道
+之间的相互关系。本文在空间分支中使用了二维卷积
+操作,特征图大小为 32,卷积层之后是归一化层,激活
+函数选择 ReLU 函数,采用平均池化层以减少特征维度
+和 增 加 模 型 的 感 受 野 。 平 均 池 化 是 沿 着 核 大 小(1,50)
+的 时 间 维 度 进 行 的 ,经 过 双 分 支 时 空 卷 积 处 理 后 ,将 输
+出特征输入到自注意力机制模块,以提高模型对输入数
+据的抽象能力和表达能力。
+谷学静,等:融合注意力的双分支时空卷积脑电识别网络 161
+
+
+现代电子技术 2025 年第 48 卷
+2.4 注意力机制
+注意力机制模拟了人类对外界刺激的注意力分配 机 制 ,旨 在 自 动 学 习 并 强 调 特 征 中 的 关 键 信 息 ,从 而 增 强分类性能。通过对时空信息中的不同特征进行动态 调整,以便网络更加关注那些对于运动想象识别任务而 言更为关键的特征。自注意力机制中的注意力权重公 式 如 式(1)所 示 ,每 个 特 征 的 权 重 是 由 查 询(Query)、键 (Key)、值(Value)组 成 ,通 过 Q、K、V 这 3 个 矩 阵 计 算 每个注意力头的权重。
+Attention (Q,K,V ) = Softmax ( )
+QK T dk V (1)
+式 中 :Softmax 是 激 活 函 数 ; dk 是 Q、K 矩 阵 的 列 数 ,即
+向量维度。
+3 实验及结果分析
+3.1 实验相关设置
+本文所有实验在基于 Linux 的服务器上运行,处理
+器 为 Intel Xeon Platinum 8255C CPU 2.5 GHz,配 备
+NVIDIA GTX 2080 Ti GPU。使用 PyTorch 1.7 和 Python
+3.7 搭 建 深 度 学 习 模 型 ,使 用 MNE 库 对 数 据 进 行 预 处
+理。在训练过程中采用 10 折交叉验证,数据集被随机
+打 乱 ,80% 划 分 为 训 练 集 ,20% 划 分 为 测 试 集 。 模 型
+Epoch 参 数 设 置 为 500,Batch size 大 小 设 置 为 10,学 习
+率设置为 0.001,优化函数为 Adam,激活函数为 ReLU 函
+数。训练采用早停法,当连续 20 轮没有改进且损失变
+化小于阈值,便停止训练,保存最优模型。
+3.2 实验结果分析
+为 了 对 模 型 进 行 全 面 评 估 ,本 文 采 用 准 确 率(Acc)
+和 Kappa 系数这两个指标进行综合评价,将本文模型与
+FBCSP[16]、EEGNet、DeepConvNet[17]、FBCNet[18]、ATCNet 等
+5 种分类方法进行对比。每个被试均实验 10 次,结果取
+平均。2a 数据集分类结果如表 1 所示。
+模型
+FBCSP
+EEGNet
+DeepConvNet
+FBCNet
+ATCNet
+本文模型
+被试 10 次分类结果的准确率/%
+1
+79.5
+85.9
+78.3
+86.4
+88.6
+88.1
+2
+55.1
+62.2
+52.4
+56.7
+67.2
+67.9
+3
+88.3
+93.7
+95.8
+96.9
+94.9
+96.2
+4
+59.9
+70.1
+58.7
+78.4
+72.0
+75.5
+5
+50.6
+52.5
+53.1
+63.5
+66.7
+84.4
+6
+61.5
+68.4
+64.5
+59.0
+68.2
+82.6
+7
+65.8
+71.6
+68.6
+82.5
+87.8
+90.3
+8
+81.2
+81.4
+92.2
+86.8
+94.4
+95.0
+9
+73.7
+68.5
+73.6
+81.0
+85.6
+88.6
+9 名被试 平均分类 准确率/%
+68.4
+72.7
+70.8
+76.8
+80.6
+85.4
+Kappa 系数
+0.58
+0.65
+0.63
+0.68
+0.73
+0.80
+表 1 2a 数据集分类结果
+表 1 中,第 2~10 列表示当前被试在不同模型下的分
+类准确率,最后一列为平均 Kappa 值,每个被试最高结
+果用加粗表示。从表中可以看出,本文方法在每名被试
+上均取得了最佳或者次佳准确率。FBCSP 是一种基于
+CSP 改进的机器学习分类方法,该方法通过频带划分寻
+找 最 优 滤 波 器 ,从 而 提 取 空 间 特 征 ;再 采 用 支 持 向 量 机
+进行分类,最终平均分类准确率只有 68.4%,各项指标
+均 低 于 深 度 学 习 方 法 ,准 确 率 比 本 文 方 法 低 17%。
+EEGNet 作 为 经 典 模 型 ,平 均 分 类 准 确 率 只 有 72.7%。
+DeepConvNet 采用深度卷积网络对 MI 数据进行特征提
+取,平均分类准确率达到了 70.8%,但可能是卷积层数
+过深,导致过度拟合。FBCNet 通过多个窄带滤波器获
+得不同频带的 MI 数据,通过 Depthwise 卷积层获得空间
+信息,但其在 2a 数据集上平均准确率只有 76.8%,比本
+文方法低了 8.6%。ATCNet 是一个基于注意力的时间卷
+积网络,平均准确率为 80.6%,高于其他未添加注意力
+机制的模型。本文方法所有被试的平均分类准确率为
+85.4%,与 其 他 深 度 学 习 方 法 相 比 ,所 提 网 络 拥 有 更 好
+的结果,但被试 3 分类准确率结果最高为 96.2%,被试 2
+结果略差,为 67.9%。原因可能是在脑电信号采集过程
+中 存 在 噪 声 干 扰 ,影 响 采 集 的 信 号 质 量 ,在 训 练 过 程 中
+无法得到最佳特征。Kappa 系数用来衡量模型一致性,
+数 值 越 高 代 表 越 与 实 际 情 况 相 同 ,本 文 Kappa 系 数 为
+0.80,高于其他算法,可知模型具有良好的一致性。
+3.3 消融实验分析
+为了解滑动窗口技术和注意力机制在整个模型中
+的作用 ,分别去除 DA、线性注意力机制(LA)和同时去
+除 LA 和 DA,将本文网络作为基本网络与上述方案进行
+162
+
+
+第 18 期
+实验对比,每名被试的分类结果如图 5 所示。从图 5 中 可以看出,DA 与注意力机制在提高分类性能方面效果 显著,有数据增强相比于不添加数据增强的平均分类准 确率提高了 3.1%,说明数据增强的能够有效避免网络 过拟合,提高网络性能与泛化能力。在添加注意力机制 之后,总体平均准确率提高了 8.6%,表明注意力机制可 以更好地帮助模型聚焦重要的部分,忽略无关信息。
+图 5 消融实验结果
+3.4 模型稳定性分析
+为进一步验证本文方法的稳定性与泛化能力,将本 文网络应用在 HGD 数据集上,所得准确率结果如图 6 所 示 。 通 过 图 6 中 结 果 可 知 ,被 试 3 分 类 准 确 率 最 高 为 99.3%,被试 11 最低分类准确率为 80.6%,这可能是信号 采集质量不佳,无法充分提取特征所致。综合计算可知, 平均分类准确率为 91.3%,由此可见,本文算法具有良好 的分类能力和泛化能力。
+图 6 HGD 数据集分类结果
+为了更加直观地了解本文网络在 HGD 数据集上 4 个类别的分类结果,绘制了如图 7 所示的混淆矩阵,其 中 纵 轴 表 示 真 实 标 签 ,横 轴 代 表 模 型 预 测 标 签 ,图 中 数 值为每个任务的分类准确率,对角线结果代表该任务的 召 回 率 。 从 图 中 可 以 看 出 ,右 手 分 类 结 果 最 好 ,为 97%。综上所述,本文网络模型对不同数据集和分类任 务具有良好的自适应性和鲁棒性。
+图 7 HGD 分类混淆矩阵
+4结语
+本文提出了一种融合注意力机制的双分支时空卷 积网络,用于 MI⁃EEG 识别。针对脑电信号数据缺乏的 问题,采用了滑动窗口的方法进行数据增强。本文采用 双分支结构同时提取不同尺度下的时间特征和深度空 间 特 征 ,然 后 通 过 自 注 意 力 层 进 一 步 识 别 关 键 特 征 ,得 到具有时空信息增强的特征图。最后在 BCI 竞赛 IV2a 和 HGD 数 据 集 上 进 行 验 证 ,平 均 分 类 准 确 率 分 别 为 85.4% 和 91.3%。实验结果表明,相比于其他深度学习 方 法 ,本 文 模 型 具 有 更 好 的 分 类 性 能 、稳 定 性 和 泛 化 能 力。在未来研究中 ,希 望 将 现 有 成 果 为 脑 机 接 口 技 术 的 发 展 和 应 用 带 来 更 多 的 突 破 和 进 步 ,为 医 疗 和 康 复 领域做出更大的贡献。
+注:本文通讯作者为周记帆。
+参考文献
+[1] VÄRBU K, MUHAMMAD N, MUHAMMAD Y. Past, present,
+and future of EEG ⁃ based BCI applications [J]. Sensors, 2022,
+22(9): 3331.
+[2] 任玲玲,王力,黄学文,等 . 基于注意力与多尺度的 4 类脑电信
+号解码[J]. 科学技术与工程,2022,22(34):15180⁃15187.
+[3] 陈黎,龚安民,丁鹏,等 . 基于欧式空间⁃加权逻辑回归迁移学 习的运动想象 EEG 信号解码[J]. 南京大学学报(自然科学),
+2022,58(2):264⁃274.
+[4] FAN C C, YANG H, HOU Z G, et al. Bilinear neural network
+with 3 ⁃ D attention for brain decoding of motor imagery
+movements from the human EEG [J]. Cognitive neurodynamics,
+2021, 15: 181⁃189.
+[5] 陈万忠,王晓旭,张涛 . 基于可调 Q 因子小波变换的识别左右 手运动想象脑电模式研究[J]. 电子与信息学报,2019,41(3):
+530⁃536.
+[6] 赵德春,沈利豪,蒋宇皓,等 . 基于共空间模式和功率谱密度的
+脑电信号分类[J]. 科学技术与工程,2023,23(10):4272⁃4278. [7] 衡玮,徐自强,陈璐瑶,等 . 基于脑电波监测智能助睡眠耳机设
+谷学静,等:融合注意力的双分支时空卷积脑电识别网络 163
+
+
+现代电子技术 2025 年第 48 卷
+计[J]. 计算机应用与软件,2020,37(8):219⁃226.
+[8] LI Y, WANG Q, WANG T, et al. Feature extraction of EEG
+signals based on local mean decomposition and fuzzy entropy
+[J]. International journal of pattern recognition and artificial
+intelligence, 2020, 34(12): 2058017.
+[9] KHADEMI Z, EBRAHIMI F, KORDY H M. A review of
+critical challenges in MI ⁃ BCI: from conventional to deep
+learning methods [J]. Journal of neuroscience methods, 2023,
+383: 109736.
+[10] LAWHERN V J, SOLON A J, WAYTOWICH N R, et al.
+EEGNet: a compact convolutional neural network for EEG ⁃
+based brain ⁃ computer interfaces [J]. Journal of neural
+engineering, 2018, 15(5): 056013.
+[11] PEI Y, XU J, CHEN Q, et al. DTP ⁃ Net: learning to
+reconstruct EEG signals in time ⁃ frequency domain by multi ⁃
+scale feature reuse [J]. IEEE journal of biomedical and health
+informatics, 2024, 28(5): 12.
+[12] HOU Y M, JIA S Y, LUN X M, et al. GCNs ⁃ net: a graph
+convolutional neural network approach for decoding time ⁃
+resolved EEG motor imagery signals [J]. IEEE transactions on
+neural networks and learning systems, 2024, 35(6): 7312⁃7323.
+[13] ZHANG C, KIM Y K, ESKANDARIAN A. EEG⁃inception: an
+accurate and robust end⁃to⁃end neural network for EEG⁃based
+motor imagery classification [J]. Journal of neural engineering,
+2021, 18(4): 046014.
+[14] INGOLFSSON T M, HERSCHE M, WANG X, et al. EEG ⁃
+TCNet: an accurate temporal convolutional network for
+embedded motor ⁃ imagery brain ⁃ machine interfaces [C]// 2020
+IEEE International Conference on Systems, Man, and
+Cybernetics (SMC). [S.l.]: IEEE, 2020: 2958⁃2965.
+[15] ALTAHERI H, MUHAMMAD G, ALSULAIMAN M. Physics ⁃
+informed attention temporal convolutional network for EEG ⁃
+based motor imagery classification [J]. IEEE transactions on
+industrial informatics, 2022, 19(2): 2249⁃2258.
+[16] ANG K K, CHIN Z Y, WANG C, et al. Filter bank common
+spatial pattern algorithm on BCI competition IV datasets 2a
+and 2b [J]. Frontiers in neuroscience, 2012, 6: 21002.
+[17] SCHIRRMEISTER R T, SPRINGENBERG J T, FIEDERER L
+D J, et al. Deep learning with convolutional neural networks
+for EEG decoding and visualization [J]. Human brain
+mapping, 2017, 38(11): 5391⁃5420.
+[18] MANE R, CHEW E, CHUA K, et al. FBCNet: a multi ⁃ view
+convolutional neural network for brain⁃computer interface [EB/
+OL]. [2023⁃01⁃12]. https://arxiv.org/abs/2104.01233.
+作者简介:谷学静(1972—),女,河北唐山人,博士研究生,教授,研究方向为虚拟现实、脑机接口。 周记帆(2000—),男,河南新乡人,硕士研究生,研究方向为脑机接口及模式识别。 郭志斌(1999—),男,山东泰安人,硕士研究生,研究方向为运动想象识别。
+164

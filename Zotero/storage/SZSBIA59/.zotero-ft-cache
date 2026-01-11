@@ -1,0 +1,283 @@
+2021⁃ 04⁃ 10 计算机应用,
+Journal of Computer Applications 2021, 41( 4) : 1042 - 1048
+ISSN 1001⁃9081 CODEN JYIIDU http://www. joca. cn
+基于深度卷积网络的运动想象脑电信号模式识别
+霍首君,郝 琰,石慧宇,董艳清,曹 锐*
+(太原理工大学 软件学院,山西 晋中 030600) ( ∗ 通信作者电子邮箱 caorui@tyut. edu. cn)
+摘 要:针对运动想象脑电信号(MI-EEG)分类准确率普遍偏较低的问题,引入基于深度框架的卷积神经网络模 型(CNN)。首先,使用短时傅里叶变换(STFT)和连续小波变换(CWT)得到两种不同解析度下的时频信息;然后将其 与电极通道位置信息相结合并以三维张量的形式作为 CNN 的输入;其次,设计了两种基于不同卷积策略的网络模型 MixedCNN 和 StepByStepCNN 来分别对两种形式的输入进行特征提取和分类识别;最后,针对因训练集样本过少而易 发生的过拟合问题,引入 mixup 数据增强策略。在 BCI Competition II dataset III数据集上的实验结果表明,CWT 得到 的样本集通过 mixup 数据增强后送入 MixedCNN 网络训练出的模型的识别准确率最高(93. 57%),相较于另外四种分 析方法:公共空间模式(CSP)+支持向量机(SVM)、自适应自回归模型(AAR)+线性判别分析(LDA)、离散小波变换 (DWT)+长短期记忆网络(LSTM)、STFT+堆栈自编码器(SAE)分别提高了 19. 1%、20. 2%、11. 7% 和 2. 3%。所提方法 可以为 MI-EGG 分类任务提供参考。 关键词:脑机接口;运动想象;时频分析;卷积神经网络;数据增强;深度学习;脑电信号;模式识别 中图分类号:TP242 文献标志码:A
+Pattern recognition of motor imagery EEG based on deep convolutional network
+HUO Shoujun,HAO Yan,SHI Huiyu,DONG Yanqing,CAO Rui* (College of Software, Taiyuan University of Technology, Jinzhong Shanxi 030600, China)
+Abstract: Concerning the low classification accuracy of Motor Imagery ElectroEncephaloGram (MI-EEG),a new Convolutional Neural Network (CNN) model based on deep framework was introduced. Firstly,the time-frequency information under two resolutions was obtained by using Short-Time Fourier Transform (STFT) and Continuous Wavelet Transform(CWT). Then,it was combined with the channel position information and used as the inputs of the CNN in the form of three-dimensional tensor. Secondly, two network models based on different convolution strategies, namely MixedCNN and StepByStepCNN,were designed to perform feature extraction and classification recognition of the two types of inputs. Finally,in order to solve the problem of overfitting due to insufficient training samples,the mixup data augmentation strategy was introduced. Experimental results on BCI Competition II dataset III showed that the model performed highest accuracy by training the CWT samples reconstructed by mixup data augmentation on MixedCNN (93. 57%),which was 19. 1%,20. 2%,11. 7% and 2. 3% higher than those of the other four analysis methods including Common Spatial Pattern (CSP)+ Support Vector Machine(SVM),Adaptive Autoregressive Model(AAR)+ Linear Discriminant Analysis(LDA), Discrete Wavelet Transform (DWT) + Long Short-Term Memory (LSTM),STFT + Stacked AutoEncoder (SAE). The proposed method can provide a reference for MI-EEG classification tasks. Key words: Brain-Computer Interface (BCI); motor imagery; time-frequency analysis; Convolutional Neural Network (CNN); data augmentation; deep learning; ElectroEncephaloGram (EEG); pattern recognition
+0 引言
+脑机接口(Brain-Computer Interface,BCI)是不依赖于肌 肉组织和外围神经,在大脑与外部电子设备之间建立的一种 新型信息传输通道的装置。头皮脑电信号
+(ElectroEncephaloGram,EEG)因 其 具 有 较 高 的 时 间 分 辨 率 、 较好的便携性以及非侵入式的优势,现已成为解码大脑认知
+活动最有效的数据来源之一。基于 EEG 的运动想象脑机接 口(Motor Imagery Brain-Computer Interface,MI-BCI)属于自发 型脑机接口类别,其目的在于准确地辨认出用户的肢体运动 意图,常见的包括左手、右手、双脚以及舌头运动的想象[1-2], 这对于医疗康复[3]、休闲娱乐[4]等领域具有重要意义。 运动想象脑电信号识别任务的传统研究方法首先需要对 EEG 信号进行预处理,随后选择合适的方法提取不同认知状
+文章编号:1001-9081(2021)04-1042-07 DOI:10. 11772/j. issn. 1001-9081. 2020081300
+收稿日期:2020⁃08⁃25;修回日期:2020⁃09⁃23;录用日期:2020⁃10⁃14。
+基金项目:国家自然科学基金资助项目(61672374);山西自然科学基金资助项目(201901D111093)。 作者简介:霍首君(1994—),男,山西运城人,硕士研究生,主要研究方向:深度学习、脑机接口; 郝琰(1996—),男,山西太原人,硕士研究 生,主要研究方向:脑科学、人工智能; 石慧宇(1996—),男,山西大同人,硕士研究生,主要研究方向:脑科学、人工智能; 董艳清(1998—), 女,山西运城人,硕士研究生,主要研究方向:脑科学、人工智能; 曹锐(1982—),男,山西太原人,副教授,博士,CCF 会员,主要研究方向:脑科 学、人工智能、虚拟现实。
+
+
+第 4 期 霍首君等:基于深度卷积网络的运动想象脑电信号模式识别
+态下的脑电特征并挑选出最具识别性的特征子集[5-6],最后通 过机器学习方法完成对运动想象脑电信号的识别工作。比如 Kevric 等[7]利用小波包分解子带中提取的高阶统计特征结合 多 尺 度 主 成 成 分 分 析(Multiscale Principal Component Analysis,MSPCA)的降噪方法,在 BCI Competition III dataset IVa 数据集上得到了 92. 8% 的平均识别准确率。Baig 等[8]首 先利用公共空间模式(Common Spatial Pattern,CSP)算法提取 出左右手运动想象状态下的特征集合,然后使用差分进化的 优化算法提取各个被试的最优特征子集,最后送入支持向量 机(Support Vector Machine,SVM)中 构 建 分 类 模 型 ,在 BCI Competition III dataset IVa 数据集上得到了 95% 以上的平均分 类准确率。传统的机器学习和统计方法面对复杂且往往是非 结构化的数据时常常要求一定的特征工程能力,以提取更为 有效的特征或者选择更加合适的模型参数,而深度学习可以 训练出更抽象也更有效的特征来完成端到端[9]的学习任务。 近年来深度学习方法在机器视觉[10-11]和语音识别[12-13]等 领域取得了巨大成功,证明深度学习方法可以很好地找出高 维数据中隐藏的复杂结构。Tabar 等[14]利用短时傅里叶变换 (Short-Time Fourier Transform,STFT)提取出各通道中 μ 和 β 节律的时频信息,并将它们组合成 2D 信息作为网络的输入, 该 网 络 是 由 卷 积 神 经 网 络(Convolutional Neural Network, CNN)和堆栈自编码器(Stacked AutoEncoder,SAE)相结合形 成的深层网络,并通过 SAE 对 CNN 提取到的特征进行分类, 所 提 出 的 方 法 在 BCI Competition IV dataset 2b 数 据 集 上 的 Kappa 值 为 0. 547,相 较 于 竞 赛 第 一 名 有 9% 的 改 进 。 Tang 等[15]提出了一种新型卷积神经网络用于运动想象 EEG 的模 式识别,该网络设置了 2 层卷积层分别负责提取信号序列中 的空间域特征和时间域特征。该文中使用的数据源自浙江大 学自行设计的运动想象实验,每个被试执行左、右手运动想象 任务各 230 次,实验结果表明使用本文提出的新型 CNN 方法 可以获得比传统方法更高的分类精度。 综上所述:1)卷积神经网络避免了复杂的特征提取过程, 且因其具有权值共享和稀疏连接等特性[16],有效地降低了模 型的复杂程度,因此,本文考虑将卷积神经网络引入到运动想 象 脑 电 信 号 的 识 别 任 务 当 中 。 2)以 经 验 风 险 最 小 化 原 则[17] (Empirical Risk Minimization,ERM)作为学习规则的网络模 型,鼓励网络记忆而不是泛化训练数据,特别是当网络在处理 小样本问题时,仅从模型结构上做调整来避免过拟合往往是 不够的,还需要在数据层面作进一步处理。3)深层的网络模 型会构成一个庞大的超参数集合,一直以来由于缺乏求解超 参集最优组合的理论支撑以及足够穷举所有组合的计算资 源,因此需要根据训练样本的特性从不同的角度对超参数的 组合进行尝试,以求达到最优的泛化效果。
+1 数据准备和分类方法
+1. 1 数据集 本文选用 BCI Competition II dataset III运动想象数据集, 该数据集记录了一位正常女性被试共 280 次随机的左右手运 动想象实验,以随机的方式挑选出 140 次实验作为训练集,剩 余的 140 次实验作为测试集,其中训练集包括 70 次左手想象 和 70 次右手想象。整个采集过程以 128 Hz 采样频率记录脑 电信号,并进行 0. 5~30 Hz 带通滤波。数据采集过程中每单次 实验的时间流程如图 1 所示。
+图 1 单次运动想象任务时序图
+Fig. 1 Sequence diagram of single motor imagery task
+每次实验持续时间共 9 s,实验开始之后会有 2 s 准备时 间,在第 3 秒开始时会有短暂的声音提示被试即将执行运动 想象任务,同时屏幕显示一个交叉十字“+”持续时间为 1 s,从 第 4 秒开始屏幕会出现一个箭头,被试通过运动想象拖动反 馈条向箭头指示方向移动,并保持至第 9 秒结束。 1. 2 数据预处理
+人在进行肢体运动想象时大脑的运动感觉皮层中的特定 位置会发生规律性的电位变化[18],当被试进行单侧肢体运动 想象时,大脑对侧皮层中 μ 节律(8~12 Hz)的强度减小,同侧 皮层中 β 节律(12~25 Hz)的强度增加,称为事件相关去同步 (Event Related Desynchronization,ERD)和 事 件 相 关 同 步 (Event Related Synchronization,ERS)现象[19]。这两种现象是 判别不同类型脑电信号的重要依据,其中时频域分析法是最 为高效的分析方法之一[20]。 1. 2. 1 短时距傅里叶变换
+短时距傅里叶变换先将整段时间序列切分成若干等长的 时间片段,再通过傅里叶变换计算出各个时间片段当中的频 谱信息,从而获得各频率成分关于时间的变化。其计算公式 如下:
+S ( f,k) = n = ∑0
+N - 1 s( n ) éë ùû
+W (n - k)e
+j2πfn
+-N (1)
+其中:S (n ) 代表脑电信号的时间序列;W (n ) 表窗口函数;N 代 表记录的时间点总数;k 表示不同时间窗的索引;f 代表信号中 的频率成分;n 代表时间点。公式中要求划分的时间窗口长 度相同,决定了该算法在测量高频成分时表现良好,而在测量 低频成分时往往会伴有失真现象。为有效测量信号中 μ 节律 和 β 节律的变化趋势,本文选用长度为 0. 5 s 的时间窗口配合 Hamming 窗口函数得到的时频矩阵如图 2 所示。最后将 C3、 C4 两个通道上的时频矩阵进行组合,得到 33×35×2 大小的三 维张量作为后续卷积神经网络的输入。 1. 2. 2 连续 Morlet 小波变换 Morlet 小 波 变 换 属 于 连 续 型 小 波 变 换(Continuous Wavelet Transform,CWT),它以有限长度且会衰减的小波作 为基底来测量信号中各个频率成分强度随时间的变化,其公 式如下:
+W ( a,b) = ∫-∞
+∞ x(t) 1
+a ψ( )
+t-b
+a dt (2)
+其中:x ( t) 代表信号序列;ψ ( t) 代表小波基底;t 代表时间点;参 数 a 控制小波函数的伸缩,当 a 从小到大取值时,小波函数逐 渐变宽,于是可以更好地对低频成分作出测量,并且通过对参 数 b 的调整控制小波函数的平移进而得到不同时域位置上各 个频带的强度信息。Morlet 小波中心时间和时域跨度的计算 公式如下:
+ψ( x) = e-x2 cos( )
+π2
+ln2 x (3)
+1043
+
+
+第 41 卷
+计算机应用
+t
+0 = ∫-∞
+∞ t| ψ ( t) |2 dt
+∫
+-∞
+∞ | ψ ( t) |2dt
+(4)
+Δtψ = ∫-∞
+∞ ( t - t0 )2 | ψ ( t) |2 dt
+∫
+-∞
+∞ | ψ ( t) |2 dt
+(5)
+中心频率和频带宽度的计算公式如下:
+ω
+0 = ∫-∞
+∞ ω| Ψ ( ω) |2 dω
+∫
+-∞
+∞ | Ψ ( ω) |2 dω
+(6)
+Δωψ = ∫-∞
+∞ ( ω - ω0 )2 | Ψ ( ω) |2 dω
+∫
+-∞
+∞ | Ψ ( ω) |2 dω
+(7)
+其中:Ψ ( ω) 是 ψ ( t) 经过傅里叶变换以后得到的频率成分信
+息。由式(3)~(7)可知,小波变换在测量高频成分时,由于使 用的小波较窄,可以获得较小的时域跨度,但相应地会使频域 跨度变大,因此在输出的时频矩阵中,高频部分频率维度的解 析度相对偏低,低频部分则正好相反。本文使用 Morlet 小波 变换得到的结果如图 3 所示。同样地,将 C3、C4 通道位置信 息进行整合,得到大小为 35×1 152×2 的样本矩阵作为神经网 络的输入。
+2 卷积神经网络的构建
+2. 1 网络拓扑结构
+为了能够训练出同时间、频率和空间三个维度均相关的
+高阶特征,构建出的 CNN 模型如图 4 所示。为方便后续讨论
+称该网络为 MixedCNN。
+具体的拓扑描述如下:
+Input 输入层接收的样本尺寸为 F×T×C。
+C1 卷积层使用的卷积核大小为 3×3×2,经该层卷积运算
+后共向外输出 64 个特征矩阵。
+C2 卷积层使用的卷积核大小为 3×3×64,并向后输出 64
+个特征矩阵。
+Pool 池化层用于对 C2 层的输出进行降采样操作以缩减
+模型的计算规模,池化窗口大小为 2×2。
+FC1 和 FC2 全连接层分别包含 600 和 300 个神经元,为避
+免出现过拟合现象,引入 50% 的 Dropout 策略,使用的激活函
+数为 ReLu。
+Output 层仅共包含 2 个神经元,代表网络的 2 类输出结果
+(左手运动想象、右手运动想象)。
+为了避免在同一个卷积核内混入不同维度的信息,本文 另外设计了一套可以依次对空、时、频三个维度的特征进行提 取的网络模型如图 5 所示。为方便后续讨论将该网络记作
+StepByStepCNN。
+具体的网络拓扑描述如下: Input 输入层接收的样本尺寸为 F×T×C。 C1 卷积层使用大小为 1×1×2 的卷积核对 C3、C4 通道的空 间信息进行整合,并向后层输出 4 个特征矩阵。 C2 卷积层针对 C1 层输出的每一个特征矩阵设计了 16 个 大小为 F×1 的卷积核以提取其频域特征, 共得到 64 个 1×T 大小的特征矩阵。 C3 卷积层使用 16 个大小为 1×6 的卷积核对输入的每张 特征矩阵进行时域上的特征提取。 FC1 和 FC2 分别包含 500 个和 200 个神经元,激活函数选 用 ReLU,且引入了 50% 的 Dropout 机制并最终配合输出层完 成对样本的识别工作。 Output 层仅共包含 2 个神经元,代表网络的 2 类输出结果 (左手运动想象、右手运动想象)。 为方便后续讨论将该网络记作 StepByStepCNN。
+图 2 STFT 运动想象时频图
+Fig. 2 STFT motor imagery time-frequency map
+图 3 CWT 运动想象时频图
+Fig. 3 CWT motor imagery time-frequency map
+1044
+
+
+第 4 期 霍首君等:基于深度卷积网络的运动想象脑电信号模式识别
+2. 2 CNN 的学习过程
+在 MixingCNN 网络中将 F×T×C 的输入张量记作 a(0),网络 中各层的计算描述如下:
+Convolution1:对输入张量执行卷积操作。 as (1) ( i ) = f ( ai (0) ⋅ ws (1) + bs (1) ) (8)
+f ( x) = max ( x,0 ) (9) 其中:上标代表层数;下标 s 和 i 分别代表该卷积层内卷积核 的个数和卷积操作执行的次数;ws (1) 和 bs (1) 分别表示第 s 个卷 积核的权重和偏置;ai (0) 和 ws (1) 均为 3×3×2 大小的矩阵;f ( x) 选 择 ReLU 激 活 函 数 ,输 出 的 每 个 as (1) 特 征 矩 阵 的 维 度 为 F×T。
+Convolution2:对 C1 层的输出数据进行卷积计算: as (2) ( i ) = f ( ai (1) ⋅ ws (2) + bs (2) ) (10)
+f ( x) = max ( x,0 ) (11) 与 C1 卷积层的学习过程类似,ws (2) 和 bs (2) 分别代表 3×3× 64 大小卷积核的权重和偏置。 Pool1:对 C2 的输出执行最大池化操作,最大子采样函数 取区域内所有输出的最大值(max-pooling),输出矩阵的大小 npool 可以由式(12)计算:
+npool = n + 2p - f
+s + 1 (12)
+其中:n 为特征矩阵的原始尺寸;p 为边缘填充数量;f 为池化 窗口的大小;s 代表步长;池化层的输出记为 a(3)。 FC1:该层中每一个神经元均与前一层所有神经元相连 接,负责对训练得到的特征进行分类。 r
+(4) ∼ Bernoulli ( p(4) ) (13) as (4) ( i ) = f ( r(4) ⋅ ai (3) ⋅ ws (4) + bs (4) ) (14)
+f ( x) = max ( x,0 ) (15)
+其中:p(4) 为 Dropout 比例,且该操作仅在训练过程中执行[21];
+ws (4) 和 bs (4) 分别代表输入权重和偏置。 FC2:由于深层结构的网络比相同神经元数量的浅层网 络具有更好的表达非线性关系的能力,为此增加了 FC2 全连 接层,其计算过程和 FC1 完全相同: r
+(5) ∼ Bernoulli ( p(5) ) (16)
+as (5) ( i ) = f ( r(5) ⋅ ai (4) ⋅ ws (5) + bs (5) ) (17)
+f ( x) = max ( x,0 ) (18)
+Output 层是网络的输出层共包含 2 个神经元,其计算公 式为:
+as (6) ( i ) = f ( ai (5) ⋅ ws (6) + bs (6) ) (19) f ( x) = Sigmoid ( x) (20)
+其中:ws (6) 为 FC2 层神经元和 Output 层神经元连接的权值; bs (6) 为 Output 层神经元的偏置;最终网络输出 a(6),并以此代表 识别出的样本类型。 同样地,在 StepByStepCNN 网络中将输入张量记作 a(0),网 络中各层的计算描述如下:
+Convolution1:对输入张量做空间域卷积, as (1) ( i ) = f ( ai (0) ⋅ ws (1) + bs (1) ) (21)
+f ( x) = max ( x,0 ) (22)
+其中:ws (1) 和 bs (1) 分别表示该层中第 s 个卷积核的权重和偏置; ai (0) 和 ws (1) 均为 1×1×2 大小的矩阵;f ( x) 选择 ReLU 作为激活
+函数;输出的每个 as (1) 的维度为 F×T。
+Convolution2:对输入张量做频率域卷积,
+图 4 MixedCNN 拓扑结构 Fig. 4 MixedCNN topology structure
+图 5 StepByStepCNN 拓扑结构 Fig. 5 StepByStepCNN topology structure
+1045
+
+
+第 41 卷
+计算机应用
+zs (2) ( j ) = i = ∑1
+F ai (1) ( j ) ⋅ ws (2) ( i ) + bs (2) (23)
+as (2) ( j ) = f ( zs (2) ( j ) ) (24) 其中:ai (1) ( j ) 代表第 i 行第 j 个位置的数据点;ws (2) (i) 和 bs (2) 分 别表示该层中第 s 个卷积核的权重和偏置;输出 as (2) 的大小为 1×T。 Convolution3:对输入张量做时间域卷积,
+zs (3) ( j ) = k = ∑1
+6 ai (2) ( j - 1 + k ) ⋅ ws (3) ( k ) + bs (3) (25)
+as (3) ( j ) = f ( zs (3) ( j ) ) (26) 其中:zs (3) ( j ) 代表第 j 个神经元的累计输入;ws (3) 和 bs (3) 分别表 示 该 层 中 第 s 个 卷 积 核 的 权 重 和 偏 置 ;输 出 as (3) 的 大 小 为 1×T-5 此特征提取工作完成,之后的全连接层和输出层的学 习过程和 MixedCNN 类似。
+为确保上述两种网络可以得到有效的训练,采用在期望 为 0,方差为 2/nl 正态分布中随机采样的方式对各层神经元的 权重进行初始化,其中 nl 为第 l 层神经元的个数,以避免损失 函数全程不下降问题。网络采用带有动量的梯度下降算法对 损失函数进行优化,学习率设置为 0. 001,最大迭代次数设置 为 300。
+2. 3 分类
+本文根据 EEG 信号的时−频−空特性,设计了两种不同卷 积策略的网络模型;然后将 STFT 和 CWT 预处理得到的样本 分别放入 MixedCNN 和 StepByStepCNN 进行训练,最终得到四 组模型;接着,使用准确率、精确率、灵敏度、特异性以及 ROC 曲线下面积(Area Under Curve,AUC)对其进行评估,并同时 与 CSP+SVM[22]、自 适 应 自 回 归 模 型(Adaptive Autoregressive
+Modeling,AAR)+LDA[23]、离 散 小 波 变 换(Discrete Wavelet
+Transform, DWT)+ 长 短 时 记 忆 网 络(Long Short-Term Memory,LSTM[24])和 STFT+SAE[14]四种方法相比较;最后,挑 选出识别性能最佳的模型并以此作为 baseline 探讨 mixup 数 据增强对模型泛化性能的影响。
+3 mixup 数据增强
+不 同 于 翻 转 、平 移 、高 斯 噪 声 等 通 用 数 据 增 强 方 法 , mixup[25]采用对不同类别之间进行建模的方式实现数据增强。 mixup 数据增强受邻域风险最小化策略[26]启发构建出一种通 用的邻域分布来近似真实分布,不同于 Chapelle 等[26]提出的 高斯邻域,mixup 邻域的数学表示如下:
+μ( )
+|
+x͂,y͂ xi,yi =
+1
+n j = ∑1
+n
+λE [ δ ( x͂ = λxi + (1 - λ) xj,y͂ = λyi + (1 - λ) yj ) ](27)
+其中:λ ∼ Beta ( α,α),α ∈ (0,∞);mixup 使用从该邻域采样得 到的虚拟样本−标签对构成新的训练数据,并以最小化式(28) 对网络参数进行调整。
+Rμ ( f ) = 1
+m i = ∑1
+m
+l ( f ( x͂ i ),y͂ i ) (28)
+其中:f ( ) 表示模型函数;l( ) 表示损失函数;m 表示虚拟样本的 数量。Zhang 等[25]指出当 α 在区间[0. 1,0. 4]内取值时可以 获得比 ERM 学习规则更好的泛化性能。在实验中将超参数 α
+分别设置为 0. 1、0. 2、0. 3、0. 4 并在每个 batch 范围内将训练 数据和标签分别做加权求和组成新的虚拟样本集合。在损失 函数构建方面,需要将输出的预测值分别与两组标签求出损 失,并与之前真实样本分配的权重进行加权求和。
+4 实验与结果分析
+4. 1 模型分析及对比
+本 文 提 出 的 4 种 分 类 模 型 :CWT+MixedCNN、CWT+
+StepByStepCNN、STFT+MixedCNN、STFT+StepByStepCNN 在测 试集上计算出的评价指标如表 1 所示。
+对于当前被试的运动想象脑电数据,在相同预处理方式 下,选择 MixedCNN 比选择 StepByStepCNN 训练出的分类模型 具 有 更 好 的 识 别 准 确 率 ,且 使 用 CWT 预 处 理 方 法 配 合 MixedCNN 训练得到的模型准确率最高,达到了 92. 14%。另 一 方 面 ,相 较 于 CWT,STFT 预 处 理 方 法 得 到 的 样 本 在 StepByStepCNN 上训练出的模型在准确率指标上更好。在使 用相同卷积网络模型的前提下,采用 STFT 预处理方式得到的 模 型 在 精 确 率 指 标 上 表 现 更 加 突 出 。 STFT+MixedCNN 和 CWT+StepByStepCNN 两 种 方 案 在 灵 敏 度 指 标 上 保 持 一 致 , CWT 配合 MixedCNN 方法在灵敏度指标上相较于其他 3 种方 法至少提升了超过 4 个百分点。在采用相同卷积策略的条件 下,预处理方式选择 STFT 相较于 CWT 训练出的模型在特异 性指标上表现更好,其中采用 STFT+StepByStepCNN 方案所得 到的特异性指标最高,达到了 95. 71%。最后,采用 MixedCNN 结 构 的 网 络 训 练 出 的 模 型 在 AUC 指 标 上 略 优 于 StepByStepCNN 训练出的模型。
+为与以上方法相比较,本文在 BCI Competition II dataset III 数 据 集 合 上 复 现 了 另 外 4 种 分 析 方 法(CSP+SVM、AAR+ LDA、DWT+LSTM、STFT+SAE),并在测试集上得到其评价指 标如表 2 所示。其中 STFT+SVM 方法在准确率指标上高于本 文 提 出 的 CWT+StepByStepCNN、STFT+MixedCNN、STFT+ StepByStepCNN 方法,以及另外 3 种对比方法。在特异性指标 上 STFT+SAE 方法和 STFT+StepByStepCNN 方法保持一致,且
+在 精 确 率 指 标 上 高 于 STFT+StepByStepCNN 方 法 。 CWT+ MixedCNN 方法在准确率、灵敏度和 AUC 三种指标上分别高 出 STFT+SAE 方法 0. 71 个百分点,4. 29 个百分点和 0. 69 个百 分点。
+表 1 实验组模型的评价指标
+Tab. 1 Evaluation indeces of models in experimental group
+方法
+CWT+MixedCNN CWT+StepByStepCNN STFT+MixedCNN STFT+StepByStepCNN
+准确率 0. 921 4 0. 885 7 0. 907 1 0. 900 0
+精确率 0. 9275 0. 8971 0. 9385 0. 9516
+灵敏度 0. 914 3 0. 871 4 0. 871 4 0. 842 9
+特异性 0. 928 6 0. 900 0 0. 942 9 0. 957 1
+AUC 0. 965 7 0. 953 1 0. 966 3 0. 962 1
+表 2 对照组模型的评价指标
+Tab. 2 Evaluation indeces of models in control group
+方法 CSP+SVM AAR+LDA DWT+LSTM STFT+SAE
+准确率 0. 785 7 0. 778 6 0. 837 5 0. 914 3
+精确率 0. 763 2 0. 819 7 0. 813 3 0. 953 1
+灵敏度 0. 828 6 0. 714 3 0. 871 4 0. 871 4
+特异性 0. 742 9 0. 842 9 0. 800 0 0. 957 1
+AUC 0. 869 5 0. 866 1 0. 924 1 0. 958 8
+1046
+
+
+第 4 期 霍首君等:基于深度卷积网络的运动想象脑电信号模式识别
+4. 2 mixup 数据增强分析
+本文选用准确率最高的 CWT+MixedCNN 方法作为 mixup 数据增强策略的 baseline,其训练损失和测试损失如图 6 所 示,当迭代训练达到 500 次左右时模型基本处于收敛状态,此 后验证损失保持在 0. 6 左右上下浮动。
+样本经 mixup 数据增强处理之后,送入 MixedCNN 训练过 程中模型在测试集上的损失曲线如图 7 所示。当 α=0. 1、0. 2、 0. 4 时其测试损失相较于 baseline 均无明显改善;当 α=0. 3,且 模 型 处 收 敛 状 态 时 ,测 试 损 失 稳 定 在 0. 5 上 下 ,相 较 于 baseline 降低了 0. 1 左右。
+α 取值对模型准确率的影响如表 3 所示,当 α=0. 1、0. 2 时,相较于 baseline 方法准确率降低了 0. 71 个百分点;当 α= 0. 3、0. 4 时,模型的准确率分别提高了 1. 43 个百分点和 0. 71 个百分点。
+5 结语
+本文创新性地将深度学习框架引入对运动想象 EEG 信 号的识别任务当中。首先,利用 STFT 和 CWT 获得 EEG 信号 的时频信息,并将其与电极通道的位置信息相结合构成样本
+数据,然后针对所构建样本数据的特性分别设计了两种基于 不同卷积策略的 CNN,并在 10 折交叉验证过程中完成最优超 参数的选择。其次,在 Competition II dataset III数据集上分别 建立了 4 组实验组分类模型和 4 组对照组分类模型,测试结果 表明,本文所提出的所有方法相较于 CSP+SVM、AAR+LDA、 DWT+LSTM 有了明显的改善,且 CWT+MixedCNN 方法在准确 率、灵敏度、AUC 指标上均高于 STFT+SAE,体现了更好的分 类 性 能 。 最 后 ,为 进 一 步 提 高 模 型 的 泛 化 能 力 ,在 CWT+ MixedCNN 方法上引入了 mixup 数据增强策略,通过对比实验 发现,当 α 取值为 0. 3 时 mixup 策略显著降低了模型的测试损 失并将模型的准确率指标提升了 1. 43 个百分点。本文所做 工作验证了深度卷积神经网络和 mixup 数据增强策略在运动 想象脑电信号识别任务当中的有效性,可为运动想象脑机接 口的应用提供方法和思路上的参考。 参考文献(References)
+[1] MOUSAVI E A,MALLER J J,FITZGERALD P B,et al. Wavelet
+common spatial pattern in asynchronous offline brain computer
+interfaces[J]. Biomedical Signal Processing and Control,2011,6
+(2):121-128.
+[2] ANG K K,CHIN Z Y,WANG C,et al. Filter bank common spatial
+pattern algorithm on BCI Competition IV datasets 2a and 2b[J].
+Frontiers in Neuroscience,2012,6:No. 39.
+[3] RAHMAN M H, RAHMAN M J, CRISTOBAL O L, et al.
+Development of a whole arm wearable robotic exoskeleton for
+rehabilitation and to assist upper limb movements[J]. Robotica,
+2015,33(1):19-39.
+[4] VAN DE LAAR B,REUDERINK B,BOS D P O,et al. Evaluating
+user experience of actual and imagined movement in BCI gaming
+[J]. International Journal of Gaming and Computer-Mediated
+Simulations,2010,2(4):33-47.
+[5] ZHANG Y,WANG Y,JIN J,et al. Sparse Bayesian learning for
+obtaining sparsity of EEG frequency bands based feature vectors in
+motor imagery classification[J]. International Journal of Neural
+Systems,2017,27(2):No. 1650032.
+[6] YANG B,LI H,WANG Q,et al. Subject-based feature extraction
+by using fisher WPD-CSP in brain-computer interfaces [J].
+Computer Methods and Programs in Biomedicine, 2016, 129:
+21-28.
+[7] KEVRIC J, SUBASI A. Comparison of signal decomposition
+methods in classification of EEG signals for motor-imagery BCI
+system[J]. Biomedical Signal Processing and Control,2017,31:
+398-406.
+[8] BAIG M Z,ASLAM N,SHUM H P H,et al. Differential evolution
+algorithm as a tool for optimal feature subset selection in motor
+imagery EEG[J]. Expert Systems with Applications,2017,90:
+184-195.
+[9] SCHIRRMEISTER R T,SPRINGENBERG J T,FIEDERER L D J,
+et al. Deep learning with convolutional neural networks for EEG
+decoding and visualization[J]. Human Brain Mapping,2017,38
+(11):5391-5420.
+[10] 张顺,龚怡宏,王进军 . 深度卷积神经网络的发展及其在计算机 视 觉 领 域 的 应 用[J]. 计 算 机 学 报 ,2019,42(3):453-482. (ZHANG S,GONG Y H,WANG J J. The development of deep
+图 6 CWT+MixingCNN 损失曲线 Fig. 6 Loss curves of CWT+MixedCNN
+图 7 四种 α 取值下的模型测试损失 Fig. 7 Model test loss under four α values
+表 3 α 对模型准确率的影响 Tab. 3 Influence of α on accuracy
+方法 CWT+MixedCNN CWT+MixedCNN+mixup(α=0. 1) CWT+MixedCNN+mixup(α=0. 2) CWT+MixedCNN+mixup(α=0. 3) CWT+MixedCNN+mixup(α=0. 4)
+准确率/% 92. 14 91. 43 91. 43 93. 57 92. 85
+1047
+
+
+第 41 卷
+计算机应用
+convolution neural network and its applications on computer vision [J]. Chinese Journal of Computers,2019,42(3):453-482. )
+[11] 王文冠,沈建冰,贾云得 . 视觉注意力检测综述[J]. 软件学报, 2019,30(2):416-439.(WANG W G,SHEN J B,JIA Y D. Review of visual attention detection[J]. Journal of Software, 2019,30(2):416-439. )
+[12] 张一彬,周杰,边肇祺,等 . 基于内容的音频与音乐分析综述 [J]. 计算机学报,2007,30(5):712-728.(ZHANG Y B,ZHOU J,BIAN Z Q,et al. A review of content-based audio and music analysis[J]. Chinese Journal of Computers, 2007, 30(5): 712-728. )
+[13] 韩文静,李海峰,阮华斌,等 . 语音情感识别研究进展综述[J]. 软件学报,2014,25(1):37-50.(HAN W J,LI H F,RUAN H B,et al. Review on speech emotion recognition[J]. Journal of Software,2014,25(1):37-50. ) [14] TABAR Y R,HALICI U. A novel deep learning approach for classification of EEG motor imagery signals[J]. Journal of Neural Engineering,2017,14(1):No. 016003. [15] TANG Z,LI C,SUN S. Single-trial EEG classification of motor imagery using deep convolutional neural networks[J]. Optik, 2017,130:11-18. [16] LECUN Y, BOTTOU L, BENGIO Y, et al. Gradient-based learning applied to document recognition[J]. Proceedings of the IEEE,1998,86(11):2278-2324. [17] BOUSQUET O. New approaches to statistical learning theory[J]. Annals of the Institute of Statistical Mathematics,2003,55(2): 371-389. [18] PFURTSCHELLER G,NEUPER C,BRUNNER C,et al. Beta rebound after different types of motor imagery in man [J]. Neuroscience Letters,2005,378(3):156-159. [19] PFURTSCHELLER G, NEUPER C, BERGER J. Source localization using Event-Related Desynchronization(ERD)within the alpha band[J]. Brain Topography,1994,6(4):269-275. [20] PADFIELD N,ZABALZA J,ZHAO H,et al. EEG-based braincomputer interfaces using motor-imagery: techniques and challenges[J]. Sensors,2019,19(6):No. 1434. [21] SRIVASTAVA N, HINTON G, KRIZHEVSKY A, et al.
+Dropout:a simple way to prevent neural networks from overfitting [J]. The Journal of Machine Learning Research,2014,15(1): 1929-1958.
+[22] KUMAR S, SHARMA A, TSUNODA T. An improved
+discriminative filter bank selection approach for motor imagery
+EEG signal classification using mutual information[J]. BMC
+Bioinformatics,2017,18(S16):No. 545.
+[23] RODRÍGUEZ-BERMÚDEZ G, GARCÍA-LAENCINA P J.
+Automatic and adaptive classification of electroencephalographic
+signals for brain computer interfaces[J]. Journal of Medical
+Systems,2012,36(S1):51-63.
+[24] ZHOU J, MENG M, GAO Y, et al. Classification of motor
+imagery EEG using wavelet envelope analysis and LSTM networks
+[C]// Proceedings of the 2018 Chinese Control and Decision
+Conference. Piscataway:IEEE,2018:5600-5605.
+[25] ZHANG H,CISSE M,DAUPHIN Y N,et al. mixup:beyond
+empirical risk minimization[EB/OL]. [2020-04-16]. https://
+arxiv. org/pdf/1710. 09412. pdf.
+[26] CHAPELLE O, WESTON J, BTTTOU L, et al. Vicinal risk
+minimization [C]// Proceedings of the 13th International
+Conference on Neural Information Processing Systems. MIT Press,
+2000:395-401.
+This work is partially supported by the National Natural Science
+Foundation of China (61672374),the Natural Science Foundation of
+Shanxi Province(201901D111093).
+HUO Shoujun, born in 1994, M. S. candidate. His research
+interests include deep learning,brain-computer interface.
+HAO Yan,born in 1996,M. S. candidate. His research interests
+include brain science,artificial intelligence.
+SHI Huiyu,born in 1996,M. S. candidate. His research interests
+include brain science,artificial intelligence.
+DONG Yanqing,born in 1998,M. S. candidate. Her research
+interests include brain science,artificial intelligence.
+CAO Rui,born in 1982,Ph. D.,associate professor. His research
+interests include brain science,artificial intelligence,virtual reality.
+1048

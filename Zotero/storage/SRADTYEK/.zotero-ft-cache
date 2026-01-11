@@ -1,0 +1,3024 @@
+2 0 2 5 届 学 术 学 位 硕 士 研 宄 生 学 位 论 文
+分 类 号 : T P 3 9 1 学 校 代 码 : 1 04 4 6
+密 级 : 公 开 学 号 : 2 0 2 2 2 3 1 71  
+硕 士 学 位 论 文
+基于 数 据 增 强 和 深 度神 经 网 络 的
+癫痫 检测 研究  
+论 文 作 者 : 胡 文 蓉
+指 导 教 师 : 袁 莎 莎 副 教 授
+培 养 单 位 : 计 算 机 学 院
+一 级 学 科 : 计 算 机 科 学 与 技 术
+二 级 学 科 : 计 算 机 应 用 技 术
+完 成 时 间 : 2 0 2 5 年 6 月 3 日  
+
+
+   
+摘 要  
+癫 痫 是 一 种 常 见 的 慢 性 神 经 系 统 疾病 , 以 大 脑 神 经 元 细 胞 的 电 活 动 异 常 , 导 致 频 繁
+的 癫 痫 发 作 , 对 患 者 的 日 常 生 活 和 身 心 健 康 产 生 重 大 影 响 。 脑 电 图
+( E l e c tro enc ep h al o gram ,E E G ) 作 为 一 种 非 侵 入 式 神 经 电 生 理 监 测 技 术 , 通 过 实 时 记 录
+大 脑 皮 层 神 经 元 集 群 同 步 放 电 产 生 的 电 位 波 动 , 凭 借 其 高 时 间 分 辨 率 、 操 作 可 重 复 性 及  
+较 低 临 床 检 测 成 本 等 优 势 , 已 成 为 癫 痫 病 灶 定 位 与 发 作 期 特 征 识 别 的 标 准 化 诊 断 工 具 。
+然 而 , 传 统 癫 痫 诊 断 依 赖 医 生 对 脑 电 图 的 视 觉 分 析 , 需 人 工 筛 查 数 小 时 至 数 天 的 连 续 脑  
+电 信 号 , 该 过 程 存 在 高 误 诊 风 险 及 效 率 瓶 颈 , 尤 其 对 夜 间 发 作 或 间 歇 期 异 常 放 电 的 识 别
+敏 感 度 不 足 , 且 长 期 监 测 产 生 的 海 量 数据 存 在 显 著 类 别 失 衡 问 题 。 基 于 数 据 増 强 技 术 的
+癫 痫 发 作 检 测 方 法 , 通 过 生 成 癫 痫 发 作 期 样 本 有 效 缓解 数 据 的 类 不 平 衡 问 题 , 结 合 深 度
+神 经 网 络 实 现 脑 电 特 征 的 提 取 与 分 类 , 可 提 升 癫 痫 发 作 检 测 的 准 确 性 , 辅 助 医 生 诊 断 癫
+痫 发 作 , 显 著 缩 短 诊 断 延 迟 , 优 化 治 疗 方 案 制 定 时 效 性 。 因 此 , 本 文 基 于 数 据 增 强 与 深  
+度 神 经 网 络 提 出 了 三 种 癫 痫 发 作 检 测 方 法 , 主 要 内 容 如 下 :
+( 1 ) 针 对 癫 痫 脑 电 信 号 长 时 监 测 中 的 类 不 平 衡 问 题 , 系 统 评 估 M ixUp 、 S up erM ix 、
+C o - M i xUp 三 种 数 据 增 强 方 法 对 数 据 平 衡 的 优 化 效 果 。 通 过 离 散 小 波 变 换 (D i s c r e t e
+Wav e l etTr ans fo rm ,D WT) 提 取 癫 痫 特 征 显 著 的 特 定 频 段 信 号 , 结 合 数 据 增 强 的 混 合 策
+略 增 强 癫 痫 发 作 期 样 本 , 有 效 缓 解 数 据 类 不 平 衡 问 题 。 构 建 融 合 注 意 力 机 制 的 双 向 长 短
+期 记 忆 网 络 ( Bi
+- d i r e c ti o na l L o ng  S h o rt - Term  M e m ory , B i L S TM  ) 与 卷 积 神 经 网 络  
+( C o nv o l uti o nal N e ura l N etw o rks , C NN ) 混 合 模 型 , 通 过 时 空 特 征 联 合 建 模 提 升 脑 电 信
+号 分 类 性 能 。 在 B o nn 和 C H B - MIT 数 据 库 上 的 对 比 实 验 表 明 , C o - MixUp 较 其 他 方 法  
+展 现 出 更 高 的 精 度 , 验 证 了 数 据 增 强 技 术 在 癫 痫 发 作 检 测 中 的 技 术 优 势 。
+( 2 ) 由 于 传 统 卷 积 神 经 网 络 与 双 向 长 短 期 记 忆 网 络 在 处 理 长 序 列 脑 电 信 号 时 存 在
+的 梯 度 消 失 或 者 爆 炸 风 险 , 提 出 一 种 融 合 C o -M ixUp 数 据 增 强 与 改 进 的 Trans form er 网
+络 Onr e s form er ) 的 癫 痫 发 作 检 测 方 法 。 具 体 而 言 , 该 方 法 通 过 离 散 小 波 变 换 对 原 始 脑
+电 信 号 进 行 分 解 , 选 取 三 个 关 键 子 带 信 号 进 行 重 建 , 并 采 用 C o -MixUp 方 法 解 决 数 据 不  
+平 衡 问 题 ; 改 进 的 Tr an s fo rm er 网 络 创 新 性 地 引 入 双 半 步 前 馈 结 构 增 强 非 线 性 表 征 能 力 ,  
+结 合 Inc ep ti o n 模 块 的 多 尺 度 特 征 提 取 优 势 与 Re s i dual 模 块 的 梯 度 传 导 特 性 , 实 现 对 发  
+作 期 与 发 作 间 期 脑 电 信 号 的 深 层 动 态 关 联 特 征 挖 掘 。 实 验 环 节 在 B onn 和 C HB - MH' 长  
+期 数 据 集 上 验 证 模 型 性 能 , 通 过 特 定 频 段 子 信 号 的 判 别 融 合 机 制 , 该 方 法 在 癫 痫 发 作 识  
+别 任 务 中 展 现 出 优 于 现 有 深 度 学 习 模 型 的 准 确 率 , 同 时 在 C HB -MIT 数 据 集 上 实 现 了 计
+算 复 杂 度 与 实 时 性 指 标 的 显 著 优 化 , 为 临 床 癫 痫 检 测 提 供 了 具 有 实 用 价 值 的 新 方 案 。
+( 3 ) 为 了 解 决 长 短 期 记 忆 网 络 ( L o ngS hort- Term M em ory , L S T M ) 处 理 长 序 列
+I  
+
+
+   
+数 据 存 在 记 忆 容 量 受 限 的 问 题 , 本 研 宄 提 出 一 种 整 合 空 间 变 化 生 成 方 法 ( S p ati al
+Vari ati o nG en erati on , S V G ) 和 Inre s - x L S T M 网 络 的 癫 痫 检 测 算 法 。 首 先 采 用 离 散 小 波  
+变 换 对 原 始 脑 电 信 号 进 行 分 解 与 特 征 重 组 ; 继 而 应 用 空 间 变 化 生 成 方 法 构 建 癫 痫 发 作 期
+的 动 态 特 征 空 间 , 有 效 缓 解 了 类 别 不 平 衡 问 题 ; 随 后 , 通 过 集 成 Incep tion 模 块 和 残 差
+连 接 的 Inr e s - xL S TM 网 络 , 在 保 持 L S TM 时 序 建 模 优 势 的 同 时 , 显 著 增 强 了 特 征 提 取  
+能 力 与 模 型 鲁 棒 性 ; 最 终通 过 分 类 标 签 数 据 融 合 策 略 实 现 精 准 分 类 。 实 验 结 果 表 明 , 在  
+B onn 数 据 集 和 C HB - MIT 长 程 脑 电 数 据 集 上 优 于 现 有 深 度 学 习 方 法 。
+本 论 文 的 研 宄 成 果 拓 展 了 数据 增 强 和 深 度 神 经 网 络 在 癫 痫 发 作 检 测 领 域 的 应 用 , 使
+用 多 种 指 标 进 行 验 证 , 得 到 了 优 异 的 实 验 结 果 有 效 助 力 癫 痫 自 动 检 测 系 统 的 进 步 与 发展 。  
+由 于 实 验 数 据 的 限 制 , 我 们 所 提 出 的 癫 痫 发 作 检 测 算 法 在 临 床 应 用 中 还 有 待 进 一 步 优 化  
+和 提 f t 。
+关 键 字 : 离 散 小 波 变 换 , 数 据 增 强 , B i L S T M 网 络 , Tran s former 模 型 , xL S T M 网 络 。  
+I I  
+
+
+A b s tr a c t
+A b s t r a ct
+E p i l e p s y  i s  a  c o mm o n  c hr o n i c  n e ur o l o g i c a l  di s o r d er  i n  wh i ch  th e  e l e c tri c a l  a c tiv i ty  o f  
+n e uro n s  i n th e  b r ai n  i s  ab n o rm a l
+,  r e s u l t i n g  i n  fr e qu e nt  s e izur e s  th at  h av e  a  s i gni fi c ant  im p a c t
+o n th e  p at i e n t
+'
+s  da i ly  l i fe  an d  p hys i c al  an d  m e n t a l  h e a l t h .  E l e c tr o e n c ep h al o gr am  ( E E G ) ,  a s  a
+n o n - i n v a s i v e  n e ur o p h y s i o l o gi c al  m o ni t o ri n g  t e c hn o l o gy,  r e c o r d s  th e  p o t e nti al  fl u c tu at i o n s
+g e n e r at e d  b y
+th e  s yn c hr o n o u s  d i s c h ar g e  o f  c er e b r al  c o rt e x  n e ur o n  c l u s t e r s  i n  r e a l  t i m e ,  w i t h  i t s
+a dv an t a g e s  o f  hi gh  t i m e  r e s o l ut i o n ,  r e p e at ab i l i t y  an d  l o w  c l i n i c al  t e s tin g  c o s t .  It  h a s  b e c o m e  a  
+s t an d ar d i z e d  d i a gn o s t i c  t o o l  fo r  fo c a l  l o c at i o n  an d  s e i zur e  s t ag e  fe atur e  r e c o gn i t i o n  o f  ep i l e p s y .  
+H o w e v e r,  th e tr a d it i o n al  d i a gn o s i s  o f ep i l ep s y  r e l i e s  o n the  d o c t o r
+'
+s  v i s u a l  an al y s i s  o f  E E G ,
+w h i c h  r e qu i r e s  m a nu a l  s c r e e n i n g  o f  c o nti nu o u s  E E G  s i gn al s  fo r  s e v er a l  h o ur s  t o  s e v e r a l  d ay s ,
+b ut  th i s  p r o c e s s  h a s  h i gh  ri s k  o f  m i s d i a gno s i s  an d  e f i c i en c y b o ttl e n e c k
+,  e s p e c i al l y  th e  
+i n s u ffi c i e nt  s e n s i t i v it y  t o  t h e  i d e nt i fi c at i o n  o f  ni gh t t i m e  s e i zur e s  o r  i nt e rmi t t e n t  ab n o rm a l
+d
+i s c h ar g e ,  an d  th e  m a s s iv e  d at a  g e n e r at e d  b y  l o n g - t e rm  m o ni t o rin g  h as  s i gn i fi c an t  c at e g o ry
+i mb a l a n c e .  T h e  s e i zu r e  d e t e c t i o n  m e th o d  b a s e d  o n  d at a  enh an c e m e n t  t e c hn o l o gy  e ffe c ti v e l y
+al l ev i at e s  th e  c l a s s  i m b a l anc e  o f  d at a  b y  g e n e r at ing  s e i zur e  p e r i o d  s amp l e s ,  an d  c o m b in e s  w ith
+d e ep  n e ura l  n e tw o rk  to  ac h i e v e  t h e  ex tra c ti o n  a n d  c l a s s i fi c a t i o n  o f  E E G  fe a tur e s ,  wh i c h  c an  
+i mp r o veth eac cur ac yo fs e izured et e cti on
+,  as s i s t  d o c t o r s  i n  d i a gn o s i n g  s e i zu re s ,  s i gni fi c ant l y
+s h o rt e n  th e  di a gn o s i s  d e l ay,  an d  o p t i miz e  th e  t i m e l i n e s s  o f  t r e atm e n t  p l an  fo rmul ati o n .  
+T h e r e fo r e ,
+t hi s  th e s i s  p ro p o s e s  thr e e  s e i z ur e  d e t e c ti o n  m et h o d s  b as e d  o n  d at a  e nh an c em e nt
+and d e e p neur a l  ne tw o rk
+,  t h e  m ai n  c o nt en t s  ar e  a s  fo l l o w s :
+( 1 )  A i m in g  at  th e  c l a s s  i mb a l an c e  p r o b l e m  in  l o n g
+- t e rm  E E G  m o n i t o ri n g  o f  e p i l e p s y,  th e
+o p ti m i z ati o n  e ffe c t  o f  t hr e e  d ata  e nh an c e m e n t  m e th o d s
+,  M i xUp ,  S up e rM i x  an d  C o - M i x Up ,  o n  
+d at a  b a l an c e  w as  s y s t e m at i c a l l y  e v a lu at e d .  D i s c r e t e  Wav e l e t  Tran s fo rm  ( D W T)  w a s  u s e d  t o
+e xtr a c t  th e  s p e c i fi c  f r e qu e n c y  b an d  s i gn al s  with  s i gni fi c ant  e p i l e p s y  c h ar a c t e ri s ti c s
+,  an d  t h e
+m
+i x e d  s tr at e gy  o f  d at a  e nh an c e m e nt  w a s  c o m b i n e d  t o  enh an c e  t h e  s e i zur e  p e ri o d  s am p l e s
+,  
+e ffe c t i v e l y  a l l e v i at i ng  t h e  p r o b l e m  o f  d at a  c l a s s  im b al an c e .  A  hyb ri d  m o d e l  o f  B i
+- d i r e c t i o n a l
+L o n g  S h o rt - Te rm  M e m o ry ( B i L S T M )  an d  C o nv o luti o n a l  N eur al  N e tw o rk s  ( C N N)  int e gr atin g  
+att e nt i o n  m e c h an i s m s  i s  c o n s tru c t e d .  T h e  c l a s s i fi c ati o n  p er fo rm an c e  o f  E E G  s i gn a l s  w a s
+i mp r o v e d  thr o u gh  s p at i o t e mp o r al  fe atur e  j o i nt  m o d e l in g .  C o mp ar at i v e  e x p e rim e nt s  o n  B o nn  
+an d  C HB - M I T  d at ab a s e s  s h o w e d  t h at  C o - M ixUp  s h o w e d  hi t l e r  a c c ur a c y  th an  o t h er  m e th o d s ,
+wh i c h  v e ri fi e d  th e  t e chn i c a l  adv an t a g e s  o f  dat a  e nh an c e m e nt  t e c hn o l o gy 
+in  s e i zur e  d e t e c t i o n .
+( 2 )  D u e  t o  th e  ri s k  o f  gr a d i e nt  di s ap p e ar an c e  o r  e x p l o s i o n  wh en  p r o c e s s in g  l o n g  s e ri e s
+E E G  s i gn a l s  i n  tra d i t i o n a l  C N N  an d  B i L S T M ,  a  s e i zu re  d e t e c ti o n  m e th o d  b a s e d  o n  C o - M i x Up  
+i n
+
+
+A b s t r a c t
+d at a  e nh an c e m e nt  an d  i mp r o v e d  T ran s fo rm e r  n e tw o rk  ( Inr e s fo rm e r )  i s  p ro p o s e d .  S p e c i fi c a l l y,
+t h e  m e t h o d  u s e s  d i s c r e t e  w a v e l e t  t r an s fo rm  t o  d e c o m p o s e  th e  o ri gi n al  E E G  s i gn a l
+,  s e l e c t s
+thre e  k e y  s ub - b an d  s i gn a l s  fo r  r e c o n s tru c ti o n ,  an d  a d o p t s  C o - M i xUp  m e th o d  t o  s o l v e  th e  
+p r o b l e m  o f  data  i m b a l an c e .  T h e  i m p r o v e d  T ran s fo rm e r  n e tw o rk  i nn o v at i v e l y  in tr o du c e d  a
+tw o - h a l f- s t e p  fe e d fo rw ar d  s tru c tu r e  t o  e nh an c e  t h e  n o nl in e ar  c h ar a c t e riz ati o n  ab i l i t y .
+C omb i nedwi ththemulti
+- s c a l e  fe a tur e  e x tr ac ti o n  a d v an ta g e  o f  In c e p ti o n  m o du l e  an d  th e  
+gr a d i e nt  tr an s m i s s i o n  c h ar a c t e ri s t i c  o f  R e s i du a l  m o d u l e , d e ep  d yn am i c  c o rr e l at i o n  fe atur e s  o f
+E E G  s i gn a l s  d urin g  a n d  b e tw e e n  s e i zur e s  w e re  mi n e d .  In  th e  e x p e ri m e n t
+,  th e  p e rfo rm an c e  o f
+t h e  m o d e l  w a s  v e ri fi e d  o n  B o nn  an d  C H B - M I T  l o ng
+- t e r m  d at a  s e t s .  T hr o u gh  th e  d i s c ri mi nant
+fu s i o n  m e c h a n i s m  o f  s ub - s i gn a l s  i n  s p e c i fi c  fr e qu e n c y  b an d s ,  t h e  a c c ur a c y  o f  th e  p r o p o s e d
+m e t h o d  w as  s u p e ri o r  t o  t h e  e x i s t i n g  d e e p  l e arn i n g  m o d e l  i n  t h e  t a s k  o f  s e i z ur e  r e c o gn i ti o n
+,  an d  
+th ec o mp ut ati o n al c o mp l e x i tyand r e al
+- t i m e  i n d e x e s  w e r e  s i gni fi c ant l y  o p t i m i z e d  o n  th e  C H B -  
+M
+IT datas e t .It
+provi de sanews chemew i th
+ p r a c t i c a l  v al u e  fo r  c l i n i c al  ep i l e p s y  d e t e c ti o n .
+( 3 )  To  a d dre s s  t h e  p r o b l e m  o f  l i m i t e d  M e m o ry  c ap a c i ty  o f  L o n g  S h o rt - Te rm  m em o ry  
+( L S T M )  i n  p r o c e s s i n g  l o n g  s e qu e n c e  d at a ,  thi s  s t u d y  p ro p o s e d  a  e p i l ep s y  d e t e c ti o n  a l g o ri thm  
+int e gr at in g  S p at i a l  Vari at i o n  G e n e r at i o n  ( S V G )  an d  Inr e s - xL S T M  n e t w o rk .  F i r s t l y,  t h e  o ri gi n a l
+E E G  s i gn al  i s  d e c o mp o s e d  an d r e a s s e mb l e d b y d i s c r e t e  w av e l e t  tr an s fo rm .  T h e n  S V G
+a l g o r i thm  w a s  u s e d  t o  c o n s tm c t  th e  dyn am i c  fe a tur e  s p a c e  o f  e p i l ep t i c  s e izur e ,  w h i c h
+e ffe c t i v e l y  a l l e v i at e d  t h e  p r o b l e m  o f  c at e g o ry  i mb a l an c e .  T h e n
+,  b y  i n t e gr ating  In c ep ti o n  
+m o du l e  an d  re s i du a l  c o nn e c t e d  Inr e s - x L S T M  n e tw o rk ,  th e  fe atur e  e x tra c ti o n  c ap ab i l i ty  and
+m o d e l  ro b u s tn e s s  w e r e  s i gn i fi c a nt l y  e nh an c e d  whi l e  m ai n t ai n i n g th e  a d v an ta g e s  o f  L S T M  
+t i m i n g  m o d e l i n g .  F i n a l l y,  a c c ur at e  c l a s s i f i c a t i o n  i s  r e a l i z e d  t hr o u g h  th e  c l a s s i fi c at i o n  l ab e l
+d at a  fu s i o n  s trat e g y .  T h e  e x p e ri m e nta l  r e s u l t s  s h o w  th a t  t h e  B o nn  da t a s e t  an d  C H B - M I T  l o n g
+r an g e  E E G  d at a s e t  ar e  s up e r i o r  t o  th e  e x i s t i n g  d e ep  l e arn in g  m e th o d s .
+The  r e s e ar c h  r e s u lt s  o f  th i s  p ap er  exp an d  th e  ap p l i c at i o n  o f  d at a  enh an c em e nt  an d  d e ep
+n e ur a l  n e tw o rk  i n  th e  fi e l d  o f  s e i z ur e  d e t e c ti o n ,  u s i n g  a  v ari e ty  o f  in d i c at o r s  t o  v e ri fy,  an d  
+o b t a in  e x c e l l e nt  e x p e ri m e n t a l  r e s u l t s  t o  e ffe c t i v e l y  h e l p  th e  p r o gr e s s  an d  d e v e l o p m e n t  o f  
+au t o m ati c  s e i zur e  d e t e c t i o n  s y s t e m .  D u e  t o  t h e  l i m i t at i o n  o f  e xp e rim e nta l  d a t a ,
+th e  s e i zure  
+d e t e c ti o n  a l g o ri thm  p r o p o s e d  b y  u s  n e e d s  t o  b e  fu rth e r  o p t i m i z e d  an d  i mp r o v e d  i n  c l i n i c a l  
+ap p l i c at i o n .
+Ke yw o r d s :  D i s c r e t e  Wav e l e t  Tran s fo rm
+,D ataenh an c em ent
+,  B i L S T M  n e tw ork ,  Tran s fo rm e r
+mo del
+,  xL S T M  n e tw o r k .
+I V
+
+
+目 录  
+第
+1 章 绪 论  1
+1
+. 1 研 宄 背 景 与 意 义  1
+1
+. 2 国 内 外 研 究 现 状  2  
+1
+. 2 . 1 基 于 机 器 学 习 的 癫 痫 检 测 技 术  2  
+1
+. 2 . 2 基 于 深 度 学 习 的 癫 痫 检 测 技 术  3
+1
+. 3 研 究 内 容 .  5
+1
+. 4 论 文 结 构 安 排  5
+第
+2 章 脑 电 信 号 基 础 及 数 据 库  7
+2
+. 1 脑 电 信 号 概 述  7
+2
+. 1 . 1 脑 电 信 号 简 介  7
+2
+. 1 . 2 脑 电 信 号 特 点  8
+2
+. 2 癫 痫 脑 电 信 号  8
+2
+. 3 脑 电 信 号 数 据 库   9
+2
+. 3 . 1 B o nn  数 据 库  9
+2
+. 3 . 2 C H B - MI T 数 据 库  9
+2
+. 4 本 章 小 结  1 0
+第
+3 章 基 于 数 据 增 强 和 l D C NN - B i L S T M 网 络 的 癫 痫 检 测 算 法 . . . . . 1 2
+3
+. 1 弓 丨 胃  1 2
+3
+. 2 算 法 流 程  1 2
+3
+. 3 离 散 小 波 变 换  1 3
+3
+. 4 数 据 增 强      1 3
+3
+. 5 I D C NN - B i L S T M 模 型  1 5
+3
+. 6 实 验 结 果 与 讨 论  1 7
+3
+. 6 . 1 实 验 结 果  1 7
+3
+. 6 . 2  讨 论           1 9
+3
+. 7 木 章 小 结  2 1
+第
+4 章 基 于 C o - Mix Up 和 改进 Tr an s form e r 网 络 的 癫 痫 检 测 算 法 . . . 2 2
+4
+. 1 弓 丨 胃  2 2
+4
+. 2 算 法 流 程  2 2
+4
+. 3 预 处 理  2 3
+4
+. 4  I n r e s fo r m e r  2 3
+4
+. 5 实 验 结 果 与 讨 论  2 6
+4
+. 5 . 1 实 验 结 果  2 6
+4
+. 5 . 2 讨 论  2 9
+
+
+4 . 6 本 章 小 结  3 3
+第
+5 章 基 于 空 间 变 化 生 成 方 法 和 Inre s -xL S T M 网 络 的 癫 痫 检 测 算 法  
+ 3 4  
+5
+. 1   3 4  
+5
+. 2 算 法 流 程  3 4  
+5
+. 3 预 处 理  3 5
+5
+. 4  I n r e s - x L S T M  3 6  
+5
+. 5 实 验 结 果 与 讨 论  3 8
+5
+. 5 . 1 实 验 结 果  3 8
+5
+. 5 . 2  讨 论  4 1
+5
+. 6 本 章 小 结  4 2  
+第
+6 章 总 结 与 展 望  4 4  
+6
+. 1 总 结  4 4  
+6
+. 2 展 望  4 5  
+ 4 6
+
+
+
+第
+1 章 绪论
+  
+第
+1 章 绪 论  
+1
+. 1 研 究 背 景 与 意 义  
+癫 痫 具 有 突 发 性 和 反 复 性 等 特 征 , 是 一 种 影 响 世 界 上 有 超 过 5 00 0 万 人 的 常 见 的 慢  
+性神 经系 统疾病 [1]
+。 每 年 有 许 多 新 增 的 癫 痫 患 者 没 有 得 到 及 时 治 疗 [2]
+。 癫 痫 不 仅 严 重 影  
+响 患 者 的 生 活 、 学 习 、 工 作 和 精 神 生 活 , 而 且 危 害 患 者 的 人 身 安 全 , 尤 其 是 儿 童 和 老 年
+人 W 。 这 种 疾 病 的 特 点 是 由 大 脑 中 的 电 活 动 异 常 , 导 致 频 繁 的 癫 痫 发 作 , 影 响 患 者 的 意
+识
+、 产 生 强 直 阵 挛 抽 搐 、 短 暂 失 神 、 感 觉 异 常 等 。 癫 痫 发 作 的 特 征 是 无 意 识 状 态 下 身 体  
+各 部 位 不 受控 制 震 颤 以 及 由 不 同 程 度 的 部 分 癫 痫 引 起 的 无 意 识 发 作 [4] 。 目 前 现 有 的 癫 痫  
+治 疗 策 略 主 要 有 药 物 治 疗 , 手 术 治 疗 和 中 医 辅 助 等 , 虽 然 抗 癫 药 物 辅 助 治 疗 或 手 术 控 制
+癫 痫 发 作 的 频 率 己 经 降 低 , 但 是 认 识 到 癫 痫 发 作 的 影 响 是 至 关 重 要 的 。
+脑 电 图 ( E E G ) 是 一 种 物 理 诊 断 技 术 , 由 于 其 可 重 复 性 和 低 成 本 , 己 被 医 学 研 宄 人  
+员 用 作 癫痫发作 检测 的 主流技术 [5]
+。 然 而 , 传 统 的 癫 痫 发 作 诊 断 是 通 过 人 工 识 别 , 这 是  
+一 项 复 杂 且 耗 时 的 视 觉 任 务 , 需 要 依 赖 于 临 床 医 生 的 经 验 进 行 脑 电 图 解 码 , 极 易 产 生 误  
+诊 和 漏 诊 , 危 害 患 者 生 命 [6]
+。 从 医 学 角 度 来 看 , 实 现 癫 痫 发 作 的 自 动 识 别 可 以 帮 助 医 生  
+在诊 断 过程 中 更 有 效 、 及 时 地 实施 诊 断 和 治 疗 措 施 [7]
+。 因 此 , 研 究 利 用 脑 电 图 信 号 进 行  
+癫 痫 发 作 自 动 检 测 技 术 具 有 重 要 的 价 值 和 意 义 。
+传 统 上 , 医 生 主 要 依 据 患 者 的 脑 电 图 信 号 记 录 和 过 往 病 史 依 据 视 觉 人 工 诊 断 癫 痫 发  
+作
+。 然 而 , 癫 痫 发 作 往 往 时 间 短 、 发 作 急 , 通 常 患 者 的 脑 电 信 号 监 测 往 往 需 要 长 期 监 测 ,
+增 加 医 生 诊 断 的 困 难 度 。 因 此 , 研 究 癫 痫 发 作 的 自 动 检 测 技 术 迫 在 眉 睫 。 依 据 计 算 机 辅
+助 医 生 诊 断 , 不 仅 有 助 于 实 时 监 测 癫 痫 发 作 , 提 高 发 作 检 测 准 确 性 , 而 且 还 可 以 降 低 医
+生 人 工 诊 断 的 复 杂 度 , 大 大 提 高 了 医 疗 效 率 。 图 1 . 1 展 示 了 计 算 机 辅 助 医 生 进 行 癫 痫 发  
+作 检 测 的 工 作 流 程 。
+l A l l ,
+ ,
+O円  
+_ ■ ■ ■  综 合 诊 断 ( 发作 类 型 + 病 因 )
+常 规 E EG 检 查 ■ ■ ■ ■ 并 制 定 治 疗 方 案
+计 算 机 辅 助 分 析 ( 特 征 提 取 + 分 类 模 型 ) 进 行 异 常 放 电 检 测
+图
+1
+. 1 计 算 机 辅 助 医 生 进 行 癫 痫 发 作 检 测 的 工 作 流 程 图
+1  
+
+
+
+第
+1 章 绪论
+  
+1
+. 2 国 内 外 研 究 现 状
+癫 痫 自 动 检 测 系 统 强 大 的 临 床 价 值 吸 引 了 广 大 科 研 学 者 的 深 入 探 索 。 早 在 上 个 世 纪  
+七 十 年 代 , 提 出 首 套 基 于 脑 电 信 号 特 征 的 自 动 识 别 算 法 , 突 破 了 传 统 目 测 诊 断 。 经 过 国
+内 外 几 十 年 的 发 展 , 癫 痫 检 测 算 法 技 术 的 不 断 成 熟 , 逐 渐 出 现 了 基 于 传 统 机 器 学 习 的 特  
+征 提 取 和 分 类 器 。 支 持 向 量 机 ( S upp o rtVe cto rM achine , S VM ) , 随 机 森 林 等 算 法 开 始  
+与 脑 电 信 号 处 理 技 术 结 合 。 研 宄 者 通 过 时 域 、 频 域 和 非 线 性 特 征 提 取 构 建 特 征 空 间 ,
+显 著 提 升 了 癫 痫 发 作 与 非 发 作 的 区 分 能 力 。 随 着 越 来 越 多 研 究 人 员 的 不 断 探 索 , 癫 痫 识
+别 领 域 研 宄 的 重 点 逐 渐 转 移 到 深 度 学 习 算 法 。 卷 积 神 经 网 络 与 长 短 期 记 忆 网 络 的 引 入 实
+现 了 更 深 层 次 的 特 征 学 习 。 使 用 深 度 神 经 网 络 分 类 的 效 率 和 性 能 都 得 到 了 提 升 。 图 1 . 2
+介 绍 了 癫 痫 发 作 检 测 流 程 。  
+传 统 的 机 器 学 习 方 法   / 
+ ̄ '  
+,
+ 基于 机器 学 习 的 算法
+"
+i
+|时 域I|
+支持 向 量机 、 决策 树 、 随
+|
+!
+频域
+丨
+丨 机森 林、 朴素 贝 叶斯 、 逻
+丨
+I 非线 性
+j I  辑 回 归 等  |
+^
+N  '  y  
+j  i  “  
+?
+J|
+E G —? 预 处 理 一 ? 特 征 提 取 一? 分 类
+s  \  y  V .    , /  V  ^  
+i  I
+r  '
+| 基 于 深 度 学 习 的 算法 '
+j
+卷积神经网 络 、 循环神经网
+丨
+I 络 、 长 短 期 记 忆 网 络 、 生 成 I
+I  对 抗 网 络 、 自 编 码 器 等  |
+
+— — — —    —  —  —  —  z  
+深 度 学 习 方 法  
+图
+1
+. 2 癲 痫 发 作 检 测 流 程 图
+1
+. 2 . 1 基于 机器 学 习 的 癱 痫检测 技 术  
+在 过 去 的 十 几 年 中 , 癫 痫 自 动 检 测 技 术 发 展 迅 速 。 利 用 脑 电 信 号 数 据 诊 断 癫 痫 发
+作 的 领 域 已 经 出 现 了 许 多 监 测 技 术 , 其 中 由 典 型 的 机 器 学 习 方 法 为 主 , 主 要 包 括 两 部
+分
+: 特征提取和 分类器 [8]
+。
+传 统 机 器 学 习 方 法 需 要 通 过 手 工 提 取 脑 电 信 号 的 时 域 、 频 域 和 非 线 性 特 征 , 这 对  
+识 别 癫 痫 发 作 起 着 至 关 重 要 的 作 用 。 Kuo - KaiS hyu 等 人 提 出 使 用 低 复 杂 度 摘 估 计 方 法 ,
+使 用 基 本 算 术 运 算 ( 加 法 、 减 法 、 乘 法 和 除 法 ) 和 按 位 运 算 进 行 特 征 提 取 , 更 适 合 低  
+2
+
+
+
+第
+1 章 绪论
+  
+成本和 低 功 耗 的 可 穿 戴 设备 t9]
+。 Temk0 等 人 利 用 快 速 傅 里 叶 变 换 提 取 脑 电 信 号 的 频 域  
+特 征 对 脑 电 信 号 数 据 进 行 分 类 并 促 进 癫 痫 发 作 检 测 Liu 等 人 使 用 变 分 模 态 分 解 脑
+电 信 号 , 通 过 Log-Euclidean 协 方 差 矩 阵 ( LE C M ) 重 建 脑 电 波 特 征 [11]
+。 S i v a s ank ari
+通 过 引 入 的 时 域 和 频 域 特 征 以 及 基 于 熵 特 征 的 希 尔 伯 特 黄 变 换 ( HHTEF ) 从 脑 电 信  
+号 中 提取特征 , 以 实现 可靠 的 分类 [ 12]
+。 Abhi s hek 等 人 使 用 功 率 谱 密 度 和 谱 熵 提 取 脑  
+电 信 号 特 征 , 以 检 测 具 有 癫 痫 发 作 和 非 癫 痫 发 作 特 征 的 脑 电 信 号 Akb ari 等 人 在  
+分 段 脑 电 图 上 提 取 了 五 种 特 征 来 对 焦 点 和 非 焦 点 信 号 进 行 分 类 , 达 到 9 3 % 的 准 确 率
+[ 1 4] 。  
+特 征 提 取 之 后 , 可 以 通 过 K-means 聚 类 分 类 器 , 支 持 向 量 机 等 对 脑 电 信 号 进 行 分  
+类
+。 Wang 等 人 使 用 随 机 森 林 算 法 分 类 识 别 性 能 达 到 平 均 准 确 率 9 6 % 在 S rih ari 等  
+人 的 工 作 中 , 新 提 出 的 模 糊 时 间 朴 素 贝 叶 斯 ( FT-NB ) 分 类 器 有 效 诊 断 癫 痫 发 作 [ 1 6]
+。
+S harm a 等 人 提 出 了 一 种 用 于 癲 痫 发 作 识 别 的 新 系 统 , 高 斯 过 程 潜 在 变 量 模 型
+( G P LVM ) 用 于 通 过 实 现 一 组 主 要 特 征 来 减 少 特 征 的 数 量 , 再 使 用 监 督 分 类 器 ( 多  
+支 持 向 量 机 ( MS VM ) ) 对 癫 痫 发 作 类 别 进 行 分 类 , 并 取 得 了 良 好 的 分 类 效 果 [ ) 7]
+。  
+A
+l
+- S alman 等 人 使 用 最 小 二 乘 支 持 向 量 机 ( L S - S VM ) 分 类 器 中 对 正 常 和 异 常 的 脑 电
+图 进行 分 类平均 准 确 率 为 97.7%
+t W 。
+传 统 的 机 器 学 习 技 术 在 辅 助 医 生 诊 断 疾 病 发 挥 重 要 作 用 。 使 用 计 算 机 技 术 比 人 工  
+诊 断速度更快 , 错误率更低 。 机器学 习 作为常用 的 识别 癫痫发作诊断技术之一
+, 尽 管
+在 手 工 特 征 提 取 和 分 类 器 的 结 合 下 存 在 较 高 的 准 确 度 , 但 在 解 决 如 何 实 现 及 时 准 确 的
+癫 痫 发 作 检 测 仍 然 是 一 项 重 大 挑 战 。
+1
+. 2 . 2 基于深度 学 习 的 镰痫检测技术
+传 统 机 器 学 习 依 赖 于 手 动 提 取 特 征 , 可 能 不 是 很 多 分 类 任 务 的 最 佳 选 择 。 在 最 新 发
+展 趋 势 中 , 深 度 学 习 方 法 促 进 了 癫 痫 发 作 识 别 。 P uj a D har 等 人 将 卷 积 神 经 网 络 ( CNN )
+应用 分析不 同 的特 征脑 电 图 信 号 , 感知 和 分类不 同 类型 的癫痫发作 [19]
+。 为 了 弥 补 C N N  
+的 不 足 , Tunc er 等 人 利 用 B iL S TM 挖 掘 EE G 数 据 信 息 [2 Q]
+。 为 了 提 高 信 号 分 类 的 准 确 率
+和 灵 敏 度 , S ame e 等 人 在 研 究 中 将 RNN 和 B iL S TM 网 络 结 合 , 用 于 通 过 脑 电 信 号 处 理  
+自 动 识 别 癫 痫 发 作 [2 1 ]
+。 吴 等 人 将 处 理 后 的 脑 电 信 号 使 用 L S TM 学 习 深 层 特 征 , 从 而 端  
+到端预测癫痫发作 [
+22]
+。 To ma 等 人 设 计 了 一 个 双 通 道 双 层 C NN 的 B i L S T M 网 络 模 型 ,
+用 于 在 任 何 两 个 不 同 通 道 的 数 据 中 提 取 时 空 特 征 , 在 模 型 中 使 用 B iL S TM 层 代 替 L S TM  
+层
+, 更 容 易 提取丰 富 的 学 习 特征 [23]
+。 Ro y 等 人 提 出 的 ChronoN e t 模 型 , 它 通 过 叠 加 多 个  
+1 D 卷 积 层 , 实 现 癫 痫 发 作 分 类 检 测 [24]
+。 E p i l ep s y-N e t 模 型 是 将 一 维 卷 积 神 经 网 络  
+( CNN ) 、 循 环 神 经 网 络 ( RNN ) 和 注 意 力 机 制 结 合 识 别 癫 痫 发 作 D en g 等 人 利 用
+CNN 擅 长 捕 捉 序 列 的 局 部 特 征 进 行 实 验 , 并 取 得 良 好 性 能 [26]
+。 B iL S TM 可 以 捕 获 文 本  
+3
+
+
+
+第
+1 章 绪论
+  
+上 下 文 特 征 , 但 其 捕 获 上 下 文 特 征 中 显 着 特 征 的 能 力 较 弱 , 利 用 注 意 力 机 制 和 C NN 可  
+以 增 强模 型 提取 关 键特 征 的 能 力 [2火  
+然 而 , 简 单 的 C NN 在 获 取 原 始 输 入 信 号 的 全 周 信 息 方 面 存 在 局 限 性 。 Raghu 等 人  
+将 CNN 与 Go o g l e ne t 和 In c ep t i o nv3 深 度 学 习 预 训 练 神 经 网 络 一 起 应 用 于 癫 痫 发 作 检 测
+的 多 分 类 [28]
+。 由 于 多 层 CNN 可 以 学 习 更 高 层 次 的 特 征 , 因 此 在 更 深 层 的 CNN 网 络 上 ,
+分 类 精 度 得 到 了 提高 [29]
+。 Yan 等 人 提 出 了 一 种 基 于 CNN 的 自 动 癫 痫 发 作 检 测 算 法 , 该  
+算 法 利 用 脑 电 图 频 谱 作 为 特 征 来 有 效 区 分 癫 痫 发 作 和 非 癫 痫 发 作 状 态 Reddy 等 人  
+提 出 了 一 种 改 进 的 C NN 架 构 , 通 过 使 用 模 糊 C -m e ans( F C M ) 聚 类 算 法 改 进 传 统  
+CNN 来对 癫 痫 发 作 信 号 进 行 分 类 [3 1 ]
+。 P and ey 等 人 将 用 C_ 和 L S TM 结 合 来 学 习 脑 电
+信 号 的 时 空 信 息 [32]
+。 为 了 分 析 不 同 范 围 的 脑 电 图 信 号 , 新 的 多 尺 度 时 间 分 析 模 型 如
+EE G Wav eN e t 被 用 于 癫 痫 发 作 检 测 [ 3 3 ]
+。 利 用 多 尺 度 模 块 加 快 了 特 征 提 取 速 度 获 得 良 好  
+性 能 , 但增 加 了 计 算 贪荷 [34]
+。 为 了 减 少 参 数 数 量 和 加 快 收 敛 速 度 , S hyu 等 人 采 用 了 多
+尺 度 Inc epti on 和 Resnet 网 络 进 行 快 速 癫 痫 发作 类 别 的 识 别 [3 5 ]
+。
+在 深 度 学 习 训 练 阶 段 , 数 据 类 别 的 不 平 衡 性 和 嘈 杂 的 噪 声 数 据 等 问 题 导 致 模 型 检 测
+性 能 不 高 [3 6]
+。 越 来 越 多 的 研 宄 人 员 研 究 如 何 有 效 利 用 有 限 的 数 据 , 增 强 深 度 学 习 训 练  
+数 据 集 数 量 , 进 而 提 高 癫 痫 检 测 性 能 。 He 等 人 通 过 动 态 数 据 生 成 的 新 颖 训 练 方 法 , 更  
+丰 富 的 噪 声 数 据 实 际 上 被 输 入 到 DNN 模 型 中 进 行 数 据 增 强 , 证 明 了 所 提 出 的 训 练 策 略  
+具 有 更 好 的 泛 化 能 力 [37]
+。 Ab oyezi 等 人 使 用 增 强 的 EE G 频 谱 图 进 行 独 立 于 患 者 的 癫 痫
+发作 分类 的 可 解释 深 度 学 习 [38]
+。 P eng 等 人 使 用 正 弦 编 码 的 时 间 信 息 增 强 模 块 来 増 强  
+EEGNet 的 第 一 卷积 层 , 在 跨受试者癫痫 发作 分类和 迁移 学 习 场 景 中 取得 了 最 佳性 能 [39]
+。
+目 前 , 基 于 Trans f o rmer 的 深 度 学 习 模 型 发 展 迅 速 , 被 广 泛 应 用 于 处 理 序 列 数 据 。
+它 利 用 自 关 注 机 制 来 评 估 输 入 序 列 中 元 素 的 重 要 性 , 使 其 能 够 有 效 地 处 理 长 序 列 数 据
+[4Q]
+。 目 前 , 基 于 Tran s fo rmer 的 深 度 学 习 模 型 被 广 泛 用 于 序 列 数 据 的 处 理 。 它 利 用 自 关
+注机 制 来评估输 入序 列 中 元 素 的 重 要 性 , 使 其 能 够有 效 地 处 理 长序 列 数 据 [41 ]
+。 考 虑 到  
+脑 电 图 信 号 的 长 期 连 续 性 , N an 等 人 提 出 了 一 种 基 于 C NN- Trans formei
+? 网 络 的 潜 在 癫 痫  
+发 作 识 别 方 法 研 宄 表 明 , 将 网 络 中 的 集 成 卷 积 和 Tr ans f o rmer 模 块 相 结 合 , 可 以 提 高 识  
+别 性 能 [42]
+。 然 而 , Tr ans f o rm er 模 型 的 自 注 意 力 机 制 具 有 二 次 时 间 复 杂 度 和 高 内 存 使 用  
+率 的 特 点 , 这 增 加 了 部 署 成 本 并 限 制 了 其 应 用 。 为 了 克 服 这 些 限 制 , Zh ou 等 人 提 出 了
+一 种 基 于 Tran s fo rm er 改 进 的 高 效 长 序 列 时 间 序 列 预 测 ( L S T F ) 模 型 , 名 为 In form er  
+[43 ]
+。 尽 管 上 述 方 法 在 癫 痫 发 作 检 测 方 面 取 得 了 进 展 , 但 目 前 的 解 决 方 案 在 以 更 少 的 计  
+算 量 实 现 更 高 的 性 能 方 面 仍 然 存 在 不 足 。 B e c k 等 人 提 出 了 一 种 新 颖 的 网 络 xL S TM , 具  
+有 记 忆 更 新 和 并 行 计 算 等 优 势
+4
+
+
+
+第
+1 章 绪论
+  
+1
+. 3 研 究 内 容  
+近 几 年 , 采 用 脑 电 图 信 号 进 行 癫 痫 发 作 检 测 得 到 了 迅 速 发 展 , 而 用 于 癫 痫 发 作 检 测
+的 脑 电 波 数据 仍 存 在 数 据 采 集 不 平 衡 、 发 作 样 本 少 等 问 题 , 在 癫 痫 发 作 样 本 量 不 足 的 情  
+况 下 , 采 用 深 度 学 习 架 构 的 模 型 进 行 癫 痫 发 作 检 测 容 易 产 生 过拟 合 现 象 , 导 致 实 验 结 果
+精 度 低 。 为 了 解 决 这 个 问 题 , 本 文 以 波 士 顿 儿 童 医 院 ( C HB - MIT ) 的 癫 痫 脑 电 数 据 集  
+和 波 恩 ( B onn ) 数 据 集 进 行 实 验 验 证 , 拟 通 过 基 于 数 据 增 强 和 深 度 学 习 网 络 在 癲 痫 发  
+作 检 测 方 面 进 行 研 究 , 提 出 了 三 种 癫 痫 发 作 脑 电 信 号 检 测 算 法 。 主 要 研 究 内 容 如 下 :
+( 1 ) 研 宄 了 一 种 基 于 数 据 增 强 和 l D CNN-B iL S T M 网 络 的 癫 痫 检 测 算 法 。 分 别 使  
+用 M ixUp 、 C o - M i xUp 和 S up erM ix 数 据 增 强 算 法 , 生 成 新 的 训 练 样 本 数 据 。 侧 重 于 使  
+用 CNN 和 B i L S TM 的 优 势 结 合 注 意 力 机 制 , 捕 捉 脑 电 信 号 的 局 部 和 全 局 关 系 。 本 研 究
+'
+结 合 D WT 进 行 脑 电 信 号 分 解 , 重 组 脑 电 信 号 和 分 类 后 的 标 签 融 合 , 优 化 了 算 法 性 能 。
+研 宄 证 明 应 用 的 数 据 增 强 技 术 具 有 一 定 的 效 果 , 其 中 C o - MixUp 的 数 据 增 强 效 果 更 胜 一  
+筹
+。  
+( 2 ) 研 宄 了 一 种 基 于 C o - Mi xUp 和 改 进 的 Tr ans fo rm er 网 络 ( Inre s fo rm er ) 的 癫 痫
+检 测 算 法 。 基 于 研 究 一 的 内 容 , 使 用 C o- M i xUp 进 行 数 据 增 强 , 平 衡 脑 电 信 号 数 据 类 的
+不 平 衡 现 象 。 Tran s fo rm er 网 络 可 以 解 决 B i L S TM 的 记 忆 容 量 缺 陷 , 更 好 的 学 习 脑 电 信
+号 特 征 。 使 用 基 于 时 间 和 事 件 的 两 种 检 测 算 法 , 取 得 一 定 的 成 效 。 并 在 临 床 应 用 方 面 进  
+行 相 关 的 指 标 性 实 验 , 在 临 床 应 用 取 得 良 好 的 成 效 。 与 当 前 的 癫 痫 检 测 算 法 相 比 , 提 出
+的 方 法 仍 具 有 一 定 的 竞 争 力 。
+( 3 ) 研 宄 了 一 种 基 于 空 间 变 化 生 成 方 法 和 Inr e s -xL S TM 网 络 的 癲 痫 检 测 算 法 。 使
+用 深 度 学 习 模 型 Inre s - xL S TM , 旨 在 进 一 步 提 取 脑 电 信 号 的 固 有 特 征 , 细 化 脑 电 信 号 特
+征 学 习 。 在 增 强 记 忆 容 量 的 同 时 可 以 并 行 处 理 特 征 数 据 , 提 高 模 型 的 处 理 能 力 , 减 轻 计  
+算 负 担 。 该 算 法 在 公 开 的 脑 电 信 号 数 据 集 上 进 行 实 验 评 估 。 提 出 的 方 法 与 目 前 最 先 进 的
+癫 痫 检 测 算 法 相 比 较 , 在 较 低 的 计 算 负 担 下 具 有 良 好 的 性 能 和 潜 在 的 临 床 应 用 价 值 。
+1
+. 4 论 文结构 安 排
+论 文 通 过 以 下 六 个 章 节 阐 述 了 癫 痫 发 作 自 动 检 测 研 究 , 研 究 内 容 如 下 :
+第
+1 章 主 要 介 绍 了 癫 痫 检 测 的 研 究 背 景 与 意 义 , 总 结 国 内 外 的 研 究 现 状 , 提 出 论 文  
+的 研 宄 内 容 和 结 构 安 排 。
+第 2 章 主 要 对 脑 电 信 号 基 础 和 数 据 库 进 行 了 概述 , 介 绍 脑 电 信 号 的 简 介 和 特 点 和 用
+来 评 估 实 验 结 果 的 两 个 公 开 癫 痫 脑 电 信 号 的 数 据 库 。
+第
+3 章 是 对 基 于 数 据 增 强 和 l D CNN -B i L S TM 网 络 的 癫 痫 检 测 算 法 进 行 分 析 。 本 章
+介 绍 了 离 散 小 波 变 换 和 数 据 增 强 算 法 进 行 脑 电 信 号 预 处 理 。 介 绍 了 提 出 的 1 D C NN-  
+5
+
+
+
+第
+1 章 绪论
+  
+B
+iL S TM 模 型 在 脑 电 信 号 分 类 的 优 势 , 并 使 用 决 策 融 合 技 术 提 高 脑 电 信 号 分 类 的 精 度 。
+最 后 分 析 了 提 出 的 方 法 在 使 用 的 数 据 集 上 取 得 的 实 验 结 果 。
+第 4 章 是 基 于 C o -MixUp 和 改 进 Trans former 网 络 的 癲 痫 检 测 算 法 。 其 次 , 对  
+lure f o rmer 网 络 架 构 进 行 了 详 细 介 绍 , 在 C HB - M I T 数 据 集 进 行 了 基 于 时 间 和 基 于 事 件  
+的 结 果 评 估 。 接 着 分 析 了 标 签 融 合 的 好 处 , 以 及 在 三 个 不 同 的 特 定 频 带 ( d3 ,d4 和 d 5 )
+与 提 出 方 法 基 于 每 位 患 者 的 准 确 率 比 较 结 果 可 视 化 。 最 后 , 针 对 模 型 的 泛 化 能 力 进 行 了
+跨 患 者 的 实 验 结 果 展 示 , 进 一 步 通 过 计 算 成 本 和 复 杂 度 肯 定 了 模 型 在 临 床 研 宄 的 潜 在 价  
+值
+。
+第
+5 章 是 基 于 空 间 变 化 生 成 方 法 和 Inres -xL S T M 网 络 的 癫 痫 研 究 检 测 算 法 。 详 细 介  
+绍 了 空 间 变 换 生 成 方 法 和 xL S TM 网 络 架 构 。 通 过 计 算 模 型 的 时 间 复 杂 度 和 延 迟 时 间 证  
+明 提 出 的 模 型 具 有 良 好 的 实 时 性 。 利 用 这 些 优 势 , 提 出 的 方 法 在 C HB - MIT 数 据 集 取 得  
+了 与 当 前 先 进 研 究 相 当 的 性 能 。  
+第
+6 章 是 总 结 和 展 望 。 总 结 提 出 研 究 内 容 存 在 的 不 足 和 对 未 来 方 向 进 行 展 望 。
+6
+
+
+
+第
+2 章 脑 电信号基础及数据库
+  
+第
+2 章 脑 电 信 号 基础 及 数 据 库  
+2
+. 1 脑 电信 号概述  
+2
+. 1 . 1 脑 电 信 号 简 介
+脑 电 图 ( E E G ) 记 录 着 大 脑 神 经 元 活 动 产 生 的 电 信 号 , 脑 电 图 电 信 号 的 分 析 对 于 了  
+解大脑 的 生 理 和 病 理 信 息 具 有 重 要 意 义 [45]
+。 十 九 世 纪 英 国 生 理 学 家 C aton 首 先 在 动 物
+大 脑 上 获 取 到 电 活 动 [46]
+。 到 二 十 世 纪 H ansB erger 开 始 记 录 人 体 脑 电 信 号 并 进 行 研 究 ,
+为 人 类 研 究 脑 电 信 号 奠 定 基 础 。 因 此 研 宄 人 员 和 医 务 工 作 者 也 开 始 在 临 床 治 疗 中 结 合  
+EE G 检 测 技 术 。 当 下 常 规 脑 电 图 、 动 态 脑 电 图 等 检 查 技 术 日 渐 成 熟 , 在 癫 痫 检 测 领 域  
+贡 献 主 要 力 量 。 日 常 脑 电 图 频 率 一 般 在 0 . 3 - 7 0Hz , 脑 电 图 的 波 形 含 有 多 种 基 本 元 素 ,
+其 中 频 率 记 录 脑 电 信 号 特 征 最 重 要 信 息 , 脑 电 图 按 照 频 率 范 围 可 以 分 为 四 种 基 本 类 型 :
+( 1 )5 波 : 频 率 分 布 范 围 为 0 . 5 - 3 . 5Hz , 存 在 于 额 头 部 位 。 主 要 会 在 人 睡 眠 , 深 度
+麻 醉 , 缺 氧 或 大 脑 病 变 时 出 现 。  
+( 2 )0 波 : 频 率 分 布 范 围 为 4 - 7 . 5Hz , 产 生 于 脑 部 顶 叶 和 颞 叶 , 常 在 儿 童 脑 部 产
+生
+。 成 年 人 在 困 倦 时 出 现 , 是 中 枢 神 经 系 统 抑 制 的 表 现 。
+( 3 )a 波 : 频 率 分 布 范 围 为 8 - 1 3Hz , 是 成 年 人 正 常 的 脑 电 波 , 主 要 出 现 在 人 清 醒  
+时 闭 眼 状 态 , 它 的 形 状 形 似 正 弦 波 形 。
+( 4 ) # 波 : 频 率 分 布 范 围 为 1 4 - 3 0Hz , 在 成 年 人 睁 眼 或 清 醒 时 活 跃 。  
+脑 电 信 号 的 波 段 主 要 是 这 四 种 形 式 , 但 是 脑 电 信 号 是 一 种 持 续 的 非 平 稳 信 号 , 在 遭  
+受 周 围 环 境 不 同 的 刺 激 时 又 会 有 不 同 的 表 现 。 脑 电 图 主 要 是 通 过 放置 在 头 皮 或 者 颅 内 的
+电 极 收集 得 到 数 据 , 根据 不 同 的 电 极 放 置 位 置 又 分 为 头 皮 脑 电 图 和 颅 内 脑 电 图 [47,[48]
+。
+头 皮 脑 电 图 又 称 为 常 规 脑 电 图 , 是 直 接 在 人体 头 皮 上 放 置 电 极 采集 数 据 。 头 皮 脑 电 图 的
+采 集 是 一 种 容 易 被 患 者 所 接 受 的 简 单 便 捷 且 无创 伤 的 方 式 , 主 要 用 于 脑 电 信 号 的 常 规 检  
+查
+。 但 是 把 在 头 皮 上 放 置 电 极 收 集 的 脑 电 信 号 数 据 通 常 会 存 在 较 多 的 噪 声 和 千 扰 。 颅 内
+脑 电 图 则 是 利 用 开 颅 手 术将 电 极 放 置 在 人 体 脑 部 皮 层 甚 至 更 加 深 入 的 部 位 收 集 的 信 号 。
+通 过 这 种 方 式 收 集 的 信 号 更 为 准 确 , 但 对 患 者 而 言 会 有 一 定 的 风 险 和 损 伤 。
+国 际 脑 电 图 学 会 结 合 临 床 神 经 学 设 计 了 一 种 电 极放置 方 法 来 规 定 电 极 的 放 置 位 置 即 :
+1 0-20 系 统 电 极放 置 法 [49]
+。 从 图 中 可 以 看 出 , 该 方 法 主 要 包 含 1 9 个 记 录 电 极 且 每 个 电  
+极 命 名 的 编 码 不 是 按 序 排 列 的 , 这 样 做 的 目 的 主 要 是 为 增 加 新 的 电 极 预 留 序 号 。 为 了 获
+取 更 精 准 的 脑 电 信 号 , 目 前 脑 皮 放 置 的 导 联 数 目 变 得 更 多 , 甚 至 有 1 2 8 导 联 的 多 导 联 脑
+电 图 。
+7
+
+
+
+第
+2 章 脑 电信号基础及数据库
+  
+2
+. 1 . 2 脑 电 信 号 特点  
+脑 电 信 号 是 人 体 脑 部 产 生 的 一 种 随机 性 很 强 的 生 理 信 号 , 主 要 有 以 下 几 个 特 点 :  
+( 1 ) 非 平 稳 性 和 随 机 性 。 现 下 的 医 疗 检 测 技 术 并 不 能 完 全 了 解 大 脑 的 生 理 活 动 ,
+脑 电 信 号 影 响 因 素 多 , 导 致 随 机 性 强 , 并 且 规 律 又 尚 未 被 熟 知 。 所 以 , 平 常 只 能 借 助  
+统 计 处 理 技 术 来 检 测 、 辨 识 和 估 计 脑 电 信 号 的 特 征 。 非 平 稳 性 是 由 于 构 成 脑 电 信 号 的  
+生 理 因 素 在 动 态 变 化 , 而 且 对 外 界 的 影 响 有 自 适 应 能 力 。 因 此 , EEG 又 是 统 计 特 性  
+随 时 间 变 化 的 非 平 稳 信 号 。
+( 2 ) 非 线 性 。 生 物 组 织 的 调 节 及 自 适 应 能 力 必 然 影 响 到 电 生 理 信 号 , 这 使 得 脑 电
+具 有 典 型 的 非 线 性 的 特 点 。 而 传 统 意 义 上 的 信 号 处 理 方 法 都 是 建 立 在 线 性 系 统 理 论 分 析  
+基 础 之 上 的 , 因 而 分 析 结 果 不 可 避 免 地 丢 失 了 很 多 原 始 信 号 所 带 的 信 息 。 这也 是 为 什 么
+非 线 性 动 力 学 混 沌 理 论 发 展 起 来 后 被 迅 速 运 用 到 脑 电 的 分 析 研 宄 中 的 原 因 。 虽 然 目 前 尚
+没 有 任 何 结 论 可 以 替 代 传 统 的 研 宄 方 法 , 但 是 不 可 否 认 的 是 非 线 性 研 宄 在 脑 电 信 号 处  
+理 中 有 着 极 其 重 要 的 地 位 , 并 有 可 能 最 终 取 代 基 于 线 性 系 统 的 研 究 方 法 占 据 脑 电 信 号 分  
+析 处 理 的 主 导 位 置  
+2
+. 2 癱痫脑 电信 号  
+癫 痫 是 一 种 常 见 的 大 脑 神 经 元 之 间 异 常 放 电 形 成 的 一 种 现 象 , 癫 痫 发 作 是 脑 内 神 经  
+元 异 常 超 同 步 化 阵 发 性 电 活 动 的 临 床 表 现 。 脑 电 图 可 以 记 录 癫 痫 患 者 发 作 期 或 发 作 间 歇  
+期 的 棘 波 、 尖 波 、 棘 慢 复 合 波 和 尖 慢 复 合 波 等 癫 痫 样 放 电 活 动 。 在 发 作 间 期 , 脑 电 信 号
+为 瞬 变 波 形 , 表 现 为 尖 波 或 棘 波 , 癫 痫 发 作 的 脑 电 信 号 是 连 续 的 , 具 有 尖 波 和 棘 波 的 复  
+合 波 形 。 发 作 间 期 癫 痫 样 放 电 及 单 侧 周 期 性 癫 痫 样 放 电 对 诊 断 有 明 确 价 值 。 棘 波 、 尖 波  
+主 要 用 于 确 诊 是 否 患 有 癫 痫 疾 病 , 棘 慢 波 , 尖 慢 波 通 常 用 来判 断 癫 痫 是 否 发 生 。 因 此 明  
+确 癫 痫 脑 电 信 号 的 波 形 、 幅 度 、 频 率 等 特 征 , 对 癫 痫 自 动 检 测 的 研 究 具 有 重 要 的 价 值 和  
+临 床 意 义 。 癫 痫 脑 电 信 号 的 波 形 特 征 如 下 :
+( 1 ) 棘 波 : 作 为 最 基 本 、 突 发 性 较 强 的 短 暂 脑 电 信 号 , 要 比 背 景 信 号 突 出 很 多 ,
+在 确 诊 的 各 种 癫 痫 发 作 中 极 为 常 见 。 棘 波 的 波 形 特 征 表 现 明 显 , 大 都 为 负 相 波 , 波 幅 差  
+异 比 较 大 , 多 在 l O O ^V 以 上 , 也 有 幅 度 小 于 5 0 pV 的 叫 做 短 棘 波 或 小 棘 波 , 棘 波 的 极 性  
+向 上 者 称 为 阴 性 棘 波 , 极 性 向 下 者 称 为 阳 性 棘 波 。  
+( 2 ) 尖 波 : 发 作 原 因 和 棘 波 类 似 , 作 为 另 一 种 常 见 的 突 发 较 强 的 短 暂 脑 电 信 号 波  
+形
+, 波 形 的 上 升 沿 部 分 陡 且 直 , 下 降 沿 部 分 变 化 较 缓 慢 , 癫 痫 发 作 过 程 中 出 现 频 率 较 高 ,  
+波 幅 较 大 , 形 态 类 似 三 角 形 , 通 常 在 1 0 0 ? 2 0 0 jiV 之 间 , 有 的 甚 至 大 于 3 0 0 pV , 周 期 在  
+8 0 ? 2 0 0  m s 之 间 。
+( 3 ) 棘 一 慢 复 合 波 : 是 一 种 由 棘 波 和 慢 波 叠 加 形 成 的 负 相 复 合 波 。 受 到 慢 波 的 影  
+响 周 期 较长 , 约 200 ? 500 ms , 受棘波影 响 幅度 较大 ,
+一 般 在 1 5 0 ? 3 0 0 ^V 之 间 , 有 的
+8
+
+
+
+第 2 章 脑 电信 号基础及数据库
+  
+会 高 达 5 0 0 pV , 3 周 /秒 的 棘 慢 波 为 失 神 发 作 的 典 型 波 形 。
+( 4 ) 尖 一 慢 复 合 波 : 是 在 尖 波 波 形 的 后 面 紧 随 一 个 慢 波 。 该 波 形 表 现 形 式 多 样 ,
+可 持 续 不 断 地 呈 不 规 则 的 同 步 出 现 , 大 多 单 侧 性 或 间 断 性 出 现 于 大 脑 的 颞 叶 区 域 。
+2
+. 3 脑 电信 号 数 据 库
+本 研 宄 使 用 的 实 验 数 据 来 自 两 个 不 同 的 公 开 脑 电 数 据 集 , 分 别 是 B onn 数 据 库 和
+C HB -MIT 长 程 脑 电 数 据 库 。 B o nn 数 据 库 包 含 5 个 子 集 : 数 据 集 A 、 B 、 C 、 D 和 E , 常  
+用 于 验 证 癫 痫 检 测 算 法 的 准 确 性 。 C HB -MIT 长 程 脑 电 数 据 库 包 含 2 3 名 病 人 的 2 4 例 长  
+时 间 癫 痫 发 作 脑 电 图 数 据 记 录 。 其 中 包 括 癫 痫 发 作 的 前 期 , 间 期 和 发 作 期 数 据 。 本 节 接  
+下 来 对 两 种 数 据 库 分 别 进 行 详 细 描 述 。  
+2
+. 3 . 1B o n n 数 据 库
+德 国 波 恩 大 学 癫 痫 学 系 的 波 恩 数 据 集 ( B onn ) 由 5 个 EE G 数 据 集 组 成 , 分 别 命 名
+为 A 、 B 、 C 、 D 和 抄 5]
+。 A 和 B 分 别 包 含 来 自 不 同 状 态 的 健 康 受试 者 的 E E G 信 号 记 录 。
+C 和 D 是 在 癫 痫 病 灶 和 病 灶 对 侧 半 球 的 海 马 体 中 获 得 的 间 歇 期 颅 内 脑 电 图 记 录 。 组 E
+中 的 信 号 是 在 癫 痫 发 作 期 间 从 颅 内 电 极 获 得 的 。 每 组 记 录 的 脑 电 信 号 包 含 1 0 0 个 时 长 为
+2 3 . 6 s 的 单 通 道 脑 电 信 号 数 据 , 分 辨 率 为 1 2 位 , 采 样 频 率 为 1 7 3 . 6 1 Hz 。 表 2 . 1 展 示 了 波
+恩 数 据 集 的 具 体 信 息 。 表 2 . 1 展 示 了 波 恩 数 据 集 患 者 的 具 体 信 息 。
+表
+2
+. 1 B o nn 数 据 集 具 体 信 息
+子 集 标 签
+
+患 者 类 型 电 极 类 型
+A( Z ) 健 康 健 康 头 皮
+B( 0 ) 健 康 健康 头 皮
+C( N )  发 作 间 期 癫 痫 患 者 颅 内
+D( F ) 发 作 间 期  癫 痫 患 者 颅 内
+E( S ) 发 作 期 癫 痫 患 者 颅 内
+2
+. 3 . 2C H B -MI T  数 据 库
+C HB - MIT 数 据 集 是 一 个 可 访 问 的 儿 童 癫 痫 患 者 多 通 道 头 皮 EE G 数 据 集 , 包 括 2 3  
+例 患 者 的 2 4 组 E E G 记 录 , 其 中 chb O l 和 chb 2 1 来 自 同 一 例 患 者 [ 5 1 , 5 2 3
+。 脑 电 信 号 数据 记  
+录 是 以 . edf 文 件 存 储 , 每 个 文 件 记 录 患 者 不 低 于 2 0 个 小 时 的 连 续 脑 电 数 据 。 数 据 集 中
+包 含 的 脑 电 数 据 记 录 总 时 长 多 于 9 0 0 个 小 时 , 选 取 2 3 例 患 者 共 有 的 双 相 蒙 太 奇 EE G 通  
+道
+, 采 样 率 为 2 5 6Hz ,1 6b i t 的 采 集 分 辨 率 。 实 验 共 选 取 了2 2 个 常 用 通 道 , 剔 除 重 复 通  
+道 T 8 - P 8 。 由 于 c hb 2 1 缺 少 F4 - C 4 通 道 , 实 验 只 使 用 了2 1 个 通 道 每 个 通 道 的 脑 电 信 号
+9
+
+
+
+第
+2 章 脑 电信号基础及数据库
+  
+记 录采 用 非 重 叠 滑 动 窗 划 分 为 4s
+— 段 的 脑 电 信 号 。 表 2 . 2 展 示 了 波 士 顿 儿 童 医 院 数 据
+集 患 者 的 具 体 信 息 。
+表 2 . 2C HB -M I T 数 据 集 患 者 的 具 体 信 息
+患 者 性 别 年 龄 瘫 痫 发 作 事 件 的 数 量 癫 痫 发 作 持 续 时 间 ( s )
+chb O l  女  1 1  7  44 2
+c hb 0 2  男  1 1  3  1 7 2
+c hb 0 3  女  1 4  7  4 0 2  
+c hb 0 4  男  2 2  4  3 7 8
+c hb 0 5  女  7  5  5 5 8
+c hb 0 6  女  1 . 5  1 0  1 3 8
+c hb 0 7  女  1 4 . 5  3  3 2 5
+c hb 0 8  男  3 . 5  5  9 1 9
+c hb 0 9  女  1 0  4  2 7 6
+c hb l O  男  3  7  4 4 7
+c hb l l  女  1 2  3  8 0 6
+c hb l 2  女  2  4 0  1 4 7 5
+c hb l 3  女  3  1 2  5 3 5
+c h b l 4  女  9  8  1 0 9
+c hb l 5  男  1 6  2 0  1 9 9 2
+c hb l 6  女  7  1 0  8 4
+c hb l 7  女  1 2  3  2 9 3
+c hb l 8  女  1 8  6  3 1 7
+c hb l 9  女  1 9  3  2 3 6
+c hb 2 0  女  6  8  2 9 4
+c hb 2 1  女  1 3  4  1 9 9
+c hb 2 2  女  9  3  2 0 4  
+c hb 2 3  女  6  7  4 2 4
+c hb 2 4  -  -  1 6  5 1 1
+合 计 — — — 1 1
+, 5 3 6
+2
+. 4 本 章 小 结  
+本 章 介 绍 主 要 围 绕 脑 电 信 号 的 基 础 理 论 知 识 进 行 分 析 , 然 后 阐 述 几 种 常 见 的 脑 电 信  
+1 0
+
+
+
+第
+2 章 脑 电信 号基础及数据库
+  
+号 并 分 析 其 特 点 。 然 后 介 绍 了 癫 痫 脑 电 信 号 定 义 及 波 形 特 征 。 最 后 描 述本 研 宄 所 用 的 两  
+个 公 开 脑 电 信 号 数 据 库 。
+1 1  
+
+
+
+第
+3 章 基 于 数 据 増 强 和 l D CNN-B i LS TM 网 络 的 癫 痫 检 测 算 法
+  
+第
+3 章 基 于 数 据 增 强 和 l D C NN-BiL S T M 网 络 的 癫 痫 检 测 算 法  
+3
+. 1 引 言
+数 据 增 强 是 一 种 通 过 对 原 始 脑 电 信 号 进 行 变 换 或 者 扩 充 生 成 新 的 样 本 数 据 的 技 术 。  
+通 过 数 据 增 强 技 术 可 以 平 衡 不 同 类 别 的 脑 电 数 据 解 决 数 据 稀 疏 或 者 过拟 合 问 题 , 对 不 平  
+衡 类 别 的 脑 电 信 号 进 行 重 组 , 从 而 提 升 模 型 的 泛 化 能 力 和 鲁 棒 性 。 这 种 方 法 可 以 帮 助 我
+们 更 好 地 了 解 信 号 的 性 质 , 从 而 更 好 地 提 高 信 号 检 测 的 性 能 。
+M
+ixUp 、 S up erMi x 和 C o -M ixUp 是 三 种 常 用 的 数 据 增 强 方 法 , 应 用 它 们 可 以 平 衡 脑  
+电 信 号 类 别 不 平 衡 现 象 。 尽 管 数 据 增 强 方 法 在 图 像 数 据 中 有 广 泛 的 应 用 , 但 它 们 在 表 征
+时 序 脑 电 信 号 上 具 有 不 同 的 优 缺 点 。 在 本 章 中 , 我 们 将 比 较 这 三 种 数 据 増 强 方 法在 脑 电
+信 号 数 据 类 别 不 平 衡 中 的 性 能 表 现 , 探 讨 C o-MixUp 数 据 增 强 技 术 在 脑 电 信 号 类 不 平 衡  
+中 的 优 势 , 为 平 衡 脑 电 信 号 的 类 别 和 癫 痫 检 测 提 供 更 准 确 、 可 靠 的 工 具 。
+3
+. 2 算 法 流程
+本 章 提 出 了 一 种 基 于 数 据 增 强 和 l D C NN- B i L S TM 网 络 的 癫 痫 检 测 算 法 , 并 取 得 了
+非 常 显 著 的 分 类 结 果 。 该 算 法 的 流 程 图 如 图 3 . 1 所 示 。 先 利 用 离 散 小 波 变 换 对 原 始 脑 电
+信 号 进 行 降 噪 处 理 , 并 选 择 癫 痫 发 作 特 定 频 段 进 行 数 据 增 强 , 来 增 强 模 型 对 于 噪 声 数 据  
+的 识 别 , 增 强 模 型 的 泛 化 能 力 。 重 组 的 脑 电 信 号 数 据 分 别 进 入 模 型 学 习 , 再 将 分 类 标 签  
+融 合 , 得 到 最 后 的 分 类 结 果 。  
+模 型 架 构 使 用 1 D CNN 和 注 意 力 机 制 来 增 强 B iL S TM 学 习 脑 电 数 据 的 时 序 信 息 , 提  
+高 捕 获 特 征 能 力 ; 使 用 多 层 卷 积 提 取 高 阶 特 征 结 合 池 化 层 加 快 计 算 速 度 , 减 少 计 算 量 ,
+同 时 对 于 处 理 不 平 衡 数 据 具 有 一 定 的 效 果 。 该 模 型 考 虑 了 时 空 特 征 , 在 癫 痫 发 作 诊 断 方  
+面 取 得 了 较 好 的 实 验 结 果 。
+P r q> ro c e s s i n g  l DCNN- B i L S T M  
+广 ,
+ ^0
+ ̄ ̄ F oa r iay er
+ ̄  
+I  D i s cr et e  |  1  1 DCNN  ]  
+Wav d el  T  ^  .  
+T ra n s form  H k一 -二 V  ^
+■ 麵 獅 、   V
+ Z/ [BiLSTM [
+.  jf  
+^  A    
+R a w     X   ^     F u s k ?l    F u s i o n    De d s i o n  
+汪 〇 ^
+
+I If
+ ̄
+A
+tten ti on
+]  T hres he d  Rule  
+\  V a hi e
+Data ^ T
+ ̄
+  J
+Enh ancement  :
+丫
+... 土
+仍  T w o - L ay e r
+V  J   ?  F u l l  Cc n n e c t i cQ  
+v
+ J  \ k . . . :    
+图 3 . 1 脑 电 信 号 分 类 算 法 流 程  
+1 2
+
+
+
+第
+3 章 基 于 数 据 增 强 和 l DCNN-B i L S TM 网 络 的 癫 痫 检 测 算 法
+  
+3
+. 3 离 散 小 波 变 换  
+头 皮 脑 电 信 号 通 常 非 常 弱 , 容 易 受 到 噪 声 的 千 扰 。 脑 电 信 号 中 通 常 存 在 仪 器 噪 声 和
+生 理 伪 影 [53 】
+, 这 会 干 扰 与 癫 痫 发 作 相 关 的 有 用 信 息 。 因 此 , 信 号 预 处 理 部 分 对 后 续 的  
+实 验 很 重 要 [54LD WT 是 一 种 用 于 信 号 处 理 的 数 学 变 换 方 法 , 它 在 保 持 信 号 的 时 间 和 频  
+率 特 性 的 同 时 , 将 信 号 分 割 成 不 同 的 频 率 , 非 常 适 合 于 处 理 非 平 稳 脑 电 图 信 号 为 了 获 得  
+更 多 有 用 的 时 频 信 息 , 本 研 究 对 脑 电 信 号 进 行 了 离 散 小 波 变 换 处 理 。
+为 了 获 得 脑 电 信 号 的 时 频 信 息 , 使 用 离 散 小 波 变 换 分解 信 号 。 通 常 , 癲 痫 发 作 信 号
+频 率 集 中 在 3 0Hz 以 下 , 为 了 从 EE G 信 号 中 获 得 更 多 有 用 的 时 频 信 息 , 使 用 截 止 频 率  
+为
+4
+Hz 和 3 2Hz 的 D WT 对 E E G 信 号 进 行 滤 波 , 以 消 除 伪 影 噪 声 。
+针 对 C HB - M I T 数 据 集 , 采 用 db4 小 波 对 E E G 片 段 进 行 5 级 D W T , 将 信 号 分 解 为  
+6 4 - 1 2 8  Hz  C d l ) 、 3 2 - 6 4  Hz  ( d2 ) 、 1 6 - 3 2  Hz  ( d 3 ) 、 8 - 1 6  H z  ( d4 ) 、 4 - 8  H z  ( d 5 )  
+和
+0 4Hz( a 5 ) 。 然 后 , 选 取 频 率 范 围 为 4 - 3 2Hz 的 d3 、 d4 和 d5 三 个 子 信 号 进 行 后 续
+分 析 , 保 留 大 脑 中 主 要 的 诊 断 频 率 信 息 , 同 时 去 除 低 频 和 高 频 噪 声 。 对 于 B onn 数 据 集 ,
+由 于 采 样 频 率 与 C HB -M I T 数 据 集 不 同 , 在 进 行 相 似 的 D WT 后 , 对 分 解 后 的 三 个 子 信
+号 进 行 带 通 滤 波 , 以 确 保 两 个 数 据 集 的 频 带 范 围 一 致 。 如 下 图 3 . 2 所 示 , 图 ( a ) 是
+C HB -MIT 数 据 集 中 2 2 通 道 的 原 始 脑 电 信 号 , 图 ( b ) 是 在 C HB - M IT 数 据 集 2 2 通 道 中
+随 机 挑 选 的 一 个 通 道 的 4 秒 信 号 , 最 上 边 是 原 始 通 道 , 下 边 依 次 是 经 过 D WT 分 解 后 (13 、  
+d4 和 d 5 脑 电 信 号 图 。  
+
+1
+i  3 ‘
+? ,
+;
+H 4
+
+1
+一
+—  ^ - ' ... . 《 其  5 00 ,
+
+r
+
+=
+  
+纖  夺〇 八?’
+\ 广??V'
+'W V wv\?VVV/V  
+巧 Sf eS■觀4
+r
+^
+ 3
+  
+(4)  ( b )
+图
+3
+. 2 原 始 脑 电 信 号 经 过 D WT 处 理 后 信 号 重 建 。 ( a) 是 C HB -M I T 数 据 集 上 初 始 2 2 通 道 4 s 脑 电 信 号
+展 示 , (b ) 是 随 机 祧 选 一 个 通 道 进 行 D WT 分 解 后 的 信 号 展 示  
+3
+. 4 数 据 增 强
+数 据 增 强 是 一 种 提 高 分 类 精 度 的 有 效 技 术 , 通 过在 学 习 问 题 中 使 用 保 留 输 入 上 下 文
+的 转 换 来増 加 数 据 [55_58]
+。 传 统 的 增 强 技 术 主 要 用 于 图 像 中 , 如 翻 转 、 裁 剪 、 缩 放 等 [5 9 ,  
+1 3
+
+
+
+第
+3 章 基 于 数 据 增 强 和 l D CNN B i LS TM 网 络 的 癫 痫 检 测 算 法
+  
+6 Q]
+。 其 中 , M ixup 、 C o -M ixup 和 S up erMix 是 深 度 学 习 中 用 于 数 据 增 强 的 几 种 典 型 技 术 。  
+它 们 主 要 通过 在 训 练 样 本 中 引 入 更 多 的 多 样 性 和 减 少 不 平 衡 数 据 的 影 响 来 提 高 泛 化 能 力 。
+M
+ixUp 虽 然 大 多 数 数 据 增 强 算 法 只 适 用 于 图 像 数 据 , 但 MixUp 可 以 应 用 于 序 列 数  
+据
+[6 1 ]
+。 M kUp 通 过 随 机 选 择 两 个 训 练 样 本 的 向 量 和 相 应 的 标 签 , 使 用 线 性 插 值 生 成 一  
+个 新 的 向 量 和 相 应 的 标 签 作 为 增 广 数 据 。 扩 展 训 练 数据 , 增 强 深 度 学 习 模 型 的 泛 化 能 力 。
+M
+i xUp 的 核 公 式 定 义 为 :  
+x=2 x
+,
+.+( 1
+
+A ) X
+j  ( 3 - 1 )
+y
+
+=  A yi
++ (l
+- A ) yJ  ( 3 - 2 )
+其 中 , 和U,
+, h ) 是 从 训 练 数 据 中 随 机 选 择 的 两 个 样 本 , 在 本 研 究 的 实 验 中 , 义 取  
+值 为 0 . 2 。
+S up e rMixS up e rM ix 是 另 一 种 先 进 的 数 据 增 强 技 术 , 它 进 一 步 发 展 了M i xup 的 思  
+想
+[ 62]
+。 S up e rM i x 通 过 更 复 杂 的 混 合 策 略 生 成 新 的 样 品 。 与 M i xup 不 同 , S up erMi x 可  
+以 创 建 更 复 杂 的 混 合 模 式 , 例 如 通 过 非 线 性 或 空 间 转 换 进 行 混 合 。 该 算 法 对 所 有 输 入 数  
+据 中 的 不 同 显 著 区 域 进 行 混 合 匹 配 , 使 每 个 混 合 样 本 的 显 著 性 度 量 最 大 化 。 SuperMix  
+在 MixUp 之 上 添 加 了 类 信 息 , 这 是 一 种 旨 在 创 建 更 具 挑 战 性 的 训 练 样 本 的 方 法 , 可 以
+提 高 模 型 的 泛 化 和 鲁 棒 性 。 使 用 混 合 策 略 , 我 们 将 混 合 函 数 定 义 为 :
+( 3 - 3 )
+其中 , x
+,
+. 为 被 剪 样 品 , 叫 为 每 个 被 剪 样 品 的 重 量 , 算 子 〇 表 示 元 素 乘 积 。  
+C o-MixUp 考 虑 到 MixUp 混 合 了 给 定 的 随 机 输 入 数 据 对 , 并 且 没 有 充 分 利 用 训 练  
+数 据 中 丰 富 的 信 息 监 督 信 号 , 提 出 了 一 种 扩 展 的 C o -MixUp 算 法 [63 ]
+。 它 不 仅 混 合 了 输  
+入 特 征 , 还 混 合 了 中 间 层 的 特 征 表 示 。 这 意 味 着 它 在 神 经 网 络 的 多 个 层 上 应 用 Mixup
+策 略 。 C o -M i xup 旨 在 促 进 更 深 层 次 特 征 表 示 的 泛 化 , 通 过 混 合 网 络 不 同 层 次 的 特 征 来  
+增 强 模 型 对 输 入 变 化 的 鲁 棒 性 。 当 C o -Mi xup 对 两 个 样 本 进 行 线 性 插 值 时 , 它 不 仅 考 虑  
+了 样 本 的 特 征 , 而 且 考 虑 了 样 本 所 属 的 类 别 。 与 Mix-Up 相 比 , C o -MixUp 提 高 了 特 征  
+的 深 度 泛 化 生 成 的 新 数 据 可 以 定 义 如 下 :
+无
+=A
+( E 二 。 0w
+, )
++
+ 〇 - 又 ) ( Z 二 ? 0  )  ( 3 - 4 )
+, 倒  (3 - 5 )  
+1 4
+
+
+
+第
+3 章 基 于 数 据 增 强 和 l DCNN-B i L S TM 网 络 的 癫 痫 检 测 算 法
+  
+其 中 ' 和 ; 从 训 练 数 据 中 截 取 的 样 本 , aE[ cm ]
+. 叫 和 % 是 每 个 截 取 样 本 的 权 重 , 运 算  
+符 〇 表 示 乘 积 运 算 。 eL
+( Wi ;) 表 示 使 用 交 叉 熵 损 失 函 数 来 度 量 模 型 输 入 与 实 际 标 签 之 间
+的 差 异 。
+3
+. 5l D C NN - B iL S T M模 型  
+近 几 年 , 深 度 学 习 技 术 发 展 迅 速 , 己 开 发 出 多 种 应 用 于 癫 痫 发 作 检 测 的 深 度 歇 息 新  
+算 法 。 由 于 单 一 的 卷 积 神 经 网 络 存 在 局 部 感 受 野 的 不 足 , 所 以 提 出 了 一 种 结 合 注 意 力 机  
+制 的 l D C NN - B i L S T M 网 络 。 图 3 . 3 是 网 络 的 内 部 参 数 结 构 图 。
+¥
+|团 ■ 圍 固
+i i f l l llf i l
+图
+ 3 . 3  l D CN N - B i L S TM  结 构 图
+( 1 ) 深 度 卷 积 模 块
+卷 积 神 经 网 络 主 要 应 用 于 图 像 识 别 和 计 算 机 视 觉 等 领 域 , 并 且 在 各 个 任 务 上 都 取得  
+了 不 错 的 成 果 [64]
+。 CNN 的 卷 积 感 受 视 野 是 局 部 的 , 可 以 通 过 叠 加 多 层 卷 积 来 扩 大 感 受  
+野
+。 研 宄 中 采 用 4 层 一 维 卷 积 神 经 网 络 ( 1 D - C NN ) , 其 次 是 Re LU 激 活 函 数 来 加 快 收
+敛 速 度 , 减 少 计 算 时 间 。 使 用 最 大 池 化 直 接 选 中 提 取 数 值 最 大 的 特 征 , 能 够 更 好 的 学 习
+序 列 数 据 中 的 多 级 局 部 抽 象 特 征 , 实 现 更 高 层 次 更 复 杂 的 学 习 。 因 为 C HB -MIT 数 据 集  
+中 癫 痫 发 作 和 非 发 作 数 据 不 平 衡 , 对 癫 痫 诊 断 的 准 确 率 会 有 一 定 的 影 响 。 研 究 中 使 用 4
+层
+1 D - CNN 可 以 更 好 的 从 数 据 中 学 习 高 阶 特 征 , 增 强 数 据 特 征 的 捕 获 。 最 大 池 化  
+( M axP o l ing ) 附 加 在 卷 积 层 之 后 的 CNN 组 合 中 , 对 输 出 进 行 下 采 样 , 降 低 了C NN 卷  
+积 层 输 出 的 分 辨 率 , 防 止 过 拟 合 。
+( 2 )B i L S T M  模 块  
+2 0 世 纪 8 0 年 代 , E lm an 等 人 提 出 了 用 于 处 理 序 列 信 息 的 循 环 神 经 网 络 ( RNN ) 。
+循 环 神 经 网 络 的 提 出 解 决 了 传 统 神 经 网 络 对 于 序 列 信 息 处 理 的 局 限 性 , 但 是 其 存 在 短 时
+记 忆 问 题 。 为 了 解 决 这 种 局 限 性 , H o c hre i ter 和 S chmi dhub er 提 出 了 L S T M , 用 于 解 决
+标 准 RNN 时 间 维 度 的 梯 度 消 失 和 梯 度 爆 炸 问 题 L S TM 可 以 在 时 序 信 息 处 理 中 更 好
+的 捕 捉 长 距 离 记 忆 问 题 , 但 其 无 法 解 决 编 码 从 后 到 前 的 信 息 。 本 实 验 采 用 双 向 长 短 期 记  
+忆 网 络 进 行 时 序 权 重 共 享 , 与 C NN 的 空 间 权 重 共 享 进 行 结 合 , 图 3 . 4 的 ( a ) 和 (b ) 是
+L S T M 和 B i L S T M 的 内 部 结 构 。 采 用 B i L S T M 是 将 反 向 L S TM 和 正 向 L S T M 结 合 来 联  
+系 上 下 文 信 息 , 可 以 更 好 地 进 行 双 向 语 义 依 赖 。  
+1 5
+
+
+
+第
+3 章 基 于 数 据 增 强 和 1 D CNN-B 1 L S TM 网 络 的 癫 痫 检 测 算 法
+  
+Ou tput  Layer  (
+l)  C Y0  v v  
+?  
+她
+S TM  ( b) B i L S T M  
+图 3 . 4 B i L S TM 结 构 图 。 (8) 是 L S TM 内 部 结 构 , ( b ) 是 B i L S TM 内 部 结 构
+( 3 ) 自 注 意 机 制
+注 意 力 机 制 是 模 仿 人 类 认 知 系 统 的 一 种 方 法 , 它 可 以 高 效 的 分 配 有 限 注 意 力 资 源 。
+注 意 力 机制 允 许神 经 网 络在 处理序 列 数据 时 , 自 动 的 选择性 处 理数据 中 的 重要 信 息 [66]
+。  
+将 注 意 力 机 制 和 B iL S TM 结 合 , 不 仅 可 以 和 序 列 中 相 邻 位 位 置 的 元 素 建 立 联 系 , 还 可  
+以 与 序 列 中 其 他 相 关 的 元 素 建 立 关 联 , 进 而 可 以 更 好 的 适 应 性 捕 捉 长 期 依 赖 关 系 , 进 一  
+步 提 升 模 型 的 性 能 [ 67] 。  
+( 4 ) 连接 层 模 块  
+全 连 接 层 是 神 经 网 络 中 的 核 心 组 件 , 尤 其 在 分 类 预 测 输 入 信 号 的 类 别 任 务 中 起 到 关  
+键 作 用 [68】
+。 在 全 连 接 层 模 块 中 使 用 两 个 密 集 层 。 第 一 个 密 集 层 的 输 出 维 度 是 1 0 0 个 神  
+经 元 ; 第 二 个 密 集 层 有 2 个 单 元 , 将 输 入 信 号 分 类 预 测 。 对 于 提 出 的 模 型 , B i L S TM 内
+部 有 s i gm o i d 激 活 函 数 , 为 了 保 持 模 型 性 能 稳 定 , 使 用 s i gm o i d 激 活 函 数 比 s o ftm ax 函
+数 分 类 预 测 效 果 更 好 。 之所 以 使 用 两 个 密 集 层 是 因 为 si gmo i d 对 函 数 值 变 化 太 过 于 明 显 ,  
+影 响 神 经 网 络 的 精 度 值 。 而 tanh 函 数 能 够 在 输 入 输 出 上 保 持 非 线 性 波 动 , 符 合 神 经 网
+络 梯 度 求 解 , 容 错 性 好 。 所 以 第 一 个 密 集 层 具 有 tanh 函 数 , 相 当 于 特 征 选 择 器 , 对 用
+于 确 定 提 取 的 特 征 是 否 和 分 类 类 别 相 关 ; 第 二 个 密 集 层 是 具 有 s i gm oi d 函 数 的 分 类 器 ,
+分 类 癫 痫 发 作 或 者 非 发 作 。 使 用 两 个 密 集 层 可 以 更 好 的 提 升 模 型 分 类 性 能 。  
+( 5 ) 标 签 融 合 模 块  
+模 型 将 原 始 脑 电 信 号 使 用 离 散 小 波 变 换 分 解 , 输 出 d3 ,d4 和 d5 特 定 频 带 子 信 号 ,
+分 别 输 入 模 型 学 习 , 得 到 分 类 预 测 概 率 值 。 为 了 方 便 将 概 率 值 进 行 比 较 , 对 其 进 行 做 差  
+运 算 , 分 别 得 到 对 应 的 标 签 概 率 。 然 后 , 如 果 标 签 的 概 率 超 过 给 定 的 阈 值 , 将 标 签 记 为
+发 作 。 根 据 实 验 结 果 将 阈 值 设 置 为 0 . 7 5 。 将 d3 ,d4 ,d5 得 到 的 标 签 进 行 融 合 , 其 中 任  
+一 频 带 子 信 号 捕 获 到 的 分 类 标 签 是 发 作 , 我 们 即 视 为 三个 频 带 子 信 号 的 癫 痫 分 类 检 测 结
+果 是 发 作 。  
+1 6
+
+
+
+第
+3 章 基 于 数 据 增 强 和 l D CNN-B i L S TM 网 络 的 癲 痫 检 测 算 法
+  
+3
+. 6 实验 结 果 与 讨 论
+癫 痫 检 测 算 法 在 P ytho n3 . 8 和 P yC h arm 2 0 2 0 环 境 中 实 现 。 实 验 采 用 五 重 交 叉 验 证 ,
+选 取 将 使 用 数 据 增 强 生 成 的 全 部 数 据 的 8 0 % 数 据 量 用 于 训 练 集 , 剩 余 的 数 据 量 2 0 % 作
+为 测 试集 。 为 了 评 价 模 型 的 分 类 性 能 , 将 癫 痫 检 测 任 务 中 常 用 的 指 标 应 用 到 我 们 提 出 的
+方 法 中 。 基 于 片 段 的 癫 痫 检 测 指 标 包 括 准 确 性 、 灵 敏 度 和 特 异 性 , 用 于 验 证 B onn 数 据
+集 和 C HB -MIT 数 据 集 的 实 验 结 果 。 在 本 研 宄 中 , 准 确 率 为 正 确 检 测 到 的 脑 电 段 数 的 百
+分 比 , 其 公 式 定 义 如 下 :
+TP  + TN  
+A c c u ra cy 
+=
+  ( 3 - 6 )
+TP  + FP  + TN  +  FN  
+灵 敏 度 定 义 为 通 过 公 式 正 确 检 测 到 的 癫 痫 片 段 的 百 分 比 :
+TP
+Se n s i t i v i ty 
+=
+  ( 3 - 7 )
+TP  +  FN  
+特 异 性 是 通 过 公 式 正 确 检 测 到 的 非 癫 痫 段 的 百 分 比 :
+TN  
+Sp e c ifi c i ty 
+=
+  ( 3 - 8 )
+TN  + FP
+其 中 T P 、 TN 、 F P 和 FN 分 别 代 表 真 阳 性 、 真 阴 性 、 假 阳 性 和 假 阴 性 。
+3
+. 6 . 1 实 验 结 果
+( 1 )B o nn 数 据 库
+表
+3
+. 1 在 B o nn 数 据 库 的 七 组 合 分 类 结 果
+准 确 率 ( % )  灵 敏 度 ( % )  特 异 性 ( % )
+名 称 组合 
+^ ^^
+
+^ ^^
+
+^ ^^
+  
+N o n eM ixUpS ^ er N o neM ixUp N oneM i xUp^?
+er
+
+>5
+^°
+T T
+r  M ix  M i x U p  r  M i x  M i x Up  〃  M ix  M i x Up  
+C a s e l  E - A  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0
+C a s e 2  E - B  9 7 . 5 0  1 0 0 . 0 0  9 2 . 5 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  9 5 . 6 5  1 0 0 . 0 0  8 6 . 9 6  1 0 0 . 0 0
+C a s e 3  E - C  9 7 . 5 0  9 7 . 5 0  9 7 . 5 0  9 7 . 5 0  1 0 0 . 0 0  9 7 . 0 6  9 7 . 1 2  1 0 0 . 0 0  9 5 . 6 5  9 7 . 8 3  1 0 0 . 0 0  9 5 . 6 5
+C a s e 4  E - D  9 5 . 0 0  9 7 . 5 0  1 0 0 . 0 0  1 0 0 . 0 0  9 4 . 1 2  9 7 . 0 6  1 0 0 . 0 0  1 0 0 . 0 0  9 5 . 6 5  9 7 . 8 3  1 0 0 . 0 0  1 0 0 . 0 0
+C a s e 5  E - A B  9 8 . 3 3  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  9 7 . 44  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  
+C a s e 6  E - C D  9 8 . 3 3  9 8 . 3 3  9 9 . 1 5  9 9 . 1 7  1 0 0 . 0 0  9 5 . 2 4  1 0 0 . 0 0  1 0 0 . 0 0  9 7 . 44  1 0 0 . 0 0  9 8 . 5 7  9 8 . 7 2
+C a s e 7  A l l  9 8 . 5 0  9 8 . 0 0  9 8 . 5 0  9 9 . 5 0  9 3 . 4 8  9 1 . 3 0  9 5 . 6 5  9 7 . 7 5  9 8 . 5 0  1 0 0 . 0 0  9 9 . 3 5  1 0 0 . 0 0  
+1 7
+
+
+
+第
+3 章 基 于 数 据 增 强 和 l D CNN-B i L S TM 网 络 的 癫 痫 检 测 算 法
+  
+对 于 波 恩 数 据 集 , 考 虑 到 数 据 集 数 量 较 少 , 设 计 了 7 种 组 合 形 式 的 分 类 实 验 。 具 体  
+组 合 情 况 及 实 验 结 果 见 表 3 . 1 。 可 以 看 出 , 本 文 提 出 的 方 法 在 这 七 个 实 验 中 都 取 得 了 很  
+好 的 效 果 。 在 原 始 数 据 集 中 噪 声 点 较 少 的 情 况 下 , e a s e l 、 c a s e 2 和 c as e 5 的 灵 敏 度 达 到
+1 0 0 % 。 特 别 是 在 c as e 7 中 , 使 用 C o -Mi xUp 处 理 不 平 衡 数 据 明 显 更 好 。
+( 2 )C HB - M IT  数 据 库  
+表
+3
+. 2 比 较 三 种 増 强 方 法 在 CHB -MIT 数 据 集 的 分 类 性 能
+准 确 率 (%) 灵 敏度 (%)
+
+特 异 性 ( % )
+病 人 X T MixS up erC o
+X T M ix S up er C o - ,
+T  M i x  S up e r  C o -  
+
+N 〇ne 
+| Up1 M ix |
+M
+ixU p 
+N〇 ne 
+|Up Mix MixUp N 〇ne
+
+丨Up丨Mix]
+M
+i xU p
+C hb O l  9 9 . 6 6  9 9 . 1 8  9 5 . 9 8  9 9 . 6 5  9 5 . 4 5  9 7 . 2 7  9 5 . 4 5  9 8 . 1 8  9 9 . 9 1  9 9 . 2 7  9 6 . 0 0  9 9 . 7 3
+C hb 0 2  9 9 . 2 8  9 9 . 7 0  9 9 . 0 5  9 9 . 1 7  9 5 . 0 0  9 5 . 0 0  9 0 . 0 0  9 7 . 5 0  9 9 . 5 0  1 0 0 . 0 0  9 9 . 5 0  9 9 . 2 5
+C hb 0 3  9 9 . 1 6  9 9 . 2 9  9 8 . 5 2  9 7 . 6 7  9 7 . 0 0  9 7 . 0 0  9 7 . 0 0  9 8 . 0 0  9 9 . 2 0  9 9 . 4 0  9 8 . 6 0  9 7 . 6 5
+C hb 0 4  9 6 . 4 9  9 7 . 2 4  9 8 . 4 0  9 2 . 6 8  6 3 . 1 6  7 3 . 6 8  8 6 . 3 1  9 3 . 6 9  9 8 . 1 6  9 8 . 4 2  9 9 . 0 0  9 2 . 6 3
+C hb 0 5  9 9 . 5 1  9 9 . 5 7  9 9 . 8 9  9 9 . 5 6  9 7 . 7 8  9 8 . 5 2  9 7 . 7 8  1 0 0 . 0 0  9 9 . 5 9  9 9 . 6 3  1 0 0 . 0 0  9 9 . 5 4
+C h b 0 6  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  
+C hb 0 7  9 9 . 7 0  9 9 . 7 0  9 9 . 8 2  9 9 . 8 8  9 8 . 7 5  9 8 . 7 5  9 7 . 3 2  1 0 0 . 0 0  9 9 . 7 5  9 9 . 7 5  9 9 . 9 4  9 3 . 9 6  
+C hb 0 8  9 7 . 6 4  9 9 . 2 1  9 6 . 7 1  9 4 . 2 2  8 8 . 7 0  8 8 . 7 0  7 9 . 5 7  9 9 . 5 7  9 8 . 0 9  9 9 . 7 4  9 7 . 5 7  9 1 . 3 1
+C hb 0 9  9 9 . 8 6  9 9 . 8 6  9 9 . 8 0  9 9 . 8 6  9 7 . 1 4  9 7 . 1 4  9 5 . 7 2  9 7 . 1 4  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  
+C hb l O  9 9 . 8 7  9 9 . 8 7  9 9 . 5 8  9 9 , 9 0  9 7 . 7 8  9 7 . 7 8  9 9 . 7 8  9 7 . 7 8  1 0 0 . 0 0  1 0 0 . 0 0  9 9 . 6 7  1 0 0 . 0 0  
+C h b l l  9 9 . 8 8  9 9 . 9 8  9 9 . 8 8  9 9 . 6 7  9 8 . 0 0  1 0 0 . 0 0  9 7 . 5  9 7 . 5 0  9 9 . 9 8  9 9 . 9 9  1 0 0 . 0 0  9 9 . 7 8
+Chb l 2  9 2 . 8 6  9 2 . 8 6  9 8 . 5 7  9 8 . 2 2  9 0 . 4 8  9 0 . 4 8  9 8 . 1 0  9 7 . 6 2  9 5 . 2 4  9 5 . 2 4  9 9 . 0 5  9 8 . 8 1
+C hb l 3  8 1 . 9 6  8 1 . 9 6  8 1 . 9 6  9 6 . 8 6  7 5 . 7 6  7 5 . 7 6  7 5 . 7 6  8 2 . 9 6  8 2 . 2 7  8 2 . 2 7  8 2 . 2 7  9 7 . 5 6  
+C hb l 4  7 0 . 6 5  9 2 . 7 3  9 7 . 1 4  8 4 . 42  7 2 . 7 3  8 5 . 4 5 6  6 8 . 1 8  8 7 . 8 8  7 0 . 4 5  1 0 0 . 0 0  9 8 . 8 7  8 4 . 0 9  
+C hb l 5  9 3 . 7 5  9 3 . 7 5  9 5 * 6 3  9 7 . 8 9  9 3 . 6 9  9 3 . 6 9  9 5 . 0 0  9 6 . 9 1  9 5 . 0 0  9 5 . 0 0  9 6 . 2 5  9 7 . 9 4
+C hb l 6  9 0 . 0 0  8 7 . 5 0  9 5 . 9 8  9 8 . 2 2  8 5 . 0 0  7 5 . 0 0  8 7 . 5  8 7 . 5  9 5 . 0 0  1 0 0 . 0 0  9 9 . 3 8  9 8 . 7 5
+C hb l 7  9 8 . 9 8  9 8 . 9 8  9 8 . 9 8  9 9 . 1 3  9 4 . 6 7  9 4 . 6 7  9 4 . 6 7  1 0 0 . 0 0  9 9 . 2  9 9 . 2 0  9 9 . 2 0  9 9 . 0 8
+Chb l 8  9 8 . 1 3  9 8 . 1 3  9 9 . 7 0  9 8 . 9 9  9 7 . 5 0  9 7 . 5  9 6 . 8 8  9 5 . 0 0  9 8 . 7 5  9 8 . 7 5  9 9 . 6 9  9 9 . 1 9  
+C hb l 9  9 9 . 7 6  9 9 . 7 6  9 9 . 7 6  9 7 . 9 4  9 5 . 0 0  9 5 . 0 0  9 5 . 0 0  9 5 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  9 8 . 0 8
+Chb 2 0  9 8 . 6 7  9 8 . 6 7  9 8 . 6 7  9 8 . 6 7  9 8 . 6 7  9 8 . 6 7  9 8 . 6 7  9 8 . 6 7  9 8 . 6 7  9 8 . 6 7  9 8 . 6 7  9 8 . 6 7  
+C h b 2 1  9 9 . 5 2  9 7 . 0 0  9 3 , 3 3  9 5 . 5 2  9 0 . 0 0  9 6 . 0 0  9 0 . 0 0  9 8 . 0 0  1 0 . 0 0 0  9 8 . 0 0  9 4 . 0 0  9 8 . 8 0  
+C hb 2 2  9 9 . 4 3  9 9 . 4 3  9 9 . 4 3  9 8 . 7 6  9 8 . 0 0  9 8 . 0 0  9 8 . 0 0  9 8 . 0 0  9 9 . 5 9  9 9 . 5 9  9 9 . 5 9  9 8 . 8 0  
+C hb 2 3  8 7 . 5 0  9 0 . 9 4  8 8 . 8 1  9 3 . 9 7  6 6 . 6 7  7 3 . 3 0  8 6 . 6 5  9 3 . 3 3  9 3 . 3 3  9 3 . 3 0  8 3 . 3 3  9 4 . 0 0  
+C hb 2 4  8 5 . 3 6  9 6 . 3 0  9 2 . 9 8  8 6 . 47  7 4 . 0 7  5 9 . 2 6  6 6 . 6 7  8 4 . 44  8 5 . 9 3  9 8 . 1 5  9 4 . 3 3  8 6 . 44
+M e a n  9 5 . 3 1  9 6 . 7 4  9 7 . 0 2  9 6 . 9 7  9 0 . 0 4  9 0 . 6 9  9 1 . 0 6  9 5 . 6 1  9 6 . 1 5  9 8 . 1 0  9 7 . 2 9  9 7 . 0 5  
+表
+3
+. 2 给 出 了l D C NN- B i L S T M 模 型 在 C HB - M IT 数 据 库 上 的 实 验 结 果 。 基 于 评 价  
+指 标 对 实 验 结 果 进 行 了 分 析 , 可 以 清 楚 地 发 现 C o -Mi xUp 带 来 了 不 可 忽 视 的 良 好 性 能 。
+与
+S up e rM i x 相 比 , C o -MixUp 的 敏 感 性 提 高 了 4 . 5 5 % , 但 准 确 性 降 低 了 0 . 0 4 % , 特 异 性  
+降 低 了0 . 2 4 % 。 患 者 chb 0 6 的 准 确 性 、 敏 感 性 和 特 异 性 均 达 到 1 0 0 % 。 在 所 有 患 者 中 ,  
+准 确 率 和 灵 敏 度 高 于 9 2 . 5 °/。 的 患 者 有 2 0 例 。 c hb l 3 、 c hb l 4 、 chb l 6 和 chb 2 4 患 者 部 分 脑  
+1 8
+
+
+
+第
+3 章 基 于 数 据 增 强 和 l D C NN-B i LS TM 网 络 的 癫 痫 检 测 算 法
+  
+电 活 动 的 影 响 导 致 模 型 敏 感 性 降 低 。  
+3
+. 6 . 2 讨论
+在 C HB -MIT 数 据 集 上 实 验 , B iL S T M 隐 藏 层 单 元 大 小 的 损 失 值 与 Ep o c h s 如 图 3 . 5
+所 示 。 从 图 中 可 以 看 出 , 当 B i L S T M 的 隐 藏 层 较 小 时 , 损 失 呈 现 上 升 趋 势 ; 当 B i L S TM  
+的 隐 藏 层 设 置 超 过 1 5 0 层 时 , 收 敛 速 度 会 减 慢 。 此 外 , 随 着 Ep o ch 不 断 增 大 , l o s s 值 在  
+不 断 减 少 直 至 趋 于 平 稳 。 因 此 , 将 B i L S TM 的 隐 藏 层 设 置 为 1 5 0 ,Ep o c h 设 置 为 1 4 0 。  
+0
+. 200
+-  
+— — a z c l 2 S  
+0
+. 1 75 
+-  一  如 5 0
+
+s i z e l 6 0
+a
+i s o -  
+(1 1 25 
+?  
+^
+ ft l O O -  1  j  
+0  2 0  4 0  6 0  9 0  1 0 0  U ? 0  1 4 0
+l ^ K t c h s
+图
+3
+. 5B iL S T M 隐 藏 层 单 元 大 小 对 应 的 不 同 Ep o c h 下 的 损 失 值  
+使 用 标 签 融 合 来 进 行 相 邻 通 道 的 实 验 精 度 融 合 。 在 C HB -MIT 数 据 集 上 实 验 , 选 取  
+不 同 的 融 合 阈 值 , 分 析 l D CN - B i L S TM 模 型 实 验 结 果 的 准 确 率 。 从 图 3 . 6 可 以 看 出 , 在  
+阈 值 设 定 为 0 . 7 5 的 情 况 下 , 标 签 融 合 的 结 果 最 佳 。
+1
+. 000
+
+ 八  
+o
+.m
+■  /  \
+t 9% -  /
+L  广  
+0
+. 992 
+■  j
+. rJ
+<
+1 990
+-  /
+a
+i  〇 l 2  a 3  a 4  a s  a ?  a s  a 9   T h r e s h o l d  
+图
+3
+. 6 不 同 的 分 类 标 签 融 合 阈 值 对 应 的 准 确 率
+为 了 验 证 C NN 组 合 在 模 型 中 的 贡 献 , 使 用 C NN+B i L S T M 模 型 , C NN+Atenti o n 模
+型 和 C NN+ B i L S T M+Ate nti o n 模 型 进 行 对 比 实 验 。 为 了 确 保 实 验 的 公 平 性 , 模 型 参 数  
+1 9
+
+
+
+第
+3 章 基 于 数据 增 强 和 l D CNN-B i LS TM 网 络 的 癫 痫 检 测 算 法
+  
+的 设 置 是 相 同 的 。 结 果 如 图 3 . 7 所 示 , 从 该 图 中 可 以 看 出 , 与 具 有 相 同 E E G 特 征 的  
+C NN+ B i L S T M , C NN +Ate n ti o n 和C NN+B i L S T M+A t enti on 相 比 , 所 提 出 的 模 型 表 现  
+最 好 。 由 于 模 型 能 够 充 分 利 用 脑 电 通道 之 间 特 征 数 据 的 时 空 关 系 , 模 型 训 练 数 据 的 学 习
+能 力 显 著 提 高 。 所 提 模 型 的 各 层 t - SNE 可 视 化 结 果 如 图 3 . 8 所 示 。
+Acc uracy  r? ,
+mm  S e n s i i i v i l y    
+H
+i
+Q
+f N - B i L S T M  C N N - A t t c n ri o n  Hi e
+ p r o p o s e d  m o d e l
+图
+ 3 . 7  提 出 模 型 ( C NN - B i L S T M - A te n ti o n ) 与  C NN - B i L S T M 、 C NN - A te nti o n  的 比 较 实 验 结 果  
+* .
+?  约 知a . . 纪 令  
+.
+i
+‘ 滞 祭 鱗跑 贫 痛滅 :>
+.
+? :
+处
+. .
+.Ay:、”. ”, :
+i
+. . *
+*
+
+(a )
+
+ 
+〇
+> )
+  
+I,气 、? '  
+(C )  (4)  
+图
+3
+. 8 所 提 模 型 的 t - S N E 可 视 化 。 ( a ) 是 原 始 脑 电 图 数 据 ; ( b ) 、 ( c) 、 ( d) 分 别 为 1 D C NN 层 、 B i L S T M  
+层 和 A tenti on 层 的 信 号 嵌 入 , 不 同 颜 色 代 表 不 同 的 信 号 类 别
+为 了 解 决 癫 痫 脑 电 信 号 类 别 数 据 不 平 衡 问 题 , 提 出 了 一 种 基 于 数 据 增 强 和 1 D CNN -  
+B
+i L S TM 网 络 的 癫 痫 发 作 识 别 方 法 。 对 数 据 集 的 评 价 结 果 表 明 , l D C NN - B i L S TM 能 从  
+数 据 中 学 习 到 有 效 的 特 征 表 示 , 模 型 具 有 稳 定 的 癫 痫 识 别 和 分 类 检 测 性 能 。 研 宄 中 选 择  
+的 数 据 是 不 平 衡 的 , C o- MixUp 对 癫 痫 发 作 数 据 的 数 据 增 强 效 果 最 好 , 而 Sup erMix 更  
+2 0
+
+
+
+第
+3 章 基 于 数 据 增 强 和 l D CNN-B i L S TM 网 络 的 癫 痫 检 测 算 法
+  
+倾 向 于 非 癫 痫 发 作 的 脑 电 图 数 据 。 结 果 表 明 , 采 用 C o -MixUp 方 法 训 练 的 模 型 在 分 类 数  
+据 方 面 具 有 更 稳 定 的 效 果 , 减 少 了 错 误 标 签 的 记 忆 , 增 强 了 对 样 本 的 鲁 棒 性 。 由 于 部 分  
+采 集 到 的 脑 电 图 数 据 存 在 较 大 的 噪 声 , c hb 0 4 、 c hb 0 8 、 c hb l 3 、 clib l 4 、 c hb l 6 、 c hb 2 3 、  
+chb2 4 患 者 的 实 验 效 果 较 差
+在 表 3 . 3 中 将 l D C NN- B i L S TM 与 几 种 可 用 的 癫 痫 识 别 方 法 进 行 了 比 较 。 所 有 这 些  
+方 法 都 在 C HB -MIT 的 研 宄 中 进 行 了 评 估 。 提 出 的 方 法 在 平 均 灵 敏 度 和 特 异 性 方 面 对 最  
+近 的 研 究 更 有 希 望 。 虽 然 与 S hen 等 人 提 出 的 方 法 相 比 , 他 们 的 模 型 具 有 更 高 的 灵 敏 度  
+[72
+]
+。 然 而 , 提 出 的 模 型 没 有 使 用 特 征 值 算 法 来 提 取 不 同 子 带 的 特 征 , 传 统 的 方 法 在 特  
+征 提 取 方 面 更 好 , 降 低 了 人 工 操 作 的 复 杂 性 。 虽 然 H o s s ain 等 人 提 出 的 方 法 的 准 确 性 高
+于 我 们 的 方 法 , 但 我 们 的 方 法 的 灵 敏 度 和 特 异 性 都 有 所 提 高 。 在 实 际 应 用 中 , 低 灵 敏 度  
+是 不 可 接 受 的 [73]
+。 组 合 模 型 方 法 ( C NN - L S T M 、 l D C NN - B iL S T M ) 取 得 了 比 单 模 型
+方 法 ( l D C NN - S p e c tro gram 、 C E - s t S E N e t 、 B i L S T M ) 更 好 的 结 果 , 并 验 证 了 不 同 模 型
+的 特征 融合 强度 %761
+。 Varl i 等 人 使 用 了 频 谱 图 图 像 的 C NN +L S T M 模 型 进 行 二 值 分 类 ,
+原 始 脑 电 图 进 行 信 号 转 换 进 行 频 谱 分 析 , 但 我 们 的 方 法 在 准 确 性 和 专 一 性 方 面 具 有 优 势
+综 上 所 述 , 提 出 的 模 型 具 有 更 高 的 性 能 。
+表
+3
+. 3 提 出 的 模 型 与 C HB - M IT 数 据 集 上 其 他 模 型 的 性 能 比 较  
+作 者  方 法 准 确 率 ( % ) 灵 敏 度 ( % )  特 异 性 ( % )
+S h en e t a l , ]  S VM - RU S B o o s t e d  9 6 . 3 8  9 6 . 1 5  9 6 . 7 6 t r e e  
+H o s s a i n  e t  a l .  ^  C N N  9 8 . 0 5  9 0 . 0 0  9 1 . 6 5
+J an a e t al . 
+[ 7 4 ]  1  D C N N - S p e c t r o gr a m  8 8 . 0 0  8 6 . 5 2  9 1 . 1 1
+L
+i e t a l .  ?  C E - s t S E N e t  9 5 . 9 6  9 2 . 4 1  9 6 . 0 5
+Ya o e t a l .
+[ 7 6 ]  B i L S T M  8 3 . 8 9  8 3 . 7 2  8 4 . 0 6
+Var l i  e t  a l . 
+[ 7 7 ]  CNN - L S T M  9 5 . 0 8  9 6 . 7 0  9 3 . 2 8
+提 出 方 法  9 6 . 9 7  9 5 . 6 1  9 7 . 0 5
+B
+i L S T M  
+3
+. 7 本章 小结  
+本 章 提 出 了 一 种 基 于 脑 电 数 据 增 强 和 l D CNN -B iL S TM 网 络 的 癲 痫 发 作 自 动 识 别 技  
+术
+。 结 果 表 明 , 采 用 数 据 增 强 技 术 处 理 非 平 衡 数 据 具 有 良 好 的 性 能 。 C o - MixUp 数 据 增
+强 方 法 更 有 利 于 检 测 癫 痫 数 据 。 l D CNN- B iL S TM 在 处 理 更 多 信 息 的 时 空 序 列 数 据 分 类  
+性 能 上 具 有 显 著 优 势 。 它 能 够 学 习 有 效 的 特 征 表 征 , 具 有 癫 痫 发 作 识 别 的 性 能 , 对 癫 痫  
+发 作 诊 断 具 有 重 要 意 义 。
+2 1  
+
+
+
+第
+4 章 基于 Co
+-M i xUp 和 改 进 T ran s former 网 络 的 癫 痫 检 测 算 法
+  
+第
+4 章 基 于 C o -M ix Up 和 改 进 T r a n s fo rm e r 网 络 的 癲 痫 检 测 算 法  
+4
+. 1 引 言
+使 用 C o - Mi xUp 进 行 数 据 增 强 可 以 充 分 利 用 训 练 数 据 中 的 信 号 来 监 督 信 号 , 达 到 混  
+合 匹 配 不 同 的 目 标 显 著 区 域 , 从而生 成 基 于 多 混 合 显 著 区 域 的 新 数据 [63]
+。 上 一 章 的 研  
+宄 表 明 , 使 用 C o -MixUP 在 原 始 发 作 数 据 基 础 上 , 混合 发 作 数 据 生 成 新 的 数 据 , 达 到 的  
+数 据 平 衡 效 果 最 佳 。
+单
+一 的 CNN 可 能 忽 略 空 间 层 次 结 构 , 无 法 有 效 的 捕 捉 脑 电 信 号 数 据 特 征 间 的 相 对  
+空 间 关 系 。 所 以 , 在 本 章 使 用 CNN 的 变 体 In c ep ti on 和 R e s i dual 网 络 , 更 好 的 分 层 捕 获  
+各 级 特 征 , 减 少 特 征 损 失 。 B i L S TM 在 进 行 长 序 列 脑 电 信 号 数 据 特 征 捕 获 存 在 记 忆 容 量  
+缺 陷 的 问 题 , 而 Tr ansf ormer 更 加 适 用 于 需 要 大 量 记 忆 的 上 下 文 数 据 , 进 行 更 深 一 步 的  
+特 征 学 习 。
+综 上 所 述 , 本 章 将 C o -M i xUp 数 据 增 强 技 术 、 基 于 CNN 以 及 Tran s form er 的 变 体 网
+络 进 行 融 合 , 提 出 了 一 种 有 效 的 癫 痫 发 作 检 测 算 法 。 将 网 络 中 的 集 成 卷 积 和  
+Trans form e r 模 块 相 结 合 , 可 以 提 高 特 征 学 习 的 效 率 和 癫 痫 检 测 的 准 确 性 , 同 时 在 临 床  
+应 用 具 有 潜 能 , 为 临 床 医 生 提 供 更 准 确 的 诊 断 建 议 , 对 于 改 善 患 者 的 生 活 质 量 具 有 重 要  
+的 意 义 。
+4
+.2 算 法 流程
+如 图 4 . 1 所 示 , 提 出 的 网 络 可 以 分 为 三 部 分 : 预 处 理 模 块 、 Inr e s fo rm er 网 络 和 标 签 融
+合 模 块 。 首 先 , 将 原 始 的 E E G 数 据 使 用 D W T 和 C o - M i x Up 处 理 , 得 到 增 强 后 的 数 据 。  
+然 后 , 将 该 数 据 使 Inre s f o rme r 学 习 特 征 信 息 , 分 别 得 到 特 定 频 带 子 信 号 的 分 类 概 率 结  
+果
+。 最 后 , 再 按 照 标 签 融 合 规 则 , 得 到 分 类 结 果 。
+ d3( *
+\ c - d3 /
+" \
+
+,
+ —|  
+盖
+— DWT  i  , 一 H  咖
+一^
+
+l d5  r  c - d3
+r  _ 0
+( a )
+    r*  
+ F c e d f b r vv^ - d  r  I n c e p t i o n  ?  R c s i d i a !  F e e d fo r w a r d  
+^
+?  
+    
+t  I n r e s M c x t o l e
+( b )  
+图 4 . 1 算 法 流 程 框 图 。 ( a) 是 癫 痫 检 测 算 法 整 体 流 程 , ( b ) 是 Inre s f o rm e r 模 块 详 细 介 绍 : 具 有 前 馈 和  
+I nr e s 模 块 的 改 进 T ra n s fo rm e r 网 络  
+2 2
+
+
+
+第 4 章 基于 Co
+-Mi xUp 和 改进 Tran s forme r 网 络 的 癫痫 检测 算 法
+  
+4
+.3 预 处 理  
+在 预 处 理 阶 段 , 将 每 个 通 道 的 脑 电 信 号 用 长 度 为 4 s 且 没 有 重 叠 的 窗 口 划 分 为 多 个  
+信 号 段 。 该 窗 口 可 以 在 保 持 信 号 的 稳 定 的 同 时 有 效 捕 捉 癫 痫 发 作 活 动 。 然 后 , 应 用 在
+D W T  将 信 号 分 解 为  4 - 8  Hz  ( d 5 ) 、 8 - 1 6  H z  ( d 4 ) 、 1 6 - 3 2  H z  ( d 3 ) 、 3 2 - 6 4  H z  ( d2 )
+和
+6 4 - 1 2 8Hz( d l ) 为 了 保 证 获 取 信 息 的 完 整 性 , 我 们 选 取 频 率 范 围 是 4 - 3 2HZ 的  
+脑 电 信 号 数 据 , 即 d3 - d5 三 阶 脑 电 信 号 数 据 。 为 了 进 一 步 解 决 癫 痫 检 测 EE G 采 集 数 据
+不 平 衡 的 问 题 , 使 用 C o - MixUp 进 行 数 据 增 强 。 C o -M i xUp 充 分 利 用 训 练 数 据 中 的 信 号
+来 监 督 信 号 , 达 到 混 合 匹 配 不 同 的 目 标 显 著 区 域 , 从 而 生 成 基 于 多 混 合 显 著 区 域 的 新 数  
+据
+[63 ]
+。 为 了 增 强 特 征 深 层 次 的 泛 化 , 在 对 两 个 输 入 数 据 之 间 进 行 线 性 插 值 时 , 考 虑 到
+同 类 样 本特 征 和 发作 数据 采集 不 足 , 只 针 对 于 发 作 数 据 进行 混 [6 1
+]
+。 实 验 中 在 原 始 发 作
+数 据 基 础 上 , 混 合 发 作 数 据 生 成 新 的 数 据 , 在 原 始 癫 痫 发 作 数 据 基 础 上 , 本 研 宄 通 过 混  
+合 发 作 数 据 构 建 增 强 数 据 集 。 为 直 观 展 示 数 据 增 强 效 果 , 图 4 . 2 选 取 了C HB -MIT 数 据
+库 中 c hb O l 病 例 的 发 作 片 段 进 行 可 视 化 说 明 。
+0  5 0  丨 〇 〇  ! 5 0  2 0 0  2 5 0 T
+i m e  s e ri e s
+a  5 0  t o o  1 5 0  2 0 0  2 5 0  , 〇 °  〇  3 0  1 0 0  1 5 0  20 0  2 5 0
+! ?0 |
+
+  t o〇 i
+  
+
+J 册  —           —  — 
+i QO 三    ? 一 — ... 一 — w— 一—  十 
+   — —  —   
+0  5 0  ! 0 0  1 5 0  2 0 0  2 5 0  0  5 0  丨 0 0  〖 5 0  2 〇 〇  2 5 0
+! 0〇 |
+    
+:  t Q O i   
+{    
+  j  °
+
+i w j 
+
+    
+'
+{ ao *  ̄
+o  so  m  ilo 
+"
+ioo  is o  5 0" 
+*
+ ̄
+o  s o  l o o  1 5 0  2 0 0  2 5 0 T
+i m e  s c ri e s  T h n c  s e r i e *
+(i > )  w  
+图 4 . 2 原 始 脑 电 信 号 , D WT 分 解 信 号 , C o - M i xUp 增 强 后 信 号 图 。 ( a) ,  (b ) 分 别 是 原 始 脑 电 图 和 子 频  
+段 信 号 。 (c ) 是 经 C o - Mi xU p 增 强 后 得 到 c - d 3 ,  c - d4 ,  c - d 5
+4
+. 4 I n r e s fo r m e r
+本 章 提 出 的 Inre s fo rm er 是 一 种 改 进 的 基 于 Trans fo rm e r 的 集 成 模 型 , 米 用 Inr e s 模  
+块 和 改 进 Tran s fo rm er 结 构 。 Inre s 模 块 使 用 多 尺 度 卷 积 模 块 丰 富 特 征 表 达 , 改 进  
+T
+r an s fo rm e i
+? 进 一 步 细 化 学 习 输 入 特 征 。 与 传 统 的 单 分 辨 率 特 征 的 C NN 提 取 不 同 , 结 合  
+残 差 网 络 的 堆 叠 CNN 模 块 可 以 实 现 多 分 辨 率 , 减 少 了 计 算 量 。 此 外 , 改 进 Trans fo rm er
+网 络 通 过 在 多 头 注 意 模 块 前 引 入 前 馈 层 , 对 具 有 癫 痫 样 异 常 的 小 样 本 数 据 进 行 了 很 好 的  
+分 类 。 在 引 入 的 前 馈 层 和 多 头 注 意 力 模 块 之 间 添 加 了 一 个 新 的 Inre s 模 块 。 Inre s form er
+2 3
+
+
+
+第
+4 章 基于 Co
+-M i x ll p 和 改 进 Tr an s form e r 网 络 的 癫 痫 检 测 算 法
+  
+网 络 由 四 个 堆 叠 在 一 起 的 模 块 组 成 : 两 个 前 馈 模 块 , lure s 模 块 和 多 头 注 意 力 模 块 。
+( 1 ) 多 头 注 意 力 模 块  
+多 头 注 意 力 机 制 是 对 传 统 注 意 力 机 制 的 扩 展 , 通 过 并 行 计 算 多 个 注 意 力 头 , 使 模 型
+能 够 同 时 关 注 输 入 数 据 的 不 同 子 空 间 和 特 征 维 度 , 从 而 增 强 模 型 的 表 达 能 力 和 语 义 捕 捉  
+能 力 。 每 个 头 通 过 独 立 的 线 性 变 换 , 将 输 入 映 射 到 不 同 的 子 空 间 , 学 习 多 样 化 的 特 征 关  
+系
+。 多 个 头 独 立 处 理 输 入 数 据 , 提 升 计 算 效 率 并 降 低 梯 度 消 失 风 险 , 设 计 了 多 头 注 意 机  
+制
+, 即 相 对 正 弦 位 置 编 码 , 以 处 理 高 维 数 据 信 息 。 因 此 , 该 机 构 被 应 用 于 处 理 高 维 阵 列
+处 理 问 题 [79]
+。
+( 2 )  Inr e s  模 块  
+Inr e s 模 块 由 基 于 C NN 的 In c e p ti o n 块 和 基 于 R e s n e t 的 残 差 块 组 成 。 图 4 . 3 是 对 本 部  
+分 的 详 细 介 绍 :  ... ^     
+ ?  C o n v l D  — ?  B a t d i n o i m  —?     A c t i v a t i o n
+k e r n e l  s i 2 e =
+l
+, s t ri d e = 2 , a l p h a = 0 . 1
+?  C o n v l D  —  B at A n o m, -  C o n v l D  —  
+k e r n e l  s i z e = 5 , s t ri d e = 2 , a l p h a = 0 . 1  k e r n e l  s i z e =
+l . s t ri d e =
+l
+^  C o n v l D  B a t A n o m ,  —  
+k e r n e l  s i z e = 9 > s t r i d e = 2 . a l p h a= 0 . l
+图 4 . 3Inre s 模 块 内 部 结 构
+I n cep ti o n 层 多 尺 度 CNN 在 检 测 癫 痫 发 作 方 面 取 得 了 良 好 的 效 果 。 该 网 络 可 以 实 现 不  
+同 尺 度 的 局 部 信 息 描 述 。 如 图 4 . 3 所 示 , 然 后 将 三 个 具 有 三 种 不 同 核 大 小 的 一 维 并 行 卷  
+积 模 块 与 卷 积 层 连 接 , 输 出 特 征 。 在 一 维 C NN 中 , 由 于 卷 积 核 是 一 维 的 , 大 的 卷 积 核  
+不 会 引 入 太 多 的 参 数 和 计 算 。 为 了 获 得 更 大 的 接 受场 , 采 用 更 宽 的 卷 积 核 来 更 全 面 地 获  
+取 特 征 。  
+Res idual 层 残 差 网 络 通 过 改变 原 信 息 的 学 习 目 标 , 解 决 了 卷 积 层 传 递 给 下 一 层 的 信 息  
+丢 失 的 问 题 。 由 于 学 习 目 标 是 残 差 , 加 快 了 收敛 速 度 , 提 高 了 准 确 率 。 Inc e p ti o n 块 的 输
+出 充 当 残 余 块 的 输 入 信 息 。 残 差 层 的 详 细 情 况 如 图 4 . 4 所 示 。  
+D | || OI |.
+§ Q + 巨 |§
+1^ I^  I I I-*I-* % i ^| % ^ 1 ^  
+8I丨
+a I I I ^ __|i f 1
+k e r n e l  s i z e = 3 , s t ri d e = 2 ,
+a
+l p h a = 0 . 1
+图 4 . 4  R e s i du a l 层 的 内 部 结 构  
+2 4
+
+
+第 4 章 基于 Co
+- M i x U p 和 改 进 T r a n s f o r m e r 网 络 的 癫 痫 检 测 算 法  
+( 3 ) 前 馈 模 块  
+如 图 4 . 5 所 示 , 所 设 计 的 前 馈 层 有 两 个 线 性 变 换 块 和 一 个 非 线 性 激 活 块 。 在 两 个 半  
+步 前 馈 层 之 后 都 部 署 了 剩 余 连 接 和 层 归 一 化 [8()]
+。 我 们 遵 循 预 范 数 残 差 单 元 , 并 在 残 差  
+单 元 内 和 第 一 个 线 性 层 之 前 应 用 层 归 一 化 , 采 用 ReLU 激 活 函 数 和 drop o ut , 增 强 了 规  
+范 网 络 的 非 线 性 表 达 能 力 。 图 4 . 5 第 一 个 线 性 层 使 用 64 的 扩 展 因 子 , 第 二 个 线 性 层 将
+其 投 影 回 模 型 维 度 。  
+- - L a v e m or m  —  L i n e ar  Re Lu  D  t  _  L i n ear  〇  t  ^  
+^  Lay e r  A c t i v a t i o n  r  Lay e r  r  
+fa c t o i
+= 6 4 . a l p h a= 0 .  l , r a t e = 0 . 1  
+图 4 . 5 前 馈 模 块 内 部 结 构  
+( 4 ) 类 权重 损 失 函 数  
+不 平 衡 数据 的 存 在 也 会 影 响 评 价 模 型 指 标 的 准 确 性 。 对 于 类 非 平 衡 数 据 , 损 失 函 数  
+也 是 一 个 重 要 的 因 素 在 训 练 阶 段 , 权 重 的 比 例 会 影 响 数 据 类 别 的 分 类 。 对 算 法 中 的 一 些  
+类 赋 予 更 高 的 权 重 , 通 过 更 高 的 惩 罚 来 减 少 一 些 类 的 误 差 。 分 类 交 叉 熵 损 失 函 数 是 一 种
+常用 的损失函数 Ml
+。 结 合 类 权 值 计 算 的 类 权 损 失 函 数 可 以 表 示 为 在 损 失 函 数 中 使 用 加
+权 交 叉 熵 。 在 交 叉摘 的 计 算 中 考 虑 了 各 类 的 权 重 , 以 处 理 不 平 衡 类 。
+令 是类权重, /) 是类权重损 失 函 数,
+t 定 义 的 公 式 如 下 :
+c〇d  (4- D
+y
+,  Nc
+( 4 _ 2 )
+其 中 , A 是 真 实 标 签 , 凡?/ 是 预 测 的 概 率 , 气 是 标 签 A 的 权 重 ,
+# 是 所 有 样 本 数 量 ,
+是 所 有 类 别 的 数 量 。  
+( 5 ) 判 别 融 合  
+由 于 数 据 预 处 理 后 得 到 的 三 个 特 定 频 段 子 信 号 d 3 、 d4 和 d 5 是 由 提 出 的 Inr e s form er
+网 络 并 行 处 理 得 到 的 实 验 结 果 。 因 此 , 实 验 中 Inre s fo nner 网 络 将 分 别 输 出 三 个 子 信 号  
+的 脑 电 信 号 段 的 分 类 概 率 值 , 对 脑 电 信 号 的 两 个 分 类 概 率 值 进 行 相 减 计 算 , 得 到 相 应 的
+标签概率值 。 如 果标签 的 概率值不低于给定 阈 值 , 则 将标签设置为 “
+1
+”
+, 判 断 为 癫 痫  
+发作 数据 : 否则 , 将标签设置为 “
+0
+”
+, 视 为 非 癫 痫 发 作 数 据 。 最 后 , 由 于 三 个 子 信 号
+分 别 对 应 于 不 同 的 频 段 , 所 以 针 对 三个 标 签 进 行 逻 辑 处 理 , 形 成 标 签 融 合 策 略 规 则 : 只  
+2 5
+
+
+第 4 章 基于 Co
+-M i x U p 和 改 进 T r a n s f o r m e r 网 络 的 癫 痫 检 测 算 法  
+要在 实验 中 任一子信 号捕获到 的标签值 中 有一个为 “
+1
+”
+, 则 最 终 的 分 类 结 果 认 为 分 割
+后 的 脑 电 信 号 数 据 为 癫 痫 发 作 数 据 。
+4
+. 5 实验结 果 与 讨 论  
+提 出 的 癲 痫 检 测 算 法 在 P ytho n3 . 8 和 PyC haim2 0 2 0 环 境 中 实 现 。 实 验 软 硬 件 设 备  
+参 数 详 细 信 息 如 表 4 . 1 所 示 。 实 验 采 用 五 重 交 叉 验 证 , 选 取 EE G 数 据 量 的 2 0 % 作 为 测
+试 集 。 学 习 率 设 置 为 0 . 00 0 1 , 批 大 小 分 别 为 20 。 优 化 器 是 亚 当 优 化 器 。 分 类 层 使 用
+s i gmo i d 函 数 进 行 分 类 。 实 验 证 明 , 该 模 型 经 过 2 0 0 次 迭 代 后 趋 于 稳 定 , 故 取 2 0 0 历 元  
+数
+。 实 验 环 境 和 设 置 如 表 4 . 1 所 示 。  
+此 外 , 基 于 事 件 的 癫 痫 检 测 指 标 使 用 事 件 敏 感 性 、 误 检 率 ( FD R ) 和 C HB - MI T 长  
+期 脑 电 图 数 据 的 延 迟 进 行 评 估 。 事 件 敏 感 性 定 义 为 真 正 检 测 到 的 癫 痫 发 作 事 件 数 与 癫 痫  
+总 发 作 事 件 数 之 比 。 在 这 里 , 检 测 持 续 一 定 时 间 的 癫 痫 事 件 被 定 义 为 一 次 真 正 的 检 测 。
+实 验 设 置 在 2 0 秒 内 连 续 出 现 的 假 阳 性 被 认 为 是 一 次 假 检 测 , FD R 定 义 为 每 小 时 发 生 的
+假 检 测 事 件 的 次 数 。 检 测 延 迟 是 指 从 目 标 发 作 开 始 到 模 型 检 测 的 时 间 。
+表 4 . 1 实 验 环 境 和 设 置  
+
+m
+
+详细信 息
+  
+CPU Int e lC orei 7 
+1 2 7 0 0 K  
+G P U  N VI D I A  G e F o r c e  RTX  3 0 8 0  Ti
+操 作 系 统  Wi n d o w s  1 0  6 4 -b i t
+语 言  P yt h o n  3 . 8
+模 型 框 架  Ten s or F l o w  2 . 6 . 0
+数 据 库  Ke r a s
+, Nu m P y, P an d as ,  S c iki t
+
+l e a m  
+数 据 处 理 工 具 P andas , S cikit
+l e a m , C o - M i x Up
+4
+. 5 . 1 实 验 结 果
+( 1 )B o nn 数 据 集  
+考 虑 到 分 割 数 据 较 少 , 以 健 康 患 者 非 癫 痫 发 作 脑 电 图 数 据 为 基 础 , 设 计 其 余 4 种 组  
+合 的 7 个 对 比 实 验 。 由 于 原 始 脑 电 图 数 据 多 为 纯 数 据 , 容 易 产 生 伪 像 的 数 据 量 较 少 , 故
+在
+e as e l 、 c as e2 、 c as e 4 、 c as e 5 中 分 类 效 果 较 好 , 灵 敏 度 、 特 异 性 和 准 确 率 均 为 1 0 0 % 。
+从 表 中 可 以 看 出 , Inre s former 在 提 出 的 七 组 对 比 实 验 中 表 现 良 好 。 在 不 平 衡 数 据 的 情 况  
+下
+, 分 类 性 能 也 得 到 了 很 好 的 结 果 。 详 细 实 验 结 果 如 表 4 . 2 所 示 。  
+2 6
+
+
+第 4 章 基于 Co
+-M i x U p 和 改 进 T r a n s f o r m e r 网 络 的 癫 痫 检 测 算 法  
+表
+4
+. 2B o nn 数 据 集 七 组 合 实 验 结 果  
+组 合 案 例 数 据 集 的 组 合 准 确 率 ( % ) 灵 敏 度 % ) 特 异 性 (% )
+C a s e l  E v s A  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0
+C a s e 2  E v s B  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0
+C as e 3  E v s C  9 7 . 5 0  1 0 0 . 0 0  9 5 . 6 5
+C a s e 4  E v s D  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0
+C a s e 5  E v s A B  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0
+C a s e 6  E v s C D  9 6 . 6 7  9 5 . 2 4  9 7 . 44
+Cas e7
+
+E vs AB CD
+
+97. 00
+
+95 . 65
+
+9 7 . 4 0
+( 2 ) C H B - M IT数 据 集  
+我 们 的 研 究 也 在 公 开 的 C HB -M IT 数 据 集 上 进 行 , 结 果 如 表 4 . 3 所 示 。 所 有 患 者 的
+平 均 准 确 率 、 灵 敏 度 和 特 异 性 分 别 为 9 8 . 0 3 % 、 9 5 . 6 5 % 和 9 8 . 0 1 % 。 每 个 患 者 的 准 确 率 都  
+在
+9 5 % 以 上 , c hb l 5 和 c hb l 9 的 准 确 率 甚 至 接 近 1 0 0 % 。 1 6 例 患 者 的 灵 敏 度 在 9 5 % 以 上 ,
+但
+chb 0 4 、 c hb 0 6 和 chb l 3 由 于 脑 电 图 信 号 中 存 在 噪 声 数 据 , 准 确 性 较 低 。 部 分 患 者 特  
+异 性 低 于 平 均 水 平 , 如 c hb 0 4 、 c hb 0 6 、 c hb 0 8 、 chb l 4 、 chb l 7 、 chb l 8 , 这 可 能 与 癫 痫 样
+本 数 量 少 , 与 非 癫 痫 性 脑 电 图 数 据 相 似 度 高 有 关 。
+此 外 , 基 于 事 件 的 实 验 也 取 得 了 良 好 的 结 果 , 事 件 灵 敏 度 为 9 8 . 2 6 % ,F D R 为
+0
+. 2 3 7 /h , 检 测 延 迟 为 4 . 8 7 s 。 仅 有 的 两 例 未 被 发 现 的 癫 痫 发 作 是 c hb l 3 和 chb l 6 。 3 例 患
+者 报 告 无 差 错 , 包 括 chb 0 2 、 c hb l l 和 chb l 9 。 1 4 例 患 者 F D R 均 不 高 于 0 . 0 8 /h , 进 一 步
+证 明 我 们 提 出 的 模 型 在 实 际 应 用 中 具 有 一 定 的 优 势 。 综 合 评 价 结 果 表 明 , 所 提 出 的
+Inr e s fo rmer 方 法 具 有 较 高 的 性 能 和 可 行 性 。
+1 00 
+I
+  
+G
+r o u p 1  
+^  G t x > u p 2
+G
+r o u p 3
+9
+: >  1  2  9  1 0  1 9  2 2
+P a t i e n t
+图 4 . 6I n c ep t i o n 模 块 的 卷 积 核 大 小 与 时 间 精 度 关 系  
+为 了 研 宄 多 尺 度 Inc epti on 块 的 卷 积 核 大 小 与 实 验 精 度 之 间 的 关 系 , 随 机 选 取 6 例
+患 者 , 分 析 不 同 卷 积 核 组 合 下 模 型 的 性 能 。 本研 究 将 卷 积 核 的 大 小 设为 Group l
+[
+l ,
+5
+,
+9
+]
+。
+2 7
+
+
+第 4 章 基于 Co
+-M i x U p 和 改 进 T r a n s f o r m e r 网 络 的 癫 痫 检 测 算 法  
+〇
+1
+ ̄
+〇叩2 和 〇1
+"
+〇叩 3 的 参数 分 别 为 [2 ,
+6
+,
+1 0] 和 [3
+, 7,
+1 1 ] 。 图 4 . 6 显 示 了 平 均 精 度 结 果 , 明 显  
+可 以 发 现 第 一 组 的 性 能 最 优 。 因 此 , 实 验 中 采 用 的 多 尺 度 Inc eption 块 的 卷 积 核 大 小 分  
+别 为 1 、 5 和 9 。
+表 4 . 3CHB -M IT 数 据 集 基 于 时 间 和 基 于 事 件 的 实 验 结 果  
+病人
+
+基于 时 间
+
+基于事件
+  
+
+准 确 率 ( % )  灵 敏 度 ( % )  特 异 性 ( % )  灵 敏 度 ( % )  FD R (/h ) 延 迟 ( s )
+C hb O l  9 8 . 0 5  9 8 . 4 8  9 8 . 0 3  1 0 0 . 0 0  0 . 0 6  2 . 2 2
+C h b 0 2  9 9 . 5 6  9 5 . 0 0  9 9 . 7 5  1 0 0 . 0 0  0 . 0 0  0 . 2 9
+C hb 0 3  9 9 . 4 1  9 8 . 0 0  9 9 . 5 0  1 0 0 . 0 0  0 . 0 8  7 . 3 6
+C h b 0 4  9 5 . 2 4  8 9 . 4 7  9 5 . 5 3  1 0 0 . 0 0  0 . 3 1  1 . 8 7
+C h b 0 5  9 8 . 4 6  9 9 . 0 8  9 8 . 4 2  1 0 0 . 0 0  0 . 0 4  1 . 6 0
+C hb 0 6  9 5 . 5 4  9 1 . 6 7  9 5 . 6 2  1 0 0 . 0 0  0 . 0 5  5 . 7 3
+C h b 0 7  9 8 . 5 1  9 6 . 8 3  9 8 . 6 5  1 0 0 . 0 0  0 . 0 6  2 . 6 7
+C h b 0 8  9 5 . 9 1  9 1 . 3 1  9 5 . 8 7  1 0 0 . 0 0  0 . 5 3  6 . 6 7
+C h b 0 9  9 9 . 3 2  1 0 0 . 0 0  9 9 . 2 9  1 0 0 . 0 0  0 . 0 8  4 . 0 0
+Chb l O  9 8 . 2 0  9 7 . 7 8  9 8 . 2 2  1 0 0 . 0 0  0 . 0 5  8 . 0 0
+C hb l l  9 9 . 6 5  9 9 . 3 8  9 7 . 4 1  1 0 0 . 0 0  0 . 0 0  4 . 0 0
+C hb l 2  9 8 . 9 5  9 8 . 8 6  9 9 . 4 0  1 0 0 . 0 0  1 . 44  1 6 . 0 0
+C hb l 3  9 9 . 2 4  8 6 . 3 7  9 9 . 8 9  7 5 . 0 0  0 , 0 2  6 . 0 0
+C hb l 4  9 5 . 4 6  9 0 . 9 1  9 5 . 6 8  1 0 0 . 0 0  0 . 3 8  3 . 2 0
+C hb l 5  9 9 . 8 0  9 7 . 4 2  9 9 . 9 2  1 0 0 . 0 0  0 . 0 8  7 . 3 3
+C h b l 6  9 6 . 7 3  8 7 . 5 0  9 7 . 1 9  8 3 . 3 3  3 . 0 0  4 . 8 0
+C h b l 7  9 8 . 2 7  1 0 0 . 0 0  9 5 . 0 0  1 0 0 . 0 0  1 . 4 0  1 . 3 3
+C hb l 8  9 5 . 3 9  9 6 . 8 8  9 5 . 3 1  1 0 0 . 0 0  0 . 3 9  4 . 0 0
+C hb l 9  9 9 . 7 3  9 7 . 2 2  9 9 . 8 6  1 0 0 . 0 0  0 . 0 0  5 . 3 3
+C hb 2 0  9 9 . 0 5  9 6 . 6 7  9 9 . 1 7  1 0 0 . 0 0  0 . 3 4  9 . 3 3
+C hb 2 1  9 8 . 0 9  9 8 . 0 0  9 8 . 1 0  1 0 0 . 0 0  0 . 0 6  2 . 6 7
+C h b 2 2  9 9 . 4 3  9 8 . 0 0  9 9 . 5 9  1 0 0 . 0 0  0 . 0 6  2 . 4 0
+C hb 2 3  9 9 . 1 5  1 0 0 . 0 0  9 8 . 6 7  1 0 0 . 0 0  0 . 2 0  4 . 0 0
+C h b 2 4  9 7 . 6 2  9 0 . 7 4  9 7 . 9 6  1 0 0 . 0 0  0 . 3 3  6 . 6 7
+M e an  9 8 . 0 3
+
+9 5 . 65
+
+98.0 1
+
+9 8 .26
+
+0 37
+
+4
+. 8 9
+此 外 , 为 了 获 得 二 值 标 签 , 选 择 合 适 的 阈 值 也 很 重 要 。 在 CHB —MIT 数 据 集 随 机  
+2 8
+
+
+
+第
+4 章 基于 Co
+-M i xUp 和 改进 Tran s fo rme r 网 络 的 癫 痫 检 测 算 法
+  
+选 取 了 一 名 患 者 , 在 不 同 阈 值 下 进 行 实 验 分 析 , 实 验 结 果 如 图 4 . 7 所 示 。 当 阈 值 设 置 为
+0
+. 8 时 , 准 确 率 最 高 , 后 续 增 加 阈 值 后 , 结 果 变 化 不 明 显 。 因 此 , 本 研 究 将 判 断 阈 值 统
+一 设 置 为 0 . 8 。
+1 00 1
+  
+I
+:y  
+—?—  A c c u r a c y
+8 0  0 . 0  0 ^  0 . 4  0 . 6  0 . 8
+T h r e s h o l d  
+图 4 . 7 不 同 阈 值 下 的 准 确 率 结 果
+为 了 证 明 前 馈 层 的 有 效 性 和 所 提 出 方 法 中 的 Inre s 模 型 具 有 良 好 的 表 达 性 , 在 消 融 实
+验 中 对 四 个 模 型 进 行 了 研 究 。 首 先 , 基 本 模 型 是 基 于 Tran s form er 模 型 的 Enc o d er 块 。  
+然 后 , 在 Tr an s fo rm e r 的 内 部 结 构 中 添 加 一 个 前 馈 层 , 称 为 F e e d - Tran s 。 此 外 , Inr e s -  
+tran s 方 法 在 Tran s fo rm e r 的 注 意 块 之 后 增 加 了 Inre s 模 块 。 为 了 保 证 工 作 的 一 致 性 和 公
+平 性 , 各 模 块 之 间 的 参 数 设 置 都 是 一 致 的 。 对 比 结 果 如 图 4 . 8 所 示 , 可 以 清 楚 地 看 到  
+Inre s fo rme r 是 最 优 秀 的 模 块 , 这 说 明 在 Trans fo rm e r 中 嵌 入 的 前 馈 模 块 和 Inre s 模 块 可 以
+更 好 地 学 习 特 征 , 增 强 特 征 学 习 能 力 。
+100 1
+  
+丨  
+s p e c i fi c ^ % )  
+70   豳 萍 ―  細  
+Tr a n s fo n n e r  Pe e d - T r a n s  I n r e s - Tra n s  I n r e s fo r m er
+Mo d e l  
+图
+ 4 . 8  提 出 的 方 法 ( I nr e fo r m e r ) 与  T r an s fo rm e r ,  F e e d - T ran s 和  I nr e s 
+tran s 的 对 比 实 验 结 果  
+4
+. 5 . 2 讨 论  
+本 文 研 宄 了 一 种 改 进 Tran s form er 深 度 神 经 网 络 , 用 于 自 动 检 测 癫 痫 发 作 。 癲 痫 发  
+作 是 动 态 的 , 可 能 表 现 在 不 同 的 频 带 。 因 此 , 该 方 法 利 用 D W T 分 解 后 的 三 个 子 信 号 分  
+别 进行 特 征 提 取 和 分 类 , 并 进 行 判 别 融 合 , 进 行 可 靠 识 别 。 为 了 验 证 判 别 融 合 对 本 研 宄
+2 9
+
+
+第 4 章 基 于 C o M i x U p 和 改 进 T r an s f o r m e r 网 络 的 癫 痫 检 测 算 法  
+的 有 效 性 , 分 别 以 d3 、 d4 和 d5 三 个 频 带 子 信 号 作 为 模 型 输入 进 行 实 验 研 究 , 并 与 标 签  
+融 合 后 的 结 果 进 行 比 较 。 图 4 . 9 为 单 频 段 与 多 频 段 判 别 融 合 的 对 比 结 果 。 可 以 看 出 , 多  
+波 段 识 别 融 合 的 精 度 明 显 高 于 单 子 波 段 。 此 外 , d4 子 信 号 的 分 类 结 果 多 数 患 者 优 于 其  
+他 两 种 。 因 此 , 与 直 接 分 析 信 号 相 比 , 基 于 多 频 域 集 成 的 网 络 学 习 具 有 更 高 的 综 合 性 能 ,
+这 也 证 实 了 采 用 小 波 变 换 的 可 行 性 。
+fl l l il l
+I  I  I  I  ? ?    ?  I  I  I  I  I   I  *  t  I  I  I  I
+1  2  3  4  5  6  7  8  9  1 0  1 1  1 2  1 3  1 4  1 5  1 6  1 7  1 8  1 9  2 0  2 1  2 2  2 3  2 4
+P a t i e nt
+图 4 . 9 融 合 判 别 结 果 与 单 独 d 3 、 d4 、 d5 识 别 的 实 验 结 果 比 较
+比 较 该 模 型 的 时 间 复 杂 度 和 临 床 应 用 价 值 。 表 4 . 4 显 示 了 四 种 模 型 的 ep o ch 时 间 、  
+处 理 能 力 和 推 理 延 迟 。 F e e d -Tran s 所 需 的 历 元 时 间 最 小 , 因 为 前 馈 层 将 输 入 特 征 压 缩 到  
+较 低 维 空 间 中 , 以 减 少 计 算 复 杂 性 和 内 存 占 用 。 简 单 Tran s fo rm er 模 型 略 高 于 F e e d -  
+Tram 。Ime s - T rans模 型 不 通 过 线 性 变 换 映 射 底 层 , 而 是 将 特 征 叠 加 , 这 大 大 増 加 了 计  
+算 量 。 可 以 看 出 , 我 们 提 出 的 Inr e s form ei
+? 模 型 在 保 持 精 度 的 同 时 使 用 了 更 少 的 历 元 时
+间
+。 7 8 1 . 9 8 m s 的 延 迟 和 4 7 . 2 0 个 请 求 / 秒 的 吞 吐 量 表 明 Inre s fo rm er 具 有 较 强 的 实 时 处 理  
+能 力 。
+表 4 . 4CH B - M I T 数 据 集 上 的 时 间 复 杂 度 和 实 时 性 能
+ ^
+平 均 历 元 时 间 (s)处 理 能 力 ( 请 求/秒 )
+
+推 理 延 迟 ( m s )
+Tr a ns fo rm e r  0 . 6 4  2 8 . 7 6  1 0 4 7 . 0 9
+F e e d - Tr an s  0 . 6 0  3 0 . 3 2  9 9 3 . 6 8
+I n r e s - T r ans  1 . 3 3  2 9 . 2 6  1 7 1 7 . 5 7
+I nr e s fo r m e r  0 . 9 9  4 7 . 2 0  7 8 1 . 9 8
+为 了 验 证 提 出 模 型 的 实 时 性 和 复 杂 度 , 实 验 统 计 计 算 模 型 的 训 练 时 间 、 推 理 速 度 和  
+3 0
+
+
+第 4 章 基于 Co
+-M i x U p 和 改 进 T r a n s f o r m e r 网 络 的 癲 痫 检 测 算 法  
+内 存 需 求 。 Inre s fo rm er 的 总 培 训 时 间 为 3 3 6 . 2 3 s 。 单 个 样 本 的 推 断 速 度 为 0 . 3 6 m s 。 训 练  
+内 存 需 求 为 9 7 . 9 8MB , 测 试 内 存 需 求 为 1 0 2 . 2 0MB , 说 明 该 模 型 具 有 强 大 的 数 据 处 理  
+能 力 。 进 一 步 证 实 了 该 方 法 具 有 临 床 研 究 的 潜 力 。
+同 时 , 考 虑 到 所 提 出 的 模 型 在 不 同 患 者 之 间 的 泛 化 能 力 , 我 们 在 C HB - MIT 数 据 集
+中 进 行 了 跨 患 者 实 验 。 即 将 22 例 患 者 的 部 分 脑 电 数 据 作 为 训 练 数 据 集 , 剩 余 1 例 患 者
+的 脑 电 数 据 作 为 测 试 数 据 集 进 行 留 一 交 叉 验 证 。 平 均 准 确 率 为 8 5 . 7 2 % , 灵 敏 度 为
+8 3 . 7 8 °/。 , 特 异 性 为 8 7 . 2 9 % 。 虽 然 跨 患 者 实 验 的 平 均 表 现 不 如 患 者 特 异 性 实 验 , 但 这 主  
+要 是 由 于 患 者 发 作 类 型 不 同 导 致 的 脑 电 图 信 号 差 异 较 大 。
+此 外 , 为 了 更 好 地 理 解 Inre s form er 方 法 的 特 征 学 习 过 程 , 使 用 t- S NE 技 术 将 特 征  
+映 射 到 二 维 空 间 中 进 行 可 视 化 。 当 网 络 稳 定 时 , 显 示 原 始 脑 电 信 号 和 各 层 的 特 征 映 射 。  
+本 研 宄 选 择 chb 0 6 患 者 数 据 进 行 论 证 。 在 图 4 . 1 0 中 , Inre s fo rm er 层 逐 渐 区 分 了 癫 痫 和  
+非 癫 痫 数 据 。 此 外 , 注 意 层 有 效 地 学 习 了 两 类 数 据 的 不 同 特 征 , 后 续 的 Inre s 模 块 进 一  
+步 丰 富 和 捕 获 了 这 些 特 征 。 因 此 , Inre s fo rm er 模 块 可 以 识 别 癫 痫 发 作 的 脑 电 图 数 据 , 在
+癫 痫 发 作 检 测 方 面 具 有 很 大 的 发 展 潜 力 。  
+-  春
+??
+?
+?
+? ? ??
+? ?
+?  ...  
+/
+? ? ??
+? ?. ?
+?
+? 馨 ? ? ?
+?  
+?
+? 幾?
+? 讀?
+?? 鞭 ?
+? 義:
+、 飞  
+歌 細 : 署 ?y
+? ? * .* . /  
+% ?
+*  #  *  *  w  
+(a )  ( b )  (c )  ( d )  ( c )
+图 4 . 1 0 提 出 Inr e s fo rm e r 模 型 的 层 t - S NE 可 视 化 。
+( a) 是 输 入 层 , (b ) 是 第 一 前 馈 层 , ( c ) 是 多 头 注 意 层 ,
+( d) 是 I nr e s 层 , ( e) 是 最 后 一 个 前 馈 层
+在 癫 痫 发 作 检 测 领 域 , 从 脑 电 图 信 号 中 获 得 的 时 频 域 特 征 己 广 泛 应 用 于 癫 痫 发 作 识
+别
+[82]
+。 S hen 等 人 利 用 DWT 和 特 征 值 算 法 提 取 脑 电 信 号 不 同 子 频 段 的 特 征 , 并 结 合 支  
+持 向 量 机 ( SVM ) 进 行 分 类 , 获 得 了 较 高 的 准 确 率 [83]
+。 并 且 他 们 还 使 用 rus b o o s ting
+3 1  
+
+
+
+第
+4 章 基 于 Co Mi x Up 和 改进 Tr ans former 网 络 的 癫痫 检 测 算 法
+  
+树 积 分 方 法 对 七 个 特 征 值 进 行 实 时 癫 痫 检 测 。 Subb as i 等 人 使 用 D WT 技 术 和 统 计 特 征  
+结 合 SVM 分 类 器 对 不 同 的 脑 电 片 段 进 行 分 类 , 证 实 了DWT 具 有 更 好 的 性 能 [84]
+。
+S e lv akum ar 等 人 通 过 P C A 重 构 时 间 序 列 脑 电 信 号 , 使 用 S VM 和 朴 素 贝 叶 斯 作 为 分 类 器 ,
+得到 准确 率 最高 的 9 5 . 63 % , 灵敏度 为 95 . 7% , 特异 性为 96. 55% [85]
+。 实 验 灵 敏 度 与 我 们
+的 研 究 大 致 相 同 , 但 准 确 性 和 特 异 性 仍 优 于 我 们 的 研 宄 。 因 此 , 与 传 统 的 机 器 学 习 方 法  
+相 比 , 深 度 学 习 方 法 更 加 有 效 。 它 可 以 自 动 捕 获 学 习 到 的 特 征 , 避 免 了 人 工 特 征 提 取 的
+缺 点 。  
+近 年 来 , 基 于 CNN 和 RNN 的 深 度 学 习 方 法 发 展 迅 速 。 Varli 等 人 将 S T F T 应 用 到
+特 征 提 取 阶 段 , 将 原 始 EE G 数 据 转 换 成 二 维 特 征 图 , 通 过 C NN 和 L S TM 实 现 了 高 性  
+能
+[77]
+。 Hu 等 人介 绍 了 统计特征提取程序 , 然 后 设计 了 深度 架 构 BiLSTM [86]
+。 D o ng 等
+人 使 用 一 种 新 颖 的 端 到 端 T C N-B i L S T M 进 行 癫 痫 发 作 检 测 , 准 确 率 较 低 , 为 9 3 . 2 7 %  
+.
+
+[ 叮]
+。
+'
+Jana 等 人 利 用 特 征 工 程 从 原 始 脑 电 图 信 号 生 成 谱 图 特 征 矩 阵 , 利 用 1 D C NN 检 测 癫  
+痫 发 作 。 该 方 法 在 敏 感 性 、 特 异 性 和 准 确 性 方 面 均 取 得 了 相 当 的 结 果 M H o s s ain 等 人 使  
+用 端 到 端 CNN 方 法 提 取 频 谱 和 时 间 特 征 进 行 学 习 , 取 得 了 很 好 的 效 果 [88]
+。 。 Yuan 等  
+人 利 用 Sp e ctro gram 构 建 了 基 于 自 编 码 器 的 多 视 图 CNN 模 型 , 将 脑 电 通 道 的 相 互 关 联  
+和 内 相 关结合起来, 释放多 通道信 息 的 力 量 [89]
+。 实 验 证 明 , C NN 是 一 种 有 效 的 脑 电 图
+癫 痫 发 作 检 测 方 法 。  
+表
+4
+. 5 与 以 往 基 于 CHB -MIT 数 据 集 的 方 法 实 验 结 果 比 较
+作 者  方 法  准 确 率 ( %)  灵 敏 度 (% )  特 异 性 ( % )
+J ana et  al .
+[
+42
+] I D
+-S p e ctro gram 
+
+ C N N  8 8  8 6 . 5 2  9 1 . 1 1
+Nane ta l .
+[ 64
+]  CN N - T ran s fo rm e r  9 7 . 1 5  9 6 . 0 2  9 7 . 9 4
+Va ri i et a l .
+W  CNN - L S T M  9 5 . 0 8  9 6 . 7 0  9 3 . 2 8
+Shenetal .
+[ 8 3 ]  S V M - RU S B o o s t e d  Tr e e  9 6 . 3 8  9 6 . 1 5  9 6 . 7 6
+S e l v a ku m a ri  e t  a l . 
+[ 8 5 ]  P C A - H y b r i d  9 5 . 6 3  9 5 . 7 0  9 6 . 5 5
+Hu et al .
+[
+8 6 ]  B i L S T M  \  9 3 . 6 1  9 1 . 8 5
+D o n g  e t  a l .  ^  T C N - B iL S T M  9 3 . 2 7  9 4 . 9 9  9 3 . 2 8
+H o s s ainetal . 
+[
+88
+]  C N N  9 8 . 0 5  9 0  9 1 . 6 5
+Yu a n  e t  a l .
+[8 9
+1  S p e c tro gram 
+
+ C N N  9 3 . 2 1  8 9 . 5 4  8 4 . 3 2
+P anet  al .
+[
+9 0 ]  Tr ans fo r m e r  9 4 . 4 6  9 4 . 9 6  9 3 . 9 7
+Zh a o  e t  al . 
+[ 9 1 ]  H AN  9 7 . 3 4  9 6 . 0 7  9 8 . 3
+O ur  w o r k  I n r e s fo r m e r  9 8 . 0 3  9 5 . 6 5  9 8 . 0 1
+3 2
+
+
+第 4 章 基于 Co
+- M i x U p 和 改 进 T r a n s f o r m e r 网 络 的 癫 痫 检 测 算 法  
+许 多 研 究 人 员 己 经 将 Trans fo rmer 应 用 于 癫 痫 检 测 领 域 。 P an 等 人 使 用 端 到 端
+Tran s f orm er 分 类 来 检 测 癫 痫 然 而 , 我 们 的 准 确 性 和 特 异 性 都 提 高 了 约 4% , 这 种
+增 强 可 能 是 由 于 我 们 使 用 判 别 融 合 对 子 信 号 进 行 分 析 。 虽 然 文 献 42 研 究 的 灵 敏 度 略 高
+于 我们 的 方 法 , 但我们 考虑 了 子波段之 间 的 相 关性 , 以 获得更好 的 准确 性 和特异性 [42]
+。
+Zhao 等 人 提 出 了 一 种 混 合 注 意 网 络 ( HAN ) , 利 用 注 意 机 制 将 图 注 意 网 络 ( GAT ) 和
+Tran s form er 结 合 起 来 提 取 时 空 特 征 [ 9 1 ] 。 该 系 统 的 精 度 低 于 我 们 的 方 法 。 值 得 注 意 的 是 ,
+Inre s 模 块 和 HAN 网 络 都 是 对 Trans form er 模 型 的 改 进 。 如 表 4 . 5 所 示 , 所 提 出 的
+Inre s fo rm er 模 块 与 之 前 的 工 作 相 比 , 获 得 了 全 面 的 性 能 。  
+4
+. 6 本 章 小 结  
+本 章 研 究 一 种 用 于 癲 痫 检 测 的 Inr e s former 网 络 , 该 网 络 结 合 了 基 于 CNN 的 网 络 和
+基 于 Tran s fo rm er 的 网 络 的 优 点 , 利 用 Inre s 模 型 和 添 加 前 馈 层 的 Tran s fo rm er 模 型 提 取  
+局 部 和 全 局 特 征 。 此 外 , 还 引 入 了C o -M i xUp 和 类 权 重 损 失 函 数 来 解 决 脑 电 样 本 有 限 和
+不 平 衡 的 问 题 。 消 融 实 验 表 明 , lur e s 模 块 和 添 加 前 馈 层 的 Tr ans fo rmer 模 型 可 以 有 效 地  
+提 高 传 统 变 压 器 的 性 能 。 与 以 往 的 研 究 相 比 , Inre s form er 具 有 相 当 的 性 能 和 较 低 的 计 算
+成 本 , 表 明 该 方 法 具 有 潜 在 的 应 用 价 值 , 对 个 性 化 医 疗 和 患 者 的 长 期 管 理 具 有 重 要 意 义 。
+3 3
+
+
+
+第
+5 章 基于 空 间 变化生成 方法和 I nre s
+-xLSTM 网 络 的 癫痫检测 算法
+  
+第
+5 章 基 于 空 间 变 化 生 成 方 法 和 In re s -xL S TM 网 络 的 癲痫 检 测  
+算 法  
+5
+. 1 引 言
+基 于 第 四 章 的 研 宄 结 果 , C o - Mix Up 可 以 很 好 的 平 衡 不 同 类 型 的 脑 电 信 号 数 据 。 但  
+在 处 理 大 规 模 类不 平 衡 数 据 时 C o -MixUp 往 往 会 占 用 大 量 的 内 存 资 源 , 会 导 致 模 型 在 训
+练 和 预 测 时 的 效 率 不 高 。 为 了 进 一 步 生 成 密 度 更 高 的 样 本 临 近 数 据 , 使 用 空 间 变 化 生 成
+方 法 ( S p ati al Var i at i o n G en erati o n , S V G ) 进 行 数 据 增 强 , 获 得 信 息 丰 富 的 脑 电 数 据 信  
+. 息 。 这 种 方 法 会 产 生 更 优 化 的 数 据 , 并 通 过 提 供 的 数 据 扰 动 ( 畸 变 ) 添 加 噪 声 数 据 , 可  
+以 提 升 模 型 的 泛 化 能 力 , 避 免 模 型 过 度 依 赖 训 练 数 据 。 空 间 变 换 生 成 方 法 不 仅 提 高 了 模  
+型 的 训 练 稳 定 性 , 还 在 样 本 数 量 较 少 的 情 况 下 大 幅 改 善 了 模 型 的 性 能 。  
+传 统 的 长 短 期 记 忆 网 络 作 为 一 种 具 有 良 好 的 特 征 提 取 效 果 的 算 法 , 可 以 有 效 的 捕 获  
+时 序 脑 电 信 号 数 据 信 息 。 但 是 , 长 短 期 记 忆 网 络 的 计 算 复 杂 度 高 , 存 在 长 序 列 处 理 效 率
+低 的 问 题 。 而 新 提 出 的 XL S TM 网 络 可 以 很 好 的 解 决 这 一 问 题 。 xL S TM 框 架 通 过 将  
+L S T M 的 新 变 体 ( s L S T M( 标 量 记 忆 ) 、 mL S TM( 矩 阵 记 忆 ) ) 集 成 到 残 差 块 , 通 过  
+构 建 叠 加 的 残 差 块 构 成 。 研 究 表 明 , 基 于 xL S TM 网 络 , 可 以 实 现 增 强 记 忆 结 构 和 规 模  
+数 据 处 理 。 引 入 xLSTM 网 络 ,
+一 方 面 降 低 了L S TM 网 络 的 计 算 复 杂 度 , 另 一 面 能 够 更  
+有 效 地 学 习 和 区 分 癫 痫 发 作 和 非 发 作 的 脑 电 信 号 。
+因 此 , 在 本 章 使 用 基 于 空 间 变 化 生 成 方 法 和 Ini es -xLS TM 网 络 实 现 癫 痫 发 作 检 测 。
+这 种 架 构 不 仅 提 高 了 性 能 , 还 在 规 模 化 方 面 与 现 有 的 Trans form er 模 型 相 比 具 有 优 势 。
+研 宄 证 明 了 其 在 癫 痫 检 测 领 域 研 究 中 的 广 泛 适 用 性 和 潜 在 价 值 , 为 医 生 诊 断 提 供 更 加 精
+准 和 高 效 的 检 测 。
+5
+. 2 算 法 流程
+本 章 提 出 了 一 种 空 间 变 化 生 成 方 法 和 Inre s -xL S T M 网 络 的 癫 痫 检 测 算 法 , 其 流 程 如
+图
+5
+. 1 所 示 。 算 法 包 括 四 个 步 骤 : 基 于 离 散 小 波 变 换 和 空 间 变 化 生 成 方 法 的 预 处 理 ,
+Inre s
+-xL S TM 和 标 签 融 合 。 具 体 来 说 , 离 散 小 波 变 换 分 解 有 效 分 解 脑 电 信 号 , 为 使 用 空  
+间 变 换 生 成 方 法 进 行 数 据 增 强 奠 定 了 良 好 的 基 础 。 通 过 使 用 基 于 Inre s 和 xL S TM 提 取  
+的 特 征 。 最 后 , 使 用 标 签 融 合 得 到 最 终 的 分 类 结 果 。 每 个 过 程将 在 本 章 节 详 细 描 述 。  
+3 4
+
+
+
+第
+5 章 基于 空 间 变化 生 成 方法 和 I nr e s
+-xLSTM 网 络 的 癫痫检 测 算 法
+  
+P r e p r o c e s s i n g
+  ̄  
+(  D i s c r e t e
+CT t:T;1 -^ r
+ —  ̄ v  p .  
+  v Z. y  f  ^  s    
+d4 d"
+H  ?
+' 广
+ 
+ ?  I n r e s - x L S T M  - ?  =  §   ^  D i s c r i m i n a t i v e
+G e n e r a l i o n  ■ ■ :. . ■ ? 、  y  ?  
+齡
+
+'
+ ̄ 4  
+图
+5
+. 1 提 出 算 法 的 流 程 图
+5
+. 3 预 处理  
+预 处 理 主 要 使 用 了 离 散 小 波 变 化 和 空 间 变 化 生 成 算 法 。 在 使用 空 间 变 化 生 成 方 法 时
+为 了 表 达 生 成 的 新 脑 电 信 号 数 据 , 计 算 中 需 要 涉 及 至 少 两 种 与 信 号 位 置 相 关 的 状  
+态
+: 原 始 状 态 和 增 强 状 态 [ 92 ] 。 根 据 上 述 状 态 的 类 型 , 数 学 模 型 中 的 位 置 可 分 为 四
+类
+:
+翻 转 : 代 表 脑 电 信 号 数 据 在 半 球 之 间 的 交 换 。 在 实 际 的 应 用 中 , 脑 电 信 号 数 据 中 存
+在 对 称 性 和 横 向 性 。 所 以 在 针 对 原 始 数 据 进 行 重 组 时 将 横 向 每 个 通道 脑 电 信 号 数 据 进 行
+相 反 的 对 称 边 缘 分 布 , 而 形 成 受 试 者 的 跨 半 球 大 脑 活 动 的 变 化 。
+K
+
+=
+ K
+0
+:
+: 0 :  ( 5 - 1 )
+八
+:
+= 八 :
+其 中 , { 0 : , A : } 是 原 始 信 号 位 置 , {? ; , : } 原 始 源 信 号 位 置 , { 0 : , A : } 是 增 加 电 极 位
+置
+, { 0 : , A : } 是 增 强 源 信 号 位 置 。
+缩 放 : 模 拟 电 极 位 置 相 对 于 E E G 帽 的 参 考 位 置 的 收 缩 或 扩 展 。 由 于 不 同 受 试 者 头
+皮 形 状 的 变 化 , 即 使 大 多 数 脑 电 图 帽 是 可 拉 伸 的 , 可 能 会 产 生 电 极 帽 没 有 放 到 适 当 的 电
+极 位 置 。 对 原 始 脑 电 信 号 数 据 进 行 相 应 的 计 算 :
+K
+= K  
+?
+:
+= Q :  ( 5 - 2 )
+A
+:
+=e
+,(A r
+e
+
+^
+
+)+
+^ , s
+'
+ ̄ N\\
+,Z
+s c a )
+旋 转 : 表示 所 有 电 极 围 绕 特 定 轴 的 旋 转 偏 移 。 由 于 校 准 阶 段 的 测 量 误 差 , 脑 电 图 帽
+的 角 度 可 能 因 受 试 者 和 会 话 而 异 , 最 终 导 致 电 极 位 置 的 旋 转 。 针 对 于 不 同 的 通 道 进 行 相
+应 的 干 扰 。
+3 5
+
+
+
+第
+5 章 基于 空 间 变化 生成方法和 I nre s
+-xLSTM 网 络 的 癫痫 检 测 算 法
+  
+?
+:
+= ? :
+A
+;
+= A :
+^ ? : + 以 - 妒 队 , )  ( 5 - 3 )
+K
+= K  
+畸 变 : 表 示 某 些 电 极 位 置 的 随 机 偏 移 。 由 于 帽 的 不 规 则 表 面 和 测 量 误 差 , 电 极 位 置  
+变 形 等 因 素 , 对 于 采 集 的 数 据 与 真 实 数 据 会 存 在 相 应 的 数 据 误 差 。 从 而 产 生 带 有 噪 声 的  
+数 据 。
+A
+:
+-  A :
+0
+:
+= 0:+ e
+c
+,e
+c
+ ̄
+7V
+c
+( O , D  ( 5 - 4 )  
+八
+:
+= 人》、 釋,
+: ^ )
+其 中 , d 和 S 分 别 表 示 一 维和 c 维 扰 动 , “ (//
+, 幻 和 r 〇u , s) 分 别 表 示 具 有 均 值 # 和 方 差  
+S 的 一 维 和 c 维 高 斯 分 布 。
+在 实 验 中 , 针 对 原 始 数据 进 行 增 强 时 分 别 将 横 向 每 个 通 道 脑 电 信 号 数 据 进 行 相 反 的
+对 称 边 缘 分 布 , 将 每 个 脑 电 通 道 顺 序 进 行 相 反 的 对 称 边 缘 分 布 和 在 原 始 脑 电 信 号 数 据 基  
+础 上 添 加 噪 声 扰 动 。 通 过 以 上 方 法 针 对 于 癫 痫 发 作 期 数 据 生 成 临 近 的 高 密 度 样 本 数 据 。  
+5
+. 4 I n r e s - xL S T M  
+本 章 提 出 的 Inr e s - x L S T M 采 用 Inr e s 模 块 和 x L S T M 模 块 。 Inr e s 模 块 和 x L S T M 模 块  
+结 合 实 现 了 长 序 列 数 据 处 理 和 记 忆 容 量 扩 展 。 这 种 创 新 设 计 不 仅 通 过 模 块 化 组 合 解 决 了
+长 序 列 建 模 中 的 记 忆 瓶 颈 问 题 , 在 计 算 效 率 、 模 型 扩 展 性 和 梯 度 稳 定 性 方 面 均 展 现 出 显  
+著 优 势 。 图 5 . 2 介 绍 了 提 出 的 Inr e s -x L S T M 结 构 。  
+In c e pti o n  —?  O
+?     rm  
+- I n ce p t i o n  —?  〇  —>  R e s i du a l  — ?  x L S TM  
+ ? ?  
+_  I n c e p t i o n  —?
+图
+ 5 . 2  Inr e s - xL S T M  结 构 图
+3 6
+
+
+
+第
+5 章 基于 空 间 变化生 成 方法 和 I nre s
+-xLSTM 网 络 的 癫痫 检 测 算法
+  
+原 始 L S TM 思 想 引 入 了 标 量 存 储 单 元 作 为 中 央 处 理 和 存 储 单 元 , 通 过 恒 定 误 差 转  
+盘
+( 单 元 状 态 更 新 ) 避 免 梯 度 消 失 。 存 储 单 元 包 含 三 个 门 : 输 入 门 、 输 出 门 和 遗 忘 门 。
+基 于 原 始 L S TM 形 成 的 新 变 体 xL S TM 采 用 指 数 门 控 和 新 型 记 忆 结 构 , 允 许 更 灵 活 地 控  
+制 信 息 流 动 , 使 xL S TM 能 够 在 遇 到 新 上 下 文 时 有 效 地 修 正 决 策 。 图 5 . 3 是 xL S TM 的 结
+构 图 。  
+( 1 ) 指 数 门 控 ( E xp onenti alG atin g ) : 改 进 L S TM 中 传 统 门 控 机 制 , 使 模 型 更 有 效 地  
+更 新 内 部 状 态 。 通 过 引 入 归 一 化 和 残 差 模 块 达 到 稳 定 性 , 使 得 xL S TM 能 够 更 好 地 处 理  
+信 息 , 增 强 模 型 的 可 扩 展 性 。
+传 统L STM门 控 :i
+, i
+'
+^ aj x^ r^ + b
+,  ( 5 - 5 )
+xL S T M门 控 ( 指 数 激 活exp ):i
+,
+= e xp ( i
+; ) i
+;
+=  eoj x
+,  + + b
+(  ( 5 - 6 )
+其 中 , t 代表时 间 步骤 , o
+■ 表 示 s i gmoi d 函 数 。 权 重 向 量 叫 对 应 于 输 入 ;c
+, 和 单 元 输 入  
+门
+i 之 间 的 输入 权 重 向 量 。 权 重 ^ 对 应 于 隐 藏 状态 和 单 元 输入 门 的 循 环 权 重 。 是
+相 应 的 偏 差 项 。
+( 2 ) 新 型 记 忆 结 构 : 在 xL S T M 网 络 中 引 入 了 两 种 新 的 记 忆 单 元 , 分 别 是 标 量 LS TM  
+( s c al ar  L S T M , s L S T M ) 和 矩 阵 L S T M ( m atri x L S TM ,  mL S T M ) 。 s L S T M  具 有 标 量  
+记 忆 和 更 新 机 制 , 以 及 新 的 记 忆 混 合 技 术 。 通 过 引 入 多 个 头 和 在 每 个 头 内 部 的 记 忆 混 合 ,
+但 不 跨 越 头 之 间 , 从 而 提 供 了 一 种 新 的 记 忆 混 合 方 式 。 在 sL S TM 网 络 中 引 入 的 记 忆 更  
+新 机 制 与 传 统 的 标 量 L S T M 网 络 相 比 , 极 大 地 增 加 了 新 记 忆 的 混 合 存 储 。 s L S TM 的 多
+头 记 忆 混 合 公 式 :
+c
+t
+=f
+,  c;
+= t anh( ?J x
+r
++6
+c )  ( 5 - 7 )
+mL S TM 使 用 矩 阵 记 忆 和 协 方 差 更 新 规 则 , 实 现 并 行 化 计 算 。 mL S T M 通 过 矩 阵 乘
+法 来 增 强 存 储 容 量 , 解 决 了L S T M 在 处 理 标 记 预 测 时 的 记 忆 容 量 局 限 性 。 为 了 提 高
+L S T M 的 存 储 容 量 , 我 们 将 L S T M 存 储 单 元 从 标 量 c E R 増 加 到 矩 阵 C E R( d X d ) 。  
+在 时 间 t , 键 k , 值 V , 以 及 查 询 向 量 q , 形 成 新 的 mL S T M 的 计 算 规 则 。 这 两 种 新 的 记  
+忆 单 元 都 通 过 指 数 门 控 来 增 强 L S T M 的 功 能 。 用 于 存 储 键 值 对 的 协 方 差 更 新 规 则 为 :  
+c
+t
+=c
+t
+l
++v
+,
+k
+,
+T  ( 5 - 8 )
+mL S TM 正 向 传 递 表 达 式 为 :
+( 5 - 9 )
+h
+t
+=o
+t  ? L ayerNorm { c
+t qt )  ( 5 - 1 0 )
+3 7
+
+
+
+第
+5 章 基于空 间 变化生成方法和 Inres
+-xLSTM 网 络 的 癫 痫检 测 算 法
+  
+LS TM  记 ti细 胞  x L ST M 模 块
+  
+^ N 
+03   ̄  ̄  
+记 忆细 胞 s LSTM Q□  
+— 常 卷论 ( C EC )  + 指 数 门 控
+V
+wS CtH t  N utV- >^ —?  S i gm o i d 门 控  + 记 忆 结 构 的 修 改  乂 2.
+\ LJLJ
+L
+ \[
+= 3= ^  
+h
+,  ZL  〇t  > (^ )  H - — ...
+|
+
+== ^U  
+nr m LSTM  > H '
+'
+'' 
+—- 、
++ 指数 门 控Z yf  
+0
++ 并 行 训 练  cmcm  
+1
+J ^e:
+.
+.
+,  
+^
+
+ j
+= = LJ  
+图 5 . 3xL S TM 内 部 结 构 图
+5
+. 5 实验结 果 与 讨 论  
+癫 痫 检 测 算 法 在 P ytho n3 . 8 和 P yC h arm2 0 2 0 环 境 中 实 现 。 实 验 采 用 五 重 交 叉 验 证 ,
+选 取将 空 间 变 换 生 成 方 法 生 成 的 全 部 数据 和 原 始 EE G 数 据 不 带 标 签 的 8 0 % 数 据 量 用 于  
+训 练 集 , 剩 余 的 原 始 EE G 数 据 量 2 0 % 作 为 测 试 集 。 学 习 率 设 置 为 0 _ 0 0 0 0 1 , 批 大 小 分 别
+为
+2 0 。 优 化 器 是 亚 当 优 化 器 。 训 练 分 类 层 使 用 线 性 激 活 函 数 , 测 试 分 类 层 使 用 s o ftmax  
+激 活 函 数 进 行 癫 痫 发 作 和 非 发 作 信 号 分 类 。 实 验 中 , 模 型 训 练 经 过 2 0 0 次 迭 代 后 趋 于 稳  
+定
+, 测 试 经 过 1 2 0 历 元 数 。 在 模 型 训 练 中 用 来 校 正 数 据 误 差 的 损 失 函 数 使 用 均 方 误 差  
+( M e an S q u areE rr o r , M S E ) 来 评 估 预 测 值 f( x) 和 真 实 值 y 之 间 的 误 差 , 公 式 如 下 :
+t
+ifM - y)
+2
+M S E  =    ( 5 - 1 1 )   n
+5
+. 5 . 1 实 验 结 果
+( 1 )B o nn 数 据 集
+实 验 以 健 康 患 者 非 癫 痫 发 作 脑 电 图 数 据 为 基 础 , 设 计 组 合 的 7 个 对 比 实 验 。 由 于 原
+始 脑 电 图 数 据 多 为 纯 数 据 , 容 易 产 生 伪 像 的 数 据 量 较 少 , 故 在 e a s e l 、 c as e 2 、 c as e4 、
+c as e 5 中 分 类 效 果 较 好 , 灵 敏 度 、 特 异 性 和 准 确 率 均 为 1 0 0 % 。 从 表 中 可 以 看 出 , Inre s -  
+xL S TM 在 提 出 的 七 组 对 比 实 验 中 表 现 良 好 。 在 不 平 衡 数 据 的 情 况 下 , 分 类 性 能 也 得 到  
+了 很 好 的 结 果 。 详 细 实 验 结 果 如 表 5 . 1 所 示 。
+3 8
+
+
+
+第
+5 章 基于 空 间 变化生成方法和 Inre s
+-xLS TM 网 络 的 癫 痫 检 测 算 法
+  
+表
+5
+. 1B o nn 数 据 集 七 种 组 合 实 验 结 果
+组合案例 数据 集组合
+
+准确 率 (%)
+
+灵敏度%)
+
+特 异 性 (% )
+C as e l  E v s A  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0
+C a s e 2  E v s B  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0
+C a s e 3  E v s C  9 8 . 5 5  1 0 0 . 0 0  9 6 . 4 3
+C a s e 4  E  v s  D  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0
+C a s e 5  E  v s AB  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0
+C as e 6  E  v s  C D  9 6 . 8 0  9 5 . 4 5  9 7 . 6 8  
+
+C as e7
+
+E vs AB CD
+
+9 7 .45
+
+96. 33
+
+9 7 . 4 0
+( 2 )C HB - M IT 数 据 集  
+我 们 的 研 究 也 在 公 开 的 C HB -M IT 数 据 集 上 进 行 , 结 果 如 表 5 . 2 所 示 。 所 有 患 者 的  
+平 均 准 确 率 、 灵 敏 度 和 特 异 性 分 别 为 9 8 . 2 4 % 、 9 6 . 0 7 % 和 9 8 . 5 1 % 。 每 个 患 者 的 特 异 性 都
+在
+9 5 % 以 上 , 8 位 患 者 的 灵 敏 度 甚 至 达 到 1 0 0% 、 7 位 患 者 的 特 异 性 达 到 1 0 0 % 。 1 1 例 患
+者 的 准 确 率 在 9 9 % 以 上 。 部 分 患 者 特 异 性 低 于 平 均 水 平 , 这 可 能 与 癫 痫 样 本 数 量 少 ,
+与 非 癫 痫 性 脑 电 图 数 据 相 似 度 高 有 关 。  
+此 外 , 基 于 事 件 的 实 验 也 取 得 了 良 好 的 结 果 , 事 件 灵 敏 度 为 9 8 . 6 1 % , F D R 为
+0
+. 3 6 /h , 检 测 延 迟 为 4 . 1 8 s 。 其 中 是 chb l 2 , chb l 3 和 chb l 6 存 在 未 被 发 现 的 癫 痫 发 作 样
+本
+。 4 例 患 者 报 告 无 差 错 。 1 2 例 患 者 F D R 均 不 高 于 0 . 0 6 /h , 进 一 步 证 明 我 们 提 出 的 模  
+型 在 实 际 应 用 中 具 有 一 定 的 优 势 。 综 合 评 价 结 果 表 明 , 所 提 出 的 Inr e s - xL S TM 方 法 具 有
+较 高 的 性 能 和 可 行 性 。
+此 外 , 为 了 获 得 二 值 标 签 , 选 择 合 适 的 阈 值 也 很 重 要 。 随 机 选 取 一 名 患 者 , 在 不 同
+阈 值 下 进 行 实 验 , 实 验 结 果 如 图 5 . 4 所 示 。 当 阈 值 为 0 . 6 5 时 , 准 确 率 最 高 , 后 续 增 加 阈
+值 后 , 结 果 不 在 变 化 。 因 此 , 本 研 究 将 判 断 阈 值 统 一 设 置 为 0 . 6 5 。  
+1 00 1
+  
+^厂  
+I
+90 J
+Ac c u r a c y
+'
+80 
+*I
+ 1
+
+* I
+ 1
+  
+0
+. 0  0 . 2  0 . 4  0 . 6  0 . 8
+H
+i r e s h o i d
+图
+5
+. 4 标 签 融 合 不 同 阈 值 对 应 的 准 确 率  
+3 9
+
+
+
+第
+5 章 基于 空 间 变化 生成方法 和 Inre s
+-x LS TM 网 络 的 癫 痫 检 测 算 法
+  
+表
+5
+. 2C H B -MIT 数据 集 基 于 时 间 和 基 于 事 件 的 实 验 结 果  
+病 人
+基于时 间
+
+基于 事 件
+  
+准 确 率 ( % )  灵 敏 度 ( % )  特 异 性 ( % ) 灵 敏 度 ( % ) F D R( /h) 延 迟 ( s )
+C hb O l  9 9 . 7 9  9 7 . 6 2  1 0 0 . 0 0  1 0 0 . 0 0  0 . 0 0  1 . 3 3
+C hb 0 2  9 8 . 8 1  1 0 0 . 0 0  9 8 . 7 5  1 0 0 . 0 0  0 . 0 0  0 . 1 3
+C hb 0 3  9 9 . 0 9  1 0 0 . 0 0  9 9 . 0 5  1 0 0 . 0 0  0 . 1 6  3 . 0 0
+C hb 0 4  9 9 . 5 2  1 0 0 . 0 0  9 9 . 5 0  1 0 0 . 0 0  0 . 0 6  1 . 6 7
+C h b 0 5  9 8 . 8 3  8 1 . 5 8  1 0 0 . 0 0  1 0 0 . 0 0  0 . 2 4  2 . 3 3
+C hb 0 6  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  0 . 0 4  4 . 0 0
+C hb 0 7  9 7 . 6 1  1 0 0 . 0 0  9 7 . 5 8  1 0 0 . 0 0  0 . 0 4  3 . 3 7
+C hb 0 8  9 5 . 6 6  1 0 0 . 0 0  9 5 . 6 5  1 0 0 . 0 0  0 . 44  7 . 7 4
+C hb 0 9  9 9 . 4 6  9 5 . 7 2  9 9 . 6 4  1 0 0 . 0 0  0 . 0 6  8 . 0 0
+C hb l O  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  0 . 0 4  4 . 0 0
+C hb l l  9 9 . 8 9  9 7 . 3 0  1 0 0 . 0 0  1 0 0 . 0 0  0 . 0 0  8 . 0 0
+C hb l 2  9 8 . 4 3  9 7 . 8 6  9 9 . 4 5  9 3 . 7 5  2 . 2 4  8 . 0 0
+C hb l 3  9 8 . 9 8  8 4 . 4 3  9 7 . 4 3  7 5 . 0 0  0 . 3 4  7 . 7 1
+Chb l 4  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  1 0 0 . 0 0  0 . 0 0  2 . 2 0
+C hb l 5  9 6 . 8 8  9 3 . 9 5  9 9 . 9 2  1 0 0 . 0 0  1 . 4 3  8 . 0 0
+C hb l 6  9 4 . 7 3  9 2 . 44  9 5 . 3 7  8 3 . 3 3  5 . 0 0  7 . 5 6
+C hb l 7  9 9 . 2 3  9 3 . 7 2  9 9 . 7 2  1 0 0 . 0 0  0 . 9 7  0 . 7 7
+C hb l 8  9 6 . 9 4  1 0 0 . 0 0  9 6 . 9 3  1 0 0 . 0 0  0 . 0 2  4 . 0 0
+C hb l 9  9 9 . 5 1  9 3 . 7 5  1 0 0 . 0 0  1 0 0 . 0 0  0 . 5 8  0 . 7 3
+C hb 2 0  9 9 . 1 6  9 3 . 3 3  9 9 . 6 9  1 0 0 . 0 0  0 . 4 3  4 . 4 6
+C hb 2 1  9 7 . 6 3  9 5 . 0 0  9 7 . 9 4  1 0 0 . 0 0  0 . 0 3  2 . 6 7
+C hb 2 2  9 6 . 9 5  9 6 . 0 0  9 7 . 0 0  1 0 0 . 0 0  0 . 0 2  2 . 2 3
+C hb 2 3  9 3 . 4 6  9 6 . 0 0  9 3 . 3 3  1 0 0 . 0 0  0 . 4 3  4 . 0 0
+C hb 2 4  9 7 . 1 4  9 6 . 9 7  9 7 . 2 7  1 0 0 . 0 0  1 . 3 3  4 . 4 7
+M e an  9 8 . 2 4  9 6 . 0 7  9 8 . 5 1  9 8 . 6 1  0 . 3 6  4 . 1 8
+为 了 证 明 所 提 出 方 法 的 Inre s 模 块 和 x-L S TM 模 块 具 有 良 好 的 性 能 , 在 消 融 实 验 中
+对 模 型 进 行 了 研 宄 。 首 先 , 基 本 模 型 是 基 于 研 究 内 容 二 的 Inre s 模 块 。 此 外 , X -L S TM  
+模 块 是 基 于 L S TM 的 改 进模 块 。 为 了 保 证 工 作 的 一 致 性 和 公 平 性 , 各 模 块 之 间 的 参 数  
+设 置 都 是 一 致 的 。 消 融 实 验 结 果 如 图 5 . 5 所 示 , 可 以 清 楚 地 看 到 Inre s - xL S TM 是 最 优 秀
+的 方 法 , 这 说 明 在 x-L S TM 中 结 合 Inre s 模 块 可 以 更 好 地 提 取 特 征 , 提 高 深 度 学 习 模 型  
+4 0
+
+
+
+第
+5 章 基于 空 间 变化生成方法和 I nres
+-xLSTM 网 络 的 癫痫检测 算法
+  
+对 于 癫 痫 发 作 检 测 的 能 力 。  
+1 00 1
+  
+I
+:
+匪 r 旧
+' 7〇 
+1:
+?
+|: j
+888  S pec i fi c ^ %)  
+lure s  xL S TM  Inre s - xL S TM  
+M o d e l  
+图
+5
+. 5 提 出 的 方 法 ( Inr e s - xL S TM ) 与 Inre s 模 块 , xL S TM 模 块 的 比 较 实 验  
+5
+. 5 . 2 讨 论  
+本 文 提 出 了 一 种 基 于 Inre s -xL S TM 的 深 度 学 习 方 法 , 通 过 实 验 结 果 可 以 更 好 的 证 明
+该 方 法 的 有 效 性 。 基 于 L S TM 改 进 的 x-L S T M 可 以 更 好 的 存 储 数 据 , 解 决 了L S TM 的
+记 忆 容 量 缺 陷 。 使 用 并 行 处 理 , 提 髙 了 模 型 运 行 的 效 率 , 减 少 了 计 算 负 担 。
+比 较 该 模 型 的 时 间 复 杂 度 和 临 床 应 用 价 值 。 表 5 . 3 显 示 了 三 种 模 型 的 ep o c h 时 间 、  
+处 理 能 力 和 推 理 延 迟 。 Inre s - xL S TM 所 需 的 历 元 时 间 最 小 , 因 为 xL S TM 将 输 入 特 征 记  
+性 并 行 处 理 , 以 减 少 计 算 量 , 降 低 内 存 占 用 。 简 单 Inre s 模 型 略 高 于 xL S T M 。 Inr e s 模
+型 不 通 过 线 性 变 换 映 射 底 层 , 而 是 将 特 征 叠 加 , 这 大 大 增 加 了 计 算 量 。 可 以 看 出 , 我 们
+提 出 的 Inre s - xL S T M 模 型 在 保 持 精 度 的 同 时 使 用 了 更 少 的 历 元 时 间 。 7 7 6 . 5 3 m s 的 延 迟  
+和
+5 2 . 3 0 个 请 求/秒 的 吞 吐 量 表 明 Inr e s - xL S T M 具 有 较 强 的 实 时 处 理 能 力 。 进 一 步 证 实 了
+该 方 法 具 有 临 床 研 究 的 潜 力 。
+表
+5
+. 3 在 C HB - MI T 数 据 集 上 时 间 复 杂 度 和 实 时 性 实 验 结 果  
+模型
+
+平 均 历 元 时 间 ( s)  处 理 能 力 ( 请 求/ 秒 )  推 理 延 迟 ( m s )
+I nr e s  0 . 8 0  2 4 . 6 5  1 1 4 8 . 1 2
+xL S T M  0 . 6 4  44 . 2 1  9 9 4 . 5 1
+Inr e s - xL S T M  0 . 5 3  5 2 . 3 0  7 7 6 . 5 3
+同 时 , 考 虑 到 所 提 出 的 模 型 在 不 同 患 者 之 间 的 泛 化 能 力 , 我 们 在 C HB -MIT 数 据 集  
+中 进 行 了 跨 患 者 实 验 。 即 将 22 例 患 者 的 部 分 脑 电 数 据 作 为 训 练 数 据 集 , 剩 余 1 例 患 者
+4 1  
+
+
+
+第
+5 章 基于 空 间 变化 生成方法和 I nr e s
+
+xLSTM 网 络 的 癫痫检测 算 法
+  
+的 脑 电 数 据 作 为 测 试 数 据 集 进 行 留 一 交 叉 验 证 。 平 均 准 确 率 为 8 7 . 44% , 灵 敏 度 为
+8 4 . 7 2 % , 特 异 性 为 8 6 . 5 8 % 。 虽 然 跨 患 者 实 验 的 平 均 表 现 不 如 患 者 特 异 性 实 验 , 但 这 主  
+要 是 由 于 患 者 发 作 类 型 不 同 导 致 的 脑 电 图 信 号 差 异 较 大 。
+在 基 于 机 器 学 习 的 癫 痫 发 作 检 测 己 经 存 在 大 量 研 宄 成 果 。 基 于 传 统 机 器 学 习 和 深 度  
+学 习 在 癫 痫 检 测 领 域 发 展 迅 速 。 其 中 , Z ab ihi 等 人 使 用 传 统 的 人 工 神 经 网 络 ( ANN ) 进  
+行 特 征 提 取 , 和 线 性 判 别 分 析 ( LD A ) 分 类 器 进 取 得 分 类 结 果 , 得 到 了9 1 . 1 5 % 的 准 确  
+率
+、 9 5 . 1 6 % 的 灵 敏 度 和 9 5 . 1 1 % 的 特 异 性 , 与 我 们 提 出 的 深 度 学 习 方 法 相 比 , 增 加 了 模  
+型 的 复 杂 度 [93]
+。 Alharth i 等 人 通 过 应 用 新 的 数 据 集 成 兼 容 性 框 架 , 实 施 一 种 用 于 读 取  
+XLtek EE G 数 据 的 新 算 法 , 使 用 1 D - C NN 、 B i - L S T M 和 atenti on 的 深 度 学 习 模 型 进 行  
+测 试和 评估 。 结 果 实 现 了 高 达 96 . 87% 的 准确 度 和 9 6. 85% 的 灵敏度 [94]
+。 Yang 等 人 通 过  
+设 置 不 同 的 小 波 变 换 比 例 因 子 进 行 数 据 增 强 , 提 出 了 一 种 针 对 特 定 癫 痫 患 者 准 确 率 高 的  
+癫痫检测 方法 , 取得 了 可观 的 实验结果 [95]
+。 D ong 等 人 提 出 了 一 种 新 的 空 间 - 时 间 超 图 注  
+意 力 转 换 器 ( S T HAT ) 框 架 , 包 括 S wi nTran s form er 和 2 D - C NN , 所 提 出 的 模 型 的 平  
+均 测 试 准 确 性 、 特 异 性 、 敏 感 性 分 别 为 9 4 . 7 5 % 、 9 5 . 4 2 % 和 9 4 . 1 8 % , 明 显 我 们 提 出 的 模  
+型 更优 [96]
+L i 等 人 一 种 具 有 监 督 对 比 学 习 的 端 到 端 C NN -B i L S T M 模 型 ( C NN -B iL S T M-  
+S C L ) , 虽 然 灵 敏 度 高 于 我 们 提 出 的 方 法 , 但 准 确 性 和 特 异 性 仍 是 我 们 的 方 法 更 高
+如 表 5 . 4 所 示 , 所 提 出 的 Inre s - x L S TM 模 块 与 之 前 的 工 作 相 比 , 获 得 了 良 好 的 性 能 。
+表
+5
+. 4 在 C HB -M I T 数 据 集 上 与 现 有 研 宄 的 比 较  
+ ^
+准 确 率 ( % )  灵 敏 度 ( % ) 特 异 性 ( % )
+S hyu e tal .
+[3 5
+]  I n c e p t i o n  +R e s i du a l  9 8 . 3 4  7 3 . 0 8  9 8 . 7 9
+Z ab i hi  e t a l . 
+[ 9 3 ]  AN N + L D A  9 1 . 1 5  9 5 . 1 6  9 5 . 1 1
+A
+lh arthi  e t  a l .  [ 9 4
+]  CN N + B iL S T M +A t e nt i o n  9 6 . 8 5  \  9 6 . 8 7
+Yan g 
+e t  a l .  [ 9 5 ]  L S T M + C N N  9 3 . 8 9  9 6 . 4 8  9 5 . 4 7
+D ong
+etal . [9 6
+]  S w i n  Tran s fo rm e r + 2 D C N N  9 4 . 7 5  9 5 . 4 2  9 4 . 1 8
+L
+i e t al .
+【
+9 7 ]  CN N - B i L S T M - S C L  9 7 . 3 6  9 8 . 9 7  9 7 . 3 6  
+O u r  w o rk  S V G +I nr e s - x L S TM  9 8 . 2 4  9 6 . 0 7  9 8 . 5 1
+5
+. 6 本 章 小 结  
+本 章 详 细 介 绍 了 一 种 基 于 空 间 变 化 生 成 算 法 ( S p ati al Vari ati o n G enerat i on , S V G )
+和
+Inre s -xL S TM 网 络 的 癫 痫 检 测 研 究 。 该 研 究 首 先 利 用 离 散 小 波 变 换 对 原 始 脑 电 信 号 进  
+行 分 解 , 将 特 定 频 带 分 别 使 用 空 间 变 换 生 成 方 法 , 生 成 新 的 样 本 数 据 , 然 后 构 建 Inre s -  
+xL S TM网 络 , 深 度 挖 掘 脑 电 信 号 特 征 。 此 外 , 使 用 特 定 频 带 重 组 信 号 进 行 深 度 网 络 学  
+4 2
+
+
+
+第
+5 章 基于 空 间 变化生成方法和 Inre s
+
+xLSTM 网 络 的癫痫 检测 算法
+  
+习 和 分 类 后 得 到 的 结 果 进 一 步 进 行 决 策 融 合 得 到 最 终 的 分 类 结 果 。 通 过 基 于 时 间 和 基 于
+事 件 的 实 验 结 果 , 进 一 步 证 明 了 该 方 法 的 可 行 性 。 计 算 提 出 模 型 的 吞 吐 量 和 延 迟 方 面 等
+评 价 指 标 , 表 明 Inre s - xL S TM 在 临 床 研 究 方 面 的 潜 在 性 能 。 利 用 这 些 优 势 , 提 出 的 方
+法 在 C HB -MIT 数 据 集 取得 了 与 当 前 先 进 研 宄 相 当 的 性 能 。
+4 3
+
+
+
+第
+6 章 总结与展望
+  
+第
+6 章 总 结 与 展 望  
+6
+. 1 总 结  
+癫 痫 是 一 种 慢 性 神 经 系 统 疾 病 , 影 响 全 球 约 5 0 0 0 万 人 。 癫 痫 发 作 的 特 征 是 反 复 和  
+不 自 主 的 抽 搐 , 可 能 伴 有 意 识 丧 失 和 失 禁 。 这 些 症 状 给 患 者 带 来 了 沉 重 的 负 担 , 并 经 常
+导 致 社 会 耻 辱 和 歧 视 。 目 前 , 癫 痫 的 诊 断 主 要 依 赖 于 神 经 学 专 家 对 脑 电 图 ( E E G ) 记  
+录 的 目 视 检 查 。 手 动 注 释 冗 长 的 脑 电 图 记 录 是 一 个 耗 时 且 劳 动 密 集 型 的 过 程 , 增 加 了 医
+务 人 员 的 工 作 量 , 并 且 难 以 满 足 不 断 增 长 的 临 床 需 求 。 因 此 , 开 发 自 动 癲 痫 发 作 检 测 系
+统 对 于 减 轻 患 者 的 身 体 和 经 济 负 担 , 同 时 显 着 减 轻 医 学 专 家 的 工 作 量 具 有 重 要 的 临 床 价  
+值
+。 本 文 旨 在 探 索 数 据 增 强 和 深 度 神 经 网 络 在 癫 痫 发 作 检 测 中 的 应 用 , 并 设 计 了 三 种 癫  
+痫 发 作 检 测 算 法 。 总 结 如 下 :  
+( 1 ) 构 建 了 一 种 基 于 数 据 增 强 技 术 的 结 合 注 意 力 机 制 的 l D CNN -B iL S TM 网 络 的 癫 痫
+检 测 算 法 。 分 别 使 用 三 种 数 据 增 强 技 术 进 行 数 据 增 强 实 验 对 比 。 添 加 注 意 力 机 制  
+的
+l D CNN-B iL S TM 模 型 , 可 以 更 好 地 突 出 脑 电 信 号 特 征 , 加 强 对 前 向 和 后 向 脑  
+电 信 号 特 征 的 捕 获 。 在 两 个 公 开 数 据 集 进 行 实 验 , 分 别 取 得 了 较 好 的 结 果 , 尤 其
+在 使 用 C o -MixUp 数 据 增 强 技 术 获 得 最 好 性 能 。
+( 2 ) 将 C o - M ixUp 数 据 増 强 技 术 与 Inr e s form er 结 合 实 现 癫 痫 发 作 检 测 。 采 用 基 于 C o -  
+M
+ixUp 的 数 据 増 强 和 类 权 重 损 失 函 数 对 分 类 结 果 进 行 标 注 , 有 利 于 Inre s fo rm ei
+■ 充
+分 学 习 不 同 频 段 的 信 号 信 息 , 减 少 类 不 平 衡 对 模 块 性 能 的 影 响 。 在 Tran s form er 网  
+络 中 , 在 多 头 注 意 力 之 前 添 加 前 馈 层 , 以 实 现 更 高 级 的 位 置 编 码 表 示 , 在 上 下 文  
+任 务 中 表 现 出 令 人 印 象 深 刻 的 性 能 。 在 多 头 注 意 层 之 前 嵌 入 Inre s 模 块 , 进 一 步 丰  
+富 了 捕 获 的 特 征 信 息 特 征 , 保 证 了 时 间 一 致 性 。 研 宄 内 容 的 实 验 结 果 展 示 该 模 型  
+不 仅 具 有 较 高 的 效 率 , 而 且 实 时 性 也 很 好 。 该 算 法 在 公 开 数 据 集 进 行 评 估 , 取 得  
+了 较 为 优 异 的 结 果 。  
+( 3 ) 提 出 基 于 空 间 生 成 算 法 和 Inre s - xL S TM 的 癫 痫 检 测 算 法 , 可 以 有 效 的 提 高 模 型 的  
+泛 化 能 力 。 使 用 离 散 小 波 变 换 和 空 间 变 换 生 成 方 法 进 行 预 处 理 。 提 出 的 网 络 可 以  
+动 态 学 习 脑 电 信 号 特 征 , 利 用 Inre s 模 块 提 取 脑 电 信 号 的 内 部 特 征 , 借 助 xL S TM  
+网 络 在 不 断 进 行 记 忆 更 新 的 同 时 并 行 处 理 特 征 数 据 , 进 一 步 实 现 脑 电 信 号 时 序 特  
+征 捕 获 。 初 步 分 类 后 采 用 标 签 融 合 策 略 , 进 一 步 优 化 算 法 性 能 。 评 估 模 型 的 计 算  
+成 本 和 复 杂 度 , 证 明 该 结 构 易 于 实 现 , 而 且 计 算 复 杂 度 低 , 运 行 时 间 短 。 在 两 个  
+公 开 数 据 集 上 的 实 验 结 果 表 明 , 该 模 型 的 检 测 性 能 优 于 现 存 方 法 , 对 癫 痫 检 测 临  
+床 研 究 具 有 很 大 的 潜 能 。
+4 4
+
+
+
+第
+6 章 总结与展望
+  
+6
+. 2 展 望
+基 于 脑 电 信 号 的 癫 痫 发 作 检 测 算 法 对 于 诊 断 和 治 疗 癫 痫 具 有 重 大 意 义 。 本 文 提 出 了  
+三 种 基 于 数 据 增 强 和 深 度 神 经 网 络 的 癫 痫 发 作 检 测 算 法 在 两 种 癫 痫 脑 电 信 号 数 据 库 上 均
+实 现 了 理 想 的 结 果 。 但 己 做 的 研 究 还 存 在 优 化 的 空 间 :
+( 1 ) 本 研 宄 针 对 于 特 定 患 者 的 数 据 集 进 行 实 验 , 均 取 得 了 较 好 的 实 验 结 果 。 下 一 步 计
+划 使 用 迁 移 学 习 技 术 , 构 建 患 者 间 特 征 映 射 模 块 。 通 过 现 有 数 据 集 与 新 患 者 数 据
+集 进 行 对 抗 训 练 , 缓 解 模 型 过 拟 合特 定 患 者 数 据 的 问 题 。  
+( 2 ) 为 了 评 估 实 验 性 能 , 分 别 使 用 了CHB -MI T 数 据 集 和 B onn 数 据 集 。 下 一 步 计 划 使
+用 多 数 据 库 验 证 模 式 , 引 入 数 据 分 布 对 齐 算 法 。 通 过 度 量 不 同 数 据 集 的 分 布 差 异 ,
+在 特 征 空 间 进 行 分 布 对 齐 , 对 提 升 模 型 跨 数 据 集 泛 化 能 力 具 有 重 要 意 义 。  
+( 3 ) 当 前 研 究 聚 焦 于 脑 电 信 号 时 序 特 征 的 提 取 与 学 习 。 为 深 化 特 征 表 征 能 力 , 后 续 工  
+作 将 构 建 多 域 融 合 框 架 并 行 捕 获 时 频 关 联 特 征 , 建 立 通 道 间 的 动 态 空 间 关 联 , 最
+终 实 现 多 维 度 特 征 的 协 同 建 模 与 跨 域 信 息 互 补 。
+4 5
+
+
+
+参考文献
+  
+参考 文 献  
+[ 1 ]  S u b a s i  A , K e vri c  J ,  Ab du l l ah  C anb az  M .  E p i l ep t i c  s e i zu r e  d e t e c ti o n  u s i n g  h yb ri d
+m a c h in e  l e arn i n g  m e th o d s  [ J ] .  N e ur al  C o mp utin g  an d  Ap p l i c at i o n s ,  2 0 1 9
+,  3 1 ( 1 ) :  3 1 7 - 3 2 5 .
+[ 2 ]  X i ao  T, Wan g  Z ,  Z h an g  Y, e t  a l .  S e l f- s up e rv i s e d  L e ar n in g  w i th  At e nt i o n  M e c h ani s m  fo r
+E E G -b as e ds e i zured e t e c t i o n[ J ]
+,B i o me di c alS i gn alP ro c e s s i ngandC ontro l
+,  2 0 2 4 ,  8 7 :
+1 0 5 4 6 4 .  
+[ 3 ] L i u W,  Wang Z
+,  L i u  X ,  e t  a l .  A  s urv e y  o f  d e e p  n e ur a l  n e tw o r k  arc h i t e c tur e s  an d  th e ir
+ap p l i c at i o n s  [
+J] ,  N e ur o c omp ut in g,  2 0 1 7 ,  2 3 4 : 1 1
+- 2 6 .  
+[ 4 ]  Z h o u  Q ,  Z h an g  S ,  D u  Q , e t  al .  RIHA N e t :  A  R e s i d u al -b a s e d  In c ep ti o n  w i th H yb ri d -  
+A
+tt e nt i o n  N e tw o rk fo r  S e i zu r e  D e t e c ti o n  u s i n g  E E G  s i gn a l s  [ J] .  C o mp u t er s  i n  B i o l o gy
+an d  M e d i c i n e ,  2 0 2 4 ,  1 7 1 :  1 0 8 0 8 6 .  
+[ 5 ]  Ah m a d M  Z , S a e e d M , S al e e m  S
+,  e t  al .  S e i zur e  d e t e c t i o n  u s in g  E E G :  A  s urv e y  o f
+d
+i ffe r ent  t e c hn i qu e s  [ C ]
+.  2 0 1 6  In t ern a ti on al  C o nfe r enc e  o n  E m e rgin g  Te c hn o l o gi e s
+( I C E T ) ,  2 0 1 6 :  1 - 6 .  
+[ 6 ]Zh angZ ,J iT
+,  Xi a o  M ,  e t  al .  C r o s s -p ati e n t  aut o m ati c  ep i l ep t i c  s e i zur e  d e t e c ti o n  u s i n g
+p at i e n t - adve r s ar i a l  ne ur a l  n e tw o rk s  w i th  s p ati o - t emp o r a l  E E G  au gm e n t at i o n  [ J] ,
+B
+i ome di c al S i gn al P ro c e s s i ngandC ontro l
+,  2 0 2 4 ,  8 9 :  1 0 5 6 6 4 .  
+[ 7 ]  J av el  I M , S al v ado r R  C ,  D adi o s  E ,  et  al .  E p i l ep t i c S e i zure  D ete c ti o n v i a E E G  u s i n g
+T r e e -  
+b as e dPip e l i neOp timiz ati onTo o l [ C ]
+. 2 0 1 9  IE E E 1 1 th  Int e r n a ti o n al  C o nfe r e n c e  o n  
+Hu m an o i d ,  N an o t e c hno l o gy,  In fo rm a ti o n  Te c hn o l o gy, C o mmuni c ati o n  an d  C o ntro l
+,  
+Envi ro nm ent
+, andM an a g em ent
+ (  H N I C E M  ) ,  2 0 1 9 :  1 - 5 .  
+[ 8 ]  X u  J ,  Wan g  J ,  L i u  J - X ,  e t  a l .  E p i l ep ti c  S e i zur e  D e t e c ti o n  B a s e d  o n  F e atur e  E x t ra c ti o n  an d
+CNN - B i G RU N etw o rkw i thA tt ent i o nM e chani s m
+,  A dv an c e d In t e ll i g e n t  C o mp u tin g
+T e chn o l o gy  an d  A p p l i c at i o n s ;  1 9 th  In t er n a ti o n al  C o n fe r e n c e ,  I C I C  2 0 2 3
+,  Z h e n g zh o u ,
+C hin a, Au gu s t1 0
+13
+,2 02 3
+,  P r o c e e d i n g s ,  P art  I I .  ( 2 0 2 3 )  3 0 8 - 3 1 9 .  
+[ 9 ]  S hyu  K- K ,  H u an g  S - C ,  L e e  L - H ,  e t  a l .  A  L o w  C o mp l e x i ty  E s tim at i o n  M e th o d  o f  E n t r o p y
+fo r  R e al - T im e  S e izur e  D e t e c t i o n  [ J] .  I E E E  A c c e s s
+,2 02 3
+,  1 1 :  5 9 9 0 - 5 9 9 9 .  
+[ 1 0 ]  Te xnko  A ,  Th o m a s  E ,  M am an e  W,  e t  a l .  E E G - b a s e d  n e o n at al  s e i zur e  d e t e c ti o n  w i th
+S u p p o rt  Ve c t o r  M a c h i n e s  [ J ]
+. C l i ni c al  N euro p hys i o l o gy, 2 0 1 1
+,  1 2 2 ( 3 ) :  4 6 4 - 4 7 3 ,
+[ 1 1 ]  L i u  X ,  Wan g  J ,  S h an g  J
+,  e t  al .  E p i l ep t i c  S e izure  D e t e c ti o n  B a s e d  o n  Vari at i on al  M o d e
+D e c o mp o s i ti o n  a n d  D e e p  F o r e s t  U s i n g  E E G  S i gn al s  [ J] .  B r a i n  S c i e n c e s ,  2 0 2 2 ,  1 2 ( 1 0 ) :
+1 2 7 5
+[ 1 2 ]  S i v a s ank ari  K ,  K aru n a n i th y  K .  E p i l e p t i c  s e i zu re  d e t e c ti o n  u s i n g  p o s t eri o r  p r o b ab i l i t y -  
+4 6
+
+
+
+参考文献
+  
+b a s e d  c o nv o l ut i o na l  ne ur al  ne tw o rk c l a s s i fi er  [ C ] .  Mu l t i m e d i a  To o l s  an d App l i c at i o n s
+,
+2 0 2 3 : 5 5 1 - 5 7 4 .  
+[
+1 3 ]  S  A , S  S  K ,  M o h an  N , e t  al .  E E G  b a s e d  aut o m at e d  d e t e c ti o n  o f  s e i z ur e  u s in g  m ac h i n e
+l e ar ni n g  ap p r o a c h  an d  tr a d i ti o n al  fe atur e s  [ J] .  E xp e r t  S y s t e m s  w i th  Ap p l i c at i o n s
+,
+2 024
+,
+2 5 1 :  1 2 3 9 9 1 .  
+[ 1 4 ]  A kb ari  H ,  S a d i q  M  T .  D et e c t i o n  o f  fo c a l  an d  n o n - fo c al  E E G  s i gn al s  u s i n g  n o n - l i n e ar
+fe atur e s  d e ri v e d  f r o m  e mp i ri c a l  w a v e l e t  tran s fo rm  rhyt hm s  [ J ] .  P hy s i c a l  an d  En g in e e ri ng
+S c i e nc e sinM e dic ine ,2 02 1
+,  4 4 ( 1 ) :  1 5 7 - 1 7 1 .
+[ 1 5 ]  Wan g  X ,  G o n g  G ,  L i  N .  C o mb i nin g  S T F T  an d  R an d o m  F o r e s t  A l g o ri t hm  fo r  E p i l ep ti c  
+D et e cti o n[ C ]
+.  P ro c e e d i n g s  o f  2 0 1 8  C h i n e s e  In t e l l i ge n t  S y s t e m s  C o n fe re n c e ,  2 0 1 9 :  5 5 1 -  
+5 5 9 .  
+[ 1 6 ]  S ri h ar i  P,  S ant o s h  V,  G a n ap athy  S .  A n  e p i l ep ti c  s e i zur e s  d i a gn o s i s  s y s t e m  u s i n g  fe atur e  
+s e l ec ti o n , fuzzy
+t emp o ra l  n a i v e  B aye s  an d  T- C NN  [ J] .  M u l ti m e d i a  To o l s  an d  A p p l i c a t i o n s
+,
+2 0 2 3 ,  8 2 (2 2 ) :  3 4 0 7 5 - 3 4 0 9 4 .  
+[ 1 7 ]  S h arm a  R , C h o p r a  K .  E E G - b a s e d  e p i l ep ti c  s e i zur e  d e t e c tio n  us i ng  G P LV  m o d e l  an d
+mu l t i  s up p o r t  v e c t o r  m a c hin e [ J] .  J o urn al  o f  In fo rm a t i o n  an d O p ti m i z ati o n  S c i en c e s
+,
+2 0 2 0 ,  4 1 ( 1 ) :  1 4 3 - 1 6 1 .  
+[ 1 8 ]  A l - S a l m an  W,  L i  Y,  We n  P,  e t  a l .  E x t r a c t in g  e p i l e p t i c  fe atur e s  i n  E E G s  u s in g  a  du al - tr e e
+c o mp l e x  w av e l e t  tr an s fo rm  c o up l e d  w ith  a  c l a s s i fi c ati o n  al g o ri thm  [ J]
+.  B r a i n  R e s e arc h ,
+2 022
+,  1 7 7 9 :  1 4 7 7 7 7 .  
+[ 1 9 ]  D h ar  P,  G ar g  V  K ,  R ahm an  M  A .  E nh an c e d  F e atu r e  E x tr a c ti on -b a s e d  C NN  Ap p r o a c h  fo r
+E p i l e p t i c  S e i zu r e  D e t e c ti o n  f r o m  E E G  S i gn a l s  [ J] .  J o ur n a l  o f  H e alth c ar e  E n g in e erin g ,
+2 0 2 2 ,  2 0 2 2 : 3 4 9 1 8 2 8 .
+[ 2 0 ]  Tun c e r  E ,  B o l at  E  D .  C l a s s i f i c ati o n  o f  ep i l ep ti c  s e i zur e s  fr o m  e l e c tr o enc e p h al o gr am  
+( E E G )  d at a u s i n g b i d i r e c t i o n a l  s h o rt - t erm  m em o ry  ( B i - L S T M )  n e tw ork ar c h i t e c tu r e  [ J ]
+.
+B
+i o m e d i c a l  S i gn a l  P ro c e s s i n g  an d  C o nt r o l
+,2 0 22
+,  7 3 : 1 0 3 4 6 2 .
+[ 2 1 ]S am e eN A ,M ahmou dNFF
+,  Al dh ahri  E  A  A ,  e t  al .  RNN  an d  B i L S T M  F u s i o n  fo r
+A c cur at e Aut o m at i c  Ep i l e p t i c  S e i zur e  D i a gn o s i s  U s in g  E E G  S i gn a l s  [ J ]
+.  L i fe - B a s e l
+,2 0 2 2
+,  
+1 2 ( 1 2 ) :  1 9 4 6 .
+P 2 ]  Wu  X , Yan g  Z , Z h a n g  T , e t  al .  An  en d - t o - e n d  s e i zur e  p re di c ti o n  ap p r o a c h  u s in g  l o n g  
+s h o rt - t e rm  m e m o ry  n e tw o rk [ J] .  F ro n t i er s  i n Hum an N e uro s c i e n c e
+,2 02 3
+,  1 7 :
+[ 2 3 ]TomaT I
+,  C h o i  S .  A n  E n d- t o - E n d  M ulti - C h ann e l  C o nv o luti o n a l  B i - L S T M  N e tw o rk  fo r
+Aut o m ati c  S l e e p  S t a g e  D e t e c t i o n  [ J ]
+.S ens ors ,2 02 3
+,  2 3 ( 1 0 ) :  1 1 8 7 7 9 4 .  
+[ 2 4 ]  R o y  S ,  Kir al - K o m e k  I ,  H a rr e r  S .  D e ep  L e arn in g  E n ab l e d  A ut o m at i c  A b n o rm al  E E G  
+4 7
+
+
+
+参考文献
+  
+I d e nt i fi c ati o n [ C ]
+.  Annu al  In t e r n at i o n al  C o n fe r e n c e  o f  th e  IE E E  E n g i n e e ri n g 
+i n  M e d i c in e
+an d B i o l o gy  S o c i e ty.  IE E E  E n gin e e ri n g i n M e d i c i n e  an d  B i o l o gy  S o c i e ty . Annu al
+In t e r n at i o n a l  C o n fe r e n c e ,  2 0 1 8 :  2 7 5 6 - 2 7 5 9 .
+[ 2 5 ]L eb a lA , M o u s s ao u iA , R ez gu iA . Ep i l ep s y-N e t : attenti o n-b a s e dl D 
+i n c e p ti o n  n e tw o rk
+m o d e l  fo r  e p i l ep s y  d e t e c t i o n  u s i n g  o n e - c h anne l  an d  mu l t i
+- c h ann e l  E E G  s i gn a l s  [ J ] .
+M u l ti m e d i a  To o l s  an d  A p p l i c at i o n s ,  2 0 2 3 ,  8 2 ( 1 1 ) :  1 7 3 9 1 - 1 7 4 1 3 .
+[ 2 6 ]  L u  G ,  L i u  Y,  Wan g  J ,  e t  a l .  C N N - B i L S T M -A tt e n ti o n :  A  mu l t i - l ab e l  n e ur a l  c l a s s i fi e r  fo r
+s h o r t  t e x t s  w i th  a  s m a l l  s e t  o f  l ab e l s  [ J ] .  In fo rm a t i o n  P r o c e s s in g  &  M an ag e m en t
+,2 02 3
+,
+6 0 ( 3 ) :  1 0 3 3 2 0 .  
+[ 2 7 ]  D e n g  J ,  C h e n g  L ,  Wan g  Z .  A tt e nti o n -b a s e d  B i L S T M  fu s e d  C NN  w i t h  g at in g  m e c h an i s m  
+m o d e l  fo r  C h i n e s e  l o n g  t e x t  c l as s i  fi  c ati o n  [ J ]
+. C o mp u t e r  S p e e ch  an d  L ang u ag e ,  2 0 2 1
+,
+6 8 : 1 0 1 1 8 2 .  
+[ 2 8 ]  R agh u  S ,  S ri r aam  N ,  T e m e l  Y,  e t  a l .  E E G  b a s e d  m u l ti - c l as s  s e i zu r e  typ e  c l a s s i fi c ati o n  
+u s i n g  c o n v o l ut i o n a l  n e ur a l  n e t w o r k  an d  tr an s fer  l e ar n i n g  [ J] .  N e ur al  N e t w o rk s ,  2 0 2 0 ,  1 2 4 :
+2 0 2 - 2 1 2 .  
+[ 2 9 ]  N o g ay  H  S 5  A d e l i  H .  D e t e c ti o n  o f  E p i l e p t i c  S e i zur e  U s i n g  P r e tr ai n e d  D e e p  C o nv o l uti o n a l
+N e u r a l  N e t w o rk  an d  T ran s fe r  L e arni n g  [ J] .  E uro p e an  N eur o l o gy,  2 0 2 0 ,  8 3 ( 6 ) :  6 0 2 - 6 1 4 .
+[ 3 0 ]  Yan  P Z 9  Wan g  F ,  Kw o k  N , e t  a l .  Aut o m at e d s p e c tro gr ap hi c  s e i z ur e  d e t e c t i o n  u s i n g
+c o nv o lut i o n al neural netw o rk s [ J ]
+.S e izure , 2 0 1 9
+,  7 1 :  1 2 4 - 1 3 1 .
+[ 3 1 ]  S at e e s h  K,  S u c h e t h a  M .  A  1 -D  C NN - F C M  m o d e l  fo r  th e  c l a s s i fi c a ti o n  o f  ep i l e p ti c
+s e i zur e d i s o r der s [ J ]
+.  N eur a l  C o mp ut i n g  an d  A p p l i c a ti o n s ,  2 0 2 3 ,  3 5 ( 2 4 ) :  1 7 8 7 1 - 1 7 8 8 1 .
+[ 3 2 ]  P an d e y  S  K ,  J an gh e l  R  R ,  M i s hr a  P  K ,  e t  a l .  A u t o m at e d  e p il ep s y  s e i zur e  d e t e c ti o n  fr o m  
+E E G s i gn a l  b a s e d  o n hyb r i d  C NN an d  L S T M  m o d e l  [ J] .  S i gn a l
+,  I m ag e  an d  Vi d e o
+P r o c e s s i n g ,  2 0 2 3 ,  1 7 ( 4 ) :  1 1 1 3 - 1 1 2 2 .  
+[ 3 3 ]  L e i  C ,  S hu zh en  Z
+,  Z h an g  X ,  e t  al .  Ep il ep ti c  S e i zur e  D e te c ti on  in  E E G  S i gn al s  U s in g
+D
+i s c r i m i n at i v e  S t e in  Ke r n e l
+- B a s e dS p ar s eR epre s entati on[ J
+]
+.  IE E E  Tran s a c ti o n s  o n  
+In s trum e nt at i o n an d M e a s ur em ent
+, 202 1
+, P P :  1 - 1 .
+[3 4] 齐 永 锋 , 裴 晓 旭 , 赵 岩 . 基 于 多 尺 度 卷 积特 征 融 合 的 癫痫 脑 电信 号 识 别 [J]
+. 光 电 子 激  
+光
+,
+2 0 2 2 ,  3 3 ( 7 ) :  7 7 8 - 7 8 4 .
+[ 3 5 ]  S hyu  K  K ,  H u a n g  S  C ,  L e e  L  H ,  e t  a l .  L e s s  P ar am e t e r i z at i o n  In c e p t i o n - B a s e d  E n d  t o  E n d
+C N N  M o d e l  fo r  E E G  S e i zur e  D e t e c t i o n  [ J] .  IE E E  A c c e s s
+,2 02 3
+,  1 1 :  4 9 1 7 2 - 4 9 1 8 2 .
+[ 3 6 ]ZhangYP
+,  Z h an g  L  N ,  Wan g  Y  C .  C l u s t e r -b as e d  m aj o ri ty  u n d e r- s amp l i n g  ap p r o a c h e s  fo r  
+c l as si m b al an c e l e arni ng[ C ]
+.  2 0 1 0  2 n d  IE E E  In t e r n at i o n a l  C o n fe r e n c e  o n  In fo rm ati o n  
+an d  F i n an c i al  E n g i n e e r i n g ,  2 0 1 0 :  4 0 0 - 4 0 4 .  
+4 8
+
+
+
+参考文献
+  
+[ 3 7 ]  H e  M K 3 D u J ?  Wang  Z R ,  e t  al .  A  N o v e l  Tr ai nin g  S tr at e gy  U s in g  D yn am i c  D at a
+G e n e r at i o n  fo r  D e e p  N e u r a l  N e tw o rk  B a s e d  S p e e ch E nh an c e m ent  [ C ]
+.  2 0 1 8  A s i a - P a c i fi c
+S
+i gn al  and  In fo rm at i o n  P r o c e s s i n g  A s s o c i ati o n  A nnu al  S u mmit  an d  C o n fe r e n c e  (A P S IPA  
+A S C ) , 2 0 1 8 :  1 2 2 8 - 1 2 3 2 .  
+[ 3 8 ]  A b o yej i  S  T?  A hm ad  I ,  Wan g  X ,  e t  a l .  D C S E N e t s :  In t e rp re ta b l e  d e ep  l e arn i n g  fo r  p a ti e n t -  
+i n d e p e n d e n t  s e i zur e  c l a s s i fi c at i o n  u s i n g  e nh an c e d  E E G -b a s e d  s p e c tr o gram  v i s u al i z ati o n  
+[ J] ,  C o m p ut e r s  i n  B i o l o gy  a n d  M e di c i n e ,  2 0 2 5 ,  1 8 5 :  1 0 9 5 5 8 .
+[ 3 9 ]  P e n g  R ,  Z h a o  C ,  J i an g  J ,  e t  a l .  T IE - E E GN e t :  Temp o ral  In fo rm at i o n  E nh an c e d  E E GN e t
+fo r  S e i zu r e  S ub typ e  C l a s s i fi c at i o n  [ J ]
+.  IE EE  Tran s a c t i o n s  o n  Ne ur a l  S y s t e m s  an d  
+R e h a b i l i t at i o n  E n g i n e e ri n g ,  2 0 2 2 ,  3 0 :  2 5 6 7 -2 5 7 6 .  
+[ 4 0 ]  M a  Y,  L i u  C ,  M a  M  S ,  e t  a l .  T S D :  T ran s fo r m e r s  fo r  S e i zur e  D e t e c t i o n  [ J] .  b i o R xi v,  2 0 2 3 .
+[ 4 1 ]  L u  Y,  Z hu o h an  L ,  H e  D ,  e t  a l .  U n d e r s t an d i n g  an d  Imp r o v in g  T ran s fo rm e r  F r o m  a  M u l ti
+-  
+P art i c l e  D yn am i c  S y s t e m  P o i n t  o f  Vi e w  [ C ] .  I C L R  2 0 2 0  Wo rk s h o p  o n  In t e gr ati o n  o f
+D e e p  N e u r a l  M o d e l s  an d  D i ffe r e nt i al  E qu at i o n s .  2 0 1 9 .
+[42 ]KeN,L inT,L inZ
+,  e t  a l .  C o n v o l u ti o n a l  Tr an s fo rm er  N e two rk s  fo r  E p i l e p t i c  S e i zur e
+D ete cti o n[ C ]
+.  P r o c e e d i n g s  o f  t h e  3 1 s t  A C M  In t er n ati o n al  C o n fe r e n c e  o n  In fo rm a ti o n  &  
+K n o w l e d g e  M an ag e m e n t .  2 0 2 2 :  4 1 0 9 - 4 1 1 3 .
+[ 4 3 ]  Zh o u H , Z h an g S , P e n g  J
+,  e t  al .  In fo rm er :  B e y o n d  E f i c i e nt  Tran s fo rm e r fo r  L o n g
+S e qu e n c e  T im e - S e r i e s  F o r e c a s t i n g  [ J] ,  ArX i v,  2 0 2 0 ,  ab s /2 0 1 2 . 0 7 4 3 6 :
+[ 4 4 ]  B e c k  M ,  P o p p e l  K ,  S p a nr i n g  M ,  e t  a l .  xL S T M :  E x t en d e d  L o n g  S h o rt - Term  M e m o ry  [ J] .
+A
+rX i v,  2 0 2 4 ,  ab s / 2 4 0 5 . 0 4 5 1 7 :  
+[45] 许 裕 纯 许 建 军 . 基 于 残 差 网 络 的 癫 痫 脑 电 自 动 检 测 方 法 [
+J ]
+. 计 算 机 应 用 s 2 0 2 4 ,
+4 4 ( S 2 ) :  3 7 0 - 3 7 4 .  
+[ 4 6 ]  I a s e mi di s  L  D .  Ep i l e p t i c  s e i zur e  p r e d i c t i o n  an d  c o ntr o l  [ J ] .  I E E E  Tr an s ac t i o n s  o n  
+B
+i o m e d i c a l  E n g i n e e r i n g ,  2 0 0 3 ,  5 0 ( 5 ) :  5 4 9 - 5 5 8 .
+[ 4 7 ]  Ye o n  C ,  K im  D ,  Kim  K ,  e t  a l .  Vi s u al  E v o ke d  P o t e nti al  R e c o r d i n g s  i n  M i c e  U s in g  a  D ry  
+Non
+inva s iveMulti - c hanne lS c alpE E GS en s or[ J]
+.  J o v e - J o um al  o f  Vi s u al i z e d
+E xp e ri m e nt s ,  2 0 1 8
+,  ( 1 3 1 ) : 5 6 9 2 7 .  
+[ 4 8 ]  B e s i o  W  G ,  M art in e z - Ju are z  I  E ,  M ak e y e v  O ,  e t  a l .  H i gh - Fr e qu en c y  O s c i l l at i o n s
+R e c o r d e d o n the  S c a l p  o f  P a t i e nt s Wi th Ep i l ep s y U s i n g  Tri p o l ar C o n c en tri c  Rin g
+E
+l e c tr o de s[ J] .IE EE
+ j o u rn al  o f  tr an s l ati o n al  e n g in e e rin g  i n  h e a l t h  an d  m e d i c i n e ,  2 0 1 4 ,  2 :  
+2 0 0 0 1 1 1 .
+[49] 薛 吉 星 . 多 通道脑 电倌 号 采集与 处理 系 统研 究 [D]
+. 广 州 : 华 南 理 工 大 学 , 2 0 2 5 .
+[ 5 0 J 张 佳 豪 . 基 于 脑 电 信 号 非 线 性 特 征 与 图 卷 积 网 络 的 癫 痫 发 作 预 测 方 法 研 究 fD ] . 济 南 :  
+4 9
+
+
+
+参考文献
+  
+济南大学,
+2 0 2 4 .  
+[ 5 1 ]  S h o e i b i  A ,  K h o d at ar s  M ,  Gh a s s e m i  N ,  e t  a l .  E p i l e p t i c  S e i zur e s  D e t e c ti o n  U s in g  D e ep
+L e arnin g  Te c hn i qu e s :  A  R e v i e w  [ J] .  In t er n at i o n al  J o urn al  o f  E n v ir o nm en t al  Re s e ar c h  and  
+P ub l i cH e alth ,2 0 2 1
+,  1 8 ( 1 1 ) : 5 7 8 0 .  
+[ 5 2 ]  Z h o n g  L ,  Wan  J ,  Yi  F,  e t  a l .  E p i l e p ti c  p r e di c ti o n  u s i n g  s p a t i o t e mp o r a l  i n fo rm ati o n  
+c o m b i n e d  w i t h  o p t i m a l  fe atu re s  s tr at e gy  o n  E E G  [ J ] .  F r o n t i e r s  i n  N e ur o s c i enc e ,  2 0 2 3 ,
+1 7 : 1 1 7 4 0 0 5 .  
+[ 5 3 ]  Lyu  C , C h e n  Y,  C he n  Z ,  e t  al .  Auto m ati c ep i l ep s y d et e c tio n b as e d  on  g ene r al i z e d  
+convo luti ona l
+ p ro t o typ el e arni ng[ J] . M e as ure m ent
+, 2 02 1
+,
+1 8 4 : 1 0 9 9 5 4 .
+[ 5 4 ]  Tun c e r  E , B o l at  E  D .  C h ann e l  b as e d  epi l ep s y  s ei zur e  typ e  d e t e c ti on  fr om  
+e l e c tro e nc e p hal o gr ap hy( E E G )  s i gn al s  w i th m a c h i n e l e arnin g t e c hni que s  [ J]
+.  
+B
+i o c yb e m e t i c s  an a  B i o m e d i c a l  E n gi n e e ri n g ,  2 0 2 2
+,  4 2 ( 2 ) :  5 7 5 - 5 9 5 .  
+[ 5 5 ]  S i m ar d  P  Y,  S t e i nkr au s  D ,  P l att  J  C .  B e s t  p r ac ti c e s  fo r  c o nv o l u ti o n al  n e ura l  n e tw o rk s
+ap p l i e d  t o  v i s u al  d o c u m e n t  a n al y s i s  [ C ]
+.  S e v e nth  Int e r n at i o n al  C o n fere n c e  o n  D o c u m e nt
+A n a l y s i s  an d  R e c o gni t i o n ,  2 0 0 3 :  9 5 8 - 9 6 3 .
+[ 5 6 ] C ub uk E D ,  Z o p h  B
+,  M an e  D ,  e t  a l .  A u t o A u gm e n t :  L e arni n g  Au gm ent at i o n  S t r at e gi e s
+Fr o m  D at a  [ C ] .  2 0 1 9 IE E E/ C V P  C on fe r e n c e  o n  C o mputer  Vi s i o n  an d  P att e rn  
+Re c o gni ti o n( C VP R) ,
+2 0 1 9 :  1 1 3 - 1 2 3 .
+[5 7
+]  K ri zh e v s ky  A ,  S u t s ke v er  I ,  H i nt o n  G  E .  Im ag e N e t  c l a s s i fi c at i o n  w i th  d e ep  c o nv o l u t i o n a l
+n e ur a l  n e tw o r k s  [ J] ,  C o mm un .  A C M ,  2 0 1 7 ,  6 0 ( 6 ) :  8 4-9 0 .
+[5 8
+]C ubukED , Z ophB
+, S hl e n s  J , e t  a l .  Ran d au gm e n t :  P ra c ti c a l  au t o m at e d  dat a
+au gm e ntat i o n withare duc e ds e arc hsp ac e[ C ]
+.  2 0 2 0  IE E E / C VF  C o n fe r e n c e  o n  C o mp ut e r
+V
+i s i o n  an d  P att e rn  R e c o gn i t i o n  Wo rk s h o p s  ( C V P RW) ,  2 0 2 0 :  3 0 0 8 - 3 0 1 7 .
+[ 5 9 ]  Kri zh e v s ky  A .  L e ar n i ng  M u l t i p l e  L aye r s  o f  F e ature s  fr o m  T iny  Im ag e s  [ J ]
+.  U n i v e r s i t y  o f
+To r o n t o ,  2 0 0 9 .  
+[ 6 0 ]H anD ,KimJ
+,  Ki m  J .  D e e p P yr a m i da l  R e s i du al  N e tw o rks  [ C ]
+.  2 0 1 7  IE E E  C o n fer e n c e  o n  
+C o mp ute r  Vi s i o n  an d  P att ern  R e c o gniti o n  ( C V P R) ,  2 0 1 7 :  6 3 0 7 - 6 3 1 5 .
+[ 6 1 ]  Zh ang  H , C i s s e  M , D aup hin Y  N , e t  a l .  mixup :  B e yo n d  E mp i ri c a l  R i s k
+M
+inim iz ati o n [ J ]  . A rX i v ,  2 0 1 7 ,  ax X i v : 1 7 1 0 . 0 9 4 1 2 .  
+[ 6 2 ]  D ab o u e i  A ,  S o l e ym ani  S
+,  Tah e rkh an i  F,  e t  a l .  S up e rM ix :  S up e rv i s in g  t he  M ix i n g  D at a
+A u gm e nt at i o n  [ C ] .  2 0 2 1  IE E E / C VF C o n fer e n c e  o n C o mp u t e r Vi s i o n an d  P att e rn  
+R e c o gn i ti o n  ( C V P R ) ,  2 0 2 1 :  1 3 7 8 9 - 1 3 7 9 8 .  
+[ 6 3 ]  K i m  J - H ,  C h o o  W,  J e o n g  H ,  e t  a l .  C o - M i x u p :  S a l i e n c y  Gui d e d J o in t  M i x up  w i th
+S up e rm o d u l ar  D i v e r s i ty  [ J ] .  A rX i v,  2 0 2 1
+,  ab s / 2 1 0 2 . 0 3 0 6 5 :
+5 0
+
+
+
+参考文献
+  
+[ 6 4 ]  Tan g s ri v i m o l  J  A ,  S c h o n fe l d  E ,  Z h an g  M ,  e t  al .  A rti fi c i al  I nt e l l i g en c e  in  N e ur o s urg e ry :  A  
+S t a t e - o f- th e - A rt  R e v i e w  fr o m  P a s t  t o  F u t u re  [ J ] .  D i a gn o s ti c s ,  2 0 2 3 ,  1 3 ( 1 4 ) : 2 4 2 9 .  
+[ 6 5 ]  H o c hre i t er  S ?  S c hm i dh u b er  J .  L o n g  S h o rt - Te rm  M e m o ry  [ J] .  N eura l  C o mp u t a t i o n ,  1 9 9 7 ,
+9 ( 8 ) :  1 7 3 5 - 1 7 8 0 .  
+[ 6 6 ]  N iu  D ,  Yu  M 5  S u n  L
+, etal .S ho rt- t ermm u l ti
+- e n e rgy  l o a d  fo r e c a s t i n g 
+fo r  i n t e gra t e d  en e rgy
+s y s t e m s  b a s e d  o n  C N N - B i G R U  o p t i m i z e d  b y  att en ti o n  m e c h an i s m  [ J] .  A p p l i e d  E n e rgy,
+2 0 2 2 ,  3 1 3 : 1 1 8 8 0 1 .  
+[ 6 7 ]  Wu  J ,  Wan g  Z ,  H u  Y,  e t  a l .  R uno ff  F o r e c a s t in g  u s in g  C o nv o l u t i o n a l  N e ur a l  N e tw o rks  and  
+opt im ize dB i - dire cti onalL o n gShort -t ermM emo ry[ J]
+. Wat e r  R e s our c e s M an ag em ent
+,
+2 0 2 3 ,  3 7 ( 2 ) :  9 3 7 - 9 5 3 .  
+[ 6 8 ]  A lh arth i  M  K ?  M o ri a  K  M ,  A l gh a z z aw i  D  M ,  e t  al .  E p i l ep ti c  D i s o r d e r  D e t e c ti o n  o f
+S e i zure s Us ing E E GS i gn al s[ J] . S en s o r s
+,  2 0 2 2 ,  2 2 ( 1 7 ) : 6 5 9 2 .
+[ 6 9 ]  Wan g  X ,  Wan g  X ,  L i u  W,  e t  al .  O n e  d im e n s i o nal  c o nvo l uti o n al  n e ur al  n e tw o rk s  fo r
+s e i zur eo n s et det e ct i o nu s ingl o n g
+- t erms c al pan dintracr ani al E E G [ J]
+.  N e ur o c o m p ut in g ,
+202 1
+,
+4 5 9 : 2 1 2 - 2 2 2 .  
+[ 7 0 ]  Z h a o  W?  Z h ao  W,  Wan g  W,  e t  al .  A  N o v e l  D e ep  N eur al  N e tw o rk  fo r  R o b u s t  D e t e c t i o n  o f
+S e i zur e s  U s in g  E E G  S i gn al s  [ J] .  C o mp ut ati o n al  an d  M ath e m at i c al  M e th o d s  i n  M e d i c i n e ,
+2 0 2 0 ,  2 0 2 0 : 9 6 8 9 8 2 1 .
+[ 7 1 ] vande rMaatenL , H int onG. Vi su al iz ingD atau s ingt - S NE [ J]
+.  J o ur n al  o f  M a ch in e
+L e arn i n g  R e s e arc h ,  2 0 0 8 ,  9 :  2 5 7 9 - 2 6 0 5 .
+[ 7 2 ]  S h e n  M  K 5  We n P, S o n g  B , e t  a l .  A n  E E G  b a s e d  re a l
+- t i m e  e p i l ep s y  s e i zu re  d e t e c ti o n
+ap p r o a c h  u s in g  d i s c re t e  w a v e l e t  tr an s fo rm  an d  m a c hi n e  l e ar ni n g 
+m e tho d s [ J ]
+.  B i o m e d i c a l
+S
+i gn a l  P r o c e s s in g  an d  C o n tr o l
+,  2 0 2 2 ,  7 7 : 1 0 3 8 2 0 .
+[ 7 3 ]  H o s s a in  M  S ,  A m in  S  U ,  Al s u l a i m an  M ,  e t  a l .  Ap p l yi n g  D e e p  L e arnin g  fo r  E p i l e p s y
+S e i zu r e  D e t e c t i o n  an d  B r a i n  M ap p i n g  Vi s u al i z ati o n  [ J
+]
+.  A C M  Tr an s .  M u l t i m e d i a  C o mp u t .
+C o mmun . App l .
+,  2 0 1 9 ,  1 5 ( l s ) :  A r t i c l e  1 0 .
+[ 7 4 ]  J an a  G  C ,  S h arm a  R ,  A gr aw a l  A .  A  l D - C N N - S p e c tr o gr am  B a s e d Ap p r o a c h  fo r  S e i zur e
+D e t e c t i o n  fr o m  E E G  S i gn a l  [ J ] .  P r o c e d i a  C o mp u t e r  S c i e nc e ,  2 0 2 0
+,  1 6 7 :  4 0 3 - 4 1 2 .  
+[ 7 5 ]  L i  Y,  L i u  Y,  C u i  W  G ,  e t  a l .  E p i l ep t i c  S e i zur e  D e t e c ti o n  i n  E E G  S i gn a l s  U s i n g  a  Un i fi e d
+Te mp o r al - S p e c t r a l  S qu e e z e - an d- E x c i t at i o n  N e tw o rk  [ J ]
+.  IE E E  T r an s a c ti o n s  o n  N e ura l
+S y s t e m s  and  R ehab i l i t at i o n  E ngi n e e rin g ,  2 0 2 0
+,  2 8 ( 4 ) :  7 8 2 - 7 9 4 .  
+[ 7 6 ]  Yao  X ,  L i  X ,  Ye  Q ,  e t  al .  A  ro b u s t  d e ep  l e ar ni n g  ap p r o a c h  fo r  aut o m at i c  c l a s s i fi c at i o n  o f
+s e i zur e s ag a i ns t  n on , s e i zur e s  [ J] . B i om e d i c al  S i gn a l  Pr o c e s s ing  an d C on tr o l
+,2 0 2 1
+, 6 4 :
+1 0 2 2 1 5 .  
+5 1
+
+
+
+参考文献
+  
+[ 7 7 ]  Varl i  M ?  Y i l m az  H .  Mu l t ip l e  c l a s s i f i c ati o n  o f  E E G  s i gn a l s  an d  ep i l ep t i c  s e i zur e  d i a gn o s i s
+w
+i th  c o m b i n e d  d e ep  l e arn i n g  [ J] ,  J o ur n al  o f  C o m p u t at i o n a l  S c i en c e ,  2 0 2 3 ,  6 7 :  1 0 1 9 4 3 .
+[ 7 8 ]  Zh an g  Y,  Yao  S
+,  Yan g  R ,  e t  al .  Ep il ep ti c  S e izur e  D e t e c ti o n  B a s e d  o n  B i di r e c t i on al  G at e d
+R e c urr e nt  Un i t  N e tw o rk [ J ] .  IE E E  Tr an s ac t i o n s  o n  N e ura l  S y s t e m s  an d  R eh ab i l i t ati o n  
+E n gi n e e ri n g ,  2 0 2 2 ,  3 0 :  1 3 5 - 1 4 5 .  
+[ 7 9 ]  L i n  Z ,  F e n g  M ,  S ant o s  C  N  d ,  e t  a l .  A  S tru c tu r e d  S e l f- at t e nt i v e  S e n t e n c e  E mb e d d in g  [ J] .
+A r X i v,  2 0 1 7 ,  ab s / 1 7 0 3 . 0 3 1 3 0 :  
+[ 8 0 ]  Va s w an i  A ,  S haz e e r  N  M ,  P arm ar  N ,  e t  a l .  A t t e nt i o n  i s  A l l  y o u  N e e d  [ C ] .  3 1 s t
+I n t e r n at i o n a l  C o n fe r e n c e  o n  N e u r a l  In fo rm at i o n  P r o c e s s in g  S y s t e m s ,  2 0 1 7 : 6 0 0 0 - 6 0 1 0 .
+[ 8 1 ]  G o n g  X  P,  L i u  X  B , D u an  X ,  e t  al . E W- F i s h e r :  A  N o v e l  L o s s  F un c ti o n  fo r  D e e p
+L e arni ng - B a s e d Im a g e  C o - S e gm e nt ati o n [ J ] ,  N e ur al P r o c e s s ing L e tt e r s
+,  2 0 2 0 ,  5 2 ( 3 ) :
+2 3 9 9 - 2 4 1 3 .  
+[ 8 2 ]  B o o nyak i t an o n t P,  L e k- u t h a i  A ,  C h o m th o  K ,  e t  a l . A  C o mp ari s o n  o f  D e ep  N e u ra l  
+N etw ork s  fo r  S e i zu r e  D et e c t i o n  i n  E E G  S i gn al s  [ J] . b i o R x i v,  2 0 1 9 .
+[ 8 3 ]  S h en M , We n P
+,  S o n g  B ,  e t  a l .  An  E E G  b as e d  r e al - t im e  e p i l e p s y  s e i zur e  d e t e c t i o n  
+ap p r o a c h  u s i n g  d i s c r e t e  w av e l e t  tr an s fo r m  an d  m a c hi n e  l e ar nin g  m e th o d s  [
+J ] ,  B i o m e d i c a l
+S
+i gn al  P r o c e s s i n g  an d  C o n tr o l
+,  2 0 2 2 ,  7 7 :  1 0 3 8 2 0 .
+[ 8 4 ] Z are iA , A s l B  M . A uto m at i cs e izuredet e cti onu s ingo rth o g o n al m at chingp urs ui t
+,  
+d
+i s c r e t e  w av e l e t  t r an s fo r m ,
+an d  entr o p y  b as e d  fe atur e s  o f  E E G  s i gn a l s  [
+J] .  C o mp u t e r s  in  
+B
+i o l o gy  and  M e di c in e ,  2 0 2 1
+,  1 3 1 :  1 0 4 2 5 0 .
+[ 8 5 ]  S e l v aku m a r i  R  S 5  M ah a l ak s hmi  M ,  P r as h al e e  P.  P at i e nt - S p e c i fi c  S e i zure  D e t e c ti o n  
+M e th o d  u s i n g  H yb ri d  C l a s s i fi e r  wi t h O p t i miz e d  E l e c tx o d e s  [
+J]
+.  J o ur n a l  o f  M e d i c al
+S ys tems
+,  2 0 1 9 ,  4 3 ( 5 ) :  1 2 1 .
+[ 8 6 ]  H u  X ,  Yuan  S ,  Xu  F ,  e t  a l .  S c alp  E E G  c l a s s i fi c a t i o n  u s i n g  d e ep  B i - L S T M  n e tw o rk  fo r  
+s e i zure d et e c ti o n [ J ]
+.C o m p ut ersinB i o l o gyandM e d i c in e ,2 0 2 0
+,  1 2 4 :  1 0 3 9 1 9 .
+[ 8 7 ]  D o n g  X ,  We n  Y ,  J i  D ,  e t  a l .  E p i l ep t i c  S e i z ur e  D e t e c t i o n  w i th  an  E n d -t o - E n d  Te m p o ra l  
+C o nv o luti o nalNetw o rkandB i dire c ti on alLo ngS hort- TermM em o ryM o del[ J]
+.  
+I n t e r n at i o n al  J o urn a l  o f  N e u r al  S y s t e m s ,  2 0 2 4 ,  3 4 ( 0 3 ) :  2 4 5 0 0 1 2 .
+[ 8 8 ]  H o s s a i n M  S ,  A m i n  S  U ,  A l s u l ai m an  M ,  e t  al .  A p p l yi n g  D e e p  L e arn i n g  fo r  E p i l e p s y
+S e i zur e  D e t e c t i o n  an d  B r a i n  M ap p i n g  Vi s u al i z ati o n  [ J ] .  A C M  Tr an s .  M u l t i m e d i a  C o mp u t .
+C o m mun .  App l .
+,20 1 9
+,  1 5 ( 1 0 ) :  1 - 1 7 .  
+[ 8 9 ]  Yuan  Y,  X un  G ,  J i a  K ,  e t  a l .  A  M ul t i - Vi e w  D e e p  L e arn in g  F ram e w o rk  fo r  E E G  S e i zur e
+D e t e c t i o n  [ J ] .  IE E E  J o u r n a l  o f  B i o m e d i c a l  an d  H e al t h  In fo r m at i c s ,  2 0 1 9 ,  2 3 ( 1 ) :  8 3 - 9 4 .  
+[ 9 0 ]  P an  H , G o n g  S , D o n g  F , et  al .  E p il ep s y  s e i zure  d et e c ti o n  u s i n g  Tr an s fo rm er  [ J] .
+5 2
+
+
+H i ghli ght si nS c i e nc e , E ngine erin gandTechno l o gy,2 0 2 2
+,  1 : 3 2 5 - 3 2 9 .
+[ 9 1 ]  Z h a o  Y,  H e  J 5  Z hu  F ,  e t  al .  H yb r i d  A tt e nti o n  N e tw o r k  fo r  E p i l e p ti c  E E G  C l a s s i fi c ati o n  [ J ]
+.  
+In t e r n at i o n al  J o ur n al  o f  N e ur al  S y s t em s
+,  2 0 2 3 ,  3 3 ( 0 6 ) :  2 3 5 0 0 3 1 .  
+[ 9 2 ]  Q in  C ,  Yang  R , H u an g  M ,  e t  al .  S p a t i al  Vari at i o n  G e n e r ati o n  A l g o ri t hm  fo r  M o t o r
+Im a g ery D at a Au gm e ntat i o n :  In cre a s ing th e D en s i tyo fS amp l e Vi c i ni ty [ J ]
+.  IE E E
+Tr an s a c t i o n s  o n  N e u r a l  S y s t e m s  an d  R e h ab i l i tat i o n  E n gi n e e ri n g ,  2 0 2 3 ,  3 1 :  3 6 7 5 - 3 6 8 6 .  
+[ 9 3 ]  Z ab ih i  M ,  K ir an y a z  S ,  J ant t i  V,  e t  a l .  P at i e nt - S p e c i fi c  S e i zur e  D e t e c t i o n  U s i n g  N o nl i n e ar
+D yn am i c s  an d  N u l l c l i n e s  [ J] ,  IE E E  J o ur n al  o f  B i o m e d i c a l  an d  H e alth  In fo rm ati c s
+,  2 0 2 0 ,
+2 4 ( 2 ) :  5 4 3 - 5 5 5 .  
+[ 9 4 ]  A l h arth i  M  K ,  M o ri a  K  M ,  A l gh a z z aw i  D  M ,  e t  al .  E p i l e p t i c  D i s o r d er  D e t e c ti o n  o f  
+S e i zur e s U s ing E E G  S i gnals [ J]
+.  S e n s o r s  ( B a s e l) ,  2 0 2 2 ,  2 2 ( 1 7 ) :  6 5 9 2 .
+[ 9 5 ]  Yan g  Y,  Q i n  X ,  L i n  X ,  e t  al .  E p i l e p s y  d e t e c t i o n  an d  an a ly s i s  m e th o d  fo r  s p e c i f i c  p at i e nt  
+b a s e d  o n  d at a  au gm en t at i o n  an d  d e e p  l e arn i n g  [ J ] .  J o urn al  o f  B i o m e d i c al  E n gi n e e ri n g ,
+2 0 2 2 ,  3 9 ( 2 ) :  2 9 3 - 3 0 0 .
+[ 9 6 ]  D o ng  C ,  S un  D ,  Z h an g  Z s  e t  a l .  E E G - b a s e d  p a ti e n t- s p e c i fi c  s e i zur e  p re d i c ti o n  b a s e d  o n  
+S p at i al
+-T e m p o r a l  H yp e r gr ap h  At t e n ti o n  Tr an s fo rm e r  [ J] .  B i o m e d i c al  S i gn al  P r o c e s s i n g
+an dC o ntro l
+,  2 0 2 5 ,  1 0 0 :  1 0 7 0 7 5 .  
+[ 9 7 ]  L i  H ,  D o n g  X ,  Z h o n g  X ,  e t  a l .  E n d - t o - e n d  m o d e l  fo r  aut o m at i c  s e i z ur e  d e t e c t i o n  u s i n g
+sup e rvi s e dc o ntra s t i v el e arning[ J]
+.  E n g in e e rin g  A p p li c at i o n s  o f  Art i fi c i a l  Int e l l i g e n c e
+,
+2 0 24
+,
+1 3 3 :  1 0 8 6 6 5 .
+5 3

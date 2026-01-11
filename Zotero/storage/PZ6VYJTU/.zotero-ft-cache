@@ -1,0 +1,343 @@
+第28卷第7期
+2025年7月 软件工程 SOFTWAREENGINEERING Vol.28 No.7
+Jul. 2025
+文章编号:2096-1472(2025)07-0064-05 DOI:10.19644/j.cnki.issn2096-1472.2025.007.013
+收稿日期:2024-08-29
+基金项目:国家自然科学基金项目(61806118);陕西科技大学博士科研启动基金项目(2020BJ-30 )
+用于抑郁症脑电数据增强的卷积注意力扩散模型
+汪子凯,陈景霞,贾晓雯,赵 晨
+(陕西科技大学电子信息与人工智能学院,陕西 西安 710021)
+221612066@ sust.edu.cn; chenjingxia@ sust.edu.cn; 221612107@ sust.edu.cn; 221612091@ sust.edu.cn
+摘 要:为了解决抑郁症检测中由于脑电(Electroencephalogram,EEG)信号数据稀缺导致的分类精度不高的问
+题,结合去噪扩散概率模型(DenoisingDiffusionProbabilistic Model,DDPM)和 卷 积 注 意 力 机 制 (Convolutional BlockAttentionModule,CBAM),提出了一种用于 EEG数据增强的卷积注意力扩散模型(ConvolutionalAttention DiffusionModel,CADM)。在 MODMA 数据集上,生成了与原始 EEG信号数据分布相似的时频特征,以扩充训练 数据集,并利用 VisionTransformer、MLP和SVM 模型进行抑郁症分类。实验结果显示,增强后的数据集在3个分 类器上的准确率分别提高了10.99%、3.88%和5.50%,证明模型生成的特征具有良好的鲁棒性,有效提升了 EEG抑 郁症检测的准确性和稳定性。 关键词:脑电信号;抑郁症检测;去噪扩散概率模型;数据增强;卷积注意力模块 中图分类号:TP391 文献标志码:A
+ConvolutionalAttentionDiffusion ModelforEEG Data AugmentationinDepressionDetection
+WANG Zikai, CHEN Jingxia, JIA Xiaowen, ZHAO Chen
+(School of Electronic Information and Artificial Intelligence, Shaanxi University of Science & Technology, Xi’an 710021, China)
+221612066@ sust.edu.cn; chenjingxia@ sust.edu.cn; 221612107@ sust.edu.cn; 221612091@ sust.edu.cn
+Abstract:To address the issue of low classification accuracy caused by scarce EEG data in depression detection,
+this paper proposes a Convolutional Attention Diffusion Model (CADM) for EEG data augmentation by integrating
+Denoising Diffusion Probabilistic Models (DDPM) and Convolutional Block Attention Module (CBAM). Using the
+MODMA dataset, the model generates time-frequency features consistent with the distribution of original EEG data to
+expand the training dataset. Classification was then performed using Vision Transformer, MLP, and SVM models.
+Experimental results demonstrate that the augmented dataset improved classification accuracy by 10.99% , 3.88% and
+5.50% across the three classifiers respectively. This proves the model’s robustness in feature generation and its
+effectiveness in enhancing the accuracy and stability of EEG-based depression detection.
+Key words:EEG signals; depression detection; denoising diffusion probabilistic models ( DDPM); data
+augmentation; convolutional block attention module (CBAM)
+0 引言(Introduction)
+近年来,基于生理数据的抑郁症检测研究备受关注,其中, 脑电图(EEG)因能实时反映大脑活动,被视为抑郁症诊断的有 效生物标志物[1]。然而,EEG 数 据 采 集 复 杂、成 本 昂 贵 且 易 受
+环境噪声影响,标记数据稀缺,限制了其在深度学习模型的应 用。为解决数据 稀 缺 问 题,传 统 的 数 据 增 强 方 法 (如 翻 转、缩 放、噪声注入等)[2-4]被用于 EEG数据增强,但这些简单变换难 以捕捉数据的深层特征。
+
+
+第28卷第7期 汪子凯等:用于抑郁症脑电数据增强的卷积注意力扩散模型
+生 成 对 抗 网 络 (Generative Adversarial Networks, GANs)[5]通过学习数据概率分布来生成样本,已在 EEG数据增
+强中取得一定进展。LUO 等[6]提出的利用 SWGAN 生成 EEG
+数据 显 著 提 升 了 情 绪 识 别 模 型 的 性 能。FAHIMI等[7]利 用
+DCGAN框架生 成 人 工 EEG 数 据,提 高 了 分 类 性 能。然 而,
+GANs训练易出现模式崩溃,导致生成数据缺乏多样性。扩散
+模型作为新型生成模型,通过扩散和逆向去噪过程生成样本,表
+现出更稳定的训练效果和更高的样本多样性[8]。DUAN 等[9]提
+出的 DS-DDPM 模 型 有 效 提 高 了 EEG 信 号 的 重 建 质 量。
+TORMA等[10]建立的扩散概率模型生成了高质量的 EEG数据
+并提升了分类性能。
+尽管如此,生成的 EEG数据仍存在信噪比低、噪声和伪影
+多等问题。本文提出一种结合卷积注意力机制的扩散模型,通
+过去噪过程提升 EEG数据生成质量,利用卷积注意力机制捕捉
+数据的时空特征,进而提高基于 EEG的抑郁症检测的准确性和
+稳定性。
+1 本文方法(Methodsofstudy)
+1.1 用于脑电数据增强的扩散模型
+由于 EEG数据采集困难,数据集规模较小,从而导致通过
+深度神经网络进行抑郁症检测的精度和稳健性较差。针对以上
+问题,本文提出了一种用于脑电数据增强的扩散模型,该模型以
+去噪扩散概率模型[11]为骨干网络,用于生成高质量的脑电数据
+特征。本文构建的扩散模型使用参数化马尔可夫链和变分推理
+来生成与真实数据匹配的合成样本,如图1所示。它主要包含
+了前向过程和反向过程。通过马尔可夫链将起始状态转化为易
+于处理的噪声的过程称为前向扩散过程;将噪声梯度逐步采样
+为信号起始状态的过程称为反向去噪过程。首先,通过预处理
+和短时傅里叶变换,将原始 EEG数据转换为 EEG时频特征,将
+其作为起始状态并送入扩散模型。扩散模型将先验数据分布通
+过前向过程逐步添加噪声,经过 T次噪声添加,最终转换为随机
+噪声。再通过反向过程逐步去噪,来重建与先验分布相同的全
+新样本。
+图1 扩散模型的前向和反向过程
+Fig.1Diffusionmodelofforwardandbackwardprocesses
+扩散过程就是对数据逐步加噪的过程,给定原始脑电数据
+样本x0~q(x),将少量的高斯噪声按照时间步长t逐步添加到
+样本中,产生一系列的噪声样本xt。随着t的不断增大,噪声数
+据逐步接近完全高斯分布。因为xt+1都是在xt 上加噪得到的,
+且只受xt 的 影 响,因 此 扩 散 过 程 被 定 义 为 一 个 固 定 马 尔 可
+夫链:
+q(x1,...,xT|x0)= ∏
+T
+t=1
+q(xt|xt-1) (1)
+其中:每一个时刻t的q(xt|xt-1)都满足高斯分布。
+q(xt|xt-1)=N(xt; 1-βtxt-1,βtI) (2) 其中:βt 是一个按照参数表单调递增的常数,它主要用于控制 每次增加的噪声的大小。
+根据重参数化技巧,令αt=1-βt,αt= ∏
+t
+s=1
+αs,则将公式(2)
+转化为:
+q(xt|x0)=N(xt;αtx0,(1-αt)I) (3) 通过式(3)可知,基于x0 并不需要经过t步的噪声添加一 步就可以得到xt,从而提高了计算效率。 反向过程的目的就是推算出条件概率q(xt-1|xt),这样就 可以从高斯噪声中逐步重新创建真实样本,由于q(xt-1|xt)无 法直接计算得到,可以采用深度网络得到的pθ(xt-1|xt)去替代 q(xt-1|xt),因此,反向过程的马尔可夫链由θ参数化为
+pθ(x0,...,xT-1|xT)= ∏
+T
+t=1
+pθ(xt-1|xt) (4)
+其中:xT 是 满 足 N (0,I)的 高 斯 分 布 的,并 且 转 移 概 率 pθ(xt-1|xt)被参数化为具有共享参数θ的高斯分布:
+pθ(xt-1|xt)=N(xt-1;μθ(xt,t),σθ (xt,t)2I) (5) 其中:根据推理可 得 高 斯 分 布 中 参 数 化 均 值μθ(xt,t)和 方 差
+σθ (xt,t)2 的数学形式为
+μθ(xt,t)= 1
+αt
+xt- βt
+1-αt
+òθ(xt,t)
+■ ■
+|■
+■
+|,
+σθ (xt,t)2=1-αt-1
+1-αtβt
+(6)
+其中:òθ(xt,t)是一个噪声预测网络,它有两个参数:噪声数据 分布xt 和扩散步长t。根据xt 和t预测随机噪声òt 便可以得 到pθ(xt-1|xt)的完整表达式,进而可以逐步得到原始数据分
+布x0。 网络的训练目的是使预测的噪声分布和当前时刻t的实 际噪声分布相似,通过变分法可以得到在每一个时间步优化下 列目标函数:
+Lsimple
+t =‖εtεθ(αtx0+ 1-αtεt,t)‖2 (7) 1.2 引入卷积注意力机制的噪声预测网络
+由1.1节可知扩散模型的核心是训练一个噪声预测网络, 该网络需要在特定的时间步长下获取带噪声的特征,并返回预 测的噪声。预测噪声是具有与输入数据相同大小的张量,网络 需要接收和输出相同形状的张量,因此,在架构方面,本文选择 构建一个 U-Net网络作为噪声预测网络。为了让神经网络能 够捕获数据的通道信息和不同位置的空间信息,本研究在噪声 预测网络 U-Net嵌入了卷积注意力机制。它结合了通道注意 力和空间注意力机制,使得神经网络可以提取更多重要的特征 信息并增强网络性能,能够更加准确地预测噪声分布。 本文构建的噪声预测网络如图2所示。和典型的 U-Net 网络一样,本网络由4个下采样模块、1个中间模块和4个上采 样模块组成,同时,在每一个块内嵌入时间步长t,其目的是模 拟一个随时间变化噪声扰动逐渐增强的过程。除了最后一个 下采样模块,每一个下采样模块包含两个残差块、一个注意力 块和下采样块。逐步降低特征空间的大小,就像自动编码器一
+65
+
+
+软件工程 2025年7月
+样,然后经过中间层,确保网络只学习最重要的信息,再通过上 采样模块进行上采样。在每一个下采样模块和上采样模块之 间引入了残差连接,极大地改善了梯度流。
+图2 噪声预测网络结构
+Fig.2Noisepredictionnetworkstructure
+通道注意力模块的处理过程如图3所示,其主要作用是根 据输入的特征图,在通道维度上对其进行加权处理,以突出重 要的通道信息,有助于网络更好地捕捉到不同通道中的关键信 息。首先,将输入的 EEG时频特征图F 分别经过自适应平均 池化和自适应最大 池 化,将 特 征 图 的 高 度 和 宽 度 降 为 1,但 通 道数保持不变,生成两张特征图:平均池化图 CAP和最大池化 图 CMP。平均池化和最大池化后的特征向量,再分别经过一 个共享全连接层(SharedMLP)。这个全连接层用于学习每个 通道的注意力权重。通过学习,网络可以自适应地决定哪些通 道对于当前任务更加重要。然后,将全局最大特征向量和平均 特征向量相交,得到最终注意力权重向量。最终应用 Sigmoid 激活函数来产生通道注意力权重,将这个权值与原始时频特征 图F 的每个通道相乘,得到注意力加权后的通道注意力图,计 算过程为
+Mc(F)=S(MLP(AP(F);MP(F)))
+=S(W1(W0(CAP))+W1(W0(CMP))) (8) 其中:S代表Sigmoid激活函数,AP 代表平均池化,MP 代表 最大池化,W0和W1分别为共享全连接层的第1层和第2层。
+图3 通道注意力机制
+Fig.3Channelattentionmechanism
+图4展示了空间注意力模块,其主要功能是提取输入特征 不同空间位置之间的关系,能够帮助模型集中注意力于特征图 中的关键区域,从而提高模型对目标的识别性能。首先,对输 入特征图F'分别进行平均池化和最大池化操作,得到关于平 均值的特征图SAP和关于最大值的特征图 SMP。然后,将这 两个特征图沿着通道维度进行连接,得到一个具有不同尺度上 下文信息的特征图。接着,通 过 7×7 的 卷 积 层 处 理 这 个 特 征
+图,以生成空间注意力权重。然后,对生成的空间注意力权重 应用 Sigmoid激活函数,再将得到的 空 间 注 意 力 权 重 应 用 于 原 始特征图,对每个空间位置的特征进行加权。其计算过程为
+MS(F')=S(F(cat(AP(F'),MP(F'))))
+=S(F(cat(SAP,SMP))) (9) 其中:S代表Sigmoid激活函数,AP 代表平均池化,MP 代表 最大池化,cat为拼接操作,F 为一个7×7的卷积运算。
+图4 空间注意力机制
+Fig.4Spatialattentionmechanism
+2 模型评估(Modelevaluation)
+2.1 数据集与数据预处理
+本文实验所使用的数据集是兰州大学可穿戴装备重点实
+验室公开的用于精神障碍分析的 MODMA 数据集[12],它是在 一个安静、干净、隔音和无电磁干扰的房间里收集的,包括来自
+临床抑郁症患者和匹配的健康对照者的脑电图和口语数据记
+录,这些受试者由医院的专业精神病学家仔细诊断和选择。其
+中,EEG 数据集使 用 传 统 由 128 个 电 极 安 装 的 弹 性 帽 和 用 于 普适计算应用的可穿戴3电极 EEG收集器收集。本实验使用
+包含53名受试者(包括24名被诊断为抑郁症的门诊患者以及
+29名健康对照者)处于静息状态和进行探针任务时记录的128
+导脑电信号;重度抑郁症患者均为兰州大学第二医院的住院患
+者或门诊患者,并由至少一名临床精神科医生诊断,患者排除
+了其他精神类疾病且未接受过精神药物治疗。对于健康对照
+组,排除了个人或家族精神障碍史,保证了数据的真实性以及
+可靠性。
+EEG信号由 128 通 道 HydroCelGeodesicSensorNet和 NetStation采集软件记录,因此,本实验通过 EEGLAB 中的
+Netstationbinarysimplefile插件导入脑电数据,使用Filterthe
+data工具进行0.1~70 Hz的带通滤波,采用 Selectdata去掉 EEG 中眼电和肌 电 等 无 关 电 极,检 查 是 否 有 坏 导 环 段。 剔 除
+环段并进行插值坏导,最后,使用独立成分分析ICA 去除 EEG
+记录中的各种伪影。
+EEG数据预处理之后,使用 MNEPython库读取原始数
+据并创建二维矩阵,通道为列,时间步长为行,提取前128个采
+样点的数据作为一个 EEG信号片段,对于每一个 EEG 片段选 取了29个稳定的 通 道 信 号 作 为 通 道 列 表,它 们 分 别 是 电 极
+[F7、F3、Fz、F4、F8、T7、C3、Cz、C4、T8、P7、P3、Pz、P4、P8、O1、
+O2、Fpz、F9、FT9、FT10、TP9、TP10、PO9、PO10、Iz、A1、A2、 POz]。对于每一个通道使用窗口大小为1024的 Hanning窗
+口对信号 进 行 加 窗 处 理,然 后 利 用 短 时 傅 里 叶 变 换 (Short
+TimeFourierTransform,STFT)将信号转换为频谱数据,计算 其频谱幅度,并将其标准化为幅度谱,最后将其绘制为时频图,
+得到 EEG数据的时频特征。
+2.2 实验环境及参数设置
+本文实验基 于 Python3.7.16 和 PyTorch1.13.1 框 架 实
+现,训练和测试在 NVIDIA RTX3090(24GB)GPU 上运行。
+66
+
+
+第28卷第7期 汪子凯等:用于抑郁症脑电数据增强的卷积注意力扩散模型
+基于 MODMA 数据集的所有 EEG数据,本文采用了不同的分
+类器对原始数据和增强后的数据进行了大量的实验来验证所
+提方法的有效性。
+首先,对 MODMA 数据集上所有被试的29个通道的脑电
+信号,通过短时傅里叶变换将其转换为时频图,得到抑郁症患
+者时频特征696个,正常对照时频特征841个,总共1537个样
+本。将抑郁患者和正常对照的时频特征分别送入扩散模型进
+行训练,生成新的抑郁和正常的时频特征,进而对训练数据集
+进行增强。随机抽取20%的 EEG 数据用于进行测试,其余的
+数据用于训练,并分别送入 VisionTransformer(ViT)[13]、MLP
+(MultilayerPerceptron)和 SVM(SupportVectorMachine)不 同的分类器进行分类,得到最终的实验结果。
+2.3 逐步扩充训练集的实验结果
+为了探究不同程度扩充训练数据集对实验结果的影响,本
+文针对 MODMA 数据集分别生成了不同数量的样本进行分类
+实验。以原始 EEG时频特征为基准,实验分别生成了原始训
+练数据集0.6、0.8、1、1.2和1.5倍的时频特征样本。将生成的
+时频特征添加到原始数据集中对其进行扩充增强。然后分别
+采用 ViT、MLP和SVM3种不同的模型对其进行分类,实验
+结果见表1。
+表1 不同增强程度的分类准确率
+Tab. 1 The classification accuracy with different levels of augmentation
+添加的样本量
+准确率/%
+ViT MLP SVM
+0 80.91 86.73 69.58
+0.6 87.70 88.03 72.49 0.8 88.03 89.64 73.14 1 91.90 90.61 75.08 1.2 87.38 90.29 71.84 1.5 88.75 88.67 70.55
+添加的样本数量表示原始训练数据集扩增倍数。由表1
+可以看出,在3个不同的分类器上进行抑郁症分类实验,使用
+增强之后的数据集的准确率普遍比采用原始数据集在平均分
+类精度上高。当添加的样本量达到原始训练数据集的1倍时,
+在 ViT、MLP和SVM-3个分类器上进行抑郁症分类均达到了
+最好的效 果,其 平 均 分 类 准 确 率 分 别 是 91.90%、90.61% 和
+75.08%,较原始 训 练 数 据 集 的 平 均 分 类 准 确 率 分 别 提 高 了
+10.99%、3.88%和5.50%。以上结果均表明采用扩散模型生成
+的新样本对原始训练数据集进行扩充增强能够有效地提高抑
+郁症检测的识别效果。
+同时,可以看出采用深度神经网络 ViT 和 MLP进行实验
+的平均分类准确率比采用传统分类器SVM 有显著的提高。说
+明深度神经网络能够从原始数据中学到更加抽象和高级的特
+征表示;能够更好地捕获数据中的相关信息和结构,从而提高
+分类的准确度。在样本量较小的时候,采用 MLP分类器得到
+最优的分类结果,但随着扩充样本数量的逐渐增大,采用 ViT
+相较于 MLP表现出了更好的分类效果。说明 ViT 可以更加
+有效地处理大规模数据,可能是因为随着数据量的增大,数据
+集中存在更加复杂和多样化的模式和结构,ViT 可以通过自注
+意力机制实现对序列数据的建模,其参数只与序列长度相关,
+而不是与数据量大小相关。因此,随着数据量的增大,ViT 的
+参数数量相对较小,不会过拟合。相比之下,MLP通常在处理
+大规模数据时需要更多的参数和更复杂的结构来达到相同的
+效果,这容易导致过拟合。因此,ViT 更适合在大规模数据集
+上进行训练,能够表现出更好的抑郁症分类效果。
+随着数据量的进一步增大,在3个分类器上平均分类准确
+率均出现了下降。由此可知,在一定的范围内,增加数据量可
+以提高分类器的准确率,这是因为 EEG 数据的采集长度是有
+限的,适当的数 据 扩 充 倍 数 可 以 更 好 地 利 用 数 据 中 的 特 征 信
+息。如果扩充倍数太小,可能无法充分学习数据的特征,导致
+分类效果不佳;而如果扩充倍数太大,可能会使增强后的数据
+变得难以处理,同样影响分类性能。因此,在数据扩充时需要
+进行适当的倍数选择,以达到最佳的分类效果。
+2.4 消融实验结果
+通过上述的实验分析可得,在1倍的数据扩充下能够达到
+最好的分类效果。为了进一步验证所提方法的有效性,分别采
+用原始扩散模型 DDPM 和本文所提方法卷积注意力扩散模型
+CADM 生成原始脑电数据1倍的人工样本,然后,分别添加抑
+郁症患者和正常对照的训练数据集,采用不同的分类器,包括
+ViT、MLP和 SVM 等算法对增强后的数据进行分类实验,对
+比结果见表2。
+表2 不同模型的分类准确率
+Tab. 2 The classification accuracy of different models
+添加的样本量
+准确率/%
+ViT MLP SVM
+原始样本 80.91 86.73 69.58
+DDPM 90.15 89.32 73.79
+CADM 91.90 90.61 75.08
+通过表2可 以 看 出,在 3 个 不 同 的 分 类 器 上 进 行 分 类 实
+验,增强后的数据普遍比原始数据分类精度更高,说明通过扩
+散模型能够生成有效的 EEG 数据特征,可以提高神经网络的
+分类能力,在数据量较少的情况下,对数据进行扩充和增强是
+非常有意义的。与原始扩散模型 DDPM 相比,本文所提模型
+CADM 在抑郁 症 分 类 实 验 上 表 现 出 了 更 好 的 性 能,分 别 在
+ViT、MLP和SVM 平均分类准确率上提高了1.75%、1.29%和
+1.29%。说明通过引 入 卷 积 注 意 力 机 制 可 以 提 升 模 型 对 输 入
+特征的表征能力,证明所提方法能够生成更加有效和高质量的
+脑电数据特征,能够有效地提高 EEG 抑郁症识别的准确率和
+稳定性。同时,可以看出,针对传统的分类器,ViT 表现出了更
+好的分类性能,说明深度神经网络能够有效地提取 EEG 数据
+深层特征,对于区分抑郁症患者和正常人更有帮助。
+3 结论(Conclusion)
+针对抑郁症 检 测 中 脑 电 数 据 采 集 难 度 大、样 本 量 小 的 问
+题,本文提出 了 一 种 卷 积 注 意 力 扩 散 模 型 (CADM)方 法 进 行
+EEG数据增强,分别采用了 ViT、MLP和 SVM 等不同模型进
+行了分类任务来验证所提模型的有效性。实验结果表明,这3
+种模型均取得了较高的分类准确率,且相较于未经扩散模型增
+67
+
+
+软件工程 2025年7月
+强的原始数据,分类性能均得到了显著提升。通过引入卷积注
+意力扩散模型,有效地消除了数据中的噪声和无关信息,突出
+了与抑郁症相 关 的 生 理 特 征,提 高 了 数 据 的 有 效 性 和 分 类 性
+能。其中,ViT 模型展 现 出 了 突 出 的 能 力,其 在 大 规 模 数 据 集
+上的学习能力和特征提取能力使得其在抑郁症 EEG 数据分类
+任务中取 得 了 优 异 的 成 绩,达 到 了 最 优 的 平 均 分 类 准 确 率
+91.90%,较原始数据集的平均分类准确率提高了10.99%。以
+上结果均证明了本文所提模型的有效性和通用性。由于扩散
+模型采用马尔可夫链,每次采样都需要经过多次迭代和计算,
+因此,生成效率非常低。未来的研究可以进一步探索如何优化
+扩散模型的生成效率,结合受试者的脑电数据生成更加高质量
+的数据,结 合 更 加 高 效 的 模 型 可 以 进 一 步 提 升 抑 郁 症 分 类
+性能。
+参考文献(References)
+[1]温敏,张云淑,王素娟,等.抑郁症患者认知功能的脑电及
+眼动研究进 展 [J].中 国 健 康 心 理 学 杂 志,2022,30(8):
+1277-1280.
+[2]HEC,LIUJ,ZHU Y,etal.Dataaugmentationfordeep
+neuralnetworks modelin EEG classification task: A
+review [J].Frontiers in human neuroscience,2021,
+15:765525.
+[3]PASCHALIM,SIMSON W,ROYAG,etal.Manifoldexploring
+dataaugmentation withgeometrictransformationsforin
+creasedperformanceandrobustness[C]∥LNCS.Informa
+tion Processingin MedicalImaging:26thInternational
+Conference.Berlin:Springer,2019:517-529.
+[4]OKAFORE,SMITR,SCHOMAKERL,etal.Operational
+dataaugmentationinclassifyingsingleaerialimagesofani
+mals[C]∥INISTA.2017IEEEInternationalConference
+onInovationsinIntelligentSystemsandApplications.New
+York:IEEE,2017:354-360.
+[5]GOODFELLOWI,POUGET-ABADIEJ,MIRZA M,etal.
+Generativeadversarialnetworks[J].Communicationsof
+theACM,2020,63(11):139-144.
+[6]LUO Y,ZHULZ,WANZY,etal.Dataaugmentationfor
+enhancingEEG-basedemotionrecognitionwithdeepgenera
+tivemodels[J].Journalofneuralengineering,2020,17
+(5):056021.
+[7]FAHIMIF,DOSENS,ANG K K,etal.Generativeadversarial
+networks-baseddataaugmentationforbrain-computerinterface
+[J].IEEE Transactionsonneuralnetworksandlearning
+systems,2021,32(9):4039-4051.
+[8]DHARIWALP,NICHOLA.DiffusionmodelsbeatGANs
+onimagesynthesis[J].Advancesin neuralinformation
+processingsystems,2021,34:8780-8794.
+[9]DUANY,ZHOUJ,WANG Z,etal.Domain-specificdenoising
+diffusionprobabilistic modelsforbraindynamics[EB/OL].
+(2023-05-15)[2024-04-23].https:∥ arxiv.org/abs/
+2305.04200.
+[10]TORMAS,SZEGLETESL.Brainsignalgenerationand
+dataaugmentation withasingle-stepdiffusionprobabilistic
+model[EB/OL].(2023-02-14)[2024-04-23].https:∥open
+review.net/forum? id=woOQ5Hb1oOF.
+[11]HOJ,JAIN A,ABBEELP.Denoisingdiffusionprobabilistic
+models[J].Advancesinneuralinformationprocessingsys
+tems,2020,33:6840-6851.
+[12]CAIH,YUANZ,GAO Y,etal.A multi-modalopendataset
+for mental-disorderanalysis[J].Scientificdata,2022,9
+(1):178.
+[13]QAYYUM A,RAZZAKI,TANVEER M,etal.High
+densityelectroencephalographyandspeechsignalbased
+deepframework forclinicaldepression diagnosis[J].
+IEEE/ACM transactionsoncomputationalbiologyand
+bioinformatics,2023,20(4):2587-2597
+作者简介:
+汪子凯(2000 ),男(汉族),达州,硕士生。研究领域:脑电信号
+处理与情感计算,深度学习与数据增强。
+陈景霞(1979 ),女(汉族),石河子,博士,教授。研究领域:深
+度学习,脑电 等 生 物 信 号 处 理,多 模 态 情 感 计 算,数 据
+挖掘。
+贾晓雯(1999 ),女(汉族),忻州,硕士生。研究领域:生理信号
+处理,多模态抑郁症检测。
+赵 晨(1998 ),男(汉族),西安,硕士生。研究领域:深度学
+习,扩散模型,数据增强,图像分割。
+(上接第42页)
+[13]BANDIP,GEESSINKO,MANSONQ,etal.Fromdetection
+ofindividualmetastasestoclassificationoflymphnodestatus
+atthepatientlevel:Thecamelyon17challenge[J].IEEE
+transactionsonmedicalimaging,2019,38(2):550-560.
+[14]KARTHIK M,DANES.Aptos2019blindnessdetection
+[EB/OL].(2020-12-11)[2024-09-26].https:∥ www.
+kaggle.com/c/aptos2019-blindness-detection.
+作者简介:
+王瑞琦(1999 ),女(汉族),吕梁,硕士生。研究领域:联邦学 习,图像处理。
+李 峰(1968 ),男(汉族),镇江,副教授,博士。研究领域:图 像处理,嵌入式计算。 范佳屹(1999 ),男(汉族),苏州,硕士生。研究领域:深度学 习,图像处理。
+68

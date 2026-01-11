@@ -1,0 +1,551 @@
+第 43 卷 第 2 期 2024 年 4 月
+北京生物医学工程
+Beijing Biomedical Engineering
+Vol. 43 No. 2 April 2024
+基金项目:山东省自然科学基金( ZR2022MH203) 、山东省研究生 教育质量提升计划( SDYAL18030) 资助
+作者单位:山东中医药大学智能与信息工程学院( 济南 250355) 通信作者:李延军。 E⁃mail:liyanjun503@ sina. com
+脑电信号情绪识别关键技术研究进展
+彭磊 魏国辉 马志庆 冯今瑀 李延军
+摘 要 随着人机交互技术的不断进步和广泛应用,对用户情绪的准确识别变得日益重要。 情绪
+识别技术已经在多个领域展现出巨大潜力,包括医疗诊断、交通安全和教育等方面。 而基于脑电的情
+绪识别成为了情绪识别领域中的热门研究方向。 首先,本文介绍情绪连续和情绪离散模型的基本概
+念,总结常用的脑电公开数据集,并对数据集的规模、情绪标签以及它们对脑电情绪识别任务的影响进
+行了比较分析。 其次,因为不同频带和脑电通道对于情绪识别的影响各不相同,课题组汇总脑电情绪
+识别关键频带和通道的相关研究,并从文献中总结归纳出脑电情绪识别的关键频带范围以及具有丰富
+情绪信息的脑电通道位置。 接着,介绍四类脑电情绪特征且给出对应的特征提取方法,也指出各种脑
+电特征的提取难度和目前在情绪识别中的应用效果。 然后,对基于深度学习的脑电情绪识别中的数据
+增强技术和注意力机制进行了阐述,指出数据增强技术的主流趋势和生成的人工情绪特征的类型,对
+各种注意力机制的作用方式和侧重点进行了对比分析。 数据增强技术用来解决脑电数据量不足的问
+题,注意力机制则对情绪识别准确率的提高起到了关键作用。 最后,对未来脑电情绪识别模型的通用
+性和脑电采集设备的研究方向做了一定的展望。
+关键词 情绪识别;脑电信号;深度学习;数据增强;注意力机制
+DOI:10. 3969 / j.issn. 1002-3208. 2024. 02. 015.
+中图分类号 R318. 04 文献标志码 A 文章编号 1002-3208(2024)02-0211-07
+本文著录格式 彭磊,魏国辉,马志庆,等. 脑电信号情绪识别关键技术研究进展[ J]. 北京生物医
+学 工 程, 2024, 43 ( 2 ): 211 - 217. PENG Lei, WEI Guohui, MA Zhiqing, et al. Research progress on key
+technologies for emotional recognition of EEG signals[J]. Beijing Biomedical Engineering,2024,43(2):211-217.
+Research progress on key technologies for emotional
+recognition of EEG signals
+PENG Lei,WEI Guohui,MA Zhiqing,FENG Jinyu,LI Yanjun
+College of Intelligence and Information Engineering,Shandong University of
+Traditional Chinese Medicine,Jinan 250355
+Corresponding author:LI Yanjun ( E⁃mail:liyanjun503@ sina. com)
+【 Abstract】 With the continuous progress and widespread application of human⁃computer interaction
+technology,accurate identification of user emotions has become increasingly important. Emotion recognition
+technology has shown great potential in multiple fields,including medical diagnosis,traffic safety,and education.
+And emotion recognition based on EEG has become a popular research direction in the field of emotion
+recognition. Firstly, this article introduces the basic concepts of continuous and discrete emotional models,
+summarizes commonly used EEG public datasets, and compares and analyzes the size of datasets, emotional
+labels,and their impact on EEG emotion recognition tasks.
+Secondly,because the impact of different frequency bands
+and EEG channels on emotion recognition varies, we
+summarize relevant research on key frequency bands and
+
+
+channels of EEG emotion recognition,and summarize the key frequency band range of EEG emotion recognition
+and the location of EEG channels with rich emotional information from the literature. Next,we introduce four
+types of EEG emotional features and provide corresponding feature extraction methods. It also points out the
+difficulty of extracting various EEG features and their current application effects in emotion recognition. Then,
+the data augmentation technology and attention mechanism in deep learning based EEG emotion recognition are
+elaborated,pointing out the mainstream trends of data augmentation technology and the types of artificial emotion
+features generated. A comparative analysis is conducted on the ways and focuses of various attention
+mechanisms. Data augmentation technology is used to solve the problem of insufficient EEG data,and attention
+mechanism plays a key role in improving the accuracy of emotion recognition. Finally, certain prospects are
+made for the universality of future EEG emotion recognition models and the research direction of EEG
+acquisition devices.
+【 Keywords】 emotional recognition;EEG signal;deep learning;data augmentation;attention mechanism
+图 1 三种 EEG 情绪识别流程
+Figure 1 Three EEG emotion recognition processes
+0 引言
+基于生理信号的情绪识别技术是实现人机交互智
+能化的关键技术。 而脑电信号(electroencephalography,
+EEG) 在众多生理信号中与情绪的相关性较高,且不
+易伪装,具有客观性和真实性[1] ,故采用 EEG 数据
+进行研究能够取得更为准确和真实的情绪识别效
+果。 常见的情绪识别的流程图可分为三种,如图 1
+所示。 完整的 EEG 情绪识别流程如图中第 1 行所
+示。 由于采集 EEG 数据的实验条件要求较高,许多
+研究者采用公开的 EEG 数据集进行情绪识别研究。
+而公开数据集在进行 EEG 数据采集时就已经去除
+了一些常见的干扰信号,故研究者在没有特殊要求
+时无需再对数据进行预处理操作,此类情绪识别流
+程如图中第 2 行所示。 近年来,伴随着情绪识别算
+法的不断提出,有的研究者直接将数据输入到模型
+当中,利用模型自动提取 EEG 数据的深层情绪特征
+并进行情绪分类。 这种方法被称为端到端 EEG 情
+绪识别,此类情绪识别流程如图中第 3 行所示。
+本文的主要贡献如下。 ( 1) 对 EEG 关键频带
+和通道文献进行总结,并提出用于 EEG 情绪识别的
+优势频带和通道。 ( 2) 对 EEG 数据增强技术进行
+归纳,简述 EEG 数据增强技术的发展。 (3) 对注意
+力机制应用于 EEG 情绪识别任务的相关文献进行
+整理,简述 各 类 注 意 力 机 制 的 作 用 方 式 和 侧 重 点,
+并提出通用型注意力机制的设想。
+1 情绪模型
+人的内在情绪状态可以通过观察个人的生理
+信号和外部表达来获取[2] 。 想要识别情绪,就必须
+将情绪进行数学量化,只有将情绪划分为细致的数
+学模型,才能实现情绪的识别。 较为常用的模型分
+为情绪离散模型和情绪连续模型。
+情绪离散模型将人的情绪分为几种基本情绪,
+其他情绪都是基本情绪的混合。 Ekman 等[3] 提出
+快乐、愤怒、悲伤、厌恶、恐惧、惊讶为 6 种基本情绪,
+在 许 多 国 家 的 文 化 中 普 遍 被 人 们 所 认 知。
+Plutchik[4] 提出可以将情绪用色轮的方式概念化,将
+情绪比作一种颜色,其他情绪是由基本情绪混合而
+成的。
+情绪连续模型则是将情绪视为情绪基本维度
+的组合。 在情绪识别领域中应用最为广泛的当属
+Russell[5] 提出的效价-唤醒( valence⁃arousal) 情绪模
+型,横轴效价 也 可 称 之 为 快 乐 维 度, 表 示 情 绪 愉 悦
+程度,纵轴唤 醒 表 示 情 绪 强 烈 程 度, 两 种 维 度 的 组
+合来描述人的各种情绪。 二维情绪模型如图 2 二维
+情绪模型所示。
+·212· 北京生物医学工程 第 43 卷
+
+
+图 2 二维情绪模型
+Figure 2 Two⁃dimensional emotional model
+2 EEG 公开数据集
+2. 1 常用数据集介绍
+在脑电 情 绪 识 别 领 域 应 用 最 为 广 泛 的 则 是
+Koelstra 等[6] 提出名为 DEAP 的多模态数据集,其中
+的 EEG 数据是进行基于脑电的情绪识别研究的重
+要数据。 每个样本数据长 63 s,其中包含了 3 s 的基
+线时间。 脑电数据分为两个数组,data 为 40( 实验
+次数) ×40( 通道数) × 8 064( 63 × 128) 的三维数组,
+label 为 40×4 的二维数组。 由于脑电情绪诱发实验
+开展困难,目前脑电情绪识别领域的公开数据集较
+少,常用公开数据集总结归纳表如表 1 所示。
+表 1 常用公开数据集总结归纳表
+Table 1 Summary table of commonly used public datasets
+参考文献 数据库 名称
+受试者 数量
+通道数 情绪标签
+Koelstra 等[6] DEAP 32 40 唤醒、效价、支配、 喜好
+Soleymani 等[7] MAHN OB⁃HCI
+27 32 唤醒、效价、支配
+Zheng 等[8] SEED 15 62 积极、中性、消极
+Katsigiannis
+等[9]
+DREAMER 23 少量 通道
+效价、唤醒、支配
+Song 等[10] MPED 23 62 快乐、有趣、愤怒、 恐惧等
+2. 2 数据集对比
+在上述的几种数据集中,EEG 数据量规模最大
+的是 DEAP 数 据 集, SEED 数 据 量 居 中, MAHNOB⁃
+HCI 数据集、DREAMER 数据集和 MPED 数据集的
+数据量相对较小,这可能限制一些模型的情绪识别
+效果。 其中 DEAP、MAHNOB⁃HCI 和 DREAMER 数
+据集的数据标签都具有效价和唤醒维度的数值记
+录,这有利于 模 型 性 能 的 验 证 工 作, 并 容 易 确 定 受
+试者 情 绪 在 二 维 情 绪 模 型 中 的 位 置。 SEED 和
+MPED 数据集采用离散情绪标签,不利于确定受试
+者在二维情绪模型上的位置。
+3 基于 EEG 情绪识别的关键频带和通道
+EEG 采集电极放置一般采用 10 - 20 电极放置
+系统,为了寻找最适合用于情感识别的脑电信号频
+带和通道,研究者们对 EEG 频带和通道进行了大量
+实验。 Yang 等[11] 的实验分类结果表明,高 γ( 30 ~
+100 Hz) 带特征在情感识别中更有效,所提出的融合
+特征在公共数据集的高 γ 波段中获得了最高的分
+类精度。 Valenzi 等[12] 使用 32 通道脑电信号中的 8
+个通道 的 脑 电 数 据 进 行 情 绪 识 别, 仍 然 实 现 了
+87. 5%的平均情绪分类率。 Zheng 等[13] 通过深度信
+念网络从多通道脑电信号中提取微分熵特征来进
+行情感识别,分析训练完成后的深度信念网络的权
+值分布,利用 12 个通道脑电信号就实现了利用 64
+个通 道 脑 电 数 据 才 能 达 到 的 识 别 准 确 率。 Wang
+等[14] 使用归一化互信息方法选择脑电 32 通道的最
+优子集,可以使 EEG 情绪识别在大幅减少 EEG 通
+道的同时获得更高的准确率。 近年来 EEG 关键频
+带和通道文献总结如表 2 所示。
+从表 2 中可以看出脑电信号的情绪信息主要集
+中在 β( 13 ~ 30 Hz) 和 γ 频段,且在 γ 频段更加集
+中。 其他频段所包含的情绪信息相对来说较为稀
+少。 根据 表 中 EEG 情 绪 识 别 研 究 的 通 道 统 计 和
+10-20系统 图 对 照, 发 现 大 脑 额 叶 区 与 颞 叶 区 的
+EEG 数据具有更多的情绪信息,隐藏着更多的情绪
+特征。 建议多采用额叶区与颞叶区的 EEG 通道数
+据用于情绪识别研究,这有利于情绪识别技术的现
+实应用,实际设备应只需少量通道数据就能实现高
+准确率的情绪识别。
+4 EEG 四类情绪特征介绍
+4. 1 时域特征
+波幅、标准差、均方根等均是 EEG 的时域特征,
+可用统计方法提取此类特征。 此方法操作简单,结
+·213·
+第 2 期 彭磊,等:脑电信号情绪识别关键技术研究进展
+
+
+果清晰直观,但是由于脑电信号是一种非线性非稳
+态的信号,使用时域特征会加大后期特征识别的难
+度,现在脑电信号的时域特征多作为辅助手段应用
+在脑电情绪识别领域。
+Wagh 等[22] 从脑电信号中提取出了方差、标准
+偏差、峰 度、 偏 度 等 时 域 特 征 进 行 情 绪 识 别。 Liu
+等[23] 将时域的均值、标准差、原始信号与归一化信
+号的一阶差均值绝对值和二阶差均值绝对值 6 个统
+计特征融合进行情绪分类,发现相比于单一时域特
+征,使用融合的特征向量情绪识别准确率上升幅度
+较大。
+表 2 EEG 关键频带和通道文献总结
+Table 2 Summary of literature on key EEG frequency
+bands and channels
+参考 文献
+发表 时间
+关键 频带
+关键通道 研究方法
+Zhang
+等 [ 15]
+2016 β 和 γ 19 通道取得最佳 准确度
+基于 ReliefF 进 行 通 道选择
+Özerdem
+等 [ 16]
+2017 未提及 P3, FC2, AF3, O1,Fp1
+多层 感 知 机 神 经 网 络( MLPNN)
+Zheng
+等 [ 17]
+2019 β 和 γ 未提及 相关 系 数 特 征 选 择 方法分析
+Goshvarpour
+等[18] 2019 未提及 FP1, C3, CP1,
+P3,Pz
+相干 性 分 析 和 源 定 位方法
+Yildirim
+等 [ 19]
+2021 未提及 F3, F4, FC5, AF4, T7, C3, CP2,PO3,O1,O2
+群体智能算法
+( swarm⁃intelligence, SI)
+Peng
+等 [ 20]
+2021 γ 通道重要性从前 到 后 递 减: T7, TP7, Fp1, FT7, PO3, FPZ, FP2, TP8,AF3,P2
+GFIL 框架识别
+Guo
+等 [ 21]
+2022 未提及 FT7, T7, TP7, P3, FC6, FT8, T8,F8
+DCoT 模型评估通道 重要性
+4. 2 频域特征
+频谱能量、功率谱密度、频带功率等是 EEG 的
+频域特征,提 取 此 类 特 征 的 方 法 有 傅 里 叶 变 换、 小
+波变换等方法,相比于 EEG 时域特征,频域特征蕴
+含更为丰富的情绪信息,可以反映不同频带的能量
+分布和情绪相关性。
+Pusarla 等[24] 将 EEG 转换的二维频谱图提供给
+DCERNet 模型,准确率提升幅度为 8%。 Mohammadi
+等[25] 使用离散小波变换在多个通道比较了不同频
+带之间的准确度,结果发现 Gamma 频带的情绪准确
+率明显高于其他频带。
+4. 3 时频特征
+时频功率分布、 时频相 干 等 为 EEG 的 时 频 特
+征,特征提取 方 法 有 短 时 傅 里 叶 变 换、 经 验 模 态 分
+解等。 时频特征能够描述信号频率随时间的变化,
+可以同时反映时域和频域的信息。
+Cao 等[26] 利用小波变换对脑电信号分解,提取
+各个频段的时频信息,然后使用时间窗函数计算在
+时频域中的统计特征。 Salankar 等[27] 利用经验模态
+分解将 EEG 分解为本征模态函数,保留了 EEG 中
+时频域中的情绪特征。
+4. 4 非线性特征
+常见的非线性 EEG 特征有微分熵、模糊熵、分
+形维数等,这些特征需应用复杂度理论和分形理论
+进行计算提 取, 难 度 较 大, 应 选 择 合 适 的 非 线 性 脑
+电特征进行提取。 其中微分熵( differential entropy,
+DE) 在 EEG 情绪识别领域中应用广泛。
+Hwang 等[28] 提取脑电信号中的 DE 特征 作 为
+CNN 模型的输入,实现了 90% 的情绪识别准确率。
+Zheng 等[29] 在系统评估流行情绪识别算 法 的 效 率
+时,发现应用 DE 的模型性能优于其他模型。
+5 深度学习在脑电情绪识别领域的应用
+5. 1 EEG 数据增强技术
+目前虽有公开数据集能够为基于脑电的情绪
+识别研究提供数据,但是相比较其他领域的实验数
+据量而言,EEG 数据量太少,且采集脑电数据又是
+一项成本较高的试验。 于是研究者们利用数据增
+强技术产生更多的数据样本,能够在一定程度上解
+决样本不足的问题。 目前 EEG 数据增强技术主要
+分为两种[30] :第一种是为信号添加噪声( 如高斯噪
+声、泊松噪声等), 第二种是使用深度学习生成模
+型。 常 用 的 数 据 增 强 模 型 有 生 成 对 抗 网 络
+( generative adversarial networks, GAN) [31] 和 变 分 自
+编码器( auto⁃encoding variational Bayes,VAE) [32] ,其
+中 GAN 是目前脑电数据增强领域中的重要理论,它
+能够学习数据的真实分布,从而产生更多类似分布
+的 EEG 数据。
+Liu 等[33] 利用 GAN 生成多通道脑电图数据的
+差分熵特征图,再通过模型提取差分熵特征当中隐
+·214· 北京生物医学工程 第 43 卷
+
+
+藏的情绪信息,实验结果表明在基于脑电图的情感
+识别任务中有明显的改进。 Wang 等[34] 在原始训练
+数据的每个特征样本中加入高斯噪声,以获得新的
+训练样 本, 从 而 一 定 程 度 上 缓 解 深 度 学 习 模 型 的
+EEG 数据中缺乏训练样本的问题,实现了模型性能
+的改进。 Pan 等[35] 利用 GAN 生成功率谱密度形式
+的训练样本,在 DEAP 数据集和 MAHNOB⁃HCI 数据
+集的实验结果表明,数据增强后识别精度有显著提
+高。 准确率的提高有两个主要原因:一方面,数据
+增强增加了样本数量。 另一方面,数据增强将每个
+类别的样本量增加到相同水平,从而实现了类别之
+间的平衡。 近年的 EEG 数据增强文献总结如表 3
+所示。
+表 3 EEG 数据增强文献总结
+Table 3 Summary of literature on EEG data enhancement
+参考 文献
+发表 时间
+产生数据 样本类型
+数据增强方法
+Luo 等[36] 2020 功率谱密度 和微分熵
+条件 Wasserstein GAN、 选 择 性 VAE 和选择性 WGAN
+Bao 等[37] 2021 DE 特征转化 的拓扑图像
+VAE-D2GAN 模型扩充数据
+Zhang 等[38] 2021 DE 特征人 工数据
+多 生 成 器 条 件 WGAN ( multiple generator CWGAN,MG⁃CWGAN)
+Ari 等[39] 2022 CWT 尺度 图像
+极限 学 习 机 自 编 码 器 ( extreme learning machine auto encoder, ELM⁃AE)
+从表 3 中能够看出,EEG 数据增强技术的主流
+趋势是使用深度神经网络学习 EEG 数据的分布特
+征,生成人工提取的情绪特征如 DE 特征、功率谱密
+度和 连 续 小 波 变 换 ( continuous wavelet transform,
+CWT) 尺度图等特征数据样本,较少研究生成 EEG
+原始数据。 另外,利用噪声的数据增强技术没有进
+一步新的方法提出。
+5. 2 基于注意力机制 EEG 情绪识别神经网络
+人的大脑在处理信息时会将大部分注意力放
+在对自己来说最重要的信息区域,注意力机制的提
+出就是为了模仿人的这种信息处理方式。 在脑电
+情绪识别中,注意力机制可以帮助模型更好地关注
+与情绪相关的特征。 注意力机制在 EEG 情绪识别
+研究常见的有通道注意力机制、 自我注意力机制
+等。 注意力机制可以改变情绪特征的权重,能够提
+高情绪识别的准确率。
+Tao 等[40] 提出了一种基于 注 意 力 的 卷 积 递 归
+神 经 网 络 ( attention⁃based convolutional recurrent
+neural network,ACRNN) ,从脑电信号中提取更多的
+区别特征,提高情感识别的准确性。 此模型能自适
+应地分配不同通道的权重,并采用 CNN 提取编码的
+脑电信号的空间信息。 在 DEAP 和 DREAMER 数据
+库上分别取得了平均 93. 72%和 93. 38% 的准确率。
+近年来关于基于注意力机制的 EEG 情绪识别文献
+具体的总结如表 4 所示。
+从表 4 中可以看出,注意力机制与神经网络的
+融合能够取得良好的实验结果。 但各种注意力机
+制改进试验 的 方 式 各 有 侧 重, 通 道、 区 域 和 空 间 注
+意力机制其实质都是对脑电通道进行情绪权重划
+分,并随着模型训练逐步改 进 各 个 通 道 的 情 绪 权
+重,从而提高情绪识别准确率。 多头注意力机制能
+够使模型能够同时关注不同时间点之间的不同信
+息,更全面地 捕 捉 脑 电 信 号 中 的 特 征 和 结 构, 从 而
+进一步提高模型的表现能力和泛化能力。 频谱注
+意力机制侧重于学习不同频段的脑电信号在情绪
+识别任务中 的 重 要 性, 此 方 法 可 以 根 据 任 务 需 求,
+自适应地调整不同频段的情绪权重,从而改进情绪
+识别效果。 未来应将各种注意力机制进一步融合,
+形成同时对频带、通道和时间进行情绪权重划分的
+通用型注意力机制模型,进一步挖掘 EEG 数据中的
+隐藏情绪信息,进一步提升模型的情绪识别准确率。
+6 总结与展望
+第一个问题是情绪识别神经网络模型的通用
+性较弱,目前大多数模型主要是针对主流 EEG 公开
+数据集中的受试者的 EEG 数据所设计的,如果更换
+EEG 数据源进行情绪识别,情绪识别的准确率会有
+较大幅度的下降,而迁移学习能够提高算法对不同
+EEG 数据的通用性,故应该在迁移学习方面投入时
+间精力,解决 模 型 的 通 用 性 问 题, 并 使 模 型 具 有 跨
+域情绪识别能力。
+第二个问题是便携性的 EEG 采集设备需要进
+一步革新,应该根据对 EEG 情绪识别关键频带和通
+道的相关研究和与情绪相关的脑区研究,尽快研发
+一种便携性,低数量 EEG 通道,抗干扰能力强,具有
+频带选择功能的 EEG 采集设备。 此种设备能够促
+进小型 EEG 数据集的产生,而众多研究者的小型
+·215·
+第 2 期 彭磊,等:脑电信号情绪识别关键技术研究进展
+
+
+表 4 基于注意力机制的 EEG 情绪识别文献总结
+Table 4 Summary of literature on EEG emotion recognition based on attention mechanism
+参考文献 发表 时间
+神经网络及所提取的情绪特征 注意力机制 数据 集
+情绪分类标签 各个维度的 准确率 / %
+Zhang 等[41] 2021 局 部 到 全 局 BiLSTM ( region to global⁃ spatiotemporal⁃BiLSTM,R2G⁃ST⁃BiLSTM) 情绪特征:局部到全局脑区更具区分性 的时空脑电特征
+区域注意机制,确定不同脑区的权 重,从而增强或削弱各脑区对情绪 识别的贡献
+DEAP 效 价, 唤 醒, 支 配,喜欢
+平均 94. 69
+Hu 等[42] 2022 CNN⁃BiLSTM⁃MHSA 情 绪 特 征: 时 间 序 列,空间信息
+多头自注意力机制 DEAP 效 价, 唤 醒, 支 配,喜欢
+平均 98. 10
+Xiao 等[43] 2022 4D⁃ANN 情 绪 特 征: 空 间, 频 谱, 时 间 特征
+频谱和空间注意 机制, 时间 注 意 机制
+SEED 积 极, 中 性, 消极
+平均 96. 10
+Jiang 等[44] 2022 基于注意机制的混合网络 ( FFT CNN⁃ LSTM⁃Attention,FFT CLA) 情 绪 特 征: 空间特征,时间特征
+通道注意力机制,自注意力机制 DEAP 效 价, 唤 醒, 支 配,喜欢
+平均 92. 38
+Li 等[45] 2022 空 间 频 率 卷 积 自 注 意 网 络 ( spatial⁃ frequency convolutional self⁃attention network,SFCSAN) 情绪特征: 空间和频 带特征
+频带内自注意力学习频率信息,频 带间 最 终 注 意 力 学 习 互 补 频 率 信息
+DEAP 效 价, 唤 醒, 支 配,喜欢
+95. 15,95. 76, 95. 64,95. 86
+EEG 数据集能够融合为数据量足够的 EEG 公开数
+据集,故此种设备的研发将极大促进 EEG 情绪识别
+研究。
+参考文献
+[ 1 ] Black MH, Chen NTM, Iyer KK, et al. Mechanisms of facial
+emotion recognition in autism spectrum disorders: insights from
+eye tracking and electroencephalography [ J ] . Neuroscience &
+Biobehavioral Reviews,2017,80:488-515.
+[ 2 ] Lin W, Li C. Review of studies on emotion recognition and
+judgment based on physiological signals [ J] . Applied Sciences,
+2023,13(4) :2573.
+[ 3 ] Ekman P, Friesen WV, O ’ sullivan M, et al. Universals and
+cultural differences in the judgments of facial expressions of
+emotion[ J] . Journal of Personality and Social Psychology,1987,
+53(4) :712-717.
+[ 4 ] Plutchik R. The nature of emotions: human emotions have deep
+evolutionary roots, a fact that may explain their complexity and
+provide tools for clinical practice[ J] . American Scientist,2001,
+89(4) :344-350.
+[ 5 ] Russell JA. A circumplex model of affect [ J ] . Journal of
+Personality and Social Psychology,1980,39(6) :1161-1178.
+[ 6 ] Koelstra S, Muhl C, Soleymani M, et al. Deap: a database for
+emotion analysis; using physiological signals [ J ] . IEEE
+Transactions on Affective Computing,2011,3(1) :18-31.
+[ 7 ] Soleymani M,Lichtenauer J,Pun T,et al. A multimodal database
+for affect recognition and implicit tagging[ J] . IEEE Transactions
+on Affective Computing,2011,3(1) :42-55.
+[ 8 ] Zheng WL, Liu W, Lu Y, et al. Emotionmeter: a multimodal
+framework for recognizing human emotions [ J ] . IEEE
+Transactions on Cybernetics,2019,49(3) :1110-1122.
+[ 9 ] Katsigiannis S, Ramzan N. DREAMER: a database for emotion
+recognition through EEG and ECG signals from wireless low⁃cost
+off⁃the⁃shelf devices[ J] . IEEE Journal of Biomedical and Health
+Informatics,2018,22(1) :98-107.
+[10] Song T,Zheng W,Lu C,et al. MPED:a multi⁃modal physiological
+emotion database for discrete emotion recognition [ J ] . IEEE
+Access,2019,7:12177 - 12191.
+[11] Yang K, Tong L, Shu J, et al. High gamma band EEG closely
+related to emotion: evidence from functional network [ J ] .
+Frontiers in Human Neuroscience,2020,14:89.
+[12] Valenzi S, Islam T, Jurica P, et al. Individual classification of
+emotions using EEG [ J ] . Journal of Biomedical Science and
+Engineering,2014(8) :604-620.
+[13] Zheng WL, Lu BL. Investigating critical frequency bands and
+channels for EEG⁃based emotion recognition with deep neural
+networks [ J ] . IEEE Transactions on Autonomous Mental
+Development,2015,7(3) :162-175.
+[14] Wang ZM, Hu SY, Song H. Channel selection method for EEG
+emotion recognition using normalized mutual information [ J ] .
+IEEE Access,2019,7:143303-143311.
+[15] Zhang J, Chen M, Zhao S, et al. ReliefF⁃based EEG sensor
+selection methods for emotion recognition [ J ] . Sensors, 2016,
+16:1558.
+[16] Özerdem MS, Polat H. Emotion recognition based on EEG
+features in movie clips with channel selection [ J ] . Brain
+Informatics,2017,4:241 - 252.
+[17] Zheng WL,Zhu JY,Lu BL. Identifying stable patterns over time
+for emotion recognition from EEG [ J ] . IEEE Transactions on
+·216· 北京生物医学工程 第 43 卷
+
+
+Affective Computing,2017,10(3) :417-429.
+[18] Goshvarpour A, Goshvarpour A. A novel approach for EEG
+electrode selection in automated emotion recognition based on
+lagged Poincare ’ s indices and sLORETA [ J ] . Cognitive
+Computation,2020,12(3) :602-618.
+[19] Yildirim E, Kaya Y, Kiliç F. A channel selection method for
+emotion recognition from EEG based on swarm⁃intelligence
+algorithms[ J] . IEEE Access,2021,9:109889-109902.
+[20] Peng Y,Qin F,Kong W,et al. GFIL:a unified framework for the
+importance analysis of features,frequency bands,and channels in
+EEG⁃based emotion recognition [ J ] . IEEE Transactions on
+Cognitive and Developmental Systems,2022,14(3) :935-947.
+[21] Guo JY,Cai Q,An JP,et al. A transformer based neural network
+for emotion recognition and visualizations of crucial EEG channels
+[ J] . Physica A:Statistical Mechanics and its Applications,2022,
+603:127700.
+[22] Wagh KP, Vasanth K. Performance evaluation of multi⁃channel
+electroencephalogram signal ( EEG ) based time frequency
+analysis for human emotion recognition [ J] . Biomedical Signal
+Processing and Control,2022,78:103966.
+[23] Liu Y, Fu G. Emotion recognition by deeply learned multi⁃
+channel textual and EEG features [ J ] . Future Generation
+Computer Systems,2021,119:1-6.
+[24] Pusarla N,Singh A,Tripathi S. Learning DenseNet features from
+EEG based spectrograms for subject independent emotion
+recognition[ J] . Biomedical Signal Processing and Control,2022,
+74:103485.
+[25] Mohammadi Z, Frounchi J, Amiri M. Wavelet⁃based emotion
+recognition system using EEG signal[ J] . Neural Computing and
+Applications,2017,28:1985 - 1990.
+[26] Cao X, Zhao K, Xu D. Emotion recognition of single⁃electrode
+EEG based on multi⁃feature combination in time⁃frequency
+domain[ J] . Journal of Physics: Conference Series, 2021, 1827
+(1) :012031.
+[27] Salankar N, Mishra P, Garg L. Emotion recognition from EEG
+signals using empirical mode decomposition and second⁃order
+difference plot [ J] . Biomedical Signal Processing and Control,
+2021,65:102389.
+[28] Hwang S,Hong K,Son G,et al. Learning CNN features from DE
+features for EEG⁃based emotion recognition[ J] . Pattern Analysis
+and Applications,2020,23:1323-1335.
+[29] Zheng WL,Zhu JY,Lu BL. Identifying stable patterns over time
+for emotion recognition from EEG [ J ] . IEEE Transactions on
+Affective Computing,2017,10(3) :417-429.
+[30] Lashgari E, Liang D, Maoz U. Data augmentation for deep⁃
+learning⁃based electroencephalography [ J ] . Journal of
+Neuroscience Methods,2020,346:108885.
+[31] Bhat S,Hortal E. GAN⁃based data augmentation for improving the
+classification of EEG signals [ C ] / / The 14th Pervasive
+Technologies Related to Assistive Environments Conference.
+Corfu,Greece:ACM,2021:453 - 458.
+[32] Tian C, Ma Y, Cammon J, et al. Dual⁃encoder VAE⁃GAN with
+spatiotemporal features for emotional EEG data augmentation[ J] .
+IEEE Transactions on Neural Systems and Rehabilitation
+Engineering,2023,31:2018 - 2027.
+[33] Liu Q, Hao J, Guo Y. EEG data augmentation for emotion
+recognition with a task⁃driven GAN [ J ] . Algorithms, 2023,
+16:118.
+[34] Wang F,Zhong S,Peng J,et al. Data augmentation for EEG⁃based
+emotion recognition with deep convolutional neural networks
+[ M ] / / MultiMedia Modeling. Bangkok, Thailand: Springer
+International Publishing,2018:82-93.
+[35] Pan B, Zheng W. Emotion recognition based on EEG using
+generative adversarial nets and convolutional neural network[ J] .
+Computational and Mathematical Methods in Medicine, 2021,
+2021:2520394.
+[36] Luo Y,Zhu LZ,Wan ZY,et al. Data augmentation for enhancing
+EEG⁃based emotion recognition with deep generative models[ J] .
+Journal of Neural Engineering,2020,17(5) :056021.
+[37] Bao G,Yan B,Tong L,et al. Data augmentation for EEG⁃based
+emotion recognition using generative adversarial networks [ J ] .
+Frontiers in Computational Neuroscience,2021,15:723843.
+[38] Zhang A, Su L, Zhang Y, et al. EEG data augmentation for
+emotion recognition with a multiple generator conditional
+Wasserstein GAN[ J] . Complex & Intelligent Systems,2022,8:
+3059 - 3071.
+[39] Ari B,Siddique K,Alçin ÖF,et al. Wavelet ELM⁃AE based data
+augmentation and deep learning for efficient emotion recognition
+using EEG recordings [ J ] . IEEE Access, 2022, 10:
+72171 - 72181.
+[40] Tao W,Li C,Song R,et al. EEG⁃based emotion recognition via
+channel⁃wise attention and self attention [ J] . IEEE Transactions
+on Affective Computing,2023,14(1) :382-393.
+[41] Zhang P, Min C, Zhang K, et al. Hierarchical spatiotemporal
+electroencephalogram feature learning and emotion recognition
+with attention⁃based antagonism neural network[ J] . Frontiers in
+Neuroscience,2021,15:738167.
+[42] Hu Z,Chen L,Luo Y,et al. EEG⁃based emotion recognition using
+convolutional recurrent neural network with multi⁃head self⁃
+attention[ J] . Applied Sciences,2022,12(21) :11255.
+[43] Xiao G,Shi M,Ye M,et al. 4D attention⁃based neural network for
+EEG emotion recognition[ J] . Cognitive Neurodynamics,2022,16
+(4) :805-818.
+[44] Jiang H,Wu D,Tang X,et al. EEG emotion recognition using an
+attention mechanism based on an optimized hybrid model [ J] .
+Computers,Materials & Continua,2022,73(2) :2697-2712.
+[45] Li D,Xie L, Chai B, et al. Spatial⁃frequency convolutional self⁃
+attention network for EEG emotion recognition[ J] . Applied Soft
+Computing,2022,122:108740.
+(2023-07-26 收稿,2023-10-24 修回)
+·217·
+第 2 期 彭磊,等:脑电信号情绪识别关键技术研究进展

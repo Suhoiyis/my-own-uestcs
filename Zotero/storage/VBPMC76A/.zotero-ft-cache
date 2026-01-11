@@ -1,0 +1,324 @@
+第 46 卷 第 5 期 2025 年 5 月
+Vol. 46,No 5 May,2025
+计量学报 ACTA METROLOGICA SINICA
+基于神经质量模型的运动想象脑电数据增强
+付荣荣, 孟 云, 黄晓东, 陈 浩, 吴 娜
+(燕山大学 电气工程学院,河北 秦皇岛 066004)
+摘要:针对脑机交互系统发展中数据不足的问题,通过神经质量模型合成事件相关去同步(ERD)和事件相关 同步(ERS)特征,节省模型训练时间,避免数据过拟合。引入了基于脑同侧运动感觉区 μ/β 节律的 ROI 神经元群模 型,调整幅值的加减常数后,生成模拟 ERD/ERS 信号。实验证明,模拟信号与真实信号在共空间模式特征上相似, 滤波和共空间模式特征提取后的机器学习分类准确率接近真实数据。混合不同比例的模拟和真实数据,对分类准 确率的影响不大,验证了基于神经质量模型的模拟信号对 ERD/ERS 信号进行数据增强的有效性。这一方法有望在 小样本数据集下用于算法创新和检验,同时可以缩短实验时间,为脑机交互系统的发展提供有力支持。 关键词:脑机交互;数据增强;脑电信号;神经元群模型;事件相关同步;事件相关去同步
+中图分类号:TB99;TB973 文献标识码:A 文章编号:1000-1158(2025)05-0762-07
+Enhancing Motor Imagery EEG Data Based on Neural Mass Model
+FU Rongrong, MENG Yun, HUANG Xiaodong, CHEN Hao, WU Na
+(Institute of Electric Engineering,Yanshan University,Qinhuangdao,Hebei 066004,China)
+Abstract: For the challenge of insufficient data in brain-machine interface (BMI) systems,this study employs a
+neural mass model to synthesize event-related desynchronization/event-related synchronization (ERD/ERS) features to
+augment limited training samples of electroencephalogram (EEG) and enhance the decoding performance. A region of
+interest(ROI)neural ensemble model,based on the μ/β rhythms within the motor cortex,is introduced to adjust amplitude
+parameters through precise constants,thereby generating simulated ERD/ERS signals.Experimental results demonstrate the
+resemblance between simulated and authentic signals in terms of common spatial pattern (CSP)features. The machine
+learning classification accuracy,post-filtering and CSP feature extraction,closely approximates that derived from authentic
+data. The negligible impact on classification accuracy as blending varying proportions of simulated and authentic data
+validates the efficacy of the simulated signals based on the neural mass model in enhancing ERD/ERS signals. This
+methodology holds promise for algorithm.
+Key words: brain-machine interaction; data augmentation; EEG; neural mass model; event-related
+synchronization;event-related desynchronization
+1引言
+基 于 脑 电(electroencephalogram,EEG)的 脑 机
+交互由于机器学习方法的发展引起了广泛关 注
+[1,2],但 这 些 方 法 往 往 需 要 大 量 数 据 来 实 现 模 型 的训练。由于伪影干扰及参与者难以长久保持专 注等因素影响,获取大量高质量 EEG 数据成为一个
+难题[3]。于是,研究人员采用数据增强技术以提升 数据质量和模型训练效果[4,5]。当前主流的数据增 强方法有数据分割重组法[6],基于 GAN 的数据生成
+增 强 法[7]等 。 神 经 质 量 模 型(neural mass model, NMM)[8,9]是 神 经 元 集 总 水 平 上 的 脑 动 力 学 计 算 模 型之一,通过调节其生理参数改变模型状态以生成 不同节律的脑电信号。ERD/ERS 作为 EEG 中的一 种重要现象,指示了神经振荡活动在特定任务中的
+收稿日期:2024-03-08;修回日期:2024-11-10
+基金项目:国 家 自 然 科 学 基 金(62073282);河 北 省 自 然 科 学 基 金(F2022203092);河 北 省 全 职 引 进 国 家 高 层 次 创 新 型 人 才 科 研 项 目
+(2021HBQZYCSB003);秦皇岛市科技计划(202302B015)
+doi:10.3969/j.issn.1000-1158.2025.05.20
+
+
+第 46 卷 第 5 期 付荣荣等:基于神经质量模型的运动想象脑电数据增强
+变化[10]。进行单侧肢体运动想象时,μ/β 节律幅值在 大脑同侧运动感觉区会增大,而对侧幅值会降低, 产 生 事 件 相 关 同 步(ERS)和 事 件 相 关 去 同 步 (ERD)[11]。
+本文提出一种基于神经质量模型的 EEG 数据 增强方法来生成事件相关去同步/同步(ERD/ERS) 脑电数据。具体为,采用神经元群模型根据运动想 象脑电特有的特征合成反映单侧肢体运动想象的 ERD/ERS 信号。通过改变突触时间常数,使 NMM 生成 μ 节律和 β 节律的信号,并按照一定比例进行 耦合来模拟 ERD/ERS 信号实现脑电数据增强,提高 了 EEG 数据集的质量和多样性。该方法与现有的 数据增强方法相比的优势在于:突破现有脑电数据 增强策略无生理机制支撑的局限,通过引入生物学 上合理的模型构建,模拟神经元群的自然活动,生 成具有生物学意义的脑电数据,实现针对有限训练 样本的脑机交互进行模型驱动的数据增强,以解决 学习算法对大数据的需求问题。
+2方法
+2. 1 Wendling 模型与 ROI 模型
+所 使 用 的 NMM 模 型 为 Zavaglia 等 提 出 的 ROI
+(region of interest)神 经 元 群 模 型[11] ,源 于 对
+Wendling 模型的修改,如图 1(a)。Wendling 模型由 一群具有相同膜电位的神经元组成,其包含 4 个集 总神经群:锥体细胞、兴奋性中间神经元、突触动力 学慢抑制性中间神经元和突触动力学快抑制性中 间神经元。ROI 模型如图 1(b)所示,平行排列用于 描述感兴趣区域的 3 个种群。整体 ROI 的模型可以 由并行部署的 N 个种群组成,本研究赋予每个种群 可调节的权重 wi[12]。 Wendling 模型每个神经元模型包括动态线性 转换函数 h(t)和非线性静态转换函数 S(v),如式 (1)、式(2)所示。h(t)将动作电位的平均脉冲密度 转换为膜电压,H 表示突触时间增益,1/h 表示时间 常数,h(t)由一阶微分方程描述,见式(3)。
+h(t) = u(t)Hhe-ht (1)
+S(v) = 2e0
+1 + er(v0 - v) (2)
+■■■
+y(t) = z(t)
+z(t) = Aax(t) - 2az(t) - a2 y(t) (3)
+式中:S(v)将膜电压转换为动作电位的平均脉冲密 度;2e0为最大点燃率;v0为相对点燃率;r 表示 S 型函 数的弯曲程度;v 为突触前平均膜电压;A 兴奋性突
+触增益;a 为兴奋性突触时间常数。 得到 Wendling 神经元群模型的微分方程组如
+式(4)。模型中 he 是兴奋性神经元细胞群;hi 是慢
+抑 制 性 神 经 元 细 胞 群 ;hg 是 速 抑 制 性 神 经 元 细 胞
+群;C 是皮质中神经元之间的突触连接数;B 为慢速
+抑制性突触增益;b 为慢速抑制性突触时间常数;G
+为快速抑制性突触增益;g 为快速抑制性突触时间
+常数[17]。
+■
+■
+■
+|
+|
+|
+|
+|
+|
+||||
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+||||
+|
+|
+|
+||
+y0 (t)=y5 (t)
+y1 (t)=y6 (t)
+y2 (t)=y7 (t)
+y3 (t)=y8 (t)
+y4 (t)=y9 (t)
+y5 (t)=AaS{y1 (t)-y2 (t)-y3 (t)}-2ay5 (t)-a2 y0 (t)
+y6 (t)=AaS{ p(t)+C2 S(C1 y0 (t))}-2ay6 (t)-a2 y1 (t)
+y7 (t)=Bb{C4 S(C3 y0 (t))}-2by7 (t)-b2 y3 (t)
+y8 (t)=Gg{C7 S(C5 y0 (t)-C6 y4 (t))}-2gy8 (t)-g2 y1 (t)
+y9 (t)=Bb{S(C3 y0 (t))}-2by9 (t)-b2 y4 (t)
+(4)
+ROI 每个种群具有不同的时间常数值,可以产
+生不同的节律,脑电图频谱中不同峰的数目 N 取决
+于脑电图的复杂性。因此 ROI 最终生成的脑电信号
+图 1 基本模型
+Fig. 1 Models
+763
+
+
+计 量 学 报 2025 年 5 月
+如式(5)所示,其中 const 为常数,用来调节模拟信号
+的幅值。得到上述模型合成的脑电数据以及频谱
+图,如图 2 所示,由数目 N 为 3 的种群生成的,分别选
+取脑电中常见的节律 δ、α 和 γ[14]。
+v
+out = i = ∑0
+N wi yout + const (5)
+2. 2 运动想象能量变化
+运 动 想 象 脑 电 的 生 理 原 理 是 :当 人 运 动 想 象
+时,运动感觉区的 EEG 的局部分量存在 ERD/ERS 现
+象。中间导联 CZ 极少含有所需的分类特征,提取
+C3 和 C4 导联 ERD/ERS 的时频图,如图 3 所示。图 3
+(a)和图 3(b)是左手运动想象时 C3 和 C4 的平均时
+频图,图 3(c)和图 3(d)是右手运动想象 C3 和 C4 的
+平均时频图。
+由图 3 可以看出,在左手运动想象时 C4 通道的
+μ 波和 β 波振幅减小[13],能量降低。当右手运动想
+象时,C3 通道的 μ 波和 β 波振幅减小,能量降低。当
+想象不同部位运动时,EEG 信号所包含的特性出现
+差异,而根据这些特性,有效地区分想象运动所产
+生的 EEG 信号,从而获知被试的运动意图。因此根
+据上述特性使用神经质量模型对运动想象数据进
+行增强。
+3结果
+3. 1 ERD/ERS 数据增强
+由上述研究表明,ERD/ERS 主要跟 μ 和 β 节律
+相关,因此只将 μ 和 β 节律并列,使用 Wendling 模型 生成的 μ 和 β 节律如图 4 所示。
+图 2 ROI 模型生成的脑电数据和频谱图
+Fig. 2 EEG data and spectrogram generated
+by ROI mode
+图 3 C3、C4 通道平均时频图
+Fig. 3 Average time-frequency maps of C3 and C4
+764
+
+
+第 46 卷 第 5 期 付荣荣等:基于神经质量模型的运动想象脑电数据增强
+图 4(a)图 4(b)是生成的 μ 节律和 β 节律。在国 际脑电图记录系统中,C3 和 C4 区域被认为代表左 手、右手运动区。ERD/ERS 主要体现在大脑中央区 的 C3 和 C4 通道[15,16],考虑到在 NMM 假设中,大脑 不同区域之间存在相互耦合。神经群属于多个脑 结构,可能与脑电活动的合成和传递有关,锥体细 胞是一种兴奋性神经元,它将轴突投射到大脑的其 他区域。该模型可以通过使用来自一个群体的初 级细胞动作电位的平均脉冲密度作为兴奋性输入 到另一个群体的神经元来解释这种组织方式。然 而,由于神经群体可能属于不同的、遥远的大脑区 域,必须引入新的参数来考虑连接群体的不同方式 以及相关延迟。于是,通过将 TCR 细胞和锥体细胞 动作电位的平均脉冲密度加以相应的延时,分别作 为丘脑和皮层其他区域的兴奋性输入,可形成不同 区域的耦合。尽管本研究中只涉及 C3 和 C42 个区 域,还是把 2 个区域之间的耦合考虑在内以获得接 近真实的模拟脑电数据[18],如图 5 所示。 其中,j 区域对 k 区域的耦合信号表示为式(6):
+yEEG = qkj · yRM( S ( i = ∑1
+N
+wji yji
+1_τ - i = ∑1
+N
+wji yji
+2_τ) ) (6)
+式中:yRM(x)=x-mean(x)为取均值函数,用于保持各
+个群自身的平衡性;qjk表示 j 通道对 k 通道的耦合系 数;S 函数为非线性函数;τ 为延迟时间;N 表示存在 不同动态特性并联的子群个数。 综上,在合成 ERD/ERS 脑电信号时,考虑到 C3 和 C4 通道之间的信号耦合。并在上述模型生成的 EEG 中,截取能反应 ERD/ERS 特征的片段。生成 90 组可以反应 ERD/ERS 特征的合成片段,其中反应
+左、右手运动想象脑电数据特征的片段各 45 组。分
+别进行 8~12 Hz 滤波并提取其能量均值,可以得到
+ERD/ERS 现象,结果如图 7(a)和图 7(b)所示。
+合成的模拟想象能量谱如图 8(a)和图 8(b)所
+示,在大脑想象左手运动时大脑同侧 C3 电极信号能
+量增加,而对侧 C4 电极信号能量减少,反之亦然,这
+符合 μ/β 节律明显的 ERD/ERS 现象,这与真实的运
+动想象脑电信号保持一致。 3. 2 数据增强效果分析
+将合成运动想象数据与真实运动想象数据在
+分类效果上进行比较。首先对数据进行 8Hz 到 30
+Hz 的 滤 波 ,再 使 用 共 空 间 模 式(common spatial
+pattern,CSP)方法对数据进行特征提取,并使用二次
+SVM、中等高斯 SVM 和袋装树算法对数据进行分
+类。为了更好的说明合成 ERD/ERS 数据能够在一
+图 4 使用 Wendling 模型生成的 μ 和 β 节律
+Fig. 4 μ and β rhythm generated by the
+Wendling model 图 5 使用神经质量模型数据增强的方法生成的脑电图
+Fig. 5 EEG signals generated by the NMM model
+765
+
+
+计 量 学 报 2025 年 5 月
+定程度上对真实 ERD/ERS 脑电数据形成补充,使用
+dataset III of BCI competition II数据集作为对照组,
+该数据集中共有 140 组,左手运动想象数据和右手
+运动想象数据各有 70 组。控制单一变量,分别随机
+选取合成的左右手运行想象的数据为 45 组和 45
+组,每组数据分类 10 次。经过 CSP 特征提取之后的
+分类准确率如图 9 所示。
+图 9 中可看出对于同一种分类方法,真实数据
+和模拟数据的准确率接近。目的是为了使用合成
+数据减少脑电获取的时间和人工成本,因此进一步
+探究合成数据在分类准确率上对真实数据的影响。
+在 dataset III of BCI competition II 数 据 集 的 140 组
+CSP 特征中混入不同数量的合成数据 CSP 特征,混
+入的数量分别为 14、28、42、56,70 和 84,即真实数据
+特征与合成数据特征的比例分别为 10:0;10:2;10:
+4;10:6;10:8;10:10,使用二次 SVM、中等高斯 SVM
+和袋装树算法探究合成数据对于真实数据的影响,
+图 6 改变 e0对 S(v)函数的影响以及 改变 H 对 h(t)函数的影响
+Fig. 6 The effect of changing e0 on the S(v)
+function and the effect of changing
+H on the h(t)function
+图 7 模型生成的左右手运动想象脑电信号
+Fig. 7 EEG signals of left and right hand motor imagery
+generated by NMM model
+图 8 使用神经质量模型生成的脑电数据的平均能量
+Fig. 8 Average energy of EEG signals generated
+by the NMM model
+图 9 准确率的箱型图
+Fig. 9 Box plot of accuracy
+766
+
+
+第 46 卷 第 5 期 付荣荣等:基于神经质量模型的运动想象脑电数据增强
+每组数据分类 10 次去掉最大值和最小值之后取平
+均值,结果如表 1 所示。
+结 果 表 明 ,当 真 实 数 据 中 混 入 合 成 数 据 ,准 确 率并没有因为生成数据的混入而大幅度变动,说明 使用神经质量模型可以进行数据增强,并且避免了 过拟合的现象。
+4总结
+本文通过模拟特定大脑状态和过程,提出能够 生成具有 ERD/ERS 模式合成脑电数据的方法。这 一方法的应用显著增加了数据的多样性和可变性, 有效克服了现有 EEG 分析面临的数据限制问题。 同时,引入了一种基于神经质量模型的脑电数据增 强方法,探索运动想象 EEG 信号的振幅变化、频率 范围和相关通道的特性。这种方法能够生成具有 特定 ERD/ERS 模式的合成数据,展现了利用大脑动 力学和连通性知识模拟特定大脑状态的能力。本 研究强调了验证合成数据模型性能的重要性,以确 保其在实际应用中的泛化能力。结合研究提出的 方法和其他数据增强技术,为 EEG 数据分析提供了 有效的解决方案除运动想象外,该方法还可用于增 强其他任务,如认知任务、情绪识别等。但值得注 意的是,虽然合成数据增强了数据集的多样性和可 变性,却不能完全取代从真实世界采集到的脑电数 据,应当仅仅作为补充。
+[参 考 文 献]
+[1] 付荣荣,鲍甜恬,田永胜,等 . 基于子成分分解的脑 电信号去噪方法比较研究 [J]. 计量学报,2019,40
+(4):708-713.
+FU R R,BAO T T,TIANY S,et al. Comparative study
+on denoising methods of EEG signals based on
+subcomponent decomposition [J]. Acta Metrologica
+Sinica,2019,40(4):708-713.
+[2] NASON S R,MENDER M J,KENNEDY E,et al.
+Restoring continuous finger function with temporarily
+paralyzed nonhuman primates using brain-machine
+interfaces [J]. Journal of Neural Engineering,2023,
+20(3):036006.
+[3] Al-SAEGH A,DAWWD S A,ABDUL-JABBAR J M.
+CutCat:An augmentation method for EEG classification
+[J]. Neural Networks,2021,141:433-443.
+[4] GUARDA L,TAPIA J E,DROGUETT E L,et al. A
+novel capsule neural network based model for
+drowsiness detection using electroencephalography
+signals [J]. Expert Systems with Applications,2022,
+201:116977.
+[5] LASHGARI E,OTT J,CONNELLY A,et al. An end
+to-end CNN with attentional mechanism applied to raw
+EEG in a BCI classification task [J]. Journal of Neural
+Engineering,2021,18(4):0460e3.
+[6] PEI Y,LUO Z,YAN Y,et al. Data augmentation:
+Using channel-level recombination to improve
+classification performance for motor imagery EEG [J].
+Frontiers in Human Neuroscience,2021,15:645952.
+[7] TARIQ M,TRIVAILO P M,SIMIC M. Mu-Beta event
+related(de)synchronization and EEG classification of
+left-right foot dorsiflexion kinaesthetic motor imagery
+for BCI [J]. Plos one,2020,15(3):e0230184.
+[8] SCHELTER B, MADER M, MADER W, et al.
+Overarching framework for data-based modelling [J].
+Europhysics Letters,2014,105(3):30004
+[9] DONG E, LIANG Z. The Multi-frequency EEG
+rhythms modeling based on two-parameter bifurcation
+of neural mass model [C]//IEEE. 2014 IEEE
+International Conference on Mechatronics and
+Automation. Tianjin,China. 2014:1564-1569.
+[10] 付荣荣,梁海峰,米瑞甫 . 运动意图诱发脑电预备响
+应信号的特征识别 [J]. 计量学报,2023,44(10):
+1597-1601.
+FU R R,LIANG H F,MI R F. Feature identification of
+EEG preparatory response signals evoked by motor
+intention [J]. Acta Metrologica Sinica,2023,44(10):
+1597-1601.
+[11] CHEN S, SHU X, JIA J, et al. Relation between
+sensorimotor rhythm during motor attempt/imagery and
+upper-limb motor impairment in stroke [J]. Clinical
+EEG and Neuroscience,2022,53(3):238-247.
+表 1 平均分类准确率
+Tab. 1 Mean classification accuracy %
+比例
+10:00
+10:02
+10:04
+10:06
+10:08
+10:10
+二次 SVM
+69.550
+68.825
+69.113
+71.013
+70.650
+70.500
+中等高斯 SVM
+70.088
+67.613
+70.138
+70.675
+71.025
+69.700
+袋装树
+69.275
+66.863
+69.700
+67.638
+68.563
+68.213
+767
+
+
+计 量 学 报 2025 年 5 月
+[12] ZAVAGLIA M,ASTOLFI L,BABILONI F,et al. A
+neural mass model for the simulation of cortical activity
+estimated from high resolution EEG during cognitive or
+motor tasks [J]. Journal of Neuroscience Methods,
+2006,157(2):317-329.
+[13] SIJUAN H, XIAOMING W. Extraction of EEG
+characteristics based on mu/beta rhythm imagination
+[J]. China tissue engineering research and clinical rehabilitation,2010,14(43):8061-8064.
+[14] WENDLING F. Neurocomputational models in the study
+of epileptic phenomena [J]. Journal of Clinical Neurophysiology,2005,22(5):285-287.
+[15] BRUNONI A R,NITSCHE M A,BOLOGNINI N,et
+al. Clinical research with transcranial direct current
+stimulation (tDCS):challenges and future directions [J]. Brain stimulation,2012,5(3):175-195.
+[16] SILVA L M,SILVA k M S,LIRA-Bandeira W G,et
+al. Localizing the primary motor cortex of the hand by
+the 10-5 and 10-20 systems for neurostimulation:an
+MRI study [J]. Clinical EEG and Neuroscience,2021,
+52(6):427-435.
+[17] WENDLING F,BELLANGER J J,BARTOLOMEI F,
+et al. Relevance of nonlinear lumped-parameter models
+in the analysis of depth-EEG epileptic signals [J].
+Biological cybernetics,2000,83(4):367-378.
+[18] DAVID O,COSMELLI D,FRISTON K J. Evaluation of
+different measures of functional connectivity using a
+neural mass model [J]. Neuroimage,2004,21(2):
+659-673.
+第一作者:付荣荣(1985-),女,辽宁鞍 山人,燕山大学副教授,主要从事认知 系统和脑控系统等方面研究。
+Email:frr1102@aliyun.com
+通讯作者:吴娜(1977-),女,吉林省吉 林市人,燕山大学讲师,主要从事机器 视觉与人工智能等方面研究。
+Email:wunamay@ysu.edu.cn
+768

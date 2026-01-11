@@ -1,0 +1,648 @@
+SOFTWARE
+软 件 2025 第 46 卷 第 1 期
+2025 年 Vol. 46, No.1
+基 金 项 目 :上 海 市 科 学 技 术 委 员 会 基 金(24692113500);上 海 市 虹 口 区 卫 生 健 康 委 员 会 临 床 重 点 扶 持 专 科 — 老 年 医 学 科
+(HKLCFC202412);上海市虹口区卫生健康委员会医学科研课题重大项目 ( 虹卫 2301-03) ;同济大学附属上海市第四
+人民医院院基金项目 (sykyqd06401)
+作者简介 :曾韵晗(2001—),女,硕士,研究方向 :脑电信号分类,深度学习 ;孙洪伟(2000—),男,硕士,研究方向 :脑电
+信号分类、深度学习。
+通讯作者 :杨玲(1973—),女,医学博士,教授,研究方向 :老年医学。
+融合时空卷积和注意力机制的脑电信号分类
+曾韵晗1 孙洪伟1 杨玲2
+(1. 上海理工大学健康科学与工程学院,上海 200093 ;2. 同济大学附属上海市第四人民医院老年医学科,上海 200434)
+摘 要 :脑电信号受多种因素影响,导致其解码准确率较低。为解决脑电信号识别精度不高的问题,本文提出了一种融合
+时空卷积和注意力机制的分类模型。该模型结合了紧凑卷积神经网络(EEGNet)在时间和空间特征提取方面的优势,以及时
+间卷积网络(TCN)在处理时间序列数据上的强大能力。同时,模型引入了注意力机制和基于卷积的滑动窗口技术,以增强对
+关键特征的识别与利用。在 BCI Competition IV-2a 数据集上进行实验,结果表明,该模型的平均分类准确率达到了 83.9%,
+平均 Kappa 值为 0.79,显著优于现有多种模型。该模型通过有效应对 EEG 信号的非平稳性和个体差异性,显著提升了运动现
+象(MI)任务的分类性能。
+关键词 :运动想象 ;脑电信号分类 ;卷积神经网络 ;时间卷积网络 ;注意力机制 ;滑动窗口
+中图分类号 :TN911.7 文献标识码 :A DOI :10.3969/j.issn.1003-6970.2025.01.004
+本文著录格式:曾韵晗,孙洪伟,杨玲.融合时空卷积和注意力机制的脑电信号分类[J].软件,2025,46(01):010-016
+EEG Signals Classification by Fusing Spatio-temporal Convolution and Attention
+Mechanism
+ZENG Yunhan1, SUN Hongwei1, YANG Ling2
+(1.School of Health Science and Engineering,University of Shanghai for Science and Technology, Shanghai 200093;
+2.Department of Geriatrics, Shanghai Fourth People's Hospital Affiliated to Tongji University, Shanghai 200434)
+【Abstract】:The electroencephalogram (EEG) signal is influenced by multiple factors, leading to a relatively
+low decoding accuracy rate. To address the issue of the low recognition accuracy of EEG signals, this paper
+presents a classification model that integrates spatiotemporal convolution and the attention mechanism. This
+model combines the advantages of the compact convolutional neural network (EEGNet) in extracting temporal and
+spatial features, as well as the strong capability of the temporal convolutional network (TCN) in processing time
+series data. Simultaneously, the model incorporates the attention mechanism and the convolution-based sliding
+window technique to enhance the recognition and utilization of key features. Experiments were conducted on the
+BCI Competition IV-2a dataset, and the results showed that the average classification accuracy of the model reached
+83.9%, with an average Kappa value of 0.79, significantly better than existing models. This model significantly
+improves the classification performance of the motor imagery (MI) task by effectively coping with the non
+stationarity and individual differences of EEG signals.
+【Key words】:motor imagery;EEG signal classification;convolutional neural network;temporal convolutional
+networks(TCN);attention mechanism;sliding window
+基金项目论文
+0 引言
+脑机接口 (Brain-Computer Interface, BCI) 技术
+是一种直接在大脑和外部设备之间建立通信的系统,通
+过解读大脑信号,实现对设备的控制。其中,脑电图
+
+
+11
+曾韵晗 孙洪伟 杨玲:融合时空卷积和注意力机制的脑电信号分类
+(Electroencephalogram, EEG) 是一种非侵入性方法,
+通过在头皮上放置电极捕捉大脑的电活动 [1]。在临床
+上,EEG 被广泛用于癫痫、睡眠障碍等多种疾病的诊断。
+与侵入式方法相比,EEG 具有无需手术、风险低、成本
+相对较低、适用范围广以及时间分辨率高等优势 [2],因
+此脑电信号被广泛用于脑机接口技术中。
+运动想象 (Motor Imagery, MI) 是一种通过思考身体
+某部位的运动而不实际进行肢体移动的活动。这项技术在
+运动康复领域展现出巨大潜力,可用于帮助因中风、脊髓
+损伤或其他神经肌肉疾病而丧失运动能力的患者 [3]。通
+过运动想象,患者能够在没有实际肢体动作的情况下激
+活大脑的运动网络,从而促进神经可塑性和功能恢复。
+这一机制已被广泛应用于脑控智能轮椅、外骨骼控制等
+辅助技术中,为患者提供了更多的康复可能性 [4]。
+在 BCI 系统中,信号分类是其中的核心任务之一。
+该过程包括从脑电信号中提取特征,并利用这些特征来
+区分不同的大脑活动状态,例如想象运动、视觉刺激反
+应或注意力集中等。信号分类的准确性对 BCI 系统的
+性能至关重要,因为它直接决定了系统的响应速度和控
+制精度。然而,脑电信号容易受到多种因素的影响,例
+如噪声干扰、个体差异以及信号采集条件等,同时大脑
+活动的动态性也进一步增加了分类的难度。为提高分类
+准确性,研究人员探索了多种方法,包括传统的统计分
+析、先进的机器学习算法以及深度学习技术。深度学习
+尤其表现出强大的潜力,已在图像、视频、音频和文本
+分析等领域取得显著成功 [5-8]。受其他领域成果的启发,
+许多研究人员开始采用深度学习算法对 MI 任务进行分
+类,为 BCI 系统的发展提供了新的突破口。
+在过去几年中,研究人员提出了多种传统机器学习
+和深度学习方法用于运动想象 (MI) 的分类。传统的机
+器学习方法通常依赖手动特征提取,其中滤波器组公共
+空间模式 (FBCSP)[9] 及其多种变体在运动想象脑电信号
+分类中表现出了优异的性能。相比之下,神经网络方法
+则无需对原始 EEG 数据进行复杂的预处理或手动特征
+提取。例如,Olivas-Padilla 等人 [10] 结合卷积神经网络
+(CNN)和 CSP 算法,并通过贝叶斯优化模型,对包括
+多类 MI 任务在内的空闲状态进行了分类。实验结果表
+明,该方法在不增加计算时间的情况下,其分类准确率
+优于许多经典智能识别方法。Vernon J. Lawhern 等
+人 [11] 提出了一种紧凑型卷积网络 EEGNet,用于基于
+EEG 的脑机接口(BCI)。EEGNet 结合了深度卷积和
+可分离卷积,能够更好地泛化多种实验范式并实现较高
+的 性 能。 此 外,Yazeed K. Musallam 等 人 [12] 提 出 了
+一种用于 MI-EEG 分类的高效模型 TCNet-Fusion。该
+模型整合了时间卷积网络(TCN)、可分离卷积、深度
+卷积以及层融合技术。实验表明,TCNet-Fusion 在分
+类性能上优于许多基于固定超参数的 CNN 模型。TM
+Ingolfsson 等 人 [13] 则开发了一种新颖的 EEG-TCNet
+模型,将 TCNet 与 EEGNet 架构结合,仅使用少量可
+训练参数即可实现卓越的分类准确性。
+注意力机制是深度学习中的一种关键技术,模仿
+了人类在处理信息时选择性关注特定部分的能力。在
+运 动 想 象 脑 电 分 类 领 域,Jincan Zhang 等 人 [14] 提 出
+CNN-GRU-AM 模型,通过引入注意力机制,模型能够
+聚焦于关键特征,从而提升识别能力。Guowen Xiao
+等人 [15] 提出了一种四维注意力神经网络 (4D-aNN) 用
+于 EEG 情绪识别,在 SEED 数据集上的个体内划分下
+取得了最先进的性能,证明了注意力机制在不同领域对
+EEG 情绪识别的有效性。
+本文提出了一种新颖的神经网络架构 AEE-TCNet,
+融合时空卷积块、滑动窗口机制、多头注意力模块以及
+时间卷积网络等多模块设计,用于解码运动想象脑电信
+号。该方法的主要贡献如下。
+(1)本文设计的时空卷积块提取了 EEG 数据的时
+间与空间特征,还通过多层次的特征处理机制增强了模
+型的鲁棒性。(2)在处理长时间序列时,本文采用滑动
+窗口机制,将输入的数据划分为多个时间片段,每个时
+间窗口独立提取时间特征。(3)为增强模型对关键信息
+的关注,提出了可选的多头注意力机制模块。通过对滑
+动窗口内的特征加权,突出最具判别性的特征信息,有
+效提高分类性能。(4)在每个滑动窗口的特征处理阶
+段,本文采用时间卷积网络 (TCN) 进行特征学习(模
+型结构如图 1 所示)。
+Conv2D Depthwise
+Conv2D
+Separable
+Conv2D Conv2D
+Convolutional Block
+Sliding Window
+Output SoftMax Concatenate
+n_windows
+n_windows
+Layer Norm
+Multi-Head Attention Block
+Temporal Convolutional Block
+N
+图 1 AEEG-TCNet 结构图
+Fig.1 AEEG-TCNet architecture diagram
+1 实验方法
+1.1 数据集
+本文选用了 BCI Competition IV-2a[16] 数据集对所
+
+
+12
+软件
+第 46 卷 第 1 期 SOFTWARE
+提出的模型进行训练和评估。该数据集由格拉兹理工大
+学于 2008 年创建,是一个广泛使用的公开运动想象脑
+电信号 (MI-EEG) 数据集。数据集包含 9 名受试者在完
+成四种不同运动想象任务时的 EEG 数据,这四种任务
+分别包括左手、右手、双脚和舌头的运动。实验使用了
+22 个 Ag/AgCI 电极以 250Hz 的采样率采集脑电信号。
+每名受试者的数据分为两个 session,一个用于训练,
+另一个用于测试,每个 session 包含 288 次脑电试验。
+1.2 预处理
+在本文中,原始的 MI-EEG 信号未经过预处理,完
+全保留了全频段的通道信息。随后,将由 ch(电极通道)
+和 T(时间点)组成的数据输入到本文所提出的模型中。
+AEEG-TCNet 模型的目标是将输入的 MI 试验 Xi 映射
+到 其 对 应 的 类 别 yi, 其 中 Xi ∈ RC*T,yi ∈ {1,... ,n}。
+针对本文使用的 BCI Competition IV-2a 数据集,参数
+取值为 ch=22(脑电图通道数),T=1125(时间点数),
+n=4(MI 类别数)。
+1.3 卷积块
+卷积模块是 AEEG-TCNet 的关键组成部分,用于
+对 EEG 信号进行多层次的时空特征提取。该模块通过
+一系列二维卷积、深度可分离卷积和可分离卷积操作,
+逐步捕获信号的时间依赖性和空间分布特性,同时采
+用池化和正则化方法有效降低模型复杂度并防止过拟合
+(如图 2 所示)。
+1.3.1 时间特征提取:二维卷积层(Conv2D)
+本文将卷积核的大小设置为(KernLength,1),其
+中 KernLength 是时间维度上的卷积核长度。该设计确
+保了卷积操作专注于时间序列的局部模式,而不会干扰
+空间维度的特征。通过设定输出通道数为 F1,这一层
+能够学习不同时间序列特征模式,同时结合批量归一化
+(Batch Normalization)减少内部协变量偏移,增强
+训练的稳定性。
+1.3.2 空间特征提取:深度可分离卷积层(Depthwise
+Conv2D)
+为了提取 EEG 信号的空间特征,使用深度可分离卷
+积层对每个时间点的特征图进行空间操作,该层的卷积
+核大小为 (1,in_chans),覆盖所有通道,通过深度乘数
+D 增强每个通道特征的复杂性。该层输出的特征经过批
+量归一化后,应用 ELU 激活函数引入非线性能力,并
+通过平均池化(AveragePooling2D)沿时间维度进行
+降采样,从而降低特征维度,减轻模型的过拟合风险。
+1.3.3 局 部 复 杂 特 征 提 取: 可 分 离 卷 积 层(Separable
+Conv2D)
+为了在时间和空间特征融合的基础上进一步提取复
+杂的局部特征,模块中加入了可分离卷积层,这一层的
+卷积核大小设定为 (1,16),专注于跨时间维度的局部模
+式,同时将输出通道数扩展至 F2=F1×D,为模型提供
+了更强的特征表达能力。卷积结果经过批量归一化和
+ELU 激活函数的处理后,通过平均池化层进一步降维,
+从而减少冗余信息。
+1.3.4 全局特征融合:二维卷积层(Conv2D)
+为了对前述提取的时空特征进行整合,模块引入了
+最后一层二维卷积,该卷积层的卷积核大小为 (16,1),
+覆盖更大的时间范围,捕获全局模式,同时保持空间维
+度的信息完整。输出的通道数维持为 F2,结合批量归
+一化和 ELU 激活函数,进一步提升模型的特征表达能
+力。经过平均池化层的降采样处理,时间维度显著减
+少,生成的高维特征张量为后续的滑动窗口机制和分类
+任务提供了多层次的信息支持。
+1.4 基于卷积的滑动窗口
+在深度学习中,滑动窗口是一种广泛应用的技术,通
+常用于在图像中检测目标区域。传统的滑动窗口方法通过
+在图像上移动一个固定大小的窗口,并利用分类器对每个
+窗口内的区域进行分类,实现目标检测 [17]。相比之下,基
+于卷积的滑动窗口能够更好地适应不同的数据集和检测任
+务,表现出更强的泛化能力。在本文中,滑动窗口的数
+量 n_windows 被设置为 5,这意味着模型将从 EEG 数
+据中提取 5 个不同的时间窗口进行特征处理。每个时间
+窗口的输出都会被单独输入到注意力模块,以进一步突
+出关键信息,增强模型对重要特征的捕捉能力,从而提
+高分类性能。其中,窗口的长度 Lw 如式(1)所示 :
+Lw=Ls-n_windows+1 (1)
+Raw Data
+......
+(1, in_chans, in_samples)
+图 2 CV 块通过四个卷积层执行时空编码
+Fig.2 CV block performs spatio-temporal encoding
+
+
+13
+曾韵晗 孙洪伟 杨玲:融合时空卷积和注意力机制的脑电信号分类
+式中,Ls 表示时间向量,1 ≤ n_windows<Ls。
+1.5 注意力机制
+注意力机制分为自注意力机制、通道注意力机制和
+空间注意力机制三种类型。本文采用的是多头自注意
+力机制 ( 如图 3 所示 )。该机制通过并行学习多种关系
+和特征类型,不仅提升了模型的性能,还增强了对复杂
+模式的捕获能力 [18]。自注意力层由三个核心组件构成 :
+查询向量(Query,Q)、键向量(key,K)和值向量
+(value,V)。其中,查询向量和键向量之间的点积操作
+用于评估不同标记之间的相关性。自注意力计算公式如
+式(2)所示 :
+( , , ) max( )
+T
+k
+QK
+Attention Q K V soft V
+d (2)
+式中,Q、K、V 分别代表查询 (Query)、键 (Key)、
+值 (Value) 矩阵 ;dk 是键向量的纬度。多头注意力机制
+在自注意力的基础上,通过增加多个注意力头来并行地
+对输入信息进行不同纬度的注意力分配,从而获得更丰
+富的特征,如式(3)、式(4)所示 :
+Headi=Attention(QWi
+Q,KWi
+K,VWi
+V) (3)
+MultiHead(Q,K,V)=Concat(Head1,... ,Headn)W o (4)
+在 式(3) 中,Wi
+Q、Wi
+K、Wi
+V 分别表示第 i 个头的
+查询、键、值的变换矩阵。式(4)中,W o 是最终的输
+出变换矩阵 ;Concat 表示拼接操作,其中 i=1,... ,n。
+MatMul
+Scale
+Mask(opt.)
+SoftMax
+MatMul
+QK V
+Linear Linear Linear
+Scaled Dot-Product Attention
+Concat
+Linear
+V KQ
+n
+(a)缩放点积注意力
+(a)Zoom dot
+product attention
+(b)多头注意力
+(b)Multi-head
+attention
+图 3 Multi-head self-attention(n = 2) 结构图
+Fig.3 Multi-head self-attention (n = 2) structure diagram
+1.6 时间卷积模块
+本 文 中 的 时 间 卷 积 模 块(TCN) 由 两 个 残 差 块 组
+成。残差连接有助于缓解梯度消失问题,从而使得网
+络能够训练得更深 [19]。每个残差块包括一维因果卷积、
+层归一化和 ELU 激活函数(如图 4 所示)。因果卷积保
+证了输出的时间序列不会泄露未来的数据,对于时间点
+t 的输出,它仅依赖于 t 时刻及其之前的输入。扩张卷
+积是一种卷积操作,通过在输入序列中插入空隙来扩大
+卷积核的感受野,从而使模型能够捕捉更长时间的依赖
+关系,而不会增加额外的参数。扩张卷积的感受野大小
+(RFS) 随着残差块数量 L 的增加而指数性扩展,RFS 的
+大小由残差块数量 L 和卷积核大小 KT 两个参数共同控
+制,RFS 的定义如式(5)所示 :
+RFS=1+2(KT-1)(2L-1) (5)
+在 本 文 中,TC 块 使 用 了 一 个 包 含 32 个 大 小 为
+KT=4 的卷积层的扩张卷积网络,L=2 个残差块,得到扩
+张卷积网络的感受野大小为 19。
+TCN Residual Block
+TCN Residual Block
+Dilated Causal Conv
+BatchNorm +ELU
+Dilated Causal Conv
+BatchNorm +ELU
++
+Input
+ELU
+图 4 时间卷积块的残差块结构图
+Fig.4 Residual block structure diagram for time
+convolution blocks
+2 实验结果
+2.1 模型评估指标
+本文中的实验使用了 Python 3.10 中的 Tensorflow
+库, 并 在 NVIDIA RTX 4060 GPU 上 进 行 计 算。 所 有
+模 型 均 使 用 Adam 优 化 器 进 行 训 练, 学 习 率 设 置 为
+0.0009,批量大小为 64,训练过程持续 1000 个 epoch,
+并采用 300 的 patience 值进行早停,以优化交叉熵损
+失函数。在评估方面,本研究所提出的模型通过准确率
+(式 6)和 Kappa 值(式 7)进行性能评估。
+1/
+n
+ii
+i TP l
+acc n
+=
+= ∑ (6)
+式中,TPi 是 true positive ;i 为 i 类中正确预测的
+样本数 ;li 是 i 类中的样本数 ;n 表示类数 (n=1,2,3,4)。
+
+
+14
+软件
+第 46 卷 第 1 期 SOFTWARE
+1
+1
+1
+na e a e
+PP
+Kappa n P
+=
+−
+=−
+∑ (7)
+式中,n 表示类数 (n=1,2,3,4) ;Pa 表示试验的
+平均准确率 ;Pe 表示与预期一致的百分比。
+2.2 模型整体性能
+AEEG-TCNet 在 BCI Competition IV-2a 数 据 集 上
+的平均准确率为 83.9%,平均 kappa 值为 0.79。该模型
+对每位受试者的分类准确率和 kappa 值表现如图 5 所示。
+其中,受试者 3 在四分类任务中达到最高准确率 95.1%。
+相比之下,受试者 2 的分类准确率较低,仅为 70.5%。
+2.3 与近几年研究的比较
+MI 分类结果验证了本文提出的 AEEG-TCNet 模型
+在 MI-EEG 数据集上的优越性能。为了进一步评估该
+模型的效果,本文将 AEEG-TCNet 与 EEGNet、EEG
+TCNet、TCNet-Fusion、ShallowConvNet[20] 四种 MI
+分类方法进行比较,结果如表 1 所示。
+(1)EEGNet :一 种 为 不 同 BCI 范 式 设 计 的 紧 凑
+型模型,旨在实现对 EEG 信号的高效分类。其架构受
+FBCSP 算法启发,通过深度可分离卷积构建了一个专
+门针对 EEG 数据的轻量化网络。由于其紧凑的设计,
+EEGNet 展现了出色的鲁棒性和泛化能力,在各种 BCI
+任务中表现良好。
+(2)EEG-TCNet :是 基 于 时 间 卷 积 网 络(TCN)
+架构开发的深度学习模型,专注于脑电信号处理和运动
+表 1 使用 BCI-2a 数据集对拟议模型进行主题特定分类的性能 (acc 和 Kappa) 比较
+Tab.1 Comparison of performance (acc and Kappa) for topic-specific classification of the proposed model using BCI
+2a dataset
+Method Statics Subject Avg
+123456789
+EEGNet Acc(%) 88.5 66.0 95.1 73.6 75.4 64.2 90.3 85.8 86.5 80.6
+Kappa 0.85 0.55 0.94 0.65 0.67 0.52 0.87 0.81 0.82 0.74
+EEG-TCNet Acc(%) 84.0 66.3 94.1 72.6 76.0 62.9 89.9 84.7 85.4 79.5
+Kappa 0.79 0.55 0.92 0.63 0.68 0.50 0.87 0.80 0.81 0.73
+TCNet-Fusion Acc(%) 86.1 66.0 93.4 72.6 79.9 66.7 90.3 85.8 85.4 80.7
+Kappa 0.81 0.55 0.91 0.63 0.73 0.56 0.87 0.81 0.81 0.74
+ShallowConvNet Acc(%) 84.3 54.1 87.5 63.6 67.4 54.9 88.8 76.8 74.2 72.4
+Kappa 0.79 0.39 0.83 0.51 0.57 0.39 0.85 0.69 0.65 0.63
+AEEG-TCNet(Proposed) Acc(%) 88.5 70.5 95.1 77.1 81.9 73.3 91.7 89.2 87.9 83.9
+Kappa 0.85 0.61 0.94 0.69 0.76 0.64 0.89 0.86 0.84 0.79
+0.8
+0.6
+0.4
+0.2
+0.0
+Kappa
+2468 Subject
+Model Kappa per Subject
+0.8
+0.6
+0.4
+0.2
+0.0
+Accuracy
+2468 Subject
+Model Accuracy per Subject
+(a)每个受试者的分类准确度值
+(a)Classification accuracy value for each subject
+(b)每个项目的分类 Kappa 值
+(b)Classification Kappa value for each subject
+图 5 每个受试者的分类准确率和 Kappa 值
+Fig. 5 Classification accuracy and Kappa value for each subject
+
+
+15
+曾韵晗 孙洪伟 杨玲:融合时空卷积和注意力机制的脑电信号分类
+想象分类。该模型结合了 EEGNet 的浅层特征提取能力
+和 TCN 对时序信息的处理能力,为 EEG 信号解码提供
+了更全面的特征建模。
+(3)TCNet-Fusion :以时间卷积网络(TCN)为
+基础,并引入了融合层以增强特征表示能力,进一步提
+升了模型在复杂分类任务中的表现。
+(4)ShallowConvNet :一种浅层卷积神经网络,
+其设计受到 FBCSP 算法的启发,专用于解码 EEG 信
+号中的频段功率特征。通过模仿 FBCSP 中的变换过程,
+ShallowConvNet 展现了深度学习在端到端 EEG 分析
+中的潜力。该模型因结构简单、参数少而具备较高的训
+练和推理效率。
+与这些模型相比,AEEG-TCNet 模型的分类准确率
+提高了 3.23%。此外,AEEG-TCNet 与上述模型的平
+均混淆矩阵如图 6 所示。在混淆矩阵中,对角线元素表
+示各类的分类准确率。结果表明,AEEG-TCNet 对所
+有类别的 MI 解码均实现了性能提升,进一步验证了其
+有效性和优越性。
+3 结语
+本文提出了一种融合时空卷积和注意力机制的架
+构,用于解码运动想象脑电信号。该模型通过时空卷积
+层提取脑电信号的时间和空间特征,并引入多头注意力
+机制,为特征分配权重,从而提升对关键特征的捕获能
+力。模型中的时间卷积层能够从时间序列中提取高级时
+间特征,同时结合基于卷积的滑动窗口技术,通过增强
+数据表征并行化特征提取过程,有效提高了 MI 分类性
+能。在四分类任务中,本文提出的模型实现了最高准确
+率 95.1% 和平均准确率 83.9%。实验结果表明,AEEG
+TCNet 在 BCI Competition IV-2a 数据集上的性能优于现
+有多个基准模型,包括 EEGNet、EEG-TCNet、TCNet
+Fusion 和 ShallowConvNet,展示了其在 MI 解码任务
+中的卓越表现。
+AEEG-TCNet 的开发为运动想象任务的脑电信号
+分类提供了一种创新解决方案,展现了深度学习在脑机
+接口领域的巨大潜力。本文的研究不仅推动了 BCI 技
+术的发展,还为未来脑机接口研究提供了新的思路和方
+法。 尽 管 AEEG-TCNet 在 BCI Competition IV-2a 数
+据集上实现了显著的性能提升,然而为进一步验证模型
+的泛化能力,未来的研究还需要在更多样化的数据集上
+进行测试。此外,应探索更灵活的网络架构和优化策略,
+以进一步提升模型性能,为 BCI 领域带来更多突破。
+参考文献
+[1] ZHANG H,ZHOU Q Q,CHEN H,et al.The Applied
+Principles of EEG Analysis Methods in Neuroscience
+and Clinical Neurology[J].Military Medical Research,
+Left hand
+Right hand
+Foot
+Tongue
+True label
+Predicted label
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.07 0.049 0.044
+0.046 0.041
+0.039 0.054 0.076
+0.036 0.049 0.06
+0.063
+0.86
+0.83
+0.85
+0.84
+Confusion Matrix of Subject:All
+Left hand
+Right hand
+Foot
+Tongue
+True label
+Predicted label
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.11 0.054 0.044
+0.075 0.063
+0.044 0.054 0.067
+0.054 0.056 0.064
+0.089
+0.81
+0.78
+0.81
+0.83
+Confusion Matrix of Subject:All
+Left hand
+Right hand
+Foot
+Tongue
+True label
+Predicted label
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.093 0.047 0.042
+0.064 0.068
+0.04 0.058 0.07
+0.045 0.077 0.073
+0.083
+0.83
+0.77
+0.82
+0.82
+Confusion Matrix of Subject:All
+Left hand
+Right hand
+Foot
+Tongue
+True label
+Predicted label
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.088 0.055 0.051
+0.062 0.048
+0.038 0.044 0.079
+0.054 0.065 0.058
+0.075
+0.83
+0.8
+0.83
+0.82
+Confusion Matrix of Subject:All
+Left hand
+Right hand
+Foot
+Tongue
+True label
+Predicted label
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.13 0.067 0.055
+0.073 0.072
+0.043 0.049 0.16
+0.06 0.063 0.099
+0.1
+0.8
+0.75
+0.76
+0.71
+Confusion Matrix of Subject:All
+(a)Proposed(AEEG-TCNet) (b)EEGNet
+(d)TCNet-Fusion (e)ShallowConvNet
+(c)EEG-TCNet
+图 6 AEEG-TCNet 和再现的 EEGNet、EEG-TCNet、TCNet_Fusion 和 ShallowConvNet 模型的分类混淆矩阵
+Fig. 6 Classification confusion matrix for AEEG-TCNet and reproduced EEGNet, EEG-TCNet, TCNet_Fusion,
+and ShallowConvNet models
+
+
+16
+软件
+第 46 卷 第 1 期 SOFTWARE
+2023,10(1):67.
+[2] SAZGAR M,YOUNG M G,SAZGAR M,et al.Overview
+of EEG,Electrode Placement,and Montages[J]. Absolute
+Epilepsy and EEG Rotation Review:Essentials for
+Trainees,2019:117-125.
+[3] 宋世林,张学军.脑电信号多特征融合与卷积神经网络算法
+研究[J].计算机工程与应用,2024,60(8):148-155.
+[4] ALTAHERI H,MUHAMMAD G,ALSULAIMAN M,et
+al.Deep Learning Techniques for Classification of
+Electroencephalogram (EEG) Motor Imagery (MI)
+Signals:A Review[J].Neural Computing and Applications,
+2023,35(20):14681-14722.
+[5] HOSSAIN S M,AL-HAMMADI H M,MUHAMMAD
+G.Automatic Fruit Classification Using Deep Learning
+for Industrial Applications.[J].IEEE Trans.Industrial Info
+rmatics,2019,15(2):1027-1034..
+[6] 谭暑秋,凌志豪,潘嘉豪,等.面向人脸超分辨率的全局结构
+感知与局部增强网络[J/OL].计算机工程与应用,1-12[2024-10
+29].http://kns.cnki.net/kcms/detail/11.2127.tp.20241024.
+1716.012.html.
+[7] AHMED I,DIN S,JEON G,et al.Exploring Deep
+Learning Models for Overhead View Multiple Object
+Detection[J].IEEE Internet of Things Journal,2019,7
+(7):5737-5744.
+[8] 许学添,蔡跃新.基于图卷积网络的运动想象识别[J].计算机
+工程与应用,2022,58(4):186-191.
+[9] ANG K K,CHIN Z Y,WANG C,et al.Filter Bank
+Common Spatial Pattern Algorithm on BCI Competition
+IV Datasets 2a and 2b[J].Frontiers in Neuroscience,2012,
+6:39.
+[10] OLIVAS-PADILLA B E,CHACON-MURGUIA M I.
+Classification of Multiple Motor Imagery Using Deep
+Convolutional Neural Networks and Spatial Filters[J].
+Applied Soft Computing,2019,75:461-472.
+[11] LAWHERN V J,SOLON A J,WAYTOWICH N R,et
+al.EEGNet:ACompact Convolutional Neural Network
+for EEG-based Brain-computer Interfaces[J].Journal of
+Neural Engineering,2018,15(5):056013.
+[12] MUSALLAM Y K,ALFASSAM N I,MUHAMMAD
+G,et al.Electroencephalography-based Motor
+Imagery Classification Using Temporal Convolutional
+Network Fusion[J].Biomedical Signal Processing and
+Control,2021,69:102826.
+[13] INGOLFSSON T M,HERSCHE M,WANG X,et al.
+EEG-TCNet:An Accurate Temporal Convolutional
+Network for Embedded Motor-imagery Brain-machine
+Interfaces[C]//2020 IEEE International Conference on
+Systems,Man,and Cybernetics (SMC).IEEE,2020:2958
+2965.
+[14] ZHANG J,ZHENG S,CHEN W,et al.A Scheme
+Combining Feature Fusion and Hybrid Deep Learning
+Models for Epileptic Seizure Detection and Prediction[J].
+Scientific Reports,2024,14(1):16916.
+[15] XIAO G,SHI M,YE M,et al.4D Attention-based Neural
+Network for EEG Emotion Recognition[J].Cognitive
+Neurodynamics,2022:1-14.
+[16] https://www.bbci.de/competition/iv/desc_2a.pdf
+[17] PEREA J A,HARER J.Sliding Windows and
+Persistence: An Application of Topological Methods
+to Signal Analysis[J].Foundations of Computational
+Mathematics,2015,15:799-838.
+[18] LI J,WANG X,TU Z,et al.On the Diversity of Multi
+head Attention[J].Neurocomputing,2021,454:14-24.
+[19] BAI S,KOLTER J Z,KOLTUN V.An Empirical
+Evaluation of Generic Convolutional and Recurrent
+Networks for Sequence Modeling[J].arxiv Preprint arxiv:
+1803.01271,2018.
+[20] WANG T,DONG E,DU S,et al.A Shallow Convolutional
+Neural Network for Classifying MI-EEG[C]//2019 Chinese
+Automation Congress (CAC).IEEE,2019:5837-5841.

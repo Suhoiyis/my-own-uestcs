@@ -1,0 +1,501 @@
+第 44 卷 第 5 期 2025 年 10 月
+北京生物医学工程
+Beijing Biomedical Engineering
+Vol. 44 No. 5 October 2025
+基于信息最大化生成对抗网络的运动想象
+脑电信号数据增强
+肖楠1 李明爱1,2,3
+摘 要 目的 运动想象脑电信号( motor imagery electroencephalography,MI-EEG) 是脑机接口( brain
+computer interfaces,BCI) 中的一种经典范式,而数据量不足问题制约着它的研究与应用。 随着深度学习
+的发展,生成对抗网络( generative adversarial networks,GAN) 成为一种有潜力的数据增强方法,但其却面
+临着生成数据特征难以自动控制和数据多样性不佳的困难。 为此,本文提出了一种基于信息最大化生
+成对抗网络 ( information maximization GAN,InfoGAN) 的 MI-EEG 数据增强方法。 方法 首 先, 针 对 MI
+EEG 的多导 联 时 间 序 列 特 点, 设 计 基 于 深 度 卷 积 的 InfoGAN ( deep convolution information maximizing
+GAN,DCIMGAN) 。 然后,基于 BCI Competition IV 2a / 2b 数据集,使用 3 种经典深度学习模型( EEGNet、
+FBMSNet 和 MI-BMInet) 在有无生成数据参与训练的条件下进行性能对比分析,以评估生成数据对分类
+模型训练的影响。 最后,以 EEGNet 作为基础分类模型,进一步对比了本文提出的增强方法与现有的多
+种数据增强策略(包括随机噪声添加、时间偏移、幅值缩放和信号翻转) 在分类性能上的差异,探讨不同
+数据增强方法的优劣性。 结果 DCIMGAN 由一个生成器 G 及两个鉴别器 D 和 Q 组成。 G 的输入为随机
+噪声和潜在变量,输出生成数据;D 和 Q 的输入为真实数据和生成数据,分别用于判别样本真假和估计
+潜在变量的值。 通过在训练过程中引入生成数据与潜在变量之间的互信息损失,实现对生成器的有效
+控制。 增加 DCIMGAN 生成数据可使 3 种模型对于 BCI Competition IV 2a / 2b 数据集的分类准确率分别
+提升 3. 51% / 7. 00%、2. 55% / 2. 10%和 3. 92% / 9. 26%。 结论 DCIMGAN 能够自动控制生成数据特征,获
+得与真实数据相似度高的 MI-EEG 数据,相对常用数据增强方法更有效提升分类模型性能。
+关键词 运动想象信号;生成对抗网络;深度卷积神经网络;数据增强
+DOI:10. 3969 / j.issn. 1002-3208. 2025. 05. 002.
+中图分类号 R318. 04 文献标志码 A 文章编号 1002-3208(2025)05-0449-08
+本文著录格式 肖楠,李明爱. 基于信息最大化生成对抗网络的运动想象脑电信号数据增强[ J].
+北京生物医学工程,2025,44( 5) :449 - 456. XIAO Nan,LI Ming’ ai. Data augmentation for motor imagery
+signals based on information maximization generative adversarial networks [ J] .Beijing Biomedical Engineering,
+2025,44(5) :449-456.
+Data augmentation for motor imagery signals based on information
+maximization generative adversarial networks
+XIAO Nan1 ,LI Ming’ ai1,2,3
+1 School of Information Science And Technology ,Beijing University of Technology ,Beijing 100124;
+2 Beijing Key Laboratory of Computational Intelligence and Intelligent System ,Beijing 100124;
+3 Engineering Research Center of Digital Community ,Ministyr of Education ,Beijing 100124
+Corresponding author:LI Ming’ ai( E-mail:limingai@ bjut. edu. cn)
+【 Abstract】 Objective Motor imagery electroencephalography ( MI-EEG) is a classic paradigm in brain
+computer interfaces,but the limited data available hinders its research and application. With the development of
+deep learning,generative adversarial networks ( GANs) have emerged as a potential data augmentation method,
+万方数据
+
+
+though they face challenges in controlling the generated data features and ensuring data diversity. To address
+these issues,this paper proposes a motor imagery ( MI) EEG data augmentation method based on an information
+maximization GAN ( InfoGAN) . Methods Firstly, based on the multi-lead time series characteristics of MI
+EEG,an InfoGAN ( deep convolution information maximizing GAN,DCIMGAN) was designed. Then,based on
+the BCI Competition IV 2a / 2b datasets, three classic deep learning models ( EEGNet, FBMSNet, and MI
+BMInet) were used to conduct a comparative analysis of performance with and without generated data in
+training,in order to evaluate the impact of generated data on the training of classification models. Finally,using
+EEGNet as the basic classification model,a further comparison was made between the proposed enhancement
+method and various existing data augmentation strategies ( including random noise addition, time shifting,
+amplitude scaling, and signal flipping) in terms of classification performance, to explore the advantages and
+disadvantages of different data augmentation methods. Results DCIMGAN consisted of a generator ( G) and two
+discriminators ( D and Q) . G taked random noise and latent variables as inputs to generate data,while D and Q
+differentiate between real and generated samples and estimate the values of latent variables,respectively. Mutual
+information loss between the generated data and latent variables was introduced during training to effectively
+control the generator.The inclusion of DCIMGAN-generated data improved the average classification accuracy of
+three classic deep learning models ( EEGNet,FBMSNet,and MI-BMInet) by 3. 51% / 7. 00%,2. 55% / 2. 10%,
+and 3. 92% / 9. 26%,respectively. Conclusions DCIMGAN can automatically control the features of generated
+data,producing MI-EEG signals with high similarity to real data,and is more effective than commonly used data
+augmentation methods in improving classification model performance.
+【 Keywords 】 motor imagery signals; generative adversarial networks; deep convolutional neural
+networks; data augmentation
+基金项目:国家自然科学基金(62173010) 资助
+作者单位:1 北京工业大学信息科学技术学院( 北京 100124) 2 计算智能与智能系统北京市重点实验室( 北京 100124)
+3 数字社区教育部工程研究中心( 北京 100124) 通信作者:李明爱。 E-mail:limingai@ bjut. edu. cn
+0 引言
+脑机接口( brain-computer interface,BCI) 通过采
+集大脑电信号并解码指令控制外部设备[1] 。 脑电
+图( electroencephalography, EEG) 因 其 非 侵 入 性、 安
+全性和记录皮质电活动的优势,被广泛应用于 BCI
+研究[2] 。 然而,构建高效 BCI 系统需要大量高质量
+的 EEG 数据,但受限于受试者不适、疲劳及操作复
+杂性,EEG 数据难以充分获取[3] 。 因此,生成高质量
+的人工 EEG 数据成为解决这一问题的潜在方案[4] 。
+传统的数据增强方法,如噪声添加、滑窗、几何
+变换和分割重组等[5-8] ,在一定程度上提升了数据
+多样性,但对特征分布改善有限,甚至可能引入不利
+偏差。 随着深度学习的快速发展,数据生成方法取
+得了显 著 进 展, 特 别 是 生 成 对 抗 网 络 ( generative
+adversarial network,GAN) [9] 的提出,有效缓解了数
+据不足的问题。 已有研究将 GAN 应用于 EEG 数据
+增强,结合特定神经网络结构生成数据,如长短期记
+忆( long short-term memory, LSTM) 、 递 归 神 经 网 络
+( recurrent neural network, RNN ) 和 卷 积 神 经 网 络
+( convolutional neural network, CNN) 等 模 型[10] 。 特
+别是基于 CNN 的 GAN 网络生成的数据在 EEG 分
+类准 确 性 提 升 方 面 表 现 尤 为 显 著[11] 。 Khoyani
+等[12] 提出了一个深度卷积 GAN( deep convolutional
+GAN,DCGAN) ,使用多层卷积神经网络在生成运动
+想象( motor imagery, MI) 数据方 面 取 得 良 好 效 果;
+Fahimi 等[13] 则更进一步,设计了条件深度卷积 GAN
+( conditional DCGAN,cDCGAN) ,通过整合条件信息
+进一步提升了生成数据的质量。 另一方面,沃瑟斯
+坦 GAN ( Wasserstein GAN, WGAN) 优化了 GAN 框
+架,通过沃瑟斯坦距离改进了模式崩溃问题的解决,
+提升了模型稳定性[14] ,Kay 等[15] 提出的 EEG-GAN
+就是基于此实现的。 Li 等[16] 则更进一步,提出了条
+件 WGAN( cWGAN) ,将条件信息融入 WGAN 框架,
+使得生成的数据能够基于特定条件更精准地匹配目
+标分布。 条件 GAN 可以根据给定的条件向量生成
+·450· 北京生物医学工程 第 44 卷
+万方数据
+
+
+特定样本,但这一过程依赖于人工设定的条件向量,
+限制了生成模型的灵活性。 在图像生成领域,Chen
+等[17] 提出了信息最大化生成对抗网络( information
+maximizing GAN,InfoGAN) ,该方法能够自动学习潜
+在变量的结构,而且通过最大化生成样本与潜在变
+量之间的互信息,使得生成样本的特定特征能够被
+有效解码和控制,增强了数据的多样性和质量。
+受 InfoGAN 启发,本文针对 MI-EEG 的多导联
+时间序列特点,提出一种基于深度卷积的数据增强
+方法,即深度卷积信息最大化 GAN( deep convolution
+information maximizing GAN, DCIMGAN) , 以 自 动 控
+制生成数据特征,提升数据质量,进而缓解 MI 信号
+数据不足问题。
+1 方法
+1. 1 DCMIGAN 模型整体架构
+为了有效应对 MI-EEG 信号中多导联时间序列
+的复杂性与多样性,本文提出了 DCMIGAN 模型,它
+由生成器 G 和两个鉴别器 D 与 Q 组成。 G 接收随
+机噪声 z 和潜在变量 c 作为输入,允许生成过程不
+仅仅由噪声驱动,还能通过潜在变量对生成数据的
+特征进行控制,输出生成数据 G(z,c)。 鉴别器 D 和
+Q 以真实数据 x∈RC×T( C 表示电极数,T 表示采样
+点数)和生成数据 G( z,c) 为输入,它们共享网络参
+数,仅在最后一层通过不同的全连接层分别输出真
+假判断和潜在变量的估计。 DCMIGAN 基本架构如
+图 1 所示。
+图 1 DCMIGAN 的基本结构
+Figure 1 The basic structure of DCMIGAN
+1. 2 生成器 G 的网络结构
+G 由一个全连接层( fully connected layer,FC) 、
+三个连续的转置卷积层( transpose convolution layer,
+TransConv) 和一个卷积层( convolutional layer,Conv)
+组成。 在每个转置卷积层后,接入 LeakyReLU 激活
+函数 并 进 行 批 归 一 化 ( batch normalization, BN) 操
+作,以稳定梯度并有效避免梯度消失或爆炸,从而加
+速训练过程并促进生成器的快速收敛。 G 的具体网
+络结构如图 2 所示,详细的网络参数配置列于表 1。
+图 2 G 的网络结构
+Figure 2 The network structure of G
+表 1 生成器的网络参数设置
+Table 1 Generator network parameter settings
+网络层 参数 激活函数 输出
+线性全连接层 批归一化层
+1 250 LeakyReLu B×1 250 B×1 250
+变形层 B×10×125
+转置卷积层 批归一化层
+(10,20,4,2,1) LeakyReLu B×20×250 B × 20 × 250
+转置卷积层 批归一化层
+(20,40,4,2,1) LeakyReLu B×40×500 B × 40 × 500
+转置卷积层 批归一化层
+(40,80,4,2,1) LeakyReLu B×80×1 000 B×80×1 000
+卷积层 批归一化层
+(80,22,1,1,0) LeakyReLu B×22×1 000 B×22×1 000
+1. 3 鉴别器 D、Q 的网络结构
+D 和 Q 的核心结构由 4 个连续卷积层组成,每
+层后接 leakyReLU 激活函数和批归一化操作。 两者
+的差异在于:D 在卷积模块后仅包含一个全连接层,
+通过 sigmoid 激活函数进行真假数据分类;而 Q 包
+含两个全连接层,用于输出潜在变量 c。 鉴别器的
+网络结构如图 3 所示,具体的网络参数配置见表 2,
+其中 B 表示批量大小( batch size) ,C 表示电极数。
+1. 4 DCMIGAN 训练
+网络训练过程分为以下几个步骤:首先,G 接收
+随机噪声 z 和 潜 在 变 量 c 作 为 输 入, 并 生 成 数 据
+G(z,c);然后将相同数量的真实样本 x 和生成样本
+·451·
+第 5 期 肖楠,等:基于信息最大化生成对抗网络的运动想象脑电信号数据增强
+万方数据
+
+
+G(z,c)输入到 D 和 Q,计算并优化各自的损失。
+图 3 D、Q 网络结构
+Figure 3 The structure of D and Q
+表 2 鉴别器的网络参数设置
+Table 2 Discriminator network parameter settings
+网络层 参数 激活函数 输出
+卷积层 批归一化层
+(80,C,1,1,0) LeakyReLu B×80×1 000 B×80×1 000
+卷积层 批归一化层
+(80,40,4,2,1) LeakyReLu B×40×500 B × 40 × 500
+卷积层 批归一化层
+(40,20,4,2,1) LeakyReLu B×20×250 B × 20 × 250
+卷积层 批归一化层
+(20,10,4,2,1) LeakyReLu B×10×125 B × 10 × 125
+展开层 B×1250
+( D)
+线性全连接层 1 Sigmoid B×1
+( Q)
+线性全连接层 100 LeakyReLu B×100
+线性全连接层 10 B×10
+D 目标是最大化真实样本和生成样本的区分度,
+以便有效判断输入样本的真实性。 D 的损失函数为:
+LD = -Ex~ pdata [ log D( x) ] 
+Ez~pz[ log1-D( G( z,c) ) ]
+式中:D( x) 为判别器对真实数据的判断;D( G
+( z,c) ) 为判别器对生成数据的判断。
+Q 的任务是最大化生成数据 G( z,c) 与潜在变
+量 c 之间的互信息,从而确保生成数据的潜在特征
+能够被有效解码并加以控制。 Q 的损失函数为:
+LQ = LMI = -Ez~ pz,c~ pc [ log Q( c G( z,c) ) ]
+然后,开始更新 G。 G 的损失包含两个部分:对
+抗损失 Ladv
+G 和互信息损失 LMI。 G 的损失函数为:
+LG = Ladv
+G +λLMI
+其中,对抗损失通过使生成样本尽可能接近真
+实样本,提升生成数据的质量;互信息损失则通过最
+大化生成数据与潜在变量 c 之间的互信息,提高生
+成数据的可控性与多样性。 参数 λ 则是用于平衡
+这两类损失,经过实验本文设置为 4。 具体地,对抗
+损失可以表示为:
+Ladv
+G = -Ez~ pz,c~ pc [ log D( G( z,c) ) ]
+训练过程中,采用交替更新的策略,即先更新 D
+和 Q 的参数,再更新 G 的参数。 这个过程持续进
+行,直到网络训练收敛,G 能够产生与真实样本相似
+的高质量数据,并且潜在变量能够有效地控制生成
+数据的特征。
+2 实验与结果分析
+2. 1 数据集
+本文使用 BCI Competition IV 2a 和 2b 数据集进
+行实验。 2a 数据集包含 9 名健康受试者在 250 Hz
+采样率下,使用 22 个电极记录的 EEG 信号,频段为
+0. 5 ~ 100 Hz。 受试者执行 4 种 MI 任务 ( 左手、 右
+手、双脚、 舌 头), 每 个 受 试 者 分 别 完 成 两 组 实 验
+( session1 和 session2) ,每次 MI 持续 4 s。 本研究仅
+使用 session1 数据训练生成器和判别器。 2b 数据集
+也包含 9 名受试者,使用 3 个电极记录左手和右手的
+MI 信号,其他设置与 2a 相同。 每个受试者完成 5 组
+实验(session1~ session5),本研究仅使用前 3 组数据用
+于训练。 2a 数据集电极数为 22(C = 22),2b 数据集为 3
+(C = 3),每次试验有 1 000 个采样点(T = 1 000)。
+2. 2 实验细节
+DCMIGAN 的 训 练 和 测 试 是 在 Geforce 3080Ti
+GPU 和 Windows 10 系统下,使用 Python 语言,基于
+pytorch 框架完成的。 优化器选用的是 Adam,批量
+大小设置为 72,训练轮次( epoch number) 为 50 000。
+为确保数据的稳定性和一致性,对数据做了归一化
+及删除工频干扰处理。
+2. 3 实验结果与分析
+2. 3. 1 时域分析
+为了评估生成信号在时域上的表现,以 2a 数据
+集受试者 A01 为例,对比了相同批量大小下真实信
+号与生成信号在多个通道上的平均值和标准差,如
+·452· 北京生物医学工程 第 44 卷
+万方数据
+
+
+图 4 所示。 其中,绿色曲线代表真实信号,红色曲线
+代表生成信号,阴影部分表示标准差范围。 可以看
+出,生成信号在 4 类 MI 任务中的统计特性与真实信
+号高度一致,且在时域上能够较好地拟合真实信号
+的波动模式,表现出较高的一致性。
+2. 3. 2 时频分析
+为了进一步展示生成信号的质量,仍以 2a 数据
+集受试者 A01 为例,采用连续小波变换对真实信号
+和生成信号进行时频分析,得到的能量分布如图 5
+所示。 从图中可以观察到,生成信号与真实信号在
+0 ~ 3 s 的时间窗口内和在 0 ~ 30 Hz 频段内的能量分
+布表现出了较高的一致性。 特别是在高能量区域
+( 即颜色较深的部分) ,生成信号能够有效地拟合真
+实信号的时频特性,表明生成信号在时频域上的特
+性得到了较好的保留。 该结果表明,本文方法能够
+较好地再现信号的时频特征,进一步证明了生成信
+号的真实性和可靠性。
+2. 3. 3 t-SNE 可视化分析
+为进一步验证生成信号在特征空间中的表现,
+仍以 2a 数据集中 A01 受试者为例,使用 t-SNE 方法
+对真实数据( 训练集) 和生成样本( 数量与真实数据
+相等)进行了二维映射,如图 6 所示。 从图中可以
+看到,生成信号与真实信号在 t-SNE 空间中的分布
+高度重叠,表明生成信号成功地捕捉到了真实信号
+的特征结构。 这一结果表明,生成的 EEG 信号在高
+维特征空间中与真实信号具有相似的分布,从而验
+证了生成模型在保留数据结构方面的有效性。
+3 讨论
+为了全面评估生成数据的质量,本文不仅通过
+直观的可视化结果对生成数据的特性进行初步分
+析,还通过定量实验进一步验证其有效性,并与其他
+方法进行对比。 具体而言,首先,本文选择 3 种经典
+的 MI-EEG 分类模型在有无生成数据参与训练的条
+件下进行性能对比分析,以评估生成数据对分类模
+型训练的影响; 其次, 以 EEGNet 作 为 基 础 分 类 模
+型,进一步对比本文提出的增强方法与现有的多种
+数据增强策略( 包括随机噪声添加、时间偏移、幅值
+缩放和信号翻转) 在分类性能上的差异,探讨了不
+同数据增强方法的优劣性。
+3. 1 DCMIGAN 对分类性能的提升分析
+为验证生成数据对分类性能的具体影响,本文
+选取了 3 种经典的 MI-EEG 分类模型 EEGNet[18] 、
+FBMSNet[19] 和 MI-BMInet[20] ,并在有无生成数据参
+图 4 真实信号和生成信号在时域上分布对比
+Figure 4 Comparison of time⁃domain distributions between real and generated signals
+·453·
+第 5 期 肖楠,等:基于信息最大化生成对抗网络的运动想象脑电信号数据增强
+万方数据
+
+
+图 5 真实信号和生成信号能量分布图对比
+Figure 5 Comparison of energy distribution between real and generated signals
+图 6 真实样本和生成样本的 T⁃SNE 嵌入图
+Figure 6 T⁃SNE embedding of real and generated samples
+与训练的条件下进行实验。 所有实验均基于 2a 和
+2b 数据集,并严格控制生成数据量与真实数据量一
+致,以确保对比结果的公平性。 实验结果如图 7 所
+示,添加生成数据后,分类模型在两种数据集上的性
+能均显著提升。 具体而言,在 2a 数据集上 3 个分类
+模型的准确率分别提升了 3. 51%、2. 55%、3. 92%,
+在 2b 数据集上分别提升了 7. 00%、2. 10%、9. 26%。
+这一结果表明,生成数据有效弥补了原始数据的不
+足,显著提升了模型的分类准确性。
+3. 2 与其他方法的对比
+本文进一步以 EEGNet 为基准模型对不同数据
+增强方法( 包括随机噪声添加、时间偏移、幅度缩放
+和信号翻转) 以及 DCMIGAN 生成的数据进行分类
+性能的对比实验。 实验基于 BCI Competition IV 2a
+和 2b 数据集,生成数据量与真实数据量保持一致,
+以确保 对 比 的 公 平 性。 实 验 结 果 表 明, DCMIGAN
+生成的数据在绝大多数受试者上表现优于传统数据
+增强方法,具体实验结果见表 3。 统计数据显示,
+DCMIGAN 生成数据的平均分类准确率在 2a 数据集
+上为 75. 23%,在 2b 数据集上为 81. 44%,均显著高
+于无数据增强及其他常见数据增强方法的结果。
+4 结论
+本文提出了一种基于信息最大化生成对抗网络
+的 MI-EEG 数据增强方法 DCMIGAN,通过引入潜在
+变量有效控制生成数据的特征,提升了生成数据的
+质量和可控性。 实验结果表明, DCMIGAN 生成的
+数据在 2a 和 2b 数据集上显著提高了多个模型的分
+类性能,优于传统数据增强方法。 该方法在不同分
+类模型中的适应性展示了其在 BCI 系统中的潜力,
+尤其在低质量或数据不足的场景中具有较强的实际
+·454· 北京生物医学工程 第 44 卷
+万方数据
+
+
+图 7 不同数据集与模型下生成数据对分类性能的影响
+Figure 7 The impact of generated data on classification performance across different datasets and models
+表 3 基于 EEGNet 不同数据增强方法的性能对比
+Table 3 Performance comparison of different data
+augmentation methods based on EEGNet
+数据 集
+受试 者
+数据增强方法
+无 噪声
+添加
+时间 偏移
+幅度 缩放
+信号 翻转
+DCMI GAN
+A01 81. 25% 80. 56% 78. 13% 80. 21% 77. 78% 82. 99%
+A02 59. 03% 62. 85% 59. 03% 60. 07% 62. 15% 63. 54%
+A03 87. 15% 89. 58% 87. 85% 86. 81% 88. 19% 87. 50%
+A04 61. 11% 68. 75% 68. 06% 63. 19% 69. 79% 65. 97%
+2a A05 68. 75% 70. 49% 72. 22% 71. 88% 71. 18% 70. 49%
+A06 60. 76% 53. 47% 58. 68% 61. 46% 65. 28% 62. 15%
+A07 69. 10% 69. 10% 69. 79% 67. 01% 70. 14% 87. 85%
+A08 74. 65% 75. 69% 79. 17% 82. 29% 77. 08% 77. 08%
+A09 83. 68% 77. 08% 80. 90% 80. 56% 78. 82% 79. 51%
+平均 71. 72% 71. 95% 72. 65% 72. 61% 73. 38% 75. 23%
+B01 52. 81% 70. 63% 69. 69% 71. 56% 72. 81% 70. 31%
+B02 52. 86% 62. 14% 61. 79% 61. 43% 60. 71% 63. 57%
+B03 71. 25% 74. 38% 74. 69% 78. 13% 77. 19% 74. 38%
+B04 93. 75% 96. 88% 96. 25% 97. 19% 96. 88% 97. 19%
+2b B05 78. 44% 88. 13% 89. 38% 92. 50% 80. 00% 87. 81%
+B06 71. 56% 80. 63% 72. 50% 63. 75% 70. 31% 83. 44%
+B07 74. 06% 83. 75% 83. 13% 86. 56% 83. 75% 85. 00%
+B08 81. 25% 89. 38% 90. 00% 90. 00% 90. 63% 89. 06%
+B09 75. 94% 79. 69% 83. 13% 83. 44% 81. 56% 82. 19%
+平均 72. 44% 80. 62% 80. 06% 80. 51% 79. 32% 81. 44%
+注:最优性能的数据增强方法获得的数据使用加粗表示。
+应用价值。 未来研究可进一步探讨该方法在多种
+BCI 任务中的应用,并提升生成模型的复杂度以进
+一步优化分类精度。
+参考文献
+[ 1 ] Ramadan RA, Vasilakos AV. Brain computer interface: control
+signals review[ J] . Neurocomputing,2016,223( FEB.5) :26-44.
+[ 2 ] Fouad MM, Amin KM, El-Bendary N, et al. Brain computer
+interface:a review[ C] / / Nirma University. In Proceedings of the
+2015 5th Nirma University International Conference on
+Engineering ( NUiCONE) . Ahmedabad,India:IEEE,2015:1-6.
+[ 3 ] Lotte F,Congedo M,Lécuyer A,et al. A review of classification
+algorithms for EEG-based brain-computer interfaces [ J] . Neural
+Engineering,2007,4(2) :R1-R13.
+[ 4 ] Fahimi F, Dosen S, Ang KK, et al. Generative adversarial
+networks-based data augmentation for brain-computer interface
+[ J ] . IEEE Transactions on Neural Networks and Learning
+Systems,2021,32(9) :4032-4051.
+[ 5 ] Li Y, Zhang XR, Zhang B, et al. A channel-projection mixed
+scale convolutional neural network for motor imagery EEG
+decoding [ J ] . IEEE Transactions on Neural Systems and
+Rehabilitation Engineering,2019,27(6) :1170-1180.
+[ 6 ] Majidov I, Whangbo T. Efficient classification of motor imagery
+electroencephalography signals using deep learning methods[ J] .
+Sensors,2019,19(7) :1736.
+[ 7 ] Shovon TH, Al Nazi Z, Dash S, et al. Classification of motor
+imagery EEG signals with multi-input convolutional neural
+network by augmenting STFT [ C ] / / Dhaka University. In
+Proceedings of the 2019 5th International Conference on
+Advances in Electrical Engineering ( ICAEE ) . Dhaka,
+Bangladesh:IEEE,2019:398 - 403.
+[ 8 ] Dai GH,Zhou J, Huang J, et al. HS-CNN: A CNN with hybrid
+convolution scale for EEG motor imagery classification [ J ] .
+·455·
+第 5 期 肖楠,等:基于信息最大化生成对抗网络的运动想象脑电信号数据增强
+万方数据
+
+
+Neural Engineering,2020,17(1) :016025.
+[ 9 ] Goodfellow IJ. Generative adversarial networks [ J ] .
+Communications of the ACM,2014,63(11) :139-144.
+[10] Wang JS,Mu W,Wang AP,et al. Generative adversarial networks
+for electroencephalogram signal analysis: a mini review [ C ] / /
+Korea University, In Proceedings of the 2023 11th International
+Winter Conference on Brain-Computer Interface ( BCI ) .
+Gangwon,Korea:IEEE,2023:1 - 6.
+[11] Mishra S, Mahmudi O, Jalali A. Motor imagery signal
+classification using adversarial learning: a systematic literature
+review[ J] . IEEE Access,2024,12:91053-91074.
+[12] Khoyani A,Kaur H,Amini M,et al. Motor imagery brain activity
+recognition through data augmentation using DC-GANs and
+musigma [ C ] / / IEEE Sensors Council. In Proceedings of the
+2022 IEEE Sensors. Dallas,TX,USA:IEEE,2022:1-4.
+[13] Fahimi F, Dosen S, Ang KK, et al. Generative adversarial
+networks-based data augmentation for brain-computer interface
+[ J ] . IEEE Transactions on Neural Networks and Learning
+Systems,2021,32(9) :4039-4051.
+[14] Li LL, Cao GZ, Liang HJ, et al. EEG generation of virtual
+channels using an improved wasserstein generative adversarial
+networks[ C] / / Harbin Institute of Technology. In Proceedings of
+the International Conference on Intelligent Robotics and
+Applications. Harbin,China:Springer,Cham,2022:386-399.
+[15] Kay GH, Robin TS, Tonio Ball et al. EEG-GAN: generative
+adversarial networks for electroencephalograhic ( EEG ) brain
+signals[ J] . arXiv:1806.01875,2018.
+[16] Li Z, Yu Y. Improving EEG-based motor imagery classification
+with conditional Wasserstein GAN [ C ] / / Shanghai Advanced
+Research Institute,Chinese Academy of Sciences. In Proceedings
+of the 2020 International Conference on Image,Video Processing
+and Artificial Intelligence. Shanghai:SPIE,2020:437-443.
+[17] Chen X, Duan Y, Houthooft R, et al. InfoGAN: Interpretable
+representation learning by information maximizing generative
+adversarial nets[ J] . arXiv:1606.03657,2016.
+[18] Lawhern VJ,Solon AJ,Waytowich NR,et al. EEGNet:A compact
+convolutional neural network for EEG-based brain-computer
+interfaces[ J] . Neural Engineering,2018,15(5) :056013.
+[19] Liu K, Yang MZ, Yu ZL, et al. FBMSNet: A filter-bank multi
+scale convolutional neural network for EEG-based motor imagery
+decoding [ J ] . IEEE Transactions on Biomedical Engineering,
+2023,70(2) :436-445.
+[20] Wang XY,Hersche M,Magno M,et al. MI-BMInet: An efficient
+convolutional neural network for motor imagery brain-machine
+interfaces with EEG channel selection[ J] . IEEE Sensors Journal,
+2024,24(6) :8835-8847
+(2024-12-06 收稿,2025-04-23 修回)
+􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀􀠀
+( 上接第 448 页)
+[12] Zhou XH, Bian GB, Xie XL, et al. Qualitative and quantitative
+assessment of technical skills in percutaneous coronary
+intervention:In vivo porcine studies [ J ] . IEEE Transactions on
+Biomedical Engineering,2019,67(2) :353-364.
+[13] Chen DD,Liang SC,Li ZF,et al. A Mock circulation loop for in
+vitro hemodynamic evaluation of aorta: application in aortic
+dissection[ J] . Journal of Endovascular Therapy, 2022, 29 ( 1 ) :
+132 - 142.
+[14] 李世龙,梁世超,袁盼盼,等. 基于体外仿生循环实验的 B 型
+夹层腔间 压 力 功 能 评 估 [ J] . 北 京 生 物 医 学 工 程, 2023, 42
+(5) :475-482.
+Li SL,Liang SC,Yuan PP,et al. Functional evaluation of luminal
+pressure in type B aortic dissection based on mock circulation loop
+[ J] . Beijing Biomedical Engineering,2023,42(5) :475-482.
+[15] Horeman T, Dankelman J, Jansen FW, et al. Assessment of
+laparoscopic skills based on force and motion parameters[J]. IEEE
+Transactions on Biomedical Engineering,2013,61(3):805-813.
+[16] Anh NX, Nataraja RM, Chauhan S. Towards near real-time
+assessment of surgical skills: A comparison of feature extraction
+techniques[ J] . ComputerMethods and Programs in Biomedicine,
+2020,187:105234.
+[17] Horeman T, Dankelman J, Jansen FW, et al. Assessment of
+laparoscopic skills based on force and motion parameters[J]. IEEE
+Transactions on Biomedical Engineering,2013,61(3):805-813.
+[18] Tashiro Y, Miura H, Nakanishi Y, et al. Evaluation of skills in
+arthroscopic training based on trajectory and force data [ J ] .
+ClinicalOrthopaedics and Related Research,2009,467:546-552.
+[19] Guo SX,Cui JX,Zhao Y,et al. Machine learning-based operation
+skills assessment with vascular difficulty index for vascular
+intervention surgery [ J ] . Medical & Biological Engineering &
+Computing,2020,58(8) :1707-1721.
+[20] Rolls A,Riga C,Bicknell C,et al. A pilot study of video-motion
+analysis in endovascular surgery: development of real-time
+discriminatory skill metrics[ J] . European Journalof Vascular and
+Endovascular Surgery,2013,45(5) :509-515.
+(2024-03-24 收稿,2024-06-02 修回)
+·456· 北京生物医学工程 第 44 卷
+万方数据
