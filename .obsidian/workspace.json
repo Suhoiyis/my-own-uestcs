@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Markdown/7/7.1  二进制数字调制原理.md",
+                "file": "Markdown/8/8.5 脉冲编码调制.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "7.1  二进制数字调制原理"
+              "title": "8.5 脉冲编码调制"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Markdown/7/7.1  二进制数字调制原理.md",
+                "file": "Markdown/8/8.5 脉冲编码调制.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "7.1  二进制数字调制原理 的大纲"
+              "title": "8.5 脉冲编码调制 的大纲"
             }
           },
           {
@@ -204,7 +204,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -224,10 +224,14 @@
   },
   "active": "ff1454735775e673",
   "lastOpenFiles": [
-    "Markdown/7/7.3  二进制数字调制系统的性能比较.md",
+    "Markdown/8/8.4  抽样信号的量化.md",
+    "Markdown/8/8.3 模拟脉冲调制.md",
+    "Markdown/8/8.2 模拟信号的抽样.md",
+    "Markdown/8/8.5 脉冲编码调制.md",
     "Markdown/7/7.4 多进制数字调制原理.md",
-    "Markdown/7/7.2  二进制数字调制系统的抗噪声性能.md",
+    "Markdown/7/7.3  二进制数字调制系统的性能比较.md",
     "Markdown/7/7.1  二进制数字调制原理.md",
+    "Markdown/7/7.2  二进制数字调制系统的抗噪声性能.md",
     "Markdown/6/6.5  基带传输系统的抗噪声性能.md",
     "Markdown/tips.md",
     "通信原理(第7版) [Principles of Communications (The Seventh Edition)] (樊昌信, 曹丽娜) (Z-Library).pdf",
@@ -247,11 +251,7 @@
     "Markdown/4/4.1 & 4.2 有-无线信道.md",
     "Markdown/3/第三章  随机过程.md",
     "Markdown/2/2.2 带通信号.md",
-    "Markdown/2/2.1 确知信号.md",
-    "Markdown/1/1.4 & 1.5.md",
     "未命名.base",
-    "Markdown/1/第一章小结.md",
-    "Markdown/1/1.2 通信系统的组成.md",
     "未命名.canvas",
     "Pasted image 20260104220940.png",
     "Pasted image 20260104220926.png",
