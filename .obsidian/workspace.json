@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Obsidian Vault/3 复习提纲.md",
+                "file": "Obsidian Vault/3.1 模型机的总体设计.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3 复习提纲"
+              "title": "3.1 模型机的总体设计"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "2a440ac2ccba1a51",
@@ -94,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Obsidian Vault/3 复习提纲.md",
+                "file": "Obsidian Vault/3.1 模型机的总体设计.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "3 复习提纲 的反向链接列表"
+              "title": "3.1 模型机的总体设计 的反向链接列表"
             }
           },
           {
@@ -113,12 +114,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Obsidian Vault/3 复习提纲.md",
+                "file": "Obsidian Vault/3.1 模型机的总体设计.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "3 复习提纲 的出链列表"
+              "title": "3.1 模型机的总体设计 的出链列表"
             }
           },
           {
@@ -156,13 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Obsidian Vault/3 复习提纲.md",
+                "file": "Obsidian Vault/3.1 模型机的总体设计.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "3 复习提纲 的大纲"
+              "title": "3.1 模型机的总体设计 的大纲"
             }
           }
         ]
@@ -185,8 +186,12 @@
   },
   "active": "01327faa0037cf97",
   "lastOpenFiles": [
-    "Obsidian Vault/3.1 模型机的总体设计.md",
+    "Obsidian Vault/3.5 模型机的微程序控制器.md",
     "Obsidian Vault/3.4 模型机的组合逻辑控制器.md",
+    "Obsidian Vault/3.3 运算方法.md",
+    "Obsidian Vault/3.2 算术逻辑运算部件.md",
+    "Obsidian Vault/3.1 模型机的总体设计.md",
+    "Obsidian Vault/3 复习提纲.md",
     "Obsidian Vault/4.1 概述.md",
     "Obsidian Vault/4 复习提纲.md"
   ]
